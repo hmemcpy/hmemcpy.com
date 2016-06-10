@@ -70,6 +70,6 @@ theme: minos
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:hmemcpy/hmemcpy.com.git
+  repo: https://github.com/hmemcpy/hmemcpy.com.git
   branch: gh-pages
   
