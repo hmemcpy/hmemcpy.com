@@ -4,6 +4,8 @@ date: 2013-02-26T15:47:38+00:00
 ---
 After my previous blog post on the subject, my good friend Avi Pinto asked if it was possible to *teach* ReSharper to treat an ASP.NET MVC `HtmlHelper` extension method to understand and navigate to relative paths within the project. I'm happy to report that not only this is possible, it also requires almost no effort at all!
 
+<!-- more -->
+
 Considering the following extension method:
 
 ```csharp

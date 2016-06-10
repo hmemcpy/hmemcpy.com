@@ -29,6 +29,8 @@ class Woot
 ```
 What is the output of this program? Is it:
 
+<!-- more -->
+
  1. 3.14
  2. 0
  3. Throws exception

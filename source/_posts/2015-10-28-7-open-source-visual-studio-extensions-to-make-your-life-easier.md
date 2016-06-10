@@ -6,6 +6,8 @@ It's time to upgrade your _favorite_ IDE! In this post I will list some of my fa
 
 Are you ready? Let's begin!
 
+<!-- more -->
+
 # BuildVision
 
 [BuildVision](https://visualstudiogallery.msdn.microsoft.com/23d3c821-ca2d-4e1a-a005-4f70f12f77ba) ([source](https://github.com/nagits/BuildVision)) is an extension that visualizes your build process:

@@ -4,6 +4,8 @@ date: 2014-01-06T11:53:06+00:00
 ---
 _If you don't understand the title, I tried to be clever and used_ [_regular ex_p_ressions_](http://www.regular-expressions.info/charclass.html)_. I now have 2 problems._
 
+<!-- more -->
+
 I've been using git and github for a while now, but only recently found out it's possible to define 2 separate URLs for fetching and pushing. Often times, when I wanted to contribute to an open source project, I had to go through the ceremony of a) forking the repository b) cloning the fork to my machine and c) define an [upstream remote](https://help.github.com/articles/syncing-a-fork) to keep the fork in sync with the changes from the original repository.
 
 Defining the upstream repository is my least favorite part of working with git/github &ndash; I always have to look up the steps how to do it. Instead of keeping the fork in sync, I just want to be able to **fetch** the changes from the original (upstream) repository, but **push** the changes into my own fork.

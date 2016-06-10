@@ -4,6 +4,8 @@ date: 2009-05-21T16:46:15+00:00
 ---
 Here's a strange bug I've encountered today in a WinForms application. Usually, double clicking on a collapsed tree node (which obviously has child nodes) will expand it. Most of the time when we need something to happen when a child node is double clicked, but not the parent, we write something similar to:
 
+<!-- more -->
+
 ```csharp
 void NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 {

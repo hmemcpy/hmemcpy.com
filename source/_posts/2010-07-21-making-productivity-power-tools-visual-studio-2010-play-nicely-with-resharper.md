@@ -4,6 +4,8 @@ date: 2010-07-21T21:02:02+00:00
 ---
 Scott Guthrie [wrote](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx) about VS 2010 Productivity Power Tools update, and I went to the Extensions Gallery to download it. I won't write an overview about it, ScottGu has already done an excellent job on [his blog](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx). You can also find more information on the [extension's page](http://visualstudiogallery.msdn.microsoft.com/en-us/d0d33361-18e2-46c0-8ff2-4adea1e34fef).
 
+<!-- more -->
+
 If you're a [ReSharper](http://www.jetbrains.com/resharper/) addict (like me), you will notice that some things just do not work or interfere with the way ReSharper does things. So here's a list of things that you can do to make ReSharper and the Productivity Power Tools work nicely together:
 
 1. Go to the Productivity Power Tools under **Tools &ndash; Options**:

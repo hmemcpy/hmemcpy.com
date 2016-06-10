@@ -6,6 +6,8 @@ date: 2011-02-24T23:52:45+00:00
 
 As always, before upgrading WordPress _<span style="text-decoration: underline;">make a full backup of your installation and the database</span>!_
 
+<!-- more -->
+
 This is still being investigated, but it seems that having HP-Hive plugin for WordPress installed (even if deactivated), causes the following error upon upgrading to WordPress 3.1:
 
 > **Fatal error**: Call to undefined function wp\_cache\_get() in **/public_html/blog/wp-includes/functions.php** on line **336**

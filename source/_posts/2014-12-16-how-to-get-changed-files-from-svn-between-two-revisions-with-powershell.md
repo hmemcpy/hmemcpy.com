@@ -4,6 +4,8 @@ date: 2014-12-16T13:38:07+00:00
 ---
 As part of [teaching myself PowerShell](/2014/12/the-2-minute-powershell-intro-for-someone-who-hates-powershell/) (and converting a legacy mess of perl scripts into something more manageable), I needed a way to export the files that were added or modified between two SVN revisions. After some searching, I came up with this PowerShell script: it takes a repository URL, a _from_ and _to_ revision numbers, and an output directory into which to export the files.
 
+<!-- more -->
+
 <script src="http://gist.github.com/hmemcpy/3ff5b99bc7886042fa4a.js"></script>
 
 This script uses [`Resolve-FullPath`](https://github.com/michael-wolfenden/CodeCampServer/blob/master/scripts/Carbon/Path/Resolve-FullPath.ps1) cmdlet from the Carbon project. Turns out, PowerShell's own `Resolve-Path` doesn't work on files/paths that do not exist.

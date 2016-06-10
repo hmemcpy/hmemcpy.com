@@ -4,6 +4,8 @@ date: 2011-05-29T11:38:03+00:00
 ---
 <img style="float: left; padding: 5px;" src="http://i0.wp.com/ecx.images-amazon.com/images/I/51BSQqef%2B6L._SL160_.jpg?resize=123%2C160" />In popular culture, computer programmers, sometimes confused with sysadmins, are often described as teenage punks, sitting in a dark, lit only by the glow of their monitor, empty cartons of pizza and Mountain Dew bottles scattered strategically around, frantically hacking away on their keyboard.
 
+<!-- more -->
+
 What does it mean to be a professional programmer? Is it wearing a suit and tie to work? Is it having certifications or diplomas decorating the walls of your office? Is it working hard, sometimes overtime and weekends, just to show your dedication?
 
 To [Uncle Bob](http://cleancoder.posterous.com/), this is not what professional programmer means. The things commonly mistaken for professionalism, such as a dress code, are not what's important, at the end of the day. Having developers act professionally towards the code and towards each other, however, is.

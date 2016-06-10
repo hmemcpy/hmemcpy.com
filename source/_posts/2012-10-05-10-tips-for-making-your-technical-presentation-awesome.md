@@ -4,6 +4,8 @@ date: 2012-10-05T16:07:46+00:00
 ---
 I am, by no means, a [professional speaker](http://www.speakinghacks.com/). I am developer with passion for technology and learning, and being known for talking **_a lot_**, I sometimes speak at local user groups about particular topics. Here are some tips I've gathered for making my presentations a little bit better.
 
+<!-- more -->
+
 ## 10. DON'T PANIC!
 
 <img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image3.png?resize=244%2C154" alt="" align="right" border="0" data-recalc-dims="1" />There's an old Murphy's law, stating: *Anything that can go wrong, will go wrong*. Your computer might freeze, BSOD or reboot suddenly. The projector you're using might burn. Your code example might not compile due to the silliest thing (which you will miss due to pressure) &ndash; it's all OK!

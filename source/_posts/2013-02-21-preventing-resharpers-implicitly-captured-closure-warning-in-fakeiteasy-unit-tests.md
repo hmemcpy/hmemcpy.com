@@ -4,6 +4,8 @@ date: 2013-02-21T14:08:51+00:00
 ---
 I noticed that some of my unit tests have a [ReSharper](http://www.jetbrains.com/resharper/) warning on the `A.CallTo()` methods of [FakeItEasy](https://github.com/FakeItEasy/FakeItEasy), suggesting that some local variables are captured implicitly by the lambda expression.
 
+<!-- more -->
+
 <img title="" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="" src="http://i0.wp.com/hmemcpy.com/wp-content/uploads/2013/02/image.png?resize=504%2C65" data-recalc-dims="1" />
 
 This warning appears since ReSharper doesn't know that the lambda expression is executed immediately when the `A.CallTo` method is invoked. Fortunately, with the help of [External Annotations](http://www.jetbrains.com/resharper/webhelp/Code_Analysis__External_Annotations.html), in particular, the **InstantHandle** annotation, we can teach ReSharper about it!

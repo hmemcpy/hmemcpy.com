@@ -4,6 +4,8 @@ date: 2012-09-30T11:37:29+00:00
 ---
 I just got my brand new [HP EliteBook 8570w](http://www.hp.com/united-states/campaigns/workstations/8570w_features.html). I was looking for a new development machine for a while, and after long consideration decided on this custom build of the Ivy Bridge-based EliteBook. Here are the (important) specs:
 
+<!-- more -->
+
   * HP EliteBook 8570w 15.6*
   * i7-3820QM
   * 16GB RAM 1600MHz DDR3

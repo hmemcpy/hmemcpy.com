@@ -4,6 +4,8 @@ date: 2010-12-19T12:13:11+00:00
 ---
 I was delighted to talk about [ReSharper](http://www.jetbrains.com/resharper/) at the recent meeting of the [ALT.NET Israel](http://groups.google.com/group/altnetisrael) group. I chose ReSharper for the reason that I use it every day, and I can't imagine myself programming without it. I wanted to share with the rest some tips, tricks and general hidden features of this wonderful tool that I've learned over the years using it.
 
+<!-- more -->
+
 ALT.NET Tools meetings are series of short demos (about 20 minutes per speaker). It was my first time speaking to a large group of people, and I wasn't sure if I could keep their attention. I ended up giving a good 40 minute talk, and managed to wow everyone in the room during the process!
 
 For the demo I used the following: ReSharper 5.1 (I used the latest [nightly build](http://confluence.jetbrains.net/display/ReSharper/ReSharper+5.1.2+Bugfix+Builds), however the official release is recommended), [Agent Smith Plugin](http://code.google.com/p/agentsmithplugin/) (an open-source code style validation plugin for ReSharper) and Philip Laureano's [LinFu](http://www.codeproject.com/KB/cs/LinFuPart1.aspx) as the demo project.

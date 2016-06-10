@@ -6,6 +6,8 @@ date: 2010-02-25T21:06:26+00:00
 
 Have I mentioned that I love ReSharper? While patiently waiting for the 5.0 release to RTM, the team at JetBrains have shipped the [Beta 2 release](http://www.jetbrains.com/resharper/beta/beta.html) (build 1618). This is a very stable, very good improvement over the previous [nightly builds](http://confluence.jetbrains.net/display/ReSharper/ReSharper+5.0+Nightly+Builds).
 
+<!-- more -->
+
 One of the things that improved the most with this release is the SSR &ndash; Structural Search and Replace. It's a new feature, allowing you to specify code patterns to be added as hints, errors or warnings to the ReSharper code analysis, as well as specifying a replacement pattern.
 
 Here is an [example](http://blogs.jetbrains.com/dotnet/2010/02/resharper-5-beta-2-released/) of this feature, taken from the [JetBrains .NET Tools blog](http://blogs.jetbrains.com/dotnet/):

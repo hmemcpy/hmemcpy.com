@@ -4,6 +4,8 @@ date: 2013-04-12T07:51:07+00:00
 ---
 I wasn't sure how I'd like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I'll just dump all that boiled inside me for quite a while. Sarcasm and bitterness ahead!
 
+<!-- more -->
+
 I'll start from the end: it wasn't until a former colleague of mine, [Gil Zilberfeld](http://www.gilzilberfeld.com/), wrote [his post](http://www.gilzilberfeld.com/2013/04/processes-and-tools-over-individuals.html) about how in our industry we shifted from choosing *individuals and interactions* over *tools and processes* (or whatever the Church of Agile calls it) to having an almost a knee-jerk reaction to someone doing horrible things to our vision of a perfect code.
 
 Think about it, how many times have you started a new job or met a new client, and once you've managed to get their code onto your machine, you shrieked in horror and facepalmed over some things *you people wouldn't believe*? A SomethingManager class that takes in 12 dependencies?! No Unit Tests?! A solution with 180 projects?! Very-similar-but-with-slight-variations duplicated monster classes?! And you think to yourself: surely those people heard of the SOLID principles? Surely they've seen a [webinar or two](http://hmemcpy.com/webinars/) on Unit testing and TDD? They might even know what IoC and DI is, and the difference between them. How is it possible, then, that after more than a decade since we got all those wonderful acronyms people still write and maintain horrible mess?

@@ -4,6 +4,8 @@ date: 2014-12-10T14:06:25+00:00
 ---
 Hi, I'm a developer, and I hate PowerShell<sup>*</sup>. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax &ndash; all those dollar signs reminded me of PHP.
 
+<!-- more -->
+
 This recently changed, however. A client had a set of legacy perl scripts which nobody could maintain anymore &ndash; and I was tasked with rewriting them. Having recently spent some time writing a script for [Boxstarter](http://boxstarter.org/) &ndash; an amazing tool that allows you to automate software and environment installations of new machines, powered by [Chocolatey](https://chocolatey.org/), in PowerShell, I thought that it could be a good fit for the task. I knew the language is powerful enough to allow the creation of those very useful tools, so I decided to give it a shot. I was not disappointed!
 
 Luckily, you already have all the tools you need to get started! Every Windows machine comes with both PowerShell and PowerShell ISE (Integrated Scripting Environment) already installed.

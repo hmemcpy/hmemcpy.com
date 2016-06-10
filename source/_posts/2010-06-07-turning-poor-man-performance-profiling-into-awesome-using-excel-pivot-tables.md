@@ -4,6 +4,8 @@ date: 2010-06-07T12:44:04+00:00
 ---
 As I'm writing this, [Dror Helper](http://blogs.microsoft.co.il/blogs/dhelper/) blogged about using a [poor man's performance profiler](http://blogs.microsoft.co.il/blogs/dhelper/archive/2010/06/02/poor-c-developer-s-performance-profiler.aspx). This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s) within our code. This information is usually logged, and after a run we're left with a huge file containing hundreds (and sometimes thousands of lines). How do we make sense of this mess? How do we filter out and understand the relevant performance information?
 
+<!-- more -->
+
 As it happens, Microsoft Excel is a great tool to assist with this task! Excel is this part of Microsoft Office, which everyone has, but very few know how to use. I was watching as a colleague of mine, Doron, worked his magic with Excel, and now I'd like to share this information with the rest of the class:
 
 _Note: I used Excel 2010 to perform this. I believe that this is possible with earlier versions, but I can't tell for sure._

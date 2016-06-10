@@ -6,6 +6,8 @@ _**Note:** I wrote this post before watching Uncle Bob's excellent NDC 2011 talk
 
 I remembered a story from a few years ago about *some guy* who tried to build a Sudoku solver using TDD (Test Driven Development) five times, failing and giving up, while *another guy* simply wrote a solver that worked.
 
+<!-- more -->
+
 A search led me to a thread on reddit, leading to <a href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html" target="_blank">this post</a> by Ravi Mohan. As it happens, *some guy* who tried the TDD approach was <a href="http://en.wikipedia.org/wiki/Ron_Jeffries" target="_blank">Ron Jeffries</a>, one of the fathers of Extreme Programming (XP), while the *other guy* was an algorithm and AI expert <a href="http://en.wikipedia.org/wiki/Peter_Norvig" target="_blank">Peter Norvig</a>. I highly recommend reading the original post and the updates, it makes for very thought provoking read (the original links to Ron Jeffries' articles are broken, but you can find them by searching for <a href="http://xprogramming.com/index.php?s=sudoku" target="_blank">sudoku</a> on his site).
 
 So what happened? How is it that the very people who preach TDD fail to implement it themselves? I believe the problem lies with grasping one of the most fundamental principles of unit testing, and that is &ndash; what _not_ to test.

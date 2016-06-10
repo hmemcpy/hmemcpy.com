@@ -4,6 +4,8 @@ date: 2014-10-21T11:20:44+00:00
 ---
 There are way more tools I love and use every day, but the following 3 are my must-haves on every Windows machine I use, so I wanted to share them with you. And they are completely **free**!
 
+<!-- more -->
+
 (Ok, there are actually 4 &ndash; the first one, [Chocolatey](https://chocolatey.org/) is a pre-requisite to the others. Chocolatey is a package manager, like **apt-get**, but made with Windows in mind. If you haven't already, install this first! I'll wait.)
 
 ### #1 &ndash; Rapid Environment Editor (RapidEE)

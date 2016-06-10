@@ -4,6 +4,8 @@ date: 2012-10-09T11:41:57+00:00
 ---
 Every once in a while, for reasons unknown, the Solution Platforms combo box, which contains the AnyCPU, x86, etc. disappears. And every time when I need to restore it, I spend a good few minutes in the options. Here are the steps to bring it back:
 
+<!-- more -->
+
   1. Right-click on the empty space between the toolbars in Visual Studio, select **Customize*¦** at the bottom
   2. In the Customize dialog, select the **Commands** tab
   3. Select **Toolbar**, then select **Standard** from the combo box. Scroll down until you find **Solution Configurations**, select it

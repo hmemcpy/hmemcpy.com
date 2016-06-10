@@ -4,6 +4,8 @@ date: 2010-11-16T14:49:36+00:00
 ---
 Today I came across a need to find all static fields in my entire solution I'm working on. Finding things usually is a no-brainer with [ReSharper](http://www.jetbrains.com/resharper/), but this time I didn't find an option to do this easily.
 
+<!-- more -->
+
 [Agent Smith plug-in](http://code.google.com/p/agentsmithplugin/) is an open-source code-style validation plug-in for ReSharper, which greatly complements ReSharper's own code-style validation, by adding additional (and custom) checks. There are many other useful features of this plug-in, such as the spell checker for just about everything (string literals, XML comments, method names, etc.). Another greatly useful feature is the XML comment validator.
 
 > **Tip for fresh install of the plug-in:** it comes with a bunch of default naming validation rules, which might conflict with those defined by ReSharper. It's best to turn them off by unchecking them in **Languages &ndash; C# &ndash; Naming Convention Settings** in ReSharper options dialog.

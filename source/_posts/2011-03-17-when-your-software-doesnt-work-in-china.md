@@ -6,6 +6,8 @@ I had an interesting bug submitted by a user, he wrote that <a href="http://www.
 
 <a href="http://www.typemock.com/typemock-isolator-product3" target="_blank">Typemock Isolator</a>, being a Visual Studio add-in, adds a menu next to the Tools menu in Visual Studio. It does so by looking for an index of the *Tools* menu in the main menu bar, and simply adding the *Typemock* menu after it. However, the *Tools* menu is only called that in the English locale. In other languages, the menu might be called differently. In French, for instance, it's called *Outils*.
 
+<!-- more -->
+
 When creating a new Visual Studio 2008 Add-in (under Other Project Types &ndash; Extensibility), if selected the *Yes, create a Tools menu item* in page 4 of the wizard, the following code is generated in `OnConnect` method after completing the wizard:
 
 ```csharp

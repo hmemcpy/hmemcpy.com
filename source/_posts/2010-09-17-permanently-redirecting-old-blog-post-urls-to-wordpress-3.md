@@ -4,6 +4,8 @@ date: 2010-09-17T16:52:04+00:00
 ---
 I am in the process of migrating from SubText to WordPress, and one of the most important tasks on the checklist is keeping the old URLs alive. WordPress allows you to chose the URL format of the blog posts (Using **Settings &ndash; Permalinks**). I chose **Month and name** as my preferred style. SubText URLs also contain the post date and the **.aspx** suffix, as well as **archive** directory for some of the posts.
 
+<!-- more -->
+
 We first need to create a [regular expression](http://www.regular-expressions.info/) (or RegEx) to identify the old style URLs. An example of such URL is: `http://hmemcpy.com/archive/2010/06/07/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables.aspx`
 
 I will be using RegexBuddy to help me create and test the regular expression, but you can use whatever free tool you like, such as [Expresso](http://www.ultrapico.com/Expresso.htm).

@@ -4,6 +4,8 @@ date: 2014-10-16T02:03:45+00:00
 ---
 Yesterday, JetBrains [announced](http://blog.jetbrains.com/dotnet/2014/10/13/introducing-the-resharper-9-early-access-program/) the first public EAP of ReSharper 9! While I'm sure they will dedicate whole blog posts about the new (and truly amazing!) features of ReSharper 9, I wanted to beat JetBrains to the punch, and let you know about one incredible feature (which I consider a *killer feature* of ReSharper 9). I am talking about the improvements in dealing with Regular Expressions (Regex)!
 
+<!-- more -->
+
 **Update:** read all about the new [Regex support in all its glory on the JetBrains blog](http://blog.jetbrains.com/dotnet/2014/10/27/regular-expression-support-in-resharper-9/)!
 
 There were always 2 ways to write regular expressions in C# code &ndash; either inside one of the methods of Regex class, e.g. `Regex.IsMatch`, or defining a string literal as a constant, and using it in a Regex class later.

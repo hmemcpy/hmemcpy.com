@@ -4,6 +4,8 @@ date: 2012-09-08T20:40:30+00:00
 ---
 One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the *classic* Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 &ndash; it must be done via the new Start screen too.
 
+<!-- more -->
+
 I was told on twitter that the new Windows Server 2012 does boot into desktop by default. This made me very curious, and I decided to try and figure out the differences in the two operating systems myself. Below are my findings:
 
 (Here's the **TL;DR** version: Windows Server 2012 indeed boots into desktop by default. Upon installing the *Desktop Experience* feature in Windows Server 2012, and after the subsequent reboot, it will no longer boot into desktop, but rather into the Start screen, just like Windows 8. However, there exists a registry key, which allows changing this behavior, and booting into desktop even with the Desktop Experience enabled.

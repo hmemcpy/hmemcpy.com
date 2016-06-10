@@ -4,6 +4,8 @@ date: 2014-07-16T14:30:35+00:00
 ---
 Sometimes, we wish we could just step into some 3<sup>rd</sup> party library, to figure out how it works, but we either don't have the source code, or otherwise just can't. Fortunately, this is made possible by **dotPeek v1.2** that was [just released](http://blog.jetbrains.com/dotnet/2014/07/16/dotpeek-1-2-is-released/), which can act as a symbol server for decompiled assemblies!
 
+<!-- more -->
+
 So let's suppose we want to put a breakpoint inside `Console.WriteLine` (or any other method in any other assembly). Here's what we need to do:
 
   * Open dotPeek, add the required assemblies to the Assembly Explorer, and press the **Start Symbol Server** button.

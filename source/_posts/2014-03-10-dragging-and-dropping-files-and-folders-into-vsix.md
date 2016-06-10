@@ -4,6 +4,8 @@ date: 2014-03-10T17:49:44+00:00
 ---
 Visual Studio Extensions, or VSIX files are simple ZIP archives following the [Open Package Conventions](http://msdn.microsoft.com/en-us/magazine/cc163372.aspx), and have a .vsix extension. Double-clicking on a .vsix will install it into Visual Studio, by opening it with VSIXInstaller.exe.
 
+<!-- more -->
+
 **TL;DR:** IF you want to be able to drag files and folders into .vsix, there's a registry tweak you can apply &ndash; add Windows Compressed (zipped) Folders&nbsp; drop handler's GUID to the .vsix entry under HKCR\.vsix. Create the subkeys `shellext\DropHandler`:
 
 <pre>HKEY_CLASSES_ROOT\.vsix\shellex\DropHandler</pre>

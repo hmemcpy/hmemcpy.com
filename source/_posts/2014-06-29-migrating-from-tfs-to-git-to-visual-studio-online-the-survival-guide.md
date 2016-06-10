@@ -4,6 +4,8 @@ date: 2014-06-29T23:28:16+00:00
 ---
 This is a step-by-step recount of my attempt to migrate an existing 3-year old TFS (TFVC) repository to git, while _keeping all the history_, and then moving it to [Visual Studio Online](http://www.visualstudio.com/), a TFS in the cloud. This wasn't an easy task, as there is no direct export-import built into either tools. I also ran into some problems during this lengthy process, and I describe the steps to solve them. Set aside a few hours of your time, brew some coffee (or tea), and let's get started!
 
+<!-- more -->
+
 # Step 1: TFS to git
 
 We first need to export the entire TFS repository to git. This is achieved by *cloning* the entire TFS repository with [git-tfs](https://github.com/git-tfs/git-tfs) or [git-TF](https://gittf.codeplex.com/), both open source tools. While designed to do the same, mainly, providing a bridge between git and TFS, the former is an older, more mature project, and the latter is a tool created by Microsoft for the same purpose. I initially tried to use Microsoft's git-TF, but after more than **24 hours** of waiting for the clone to end, it **died with a Java exception** (the tool by Microsoft is written in Java).

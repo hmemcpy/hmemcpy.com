@@ -6,6 +6,8 @@ date: 2010-09-19T16:23:50+00:00
 
 A friend let me know that in the new [IE9 beta](http://ie.microsoft.com/testdrive/) my blog doesn't look good. After a 35MB download, long install, and event longer reboot (!), I was finally able to see what he meant:
 
+<!-- more -->
+
 ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_thumb.png)
 
 The header image shifted to the right, and this only happens in IE9. A quick search about the problem led me to [this question](http://wordpress.stackexchange.com/questions/1932/how-to-fix-the-ie9-wordpress-twenty-ten-header-image-display-problem) on the [WordPress StackExchange](http://wordpress.stackexchange.com/) site, where I learned that a ticket was opened for the WordPress team, and a workaround for the problem.

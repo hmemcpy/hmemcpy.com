@@ -4,6 +4,8 @@ date: 2013-03-24T23:16:14+00:00
 ---
 As part of transitioning to a new API, I wanted a way to mark the old API as obsolete, so that Visual Studio (or ReSharper) would flag using of the old API as an error.
 
+<!-- more -->
+
 Normally, the [`ObsoleteAttribute`](http://msdn.microsoft.com/en-us/library/system.obsoleteattribute.aspx) does exactly that &ndash; marks certain methods or types as obsolete, and has a constructor overload to specify whether the usage will be treated as an error or not. Unfortunately, in my case there was no source code for the old API (it was used as a 3<sup>rd</sup>-party DLL), and there's no way to apply the Obsolete attribute to external DLLs without modifying the assembly using IL-rewriting tools.
 
 It had occurred to me that perhaps this would be possible to achieve using one of [ReSharper's External Annotations](http://www.jetbrains.com/resharper/webhelp/Code_Analysis__External_Annotations.html), but there are no built-in annotations for this kind of task. The annotations mechanism is used to decorate various .NET types and methods with special attributes that provide ReSharper with additional information. Turns out, it is possible to use the same mechanism to apply the Obsolete attribute as well! This way, ReSharper could mark the usage as an error, even if it's not really a compilation error (which is good enough for me!).

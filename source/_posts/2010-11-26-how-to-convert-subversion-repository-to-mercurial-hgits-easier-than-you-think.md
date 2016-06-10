@@ -4,6 +4,8 @@ date: 2010-11-26T14:51:35+00:00
 ---
 Converting SVN to Mercurial, while keeping all the commit history, might sound like a hard thing to do, but in fact it isn't! This functionality is already built into Mercurial, it's just not enabled by default.
 
+<!-- more -->
+
 I will be using [BitBucket](http://bitbucket.org/) as the Mercurial repository host for this example. You will also need the latest version of [TortoiseHg](http://tortoisehg.bitbucket.org/).
 
 Conversion is done using the command `hg convert`, however the Convert extension is not enabled by default. To enable it, locate the file `Mercurial.ini`, typically located in your` %UserProfile%` drectory (`C:\Users\<username>`) in Windows 7). Open it in Notepad, and locate the following section:

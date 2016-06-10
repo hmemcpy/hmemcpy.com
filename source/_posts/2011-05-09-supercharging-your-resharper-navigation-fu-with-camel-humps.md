@@ -4,6 +4,8 @@ date: 2011-05-09T01:30:34+00:00
 ---
 I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a *lot*, mostly due to it's being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given &ndash; use the keyboard shortcuts. A lot. Some even go completely mouseless!
 
+<!-- more -->
+
 Here's a little tip to make navigation your code even better: <a href="http://blogs.jetbrains.com/dotnet/2008/02/resharper-in-detail-camelhumps/" target="_blank">CamelHumps</a>. CamelHumps is a ReSharper feature that allows navigating and selecting parts of compound names, according to <a href="http://en.wikipedia.org/wiki/CamelCase" target="_blank">camelCase</a> rules, so that if you have a method named `CreateUser_WithValidUsernameAndPassword_UserIsCreated` (like I name my unit tests, `UnderTest_Scenario_ExpectedResult`), with CamelHumps enabled, you would be able to move the caret to the beginning of every word using **Ctrl-Left/Right**.
 
 While this is a great feature, I wouldn't want it enabled all the time, since it's also affects Extend/Shrink Selection (Ctrl-W), which sometimes can be annoying. Fortunately, those actions are available as Visual Studio actions, so they can be used even if CameHumps is turned off globally:

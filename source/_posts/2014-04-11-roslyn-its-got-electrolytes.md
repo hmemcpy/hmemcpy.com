@@ -4,6 +4,8 @@ date: 2014-04-11T00:10:59+00:00
 ---
 Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide, some people already started predicting the demise of ReSharper. It's been a week or so, and JetBrains finally [posted a Q&A](http://blog.jetbrains.com/dotnet/2014/04/10/resharper-and-roslyn-qa/) where they explain their reasons for **not** moving to Roslyn, as predicted, at least not in the foreseeable future. Which, in turn, caused yet another sea of comments, both supporting and condemning the decision.
 
+<!-- more -->
+
 Now, why do I care?
 
 I've been a developer for Visual Studio tooling for a while now. Anyone who had ever attempted to build a Visual Studio extension knows very well the limitation of certain APIs. In particular, the Visual Studio automation model (called DTE), and the code model &ndash; both very old, at times unpredictable APIs. The only sources of information, other than MSDN and associated forums, are handful of people who have years of painful experience developing on top of those APIs. Asking a Visual Studio Extensibility question on StackOverflow will almost always yield an answer from the same handful of people. You get to know their names, avatars and positions at various divisions at Microsoft, where they work or worked at some point.

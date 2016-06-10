@@ -4,6 +4,8 @@ date: 2012-10-30T12:15:04+00:00
 ---
 <img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i0.wp.com/hmemcpy.com/wp-content/uploads/2012/10/457236971_3abe1f2afb.jpg?resize=244%2C184" alt="" align="right" border="0" data-recalc-dims="1" />Let's get this out of the way first: I **_hate_** [#regions](http://msdn.microsoft.com/en-us/library/9a1ybwek.aspx)! It's a construct that was introduced to C# 1 to help separate generated code in WinForms from the actual user code (there was no support for .Designer or partial classes yet). Regions became an abuse, where developers would simply _hide_ huge code behind regions, instead of following SRP and keeping classes small. I actually [voted](http://youtrack.jetbrains.com/issue/RSRP-305779) and [suggested](http://youtrack.jetbrains.com/issue/RSRP-330110) that ReSharper will not generate any regions by default.
 
+<!-- more -->
+
 Having said that, however, if there is one thing that is worse than regions is huge XAML files. Being very verbose, XAML tends to get huge, even for the most simple things, and it becomes very difficult to navigate and read.
 
 Turns out, someone made an extension for Visual Studio called [XAML Regions](http://visualstudiogallery.msdn.microsoft.com/3c534623-bb05-417f-afc0-c9e26bf0e177), which allows adding regions in .xaml files with an XML comment-like syntax:

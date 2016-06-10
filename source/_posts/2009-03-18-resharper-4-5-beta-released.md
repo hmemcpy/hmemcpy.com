@@ -6,6 +6,8 @@ _[**Update:** this article is now obsolete, and the links below might not work. 
 
 JetBrains just <a href="http://www.jetbrains.com/resharper/beta.html" target="_blank">announced</a> that ReSharper 4.5 has reached Beta status, and now available to <a href="http://download.jetbrains.com/resharper/ReSharperSetup.4.5.1208.6.msi" target="_blank">download</a>.
 
+<!-- more -->
+
 Here are some of my first impressions:
 
   * The installation was a snap &#8211; it asked to remove the previous version (4.1), and installed the new version instead, while keeping the previous settings.

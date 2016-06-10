@@ -4,6 +4,8 @@ date: 2011-08-11T13:17:23+00:00
 ---
 I speak Russian, but I never bothered to learn how to properly type it on the keyboard. Every time I needed to search or write something, I would use a transliteration service, such as <a href="http://www.translit.ru" target="_blank">translit.ru</a>, then copy the translated text to clipboard and paste it to the target window (such as a Skype chat session).
 
+<!-- more -->
+
 <img style="float: right; padding: 5px" src="http://i0.wp.com/hmemcpy.com/wp-content/uploads/2011/08/image.png?resize=206%2C139" />I have recently discovered <a href="http://www.google.com/ime/transliteration/" target="_blank">Google IME</a> (Input Method Editor) &ndash; an extension of <a href="http://www.google.com/transliterate/" target="_blank">Google Transliteration</a>, brings the transliteration service to Windows as another language on your keyboard!
 
 Here is how it works: after installing Google IME <a href="http://www.google.com/ime/transliteration/" target="_blank">in your language</a>, you will have that language added in your languages bar. Then, when you switch to that language using Alt-Shift, you then can type in English letters, and Google IME will automatically convert it to the target language (even suggesting the correct spelling if you made a mistake!).

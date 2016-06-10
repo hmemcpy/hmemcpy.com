@@ -4,6 +4,8 @@ date: 2010-07-22T06:55:48+00:00
 ---
 Yesterday I attended the 2nd Software Craftsmanship meeting, led by [Uri Lavi](http://www.irefactor.net/), held in the headquarters of [PicScout](http://www.picscout.com/).
 
+<!-- more -->
+
 ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/IMG_0684_1.jpg)
 
 The main agenda for the evening was Bad Code: identifying bad code, code smells, and using tools to identify bad code. Uri gave an in-depth presentation about most common code smells, such as huge nested switch/case statements, and explained how to refactor them into a working, beautiful code.

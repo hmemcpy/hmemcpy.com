@@ -8,6 +8,8 @@ Suppose you're developing custom tooling that enhances (or otherwise modifies) c
 
 One common way to interact with those custom properties is by adding a page in the project properties, however, most documentation about extending project properties refers to creating your own project systems. Any documentation about extending existing projects is either out of date, or nonexistent.
 
+<!-- more -->
+
 But, when there's a will &ndash; there's a way. TL;DR: Here's how to add a custom property page to a regular C# console application:
 
   1. Create an (empty) VSIX project 

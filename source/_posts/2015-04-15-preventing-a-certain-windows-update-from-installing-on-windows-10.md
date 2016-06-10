@@ -4,6 +4,8 @@ date: 2015-04-15T15:30:26+00:00
 ---
 This post explains how to prevent a certain update from installing on a Windows 10 machine (at the time of writing, build 10049). The information below might not be accurate/relevant for future updates.
 
+<!-- more -->
+
 **UPDATE:** Microsoft has released a [tool to hide unwanted updates](https://support.microsoft.com/en-us/kb/3073930), which makes the process described below much simpler:
 
 {% asset_img image.png "Show or hide updates" %}

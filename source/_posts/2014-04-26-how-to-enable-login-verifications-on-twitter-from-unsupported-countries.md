@@ -4,6 +4,8 @@ date: 2014-04-26T17:35:45+00:00
 ---
 It's funny how a random twitter rant can yield valid solutions. One such rant between [@omervk](https://twitter.com/omervk) (who co-runs [plaintextoffenders.com](http://plaintextoffenders.com)) and myself regarding enabling Two Factor Authentication (2FA, or *login verification*) on twitter being unavailable for people in Israel, caught the attention of [Per Thorsheim](https://twitter.com/thorsheim), an independent security consultant and founder of the [Passwords conference](http://passwordscon.org/). Per, turns out, was interested in this problem because of another matter, that Twitter seemingly _turned off_ login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter [here](http://securitynirvana.blogspot.no/2014/04/did-twitter-silently-remove-login.html).
 
+<!-- more -->
+
 So what is the problem exactly? In order to enable login verifications on Twitter, turns out, you need to _either_ associate your mobile phone number with twitter, or enable sending login verifications to your iOS or Android twitter app. The latter, turns out _also_ requires your phone number!
 
 Here's how it supposed to work: you go to the [**Security and privacy**](https://twitter.com/settings/security) settings in your twitter account. If no phone number is associated, you will see these options:

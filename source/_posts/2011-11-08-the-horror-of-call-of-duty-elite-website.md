@@ -4,6 +4,8 @@ date: 2011-11-08T13:33:53+00:00
 ---
 I don't normally blog about this, so please excuse the following rant. As a public service, I search for *plain text* on twitter to find people complaining about sites storing user <a href="/2011/04/announcing-plain-text-offenders/" target="_blank">passwords in plain text</a>. I noticed some people complaining about <a href="http://www.callofduty.com/elite" target="_blank">Call of Duty Elite</a> &ndash; an official site for the Call of Duty: Modern Warfare series players from Activision &ndash; about their passwords being stored as plain text.
 
+<!-- more -->
+
 I decided to sign up to the website myself, in order to see for myself the *Forgot password* email that contained my plain text passwords. Below are my experiences:
 
 I started by going to the Call of Duty Elite website and pressing *Join up for free* in the middle of the page. I was taken to a screen where I was prompted to either sign in with my Facebook account, or using a traditional sign up. I'm somewhat reluctant to authenticate with my Facebook account, because sites usually tend to ask for much more information from Facebook that they really require (I prefer using Twitter authentication for this, if available). Besides, my real reason was to register a bogus profile just for the sake of the password recovery email.

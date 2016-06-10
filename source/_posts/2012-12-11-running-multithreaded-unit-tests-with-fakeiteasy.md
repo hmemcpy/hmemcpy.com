@@ -4,6 +4,8 @@ date: 2012-12-11T21:39:08+00:00
 ---
 While running some of my tests today, I suddenly got an `IndexOutOfRangeException`, with the following stack trace:
 
+<!-- more -->
+
 ```
    at System.Collections.Generic.List`1.Add(T item)
    at FakeItEasy.Core.FakeScope.AddInterceptedCall(FakeManager fakeManager, ICompletedFakeObjectCall call)

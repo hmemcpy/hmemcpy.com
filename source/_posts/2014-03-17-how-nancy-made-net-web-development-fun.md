@@ -6,6 +6,8 @@ Let's get this out of the way first: this is **not** a post about how to use [Na
 
 I am not a web developer. During my career I mostly worked on desktop applications (with occasional dab in the database land, typical CRUD stuff). Over the years my passion for development shifted towards building development tools (Visual Studio, ReSharper plugins), and my dayjob now having a blast building [OzCode](http://www.oz-code.com/), a debugging productivity tool for Visual Studio.
 
+<!-- more -->
+
 So I never had the chance to *do* web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages &ndash; they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).
 
 Enter Nancy.

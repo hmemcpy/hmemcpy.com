@@ -4,6 +4,8 @@ date: 2014-04-20T19:41:56+00:00
 ---
 Lately I found myself launching [scriptcs](http://scriptcs.net/) more and more to do simple calculations. I half-jokingly said on twitter that I'd better remap `calc.exe` to `scriptcs.exe` on my machine. However it seems that my joke tweet was taken seriously by some people, and I was asked how this was done. So here goes!
 
+<!-- more -->
+
 For this next trick I will use my most favorite Windows trick &ndash; the Image File Execution Options (IFEO). I've blogged about IFEO in the past, it's generally used to allow [attaching a debugger to a process before it starts](/2010/12/how-to-debug-a-process-that-is-crashing-on-startup/), but can also do other useful things, such as replacing the Windows Task Manager with Process Explorer, or even disabling some processes launching, which is useful to [prevent Narrator in Windows 8 from launching](/2012/12/how-to-disable-windows-narrator-appearing-on-win-enter-in-windows-8/) via the Win-Enter key.
 
 So here is how to remap `calc.exe` to launch scriptcs instead. First, locate on your machine where `scriptcs.exe` is installed, as we need the full path. You can use the command `where scriptcs.exe` in CMD to find it. If you don't have `scriptcs.exe` in path, best [install it via Chocolatey](http://chocolatey.org/) (you're welcome!)

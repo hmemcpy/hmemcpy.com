@@ -4,7 +4,9 @@ date: 2009-05-19T05:57:18+00:00
 ---
 Say you need to paste a chunk of XML (or [WKT](http://en.wikipedia.org/wiki/Well-known_text)) into Visual Studio as a string literal (for your unit tests, or what not). How would you do it?
 
-In C#, string literals can be represented in two ways</a>:
+In C#, string literals can be represented in two ways:
+
+<!-- more -->
 
 {% blockquote MSDN http://msdn.microsoft.com/en-us/library/aa691090.aspx %}
 C# supports two forms of string literals: regular string literals and verbatim string literals.

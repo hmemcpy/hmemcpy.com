@@ -4,6 +4,8 @@ date: 2014-06-09T16:08:08+00:00
 ---
 I was called over to see if I could help solve a strange issue &ndash; every time the build script (Ant) for the client's Android app ran &ndash; certain files that were modified by the build script (aÂ .properties file, few others), were suddenly inaccessible to other people logging to the machine &ndash; only the user who initiated the build could still write to the files. Looking at the file permissions tab proved as much: only the current user and the Administrators group could access the file!
 
+<!-- more -->
+
 My initial investigation into Ant's build.xml led me to an interesting discovery &ndash; all the files that lost their permissions were modified using the [ReplaceRegExp](http://ant.apache.org/manual/Tasks/replaceregexp.html) task for Ant &ndash; a task that could replace text in a file using regular expressions. Quick Google search for *replaceregexp ant file permissions* led me to [this similar issue](https://issues.apache.org/bugzilla/show_bug.cgi?id=36440), which was, unfortunately, closed as wontfix.
 
 

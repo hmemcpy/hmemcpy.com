@@ -4,6 +4,8 @@ date: 2013-04-13T18:47:43+00:00
 ---
 <img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i1.wp.com/hmemcpy.com/wp-content/uploads/2013/04/image.png?resize=187%2C121" alt="" align="right" border="0" data-recalc-dims="1" />I wish I didn't have to write this post, but there was just no easy information available about this seemingly easy task. Normally, I wouldn't even have bothered, but during playing Battlefield 3 (or other full-screen games), if you happen to hit Caps lock, this popup will cause the game to run in window mode (and having you killed in the process!).
 
+<!-- more -->
+
 I have a Microsoft Wireless Keyboard 7000, and if your popup looks like the one in the image above, you can disable it with the [Microsoft IntelliType](http://www.microsoft.com/en-us/download/details.aspx?id=26949) software.
 
 Here's how to disable those annoying on-screen notifications for caps lock, scroll lock and num lock from appearing on your screen:

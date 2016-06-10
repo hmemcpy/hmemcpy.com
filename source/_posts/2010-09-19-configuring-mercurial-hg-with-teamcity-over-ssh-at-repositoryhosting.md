@@ -8,6 +8,8 @@ We use [TeamCity](http://www.jetbrains.com/teamcity/) as our continuous integrat
 
 Here are the steps required for configuring Mercurial with SSH in TeamCity:
 
+<!-- more -->
+
 **Part 1:** Installing TortoiseHg and generating a cryptographic key-pair for secure authentication
 
   * Download and install [TortoiseHg](http://tortoisehg.bitbucket.org/). Make sure to install the correct version (32-bit or 64-bit).

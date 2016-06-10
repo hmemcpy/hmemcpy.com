@@ -6,6 +6,8 @@ date: 2010-01-14T06:50:00+00:00
 
 Early Saturday morning on Islay, and we are set to go on another adventure! After eating a delicious breakfast that our lovely host prepared for us, we were set to try and explore some more distilleries. Unfortunately there were no tours at Lagavulin and Ardbeg on a Saturday, so we decided to drive to the place where one of my most favorite [pictures](http://www.islayinfo.com/islay-pictures-wallpaper/kilnaughton_bay_1280x859.html) was taken &#8211; the Carraig Fhada Lighthouse.
 
+<!-- more -->
+
 [<img style="display: inline; margin-left: 0px; margin-right: 0px; border: 0px;" title="Carraig Fhada Lighthouse" src="http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/Scotland001_thumb.jpg?resize=260%2C155" border="0" alt="Carraig Fhada Lighthouse" align="left" data-recalc-dims="1" />](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/Scotland001.jpg) It was a relatively short drive, the road eventually becomes almost undrivable. We parked our car outside the gates of the Carraig Fhada farm and continued on foot. The sea breeze blows into our faces as we walk slowly along the rocky path towards the lighthouse. It's so calm and peaceful out here&
 
 Fully recharged by the fresh air and breathtaking scenery we went back to the car. I quickly checked the little map we had and saw that Kilchoman distillery is open on a Saturday! My GPS has no idea where Kilchoman is, but it's very hard to get lost on Islay, so I set course to Bruichladdich and we begin driving.

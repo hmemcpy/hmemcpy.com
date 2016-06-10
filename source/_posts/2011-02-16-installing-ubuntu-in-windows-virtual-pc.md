@@ -4,6 +4,8 @@ date: 2011-02-16T11:20:46+00:00
 ---
 I was trying to install Ubuntu using [this tutorial](http://www.hanselman.com/blog/InstallingUbuntu104LTSOnWindowsVirtualPCOnWindows7.aspx) by Scott Hanselman, where upon pressing *Create virtual machine*, I was met with the following error message:
 
+<!-- more -->
+
 ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2011/02/Untitled.png)
 
 I couldn't immediately find the option in the BIOS, so I wrote down the BIOS Version (which was TYG4110H.86A), and later downloaded a BIOS upgrade from the Intel site.
