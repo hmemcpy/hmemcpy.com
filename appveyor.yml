@@ -10,21 +10,20 @@ environment:
     secure: 1WheHu+kkZmDJrayiqakzJvDUfL6OOkzc3a+sd3RM6hJcjOvIJcvrOzegNHHzbCV
 
 install:
-  - ps: Install-Product node 0
   - npm install -g npm
   - npm install -g hexo-cli
   - npm install
-
 cache:
   - node_modules -> package.json
-  
+
   # Don't actually build.
 build: off
+test: off
 
-on_success:
+deploy_script:
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
   - git config --global user.email "hmemcpy@gmail.com"
   - git config --global user.name "Igal Tabachnik"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - hexo deploy
+  - hexo deploy --generate
