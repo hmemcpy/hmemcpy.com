@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/hmemcpy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://hmemcpy.com
+  * I am hmemcpy (https://keybase.io/hmemcpy) on keybase.
+  * I have a public key with fingerprint 84D6 40BB 0374 D721 2744  9731 45E3 7E44 9CA7 AA0D
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101b395d78c17aa7943a74385faf97514d0b9f87c4b716401586b741b626b942b7e0a",
+            "fingerprint": "84d640bb0374d7212744973145e37e449ca7aa0d",
+            "host": "keybase.io",
+            "key_id": "45e37e449ca7aa0d",
+            "kid": "0101b395d78c17aa7943a74385faf97514d0b9f87c4b716401586b741b626b942b7e0a",
+            "uid": "399ce251f5b8be5aef38c5bad4897219",
+            "username": "hmemcpy"
+        },
+        "revoke": {
+            "sig_ids": [
+                "fc40ce8d3a857171e9e11e0040b6ddc31b1382f2363c78ccb8c7fcccee6b770e0f"
+            ]
+        },
+        "service": {
+            "hostname": "hmemcpy.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1465643311,
+    "expire_in": 157680000,
+    "prev": "603854e84dca7d8958d37db9886573e8dfa39b358c4f95f13ffb5b277b0d5f12",
+    "seqno": 30,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.53
+Comment: https://keybase.io/crypto
+
+yMJvAnicrVJbaBVHGD5HrSHHRqVQW32oMES8NDU7OzM7M6cXQftiLCFaSgUNx53Z
+2WQ5ObsnezbbxBBQMa0FwYi3eHnQxGgLrUF8UEzUtBUvkQiKBK3XCoVeqEVbiKjF
+zob2oeBj52Xmn/n+7//+75+zFRNTmTQRM2p2Nc+M0pe+ediS+njVw+p2IAKnDWTb
+QV6Nb6rJUaUol/cckAUGNKBAnDiUSUhtm3KMbIoRI67tckogdgzBXUYlFhRa2ICE
+WYJiKCzTEhybgirDBlXA9fwGFRZDz480LcOOxgphIIodakKTYswpgpgoRJU+S1sX
+Mxyd2BiUkgwtTtgltdAL9J0OcuPyXoD/n3W3jNMhzqUyCXSJYEIRW7mISSJsBzOu
+5fMEWFKhbxeURjcWVEEW20BHFQhVHORVYmvJa9CaSyC7CrgSG1IxB9mMUEih4gpC
+ZRjaEctxJIICIma6JrKQ1PqlYJK6UkqltERqKMMF9ZpbF4w9OU6emPTf4gtlUNCq
+imEQBTJoSh6iqJhNNEVtxQT4iRK5fyhywvMdPSCdEKuw5AU+yEKNlJGXcEJsEQsj
+BGEVUK1FL1Q5L0EQajFDr6SMijWlZWiDsdLT1fNwGCe6R+oIzphFKNIduzbiAhEm
+scuJC5HrCiJMSoXh6NAESVPNfgCySJNGdoPm1L75dtQSKtDx7dDqSal0JjX5pQnJ
+z01lyqf/+5/3ryx7vuyVgXl48fzZ5WLW2NgHh09uXdc8d9GdfQ1P13bFvTuXb+jv
+rhiMfzrz3c49rX/eXvZD7dMTb65Zn/Gn3uovXVryXsfGaw92z5l2uu/T4wf79u6t
+r8kPpDKth65dXHr58bYrH1Uu+PH5cE13U172VUd9N85s2jwy5U4Zr3s5cyA6cjS+
+39k++v3lfXTAL6v98It1FU+evTW4qSezed7bfx3rXso6+czX1k9/9PmX59oK23vu
+/vrHmpuzX4/jtc9GhufU976BflsRmOe/+np0UlfmZuWWsV2NTz7bsP/U9aljQ+lH
+/ZPTxQfv/N4z9PjnBbvfv3pya9f9laOV4cZfOha9Wnvv3Qvbh6vrBnd03ljyN+3o
+XdU=
+=wb2F
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/hmemcpy
+
+==================================================================

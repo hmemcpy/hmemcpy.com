@@ -27,7 +27,7 @@ $my = 23
 [xml]$myXml = $my 
 ```
 
-**It's pipelined** &ndash; every variable or the output of every function can be piped as an input to another function using the pipe (*|*) operator. It's extremely useful when dealing with collections and other enumerable objects &ndash; allowing you to filter the elements and transform the result into whatever you need.
+**It's pipelined** &ndash; every variable or the output of every function can be piped as an input to another function using the pipe (`|`) operator. It's extremely useful when dealing with collections and other enumerable objects &ndash; allowing you to filter the elements and transform the result into whatever you need.
 
 ```ps
 # a LINQ-like querying with pipelining. 
@@ -80,7 +80,7 @@ Quite a lot is going on in this example, which demonstrate the Power of PowerShe
   * Strings can be formatted with `-f`, however in this case they are a part of an expression, and have to be escaped into their own expression by using `$()`.
   * The `%` symbol is an alias of `foreach`, which is an alias of `ForEach-Object`. Use `Get-Alias -Definition ForEach-Object` to see all the alias definitions, or `Get-Alias %`, for example.
   * The last line in a function (or selection) is what gets returned (or printed out). In this case, the result of the last line is a single string, containing the value *˜other.txt' (it's the only modified file). If there was more than one result, the return would be an array.
-  * Finally, to call this method, we use `Get-SvnDiff 1000 2000`, and we can use the pipe operator (*|*) to continue modifying the returned values.
+  * Finally, to call this method, we use `Get-SvnDiff 1000 2000`, and we can use the pipe operator (`|`) to continue modifying the returned values.
 
 And that's it! Sure, there is way more to know about PowerShell, but this should be more than enough to get started, or at least, not to get lost when reading and writing simple scripts.
 

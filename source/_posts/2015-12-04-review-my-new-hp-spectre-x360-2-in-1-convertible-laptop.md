@@ -5,7 +5,7 @@ date: 2015-12-04T16:38:45+00:00
 <img style="float: right; padding: 5px;" src="{% asset_path image1.png %}" />I decided to get with the times, and get myself a mid-level ultraportable machine I can carry around while traveling. Knowing almost nothing about this category of computers (and having avoided touch-enabled hybrids/tables until now), I spent considerable time researching. My requirements were simple:
 
   * a secondary machine (my 3 year old behemoth HP EliteBook 8570w is still the best development machine I've got)
-  * light, portable (so, about 13*), touch-enabled (most of them are, anyway)
+  * light, portable (so, about 13"), touch-enabled (most of them are, anyway)
   * good typing experience (I considered a Surface 3/4 with Type Cover keyboard, but typing experience got mixed reviews)
   * $1000 or less
 
