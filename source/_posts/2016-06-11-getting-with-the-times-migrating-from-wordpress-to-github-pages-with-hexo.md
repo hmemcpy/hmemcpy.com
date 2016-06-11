@@ -21,13 +21,13 @@ For the migration process, you will need the following:
 
 ### Step 1: Export WordPress data as Jekyll
 
-Jekyll, being the older static generators, is widely supported, including this wonderful plugin for WordPress called [WordPress to Jekyll Exporter](https://github.com/benbalter/wordpress-to-jekyll-exporter). 
+Jekyll, being one of the older static generators, is widely supported, including this wonderful plugin for WordPress called [WordPress to Jekyll Exporter](https://github.com/benbalter/wordpress-to-jekyll-exporter). 
 
 Go to your WordPress admin panel and install the **WordPress to Jekyll Exporter** plugin. After installing and activating the plugin, you should have a new menu under **Tools** called **Export to Jekyll**. Depending on the size of your blog, this might take a few minutes to complete, but a new zip file called `jekyll-export.zip` should begin downloading.
 
-Since our ultimate goal is to eventual delete the WordPress blog, it's best to make a complete backup of all the content. You can do this via your hosting's FTP or with another great WordPress plugin called **Duplicator**, which can export everything for you into a zip file. We will also need the contents of this zip to replace any broken images and other files.
-
 Exported data from WordPress will contain all the posts and other static pages in Markdown (.md) files. The blog posts themselves are contained in a `_posts` directory inside the `lekyll-export.zip` archive.
+
+Since our ultimate goal is to eventually delete the WordPress blog, it's best to make a complete backup of all the content. You can do this via your hosting's FTP or with another great WordPress plugin called **Duplicator**, which can export everything for you into a zip file. We will also need the contents of this zip to replace any broken images and other files.
 
 ### Step 2: Configuring Hexo
 
@@ -52,7 +52,7 @@ After removing and saving the .md file, it will be automatically recompiled by H
 
 ### Step 3: Manual labor
 
-Here is the nasty part - fixing up any syntax errors and broken images. Unfortunately, in some cases the export does not do a very good job, so manual tweaks are needed. If you used the Windows Live Writer to write posts (as I had), you'll find it likes replacing `-` with `&ndash;`, and worse. This part is, unfortunately, the most difficult in this entire process.
+Here is the nasty part - fixing up any syntax errors and broken images. Unfortunately, in some cases the export does not do a very good job, so manual tweaks are needed. If you used Windows Live Writer to write posts (as I had), you'll find it likes replacing `-` with `&ndash;`, and worse. This part is, unfortunately, the most difficult in this entire process.
 
 Once you're done fixing *most* issues, verifying each time it renders correctly in the browser, time to set up GitHub!
 
