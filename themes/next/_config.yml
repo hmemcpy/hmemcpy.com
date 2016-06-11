@@ -21,6 +21,9 @@ since: 2009
 # Tips: Before you open this tag, remeber set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
 canonical: true
 
+github:
+  repo_url: https://github.com/hmemcpy/hmemcpy.com
+
 
 # ---------------------------------------------------------------
 # Menu Settings

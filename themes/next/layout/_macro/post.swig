@@ -97,7 +97,15 @@
               </span>
             {% endif %}
           {% endif %}
-
+          
+          {% if page.source %}
+            <span class="post-edit">
+                &nbsp; | &nbsp;
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <a href="{{ url_for(theme.github.repo_url) }}/edit/master/source/{{page.source}}">Edit this page</a>
+            </span>
+          {% endif %}
+          
           {% if not is_index and theme.facebook_sdk.enable and theme.facebook_sdk.like_button %}
             &nbsp; | &nbsp;
             <div class="fb-like" data-layout="button_count" data-share="true"></div>
