@@ -4,7 +4,7 @@
 
 # Site
 title: In Absentia
-subtitle:
+subtitle: by Igal Tabachnik
 description:
 author: Igal Tabachnik
 language: en
@@ -65,13 +65,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 
 ## Themes: https://hexo.io/themes/
-theme: apollo
-
-archive_generator:
-    per_page: 0
-    yearly: false
-    monthly: false
-    daily: false
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
