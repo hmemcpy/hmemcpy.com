@@ -2,7 +2,7 @@
 title: 'Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window'
 date: 2010-06-27T07:04:44+00:00
 ---
-Here's an issue I've been struggling with: it seems that by accessing a certain property of a _docked_ tool window of an add-in, an exception is thrown somewhere inside Visual Studio 2010. It's caught internally, and the exception message, *Object reference is not set to an instance of an object*, is shown whenever I was trying to open any file (code or otherwise).
+Here's an issue I've been struggling with: it seems that by accessing a certain property of a _docked_ tool window of an add-in, an exception is thrown somewhere inside Visual Studio 2010. It's caught internally, and the exception message, *Object reference is not set to an instance of an object*, is shown whenever I was trying to open any file (code or otherwise).
 
 <!-- more -->
 

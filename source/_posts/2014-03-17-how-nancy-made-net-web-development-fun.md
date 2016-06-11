@@ -8,11 +8,11 @@ I am not a web developer. During my career I mostly worked on desktop applicatio
 
 <!-- more -->
 
-So I never had the chance to *do* web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages &ndash; they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).
+So I never had the chance to *do* web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages &ndash; they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).
 
 Enter Nancy.
 
-When I first heard about Nancy, I was intrigued &ndash; an entire web application that fits in a tweet! If, in a highly unlikely event, you're reading about Nancy for the first time in this blog post, here's the canonical *hello world* app:
+When I first heard about Nancy, I was intrigued &ndash; an entire web application that fits in a tweet! If, in a highly unlikely event, you're reading about Nancy for the first time in this blog post, here's the canonical *hello world* app:
 
 ```csharp
 public class SampleModule : Nancy.NancyModule
@@ -30,15 +30,15 @@ So what makes Nancy so appealing to me, a non-web developer? First and foremost 
 
 But what I like most about Nancy has nothing to do with its actual application &ndash; it has to do with the way it works under the covers. Demonstrated by one of Nancy's lead developers, Andreas Håkansson ([@TheCodeJunkie](https://twitter.com/TheCodeJunkie) on twitter), in the [Guerilla Framework Design](https://www.youtube.com/watch?v=7jg0u-YaRxQ) talk at DevDay, Nancy uses lots of cool C# language hacks to achieve simplicity and make using of the framework as simple as possible!
 
-Want examples? Let's start with the *hello world* app above: there are at least 3 cool things that don't require you to understand exactly how they work. For example, the funky `= _ =>` *smiley face*. While aesthetically pleasing, this is a lambda expression, defining the body of the HTTP Get method, with the route */*. This lambda passes a parameter which is a dynamic dictionary (specified by underscore in the above example). This dictionary contains, among other things, the URL parameters, so they can be used immediately inside the method body, e.g.:
+Want examples? Let's start with the *hello world* app above: there are at least 3 cool things that don't require you to understand exactly how they work. For example, the funky `= _ =>` *smiley face*. While aesthetically pleasing, this is a lambda expression, defining the body of the HTTP Get method, with the route */*. This lambda passes a parameter which is a dynamic dictionary (specified by underscore in the above example). This dictionary contains, among other things, the URL parameters, so they can be used immediately inside the method body, e.g.:
 
 ```csharp
 Get["/greet/{name}"] = parameters => "Hello " + parameters.name;
 ```
 
-Here, the underscore has been replaced with the named argument `parameters`, and now, everyone who issues an HTTP GET to the address /greet/Igal, for example, the value *Igal* will be captured in the parameter `name` in the dynamic dictionary, and will just be there, available to use!
+Here, the underscore has been replaced with the named argument `parameters`, and now, everyone who issues an HTTP GET to the address /greet/Igal, for example, the value *Igal* will be captured in the parameter `name` in the dynamic dictionary, and will just be there, available to use!
 
-Another thing to note is that the lambda returns a string, but it somehow renders fine in the browser. The `Get` property (along with other HTTP verbs that Nancy provides) expects a `Func<dynamic, dynamic>` as a return result of the lambda, so it doesn't really matter. The conversion is taken care under the hood of Nancy, which defines a lot of [implicit conversions](http://msdn.microsoft.com/en-us/library/z5z9kes2.aspx) to covert strings to valid response content, and integers to valid HTTP codes! This means that you can simply *`return 404;`* from a body of a Nancy route, and it will auto-magically transform into `HttpStatusCode.NotFound` that Nancy understands.
+Another thing to note is that the lambda returns a string, but it somehow renders fine in the browser. The `Get` property (along with other HTTP verbs that Nancy provides) expects a `Func<dynamic, dynamic>` as a return result of the lambda, so it doesn't really matter. The conversion is taken care under the hood of Nancy, which defines a lot of [implicit conversions](http://msdn.microsoft.com/en-us/library/z5z9kes2.aspx) to covert strings to valid response content, and integers to valid HTTP codes! This means that you can simply *`return 404;`* from a body of a Nancy route, and it will auto-magically transform into `HttpStatusCode.NotFound` that Nancy understands.
 
 Everything in Nancy is expandable, configurable and overridable. Nancy is built with testability, extensibility and pluggability in mind, which means that almost everything you need it to do (support another View engine, hosting platform, custom IoC container, etc.) is just a NuGet package away. Which is just awesome, as there are [tons of things](https://www.nuget.org/packages?q=nancy) you can add to Nancy.
 

@@ -2,7 +2,7 @@
 title: 'Turning old and busted asynchronous code into new async/await-enabled hotness with TaskCompletionSource<T>'
 date: 2013-01-30T22:38:36+00:00
 ---
-While working with a client to create a new version of their software, one of the tasks was creating a service that talked to a hardware laser tracker, a device which allows tracking certain points (*targets*) over a large distance.
+While working with a client to create a new version of their software, one of the tasks was creating a service that talked to a hardware laser tracker, a device which allows tracking certain points (*targets*) over a large distance.
 
 <!-- more -->
 
@@ -34,7 +34,7 @@ public Task<PositionData> GetPositionAsync()
 
 And it worked great! The caller of `GetPositionAsync` now had a task which he can either `await` (if using .NET 4.5, or in .NET 4.0 using Async Targeting Pack (now known as [Microsoft.Bcl.Async](http://nuget.org/packages/Microsoft.Bcl.Async)), but only if running in Visual Studio 2012), or using plain old methods, available on the Task object.
 
-However, upon calling this method a second time, an `InvalidOperationException` ***An attempt was made to transition a task to a final state when it had already completed.*** was thrown on the `tcs.SetResult(data)` line. It took me a second to realize the bug, can you see it?
+However, upon calling this method a second time, an `InvalidOperationException` ***An attempt was made to transition a task to a final state when it had already completed.*** was thrown on the `tcs.SetResult(data)` line. It took me a second to realize the bug, can you see it?
 
 The problem occurred because the event handler was not unsubscribed from, after the task had completed! Since the handler is a lambda expression, it captured the variable `tcs` when it was created. When we called `GetPositionAsync()` the second time, we made another subscription to the event handler, but when it fired, the first subscription was handled first, attempting to set the result of the **first** `TaskCompletionSource` instance, which had, of course, already finished.
 

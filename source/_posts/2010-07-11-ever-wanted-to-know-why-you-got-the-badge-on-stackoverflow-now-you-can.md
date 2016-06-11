@@ -12,6 +12,6 @@ I am happy to say that [waffles](http://meta.stackoverflow.com/users/17174/waffl
 
 ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/badges_3.png)
 
-Thanks Jeff and Sam for implementing this feature, and thanks to everyone in the SO community for making this question award me the *[Great Question](http://meta.stackoverflow.com/badges/22/great-question?user_id=8205)* badge.
+Thanks Jeff and Sam for implementing this feature, and thanks to everyone in the SO community for making this question award me the *[Great Question](http://meta.stackoverflow.com/badges/22/great-question?user_id=8205)* badge.
 
 Happy Hunting!

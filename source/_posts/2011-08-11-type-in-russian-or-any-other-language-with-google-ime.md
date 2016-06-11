@@ -10,7 +10,7 @@ I speak Russian, but I never bothered to learn how to properly type it on the ke
 
 Here is how it works: after installing Google IME <a href="http://www.google.com/ime/transliteration/" target="_blank">in your language</a>, you will have that language added in your languages bar. Then, when you switch to that language using Alt-Shift, you then can type in English letters, and Google IME will automatically convert it to the target language (even suggesting the correct spelling if you made a mistake!).
 
-Suppose I want to type *который час* (*what time is it?*). I switch to the Russian language, then type the word *kotoryj*:
+Suppose I want to type *который час* (*what time is it?*). I switch to the Russian language, then type the word *kotoryj*:
 
 ![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2011/08/image3.png)
 

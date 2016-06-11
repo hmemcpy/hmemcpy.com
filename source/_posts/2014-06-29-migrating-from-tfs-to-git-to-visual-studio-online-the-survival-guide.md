@@ -8,7 +8,7 @@ This is a step-by-step recount of my attempt to migrate an existing 3-year old T
 
 # Step 1: TFS to git
 
-We first need to export the entire TFS repository to git. This is achieved by *cloning* the entire TFS repository with [git-tfs](https://github.com/git-tfs/git-tfs) or [git-TF](https://gittf.codeplex.com/), both open source tools. While designed to do the same, mainly, providing a bridge between git and TFS, the former is an older, more mature project, and the latter is a tool created by Microsoft for the same purpose. I initially tried to use Microsoft's git-TF, but after more than **24 hours** of waiting for the clone to end, it **died with a Java exception** (the tool by Microsoft is written in Java).
+We first need to export the entire TFS repository to git. This is achieved by *cloning* the entire TFS repository with [git-tfs](https://github.com/git-tfs/git-tfs) or [git-TF](https://gittf.codeplex.com/), both open source tools. While designed to do the same, mainly, providing a bridge between git and TFS, the former is an older, more mature project, and the latter is a tool created by Microsoft for the same purpose. I initially tried to use Microsoft's git-TF, but after more than **24 hours** of waiting for the clone to end, it **died with a Java exception** (the tool by Microsoft is written in Java).
 
 First, install git-tfs. It's best installed with [Chocolatey](https://chocolatey.org/) by using `cinst gittfs`. Next, we need to get the exact name of the project we want to clone. Assuming your TFS server is https://tfs.contoso.com, first, run the following command to list all the branches:
 
@@ -60,7 +60,7 @@ Next, however, the issue says to run this:
 git rev-list master --first-parent --count
 ```
 
-Which is the *depth of the *˜first-parent' lineage of master*, according to the post author. Not quite sure what this meant (the documentation wasn't very helpful, either), running this command produced a number which was about half the previous one: 2512.
+Which is the *depth of the *˜first-parent' lineage of master*, according to the post author. Not quite sure what this meant (the documentation wasn't very helpful, either), running this command produced a number which was about half the previous one: 2512.
 
 Not knowing exactly what the numbers meant, I decided to try and follow the post's advice, and split that number into 5 sections, of 500 commits each, and I pushed them in the following order:
 
@@ -78,7 +78,7 @@ And finally:
 git push -u origin master
 ```
 
-To push the remaining commits, and create a remote tracking branch for master. To make extra sure, I ran this last command again, and got *Everything up-to date* message.
+To push the remaining commits, and create a remote tracking branch for master. To make extra sure, I ran this last command again, and got *Everything up-to date* message.
 
 Refreshing the CODE tab in VSO revealed that all my source code was uploaded successfully! I cloned the repository locally, and ran a diff between the two directories in Beyond Compare, just to make absolutely certain that everything was copied properly. It was!
 

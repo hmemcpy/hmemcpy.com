@@ -40,6 +40,6 @@ All that is left now is install a WordPress plug-in called [Redirection](http://
 
 ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML8075d84.png)
 
-The **Target URL** value is combined with the numbered references (`$1` &ndash; year, `$2` &ndash; month and `$4` &ndash; post title). Make sure the **Regular expression** checkbox is checked.
+The **Target URL** value is combined with the numbered references (`$1` &ndash; year, `$2` &ndash; month and `$4` &ndash; post title). Make sure the **Regular expression** checkbox is checked.
 
 C'est tout!

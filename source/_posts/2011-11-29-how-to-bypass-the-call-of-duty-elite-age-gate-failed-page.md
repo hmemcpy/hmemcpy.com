@@ -1,8 +1,8 @@
 ﻿---
-title: "How to bypass the Call of Duty Elite 'Age Gate Failed' page"
+title: "How to bypass the Call of Duty Elite 'Age Gate Failed' page"
 date: 2011-11-29T15:54:18+00:00
 ---
-Since posting my [rant](/2011/11/the-horror-of-call-of-duty-elite-website/) on the Call of Duty Elite Website, I've been getting a lot of hits on the blog from people struggling with the *Age Gate* page of the website. If for some reason you enter the wrong date of birth at the signup page, you will not be able to return to the signup to enter a new date, and get the *Age Gate Failed* page instead.
+Since posting my [rant](/2011/11/the-horror-of-call-of-duty-elite-website/) on the Call of Duty Elite Website, I've been getting a lot of hits on the blog from people struggling with the *Age Gate* page of the website. If for some reason you enter the wrong date of birth at the signup page, you will not be able to return to the signup to enter a new date, and get the *Age Gate Failed* page instead.
 
 <!-- more -->
 

@@ -1,5 +1,5 @@
 ﻿---
-title: "Preventing ReSharper's 'implicitly captured closure' warning in FakeItEasy unit tests"
+title: "Preventing ReSharper's 'implicitly captured closure' warning in FakeItEasy unit tests"
 date: 2013-02-21T14:08:51+00:00
 ---
 I noticed that some of my unit tests have a [ReSharper](http://www.jetbrains.com/resharper/) warning on the `A.CallTo()` methods of [FakeItEasy](https://github.com/FakeItEasy/FakeItEasy), suggesting that some local variables are captured implicitly by the lambda expression.

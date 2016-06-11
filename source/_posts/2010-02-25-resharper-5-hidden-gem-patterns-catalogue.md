@@ -30,8 +30,8 @@ Press **Add Pattern**.
 
 We can add either a search only pattern, or a search and replace pattern. Let's add a pattern to turn NUnit Asserts into fluent NUnut Assert syntax:
 
-  * Add `Assert.AreEqual($expected$, $actual$)` in the **Search Patten** window.
-  * Press **Add Placeholder**, select argument, and type `expected` in the name. Do the same for `actual`.
+  * Add `Assert.AreEqual($expected$, $actual$)` in the **Search Patten** window.
+  * Press **Add Placeholder**, select argument, and type `expected` in the name. Do the same for `actual`.
   * In **Replace Pattern**, type `Assert.That($actual$, Is.EqualTo($expected$))`.
   * Choose Pattern severity, I selected **Show as suggestion**.
   * Fill in the description texts.

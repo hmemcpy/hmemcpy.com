@@ -6,7 +6,7 @@ I just got my brand new [HP EliteBook 8570w](http://www.hp.com/united-states/cam
 
 <!-- more -->
 
-  * HP EliteBook 8570w 15.6*
+  * HP EliteBook 8570w 15.6*
   * i7-3820QM
   * 16GB RAM 1600MHz DDR3
   * 256GB SSD + 512GB HDD (instead of optical drive)

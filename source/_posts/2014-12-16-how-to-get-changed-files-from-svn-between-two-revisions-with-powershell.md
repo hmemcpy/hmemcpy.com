@@ -18,4 +18,4 @@ Here's how it works:
   4. The target (sub)directory for that file is being created, if it doesn't exist. 
   5. It then executes [**svn export**](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.export.html) command on the current filename, limiting it to the _to_ revision, so that&nbsp; the changes are taken only until that revision. The file is written in the relative target directory.
 
-This is probably far from *idiomatic* PowerShell, but it gets the job done! Your improvements are welcome, feel free to comment on the Gist!
+This is probably far from *idiomatic* PowerShell, but it gets the job done! Your improvements are welcome, feel free to comment on the Gist!

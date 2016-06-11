@@ -48,7 +48,7 @@ In addition, SaveAllTheTime contains a small widget, reminding you to commit oft
 
 # TabSanity
 
-I discovered [TabSanity](https://visualstudiogallery.msdn.microsoft.com/ac4d4d6b-b017-4a42-8f72-55f0ffe850d7) ([source](https://github.com/jedmao/tabsanity-vs)) fairly recently, and it was one of those *where has this been all my life!!1* moments. This extension makes tabs-as-spaces behaves like actual tabs! The backspace and delete keys, arrow key navigation will not allow the caret to land within the spaces that form a tab, and it will skip to the next *tab*, saving you keystrokes!
+I discovered [TabSanity](https://visualstudiogallery.msdn.microsoft.com/ac4d4d6b-b017-4a42-8f72-55f0ffe850d7) ([source](https://github.com/jedmao/tabsanity-vs)) fairly recently, and it was one of those *where has this been all my life!!1* moments. This extension makes tabs-as-spaces behaves like actual tabs! The backspace and delete keys, arrow key navigation will not allow the caret to land within the spaces that form a tab, and it will skip to the next *tab*, saving you keystrokes!
 
 # EmojiVS
 

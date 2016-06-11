@@ -50,7 +50,7 @@ Here are the steps required for configuring Mercurial with SSH in TeamCity:
   Press **Test Connection**. If TeamCity seems to hang at this point, and there are no message boxes appear on your screen (from a process called TortoisePlink.exe),
     
   1. Assuming TeamCity runs as a service, go to **services.msc**, find **TeamCity Web Server** and stop it.
-  2. Go to **Properties**, then the **Log On** tab. and check the *Allow service to interact with desktop* checkbox.
+  2. Go to **Properties**, then the **Log On** tab. and check the *Allow service to interact with desktop* checkbox.
   3. Restart the service.
     
 When you've done that, the service will run as a console application, and you'll be able to see the output. Try testing the connection again. This time, if there were any errors, you'll be able to see them. Reverse this once you're done troubleshooting, or when you see the Test Successful message in TeamCity.

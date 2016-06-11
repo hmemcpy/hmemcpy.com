@@ -2,11 +2,11 @@
 title: 'Installing a .vsix Extension via MSI without "devenv /setup"'
 date: 2014-03-17T01:40:19+00:00
 ---
-There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or *manually*, by copying the files from a custom installer, typically MSI (and specifying a special `<InstalledByMsi>true</InstalledByMsi>` element in the `extension.vsixmanifest` file). The latter approach is generally used if the extension needs to perform additional tasks, such as running ngen or registering COM servers.
+There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or *manually*, by copying the files from a custom installer, typically MSI (and specifying a special `<InstalledByMsi>true</InstalledByMsi>` element in the `extension.vsixmanifest` file). The latter approach is generally used if the extension needs to perform additional tasks, such as running ngen or registering COM servers.
 
 <!-- more -->
 
-**TL;DR:** it is possible to register custom Visual Studio extensions by <a href="http://en.wikipedia.org/wiki/Touch_(Unix))">touching</a> (modifying the last accessed date) of the file `extensions.configurationchanged`, which is located in the 
+**TL;DR:** it is possible to register custom Visual Studio extensions by <a href="http://en.wikipedia.org/wiki/Touch_(Unix))">touching</a> (modifying the last accessed date) of the file `extensions.configurationchanged`, which is located in the 
 
 ```
 %VSInstallDir%\Common7\IDE\Extensions

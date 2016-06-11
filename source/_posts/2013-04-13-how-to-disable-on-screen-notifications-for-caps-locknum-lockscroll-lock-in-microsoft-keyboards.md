@@ -11,11 +11,11 @@ I have a Microsoft Wireless Keyboard 7000, and if your popup looks like the one 
 Here's how to disable those annoying on-screen notifications for caps lock, scroll lock and num lock from appearing on your screen:
 
   1. If you haven't already, download and install [Microsoft IntelliType](http://www.microsoft.com/en-us/download/details.aspx?id=26949)
-  2. Open it by typing *Microsoft Mouse and Keyboard* in Start menu/screen, and select your keyboard
+  2. Open it by typing *Microsoft Mouse and Keyboard* in Start menu/screen, and select your keyboard
   3. Point your mouse cursor on the key you want to disable (CAPS LOCK, for example):
   
     <img style="display: inline;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2013/04/image5.png?resize=636%2C480" alt="" data-recalc-dims="1" />
-  4. Click the highlighted CAPS LOCK entry (or click on the CAPS LOCK button with the mouse, and DISABLE *Display CAPS LOCK status on the screen*:  
+  4. Click the highlighted CAPS LOCK entry (or click on the CAPS LOCK button with the mouse, and DISABLE *Display CAPS LOCK status on the screen*:  
     <img style="display: inline;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2013/04/image6.png?resize=636%2C480" alt="" data-recalc-dims="1" />
   5. Repeat the process for other keys, if you want
   6. Enjoy bother-free gaming!

@@ -2,7 +2,7 @@
 title: 'How to enable login verifications on Twitter from "unsuppored" countries'
 date: 2014-04-26T17:35:45+00:00
 ---
-It's funny how a random twitter rant can yield valid solutions. One such rant between [@omervk](https://twitter.com/omervk) (who co-runs [plaintextoffenders.com](http://plaintextoffenders.com)) and myself regarding enabling Two Factor Authentication (2FA, or *login verification*) on twitter being unavailable for people in Israel, caught the attention of [Per Thorsheim](https://twitter.com/thorsheim), an independent security consultant and founder of the [Passwords conference](http://passwordscon.org/). Per, turns out, was interested in this problem because of another matter, that Twitter seemingly _turned off_ login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter [here](http://securitynirvana.blogspot.no/2014/04/did-twitter-silently-remove-login.html).
+It's funny how a random twitter rant can yield valid solutions. One such rant between [@omervk](https://twitter.com/omervk) (who co-runs [plaintextoffenders.com](http://plaintextoffenders.com)) and myself regarding enabling Two Factor Authentication (2FA, or *login verification*) on twitter being unavailable for people in Israel, caught the attention of [Per Thorsheim](https://twitter.com/thorsheim), an independent security consultant and founder of the [Passwords conference](http://passwordscon.org/). Per, turns out, was interested in this problem because of another matter, that Twitter seemingly _turned off_ login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter [here](http://securitynirvana.blogspot.no/2014/04/did-twitter-silently-remove-login.html).
 
 <!-- more -->
 
@@ -12,7 +12,7 @@ Here's how it supposed to work: you go to the [**Security and privacy**](https:/
 
 {% asset_img image1.png %}
 
-Notice that both *Send* options are disabled. Pressing the **add a phone** link takes you to a page where you can enter your phone number (after selecting your country and carrier), however in my case, I got this message after submitting:
+Notice that both *Send* options are disabled. Pressing the **add a phone** link takes you to a page where you can enter your phone number (after selecting your country and carrier), however in my case, I got this message after submitting:
 
 {% asset_img image2.png %}
 

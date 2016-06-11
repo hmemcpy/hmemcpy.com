@@ -31,7 +31,7 @@ Finally, I tried to go to the file location using the cmd, and I got my answer &
 
 {% asset_img image4.png %}
 
-Windows has an unfortunate `MAX_PATH` limitation at 260 characters is the source of great pain, and I hope Microsoft fixes it one day. Meanwhile, here's how to *work around* this particular issue: dotPeek generates debug symbols under `%LOCALAPPDATA%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp` for C# code, and unfortunately, it isn't possible to configure. Luckily, it is possible to configure where Visual Studio looks for debug symbols. This is a little-known page in the **Solution** properties called **Debug Source Files**:
+Windows has an unfortunate `MAX_PATH` limitation at 260 characters is the source of great pain, and I hope Microsoft fixes it one day. Meanwhile, here's how to *work around* this particular issue: dotPeek generates debug symbols under `%LOCALAPPDATA%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp` for C# code, and unfortunately, it isn't possible to configure. Luckily, it is possible to configure where Visual Studio looks for debug symbols. This is a little-known page in the **Solution** properties called **Debug Source Files**:
 
 {% asset_img image5.png %}
 
@@ -39,7 +39,7 @@ What I did was copy the entire contents of dotPeek's `SymbolCache\CSharp` direct
 
 After doing this, I could go back to debugging, was was able to step into methods that were previously unavailable!
 
-As the comments below mention, this is also possible to do without copying, by creating a (symbolic) link between theÂ directories! From an elevator command shell, run:
+As the comments below mention, this is also possible to do without copying, by creating a (symbolic) link between the directories! From an elevator command shell, run:
 
 ```
 mklink /D d:\sym %localappdata%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp

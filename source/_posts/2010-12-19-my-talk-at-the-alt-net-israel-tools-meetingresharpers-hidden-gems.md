@@ -22,7 +22,7 @@ One of my most used features of ReSharper is the ability to navigate to the rece
 
   * ### Navigating to constructors
 
-I learned this neat trick fairly recently from JetBrains' own [Hadi Hariri](http://hadihariri.com/), while looking for interesting topics to discuss at the meeting. In any code file, type **new** into the *Go To File Member* navigation (**Alt-/** [Visual Studio] or **Ctrl-F12** [IDEA]), and it will list all constructor first!
+I learned this neat trick fairly recently from JetBrains' own [Hadi Hariri](http://hadihariri.com/), while looking for interesting topics to discuss at the meeting. In any code file, type **new** into the *Go To File Member* navigation (**Alt-/** [Visual Studio] or **Ctrl-F12** [IDEA]), and it will list all constructor first!
 
 ![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/12/image1.png)
 
@@ -40,7 +40,7 @@ Another important benefit of working with Solution-wide analysis enabled is the 
 
   * ### Code issues inspection
 
-At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings &ndash; indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
+At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings &ndash; indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
 
 ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML1e0bf42.png)
 
@@ -54,7 +54,7 @@ The next thing I talked about is the SSR. I wrote about SSR [previously in great
 
 Before I even started my talk, I asked the audience who used ReSharper to raise hands. Of almost 40 people, I think 90% raised their hands. I guaranteed them that the feature I was about to show was something they never heard of before, and I was pleased to have been right!
 
-ReSharper's *Internal Mode* (or *God-mode* or *<a href="http://doom.wikia.com/wiki/Doom_cheat_codes">iddqd</a>*, as it was referred to around the room) is an internal set of tools and commands, used mostly by ReSharper developers at JetBrains. To enable it, start Visual Studio with the following command line switch:
+ReSharper's *Internal Mode* (or *God-mode* or *<a href="http://doom.wikia.com/wiki/Doom_cheat_codes">iddqd</a>*, as it was referred to around the room) is an internal set of tools and commands, used mostly by ReSharper developers at JetBrains. To enable it, start Visual Studio with the following command line switch:
 
 `devenv.exe /ReSharper.Internal`
 
@@ -78,7 +78,7 @@ After turning on Internal mode, upon trying to build the solution for the first 
 
 ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML2146e28.png)
 
-By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to _ReSharper &ndash; Options_. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under *Tools*, and select the *Internal* menu. On the right side make sure that the highlighted items are checked:
+By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to _ReSharper &ndash; Options_. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under *Tools*, and select the *Internal* menu. On the right side make sure that the highlighted items are checked:
 
 ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/image2.png)
 

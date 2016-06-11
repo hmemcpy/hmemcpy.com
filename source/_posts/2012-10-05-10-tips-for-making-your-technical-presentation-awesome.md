@@ -8,17 +8,17 @@ I am, by no means, a [professional speaker](http://www.speakinghacks.com/). I am
 
 ## 10. DON'T PANIC!
 
-<img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image3.png?resize=244%2C154" alt="" align="right" border="0" data-recalc-dims="1" />There's an old Murphy's law, stating: *Anything that can go wrong, will go wrong*. Your computer might freeze, BSOD or reboot suddenly. The projector you're using might burn. Your code example might not compile due to the silliest thing (which you will miss due to pressure) &ndash; it's all OK!
+<img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image3.png?resize=244%2C154" alt="" align="right" border="0" data-recalc-dims="1" />There's an old Murphy's law, stating: *Anything that can go wrong, will go wrong*. Your computer might freeze, BSOD or reboot suddenly. The projector you're using might burn. Your code example might not compile due to the silliest thing (which you will miss due to pressure) &ndash; it's all OK!
 
 The best way out of this situation is to remain calm, breathe normally, and try your best to recover from a bad situation. Keep talking about what you're about to do. If you're going to reboot &ndash; say it out loud, your audience will understand. The most important thing is to keep talking about what you're doing &ndash; as well as listening. If your audience is technical, they might yell out something you missed which will solve the problem. Which brings us to*¦
 
 ## 9. ALWAYS HAVE BACKUP
 
-Always have backup of your entire presentation offline. I find it best to keep it in my [Dropbox](https://www.dropbox.com/referrals/NTIzMjM2NjE5?src=global9) folder, so that I could access it on any computer I, in case mine breaks down. Also, never rely on having steady internet connection. In conferences, the *free* WiFi tends to be overloaded, and you won't always be able to rely on your mobile phone's tethering. Make sure your entire demo runs without requiring an active internet connection.
+Always have backup of your entire presentation offline. I find it best to keep it in my [Dropbox](https://www.dropbox.com/referrals/NTIzMjM2NjE5?src=global9) folder, so that I could access it on any computer I, in case mine breaks down. Also, never rely on having steady internet connection. In conferences, the *free* WiFi tends to be overloaded, and you won't always be able to rely on your mobile phone's tethering. Make sure your entire demo runs without requiring an active internet connection.
 
 ## 8. CLEAN UP YOUR DESKTOP
 
-[<img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border: 0px;" src="http://i2.wp.com/www.stardock.com/products/fences/images/screenshots/fences_image.png?resize=244%2C184" alt="" align="right" border="0" data-recalc-dims="1" />](http://i2.wp.com/www.stardock.com/products/fences/images/screenshots/fences_image.png)Most of the time you will present on your own work/personal machine. It probably contains a bunch of icons that even you might not have used for a while &ndash; but nevertheless, they are there. Your audience doesn't have to see your *mess*. If you haven't already &ndash; install [Fences](http://www.stardock.com/products/fences/) &ndash; a free utility from Stardock that allows grouping your desktop icons into areas called &#8220;fences*. One of the most useful features of this little utility is the ability to **_hide_** all fences and icons with a double-click! All your icons will disappear out of view (unless you choose to keep them). This way you will have a desktop with just the things you need for your presentation.
+[<img style="background-image: none; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border: 0px;" src="http://i2.wp.com/www.stardock.com/products/fences/images/screenshots/fences_image.png?resize=244%2C184" alt="" align="right" border="0" data-recalc-dims="1" />](http://i2.wp.com/www.stardock.com/products/fences/images/screenshots/fences_image.png)Most of the time you will present on your own work/personal machine. It probably contains a bunch of icons that even you might not have used for a while &ndash; but nevertheless, they are there. Your audience doesn't have to see your *mess*. If you haven't already &ndash; install [Fences](http://www.stardock.com/products/fences/) &ndash; a free utility from Stardock that allows grouping your desktop icons into areas called &#8220;fences*. One of the most useful features of this little utility is the ability to **_hide_** all fences and icons with a double-click! All your icons will disappear out of view (unless you choose to keep them). This way you will have a desktop with just the things you need for your presentation.
 
 ## 7. LOWER YOUR RESOLUTION
 
@@ -31,7 +31,7 @@ If you are using a non-default color scheme or font in your Visual Studio (or an
   1. Open the Visual Studio Command Prompt (known as Developer Command Prompt in Visual Studio 2012)
   2. Type in the following: **devenv.exe /rootsuffix YourDemoName**
 
-A new instance of Visual Studio will be launched, having a default set of settings (as if you just launched Visual Studio for the first time!). The **rootsuffix** switch tells Visual Studio to create an additional **_hive_**, copying the local disk and registry settings to another folder called **YourDemoName**. In this new instance, you can modify the settings of Visual Studio as you like (change fonts sizes, remove toolbars, turn off add-ins), and it won't affect your *normal* Visual Studio settings.
+A new instance of Visual Studio will be launched, having a default set of settings (as if you just launched Visual Studio for the first time!). The **rootsuffix** switch tells Visual Studio to create an additional **_hive_**, copying the local disk and registry settings to another folder called **YourDemoName**. In this new instance, you can modify the settings of Visual Studio as you like (change fonts sizes, remove toolbars, turn off add-ins), and it won't affect your *normal* Visual Studio settings.
 
 ## 5. TURN OFF 3<sup>RD</sup> PARTY ADD-INS
 
@@ -43,13 +43,13 @@ Another important tip is to **_use the mouse_** for almost everything! This migh
 
 ## 4. PRACTICE (AND REDUCE) YOUR DEMO
 
-Even if you can't come up with a good demo in time for the presentation, just focus on the *killer features* of the topic of your presentation. It happened to me way too often that I wanted to show so much, but ended up talking about one particular feature that sparked interest. Less is always more in this case.
+Even if you can't come up with a good demo in time for the presentation, just focus on the *killer features* of the topic of your presentation. It happened to me way too often that I wanted to show so much, but ended up talking about one particular feature that sparked interest. Less is always more in this case.
 
 Make sure you know your demo by heart. Open Notepad (or your favorite note-taking application) and write down _every step_ of your demo, from creating a new project to adding a new class called *˜AwesomeDemo'. Keep this file open during your presentation, either on another monitor or even another computer (or a phone or a tablet). If you get stuck for any reason, look at it for what to do next.
 
 ## **3. KEEP TALKING**
 
-<img style="float: right; margin: 0px 0px 0px 5px; display: inline;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image5.png?resize=160%2C160" alt="" align="right" data-recalc-dims="1" />Like I mentioned before, keep talking. Explain every step that you are doing or about to do. Nobody wants to listen to you breathe to your microphone, or being silent for a few minutes, while you type or look for some file. Sometimes, especially when somethingÂ doesn'tÂ work, talking out loud about what's happening can help. It works for [Rubber duck debugging](http://en.wikipedia.org/wiki/Rubber_duck_debugging), it will work for your demo.
+<img style="float: right; margin: 0px 0px 0px 5px; display: inline;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image5.png?resize=160%2C160" alt="" align="right" data-recalc-dims="1" />Like I mentioned before, keep talking. Explain every step that you are doing or about to do. Nobody wants to listen to you breathe to your microphone, or being silent for a few minutes, while you type or look for some file. Sometimes, especially when something doesn't work, talking out loud about what's happening can help. It works for [Rubber duck debugging](http://en.wikipedia.org/wiki/Rubber_duck_debugging), it will work for your demo.
 
 ## **2. HAVE A RESET STRATEGY**
 
