@@ -34,6 +34,7 @@ menu:
   home: /
   #categories: /categories
   archives: /archives
+  rss: /atom.xml
   #tags: /tags
   #commonweal: /404.html
   twitter: https://twitter.com/hmemcpy
@@ -57,6 +58,7 @@ menu_icons:
   twitter: twitter
   github: github
   linkedin: linkedin
+  rss: rss
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -270,7 +272,7 @@ mathjax:
 
 
 # Google Analytics
-#google_analytics:
+google_analytics: 'UA-70273-3'
 
 # CNZZ count
 #cnzz_siteid:
