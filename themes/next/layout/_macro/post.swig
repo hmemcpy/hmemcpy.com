@@ -102,7 +102,7 @@
             <span class="post-edit">
                 &nbsp; | &nbsp;
                 <i class="fa fa-pencil" aria-hidden="true"></i>
-                <a href="{{ url_for(theme.github.repo_url) }}/edit/master/source/{{page.source}}">Edit this page</a>
+                <a href="{{ url_for(config.github.repo_url) }}/edit/master/source/{{page.source}}">Edit this page</a>
             </span>
           {% endif %}
           

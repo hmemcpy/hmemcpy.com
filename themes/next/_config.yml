@@ -21,10 +21,6 @@ since: 2009
 # Tips: Before you open this tag, remeber set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
 canonical: true
 
-github:
-  repo_url: https://github.com/hmemcpy/hmemcpy.com
-
-
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
@@ -32,11 +28,8 @@ github:
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-  #categories: /categories
   archives: /archives
   rss: /atom.xml
-  #tags: /tags
-  #commonweal: /404.html
   twitter: https://twitter.com/hmemcpy
   github: https://github.com/hmemcpy
   linkedin: https://il.linkedin.com/in/igaltabachnik
@@ -162,8 +155,8 @@ toc:
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-#creative_commons: by-nc-sa
-#creative_commons:
+#creative_commons: by-cc
+creative_commons: by
 
 
 sidebar:

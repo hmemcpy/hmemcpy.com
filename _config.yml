@@ -10,6 +10,9 @@ author: Igal Tabachnik
 language: en
 timezone: Asia/Jerusalem
 
+github:
+  repo_url: https://github.com/hmemcpy/hmemcpy.com
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://hmemcpy.com
