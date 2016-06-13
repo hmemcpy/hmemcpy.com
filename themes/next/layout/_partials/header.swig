@@ -15,7 +15,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <span class="site-subtitle" style="display: intline;">{{ config.subtitle }}</span>
+  <span class="site-subtitle">{{ config.subtitle }}</span>
 </div>
 
 <div class="site-nav-toggle">
