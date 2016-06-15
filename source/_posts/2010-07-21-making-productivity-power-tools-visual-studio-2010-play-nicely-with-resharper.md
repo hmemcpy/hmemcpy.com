@@ -8,20 +8,18 @@ Scott Guthrie [wrote](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-
 
 If you're a [ReSharper](http://www.jetbrains.com/resharper/) addict (like me), you will notice that some things just do not work or interfere with the way ReSharper does things. So here's a list of things that you can do to make ReSharper and the Productivity Power Tools work nicely together:
 
-1. Go to the Productivity Power Tools under **Tools &ndash; Options**:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_31.png)
+Go to the Productivity Power Tools under **Tools &ndash; Options**:
+{% asset_img image1.png %}
 
   * Turn off **Automatic Brace Completion** if you prefer ReSharper to do it for you.
   * Turn off **Ctrl + Click Go To Definition**. ReSharper provides this functionality.
   * Turn off **Move Line Up/Down Commands**. This breaks ReSharper's equivalents.
   * Turn any other settings on or off, depending on your personal preferences.
 
-2. Fixing Quick Access
+#### Fixing Quick Access
 
 One of the best features of the Productivity Power Tools is the **Quick Access** window. If you're a ReSharper user, you'll appreciate it if you love the **Go To Class** navigation (Ctrl-**T** [Visual Studio] or Ctrl-**N** [IntelliJ]). The **Quick Access** allows you to navigate virtually everywhere by typing the name. For example, to open the Keyboard options, simply start typing **keyb:**
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML19bb3088_1.png)
+{% asset_img image2.png %}
 
 The default shortcut for this window is **Ctrl + 3**, however this key binding is used by ReSharper's Bookmarks system. If you're not using the bookmarks:
 

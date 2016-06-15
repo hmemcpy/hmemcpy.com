@@ -14,8 +14,7 @@ int[] array = new int[]
 ```
 
 To fix this, go to **Formatting Style -> Other**, and set the *Continuous line indent multiplier* to 1 (mine was 0)
-  
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image14.png)
+{% asset_img image.png %}
 
 And now it's back to normal:
   

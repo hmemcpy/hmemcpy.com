@@ -35,8 +35,7 @@ PROJCS["OSGB 1936 / British National Grid",
 How would you go about turning this into an escaped string literal (verbatim or regular)?
 
 Being as most programmers are, well, lazy, I didn't want to do yet another find/replace session. I googled for the first thing that came to mind, "Smart Paste Visual Studio 2008". I found this great add-in called [Smart Paster](http://weblogs.asp.net/alex_papadimoulis/archive/2004/05/25/141400.aspx) by Alex Papadimoulis (creator of [TheDailyWTF](http://thedailywtf.com)), which adds a highly configurable "Paste As..." context menu:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image16.png)
+{% asset_img image.png %}
 
 And now, all I need to do is "Paste As" string, to get this (with a few tweaks):
 

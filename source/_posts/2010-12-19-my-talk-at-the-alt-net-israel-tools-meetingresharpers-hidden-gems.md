@@ -17,32 +17,28 @@ The first feature that I demonstrated was a [live template](http://www.jetbrains
   * ### Recently edited
 
 One of my most used features of ReSharper is the ability to navigate to the recent place an edit occurred. By pressing **Ctrl-Shift-Backspace**, you will be immediately taken back to the last place you changed code. Repeat to go back to all places an edit took place. To view a list of all recent files, press **Ctrl-,** (Visual Studio) or **Ctrl-E** (IDEA).
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/image.png)
+{% asset_img image1.png %}
 
   * ### Navigating to constructors
 
 I learned this neat trick fairly recently from JetBrains' own [Hadi Hariri](http://hadihariri.com/), while looking for interesting topics to discuss at the meeting. In any code file, type **new** into the *Go To File Member* navigation (**Alt-/** [Visual Studio] or **Ctrl-F12** [IDEA]), and it will list all constructor first!
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/12/image1.png)
+{% asset_img image2.png %}
 
   * ### Working with Solution-wide analysis
 
 I wrote about the benefits of turning Solution-wide analysis back when I [reviewed ReSharper 4.5 Beta](/2009/03/resharper-4-5-beta-released/). Several things happen when Solution-wide analysis is enabled &ndash; all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.
 
-> A word of caution when changing visibility (or even removing) unused public classes &ndash; make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image12.png)
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image13.png)
+{% blockquote %}
+A word of caution when changing visibility (or even removing) unused public classes &ndash; make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.
+{% asset_img image12.png %} {% asset_img image13.png %}
+{% endblockquote %}
 
 Another important benefit of working with Solution-wide analysis enabled is the ability to immediately detect errors in the entire solution, rather than just the current file. The Next/Previous error navigation (**Shift-Alt-PgDn/PgUp** [Visual Studio] or **Alt-F12/Shift-Alt-F12** [IDEA]) will now take you to all errors in your solution.
 
   * ### Code issues inspection
 
 At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings &ndash; indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML1e0bf42.png)
+{% asset_img image3.png %}
 
   * ### SSR (Structural Search and Replace) and Patterns Catalog
 
@@ -65,25 +61,20 @@ You will now have a new menu in ReSharper's menu called _Internal_. There are ma
 PSI (Program Structure Interface) is JetBrains implementation of Visual Studio's AST (Abstract Syntax Tree). It allows representing every single construct of a source file in a syntactic tree. These tools are an indispensible aid for plugin developers, for instance, when trying to understand the structure of the source code.
 
 PSI Browser (located under _Windows_) displays the entire structure of the currently opened file. By double clicking any element, it will jump to the corresponding place in the source code.
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML20f9b11.png)
+{% asset_img image4.png %}
 
 PSI Viewer is a great utility to create code snippets on the fly, and view their PSI representation.
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML2127133.png)
+{% asset_img image5.png %}
 
 #### Concurrent building with MSBuild
 
 After turning on Internal mode, upon trying to build the solution for the first time, you will be presented with the following dialog:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML2146e28.png)
+{% asset_img image6.png %}
 
 By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to _ReSharper &ndash; Options_. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under *Tools*, and select the *Internal* menu. On the right side make sure that the highlighted items are checked:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/image2.png)
+{% asset_img image7.png %}
 
 Since MSBuild is not integrated into Visual Studio, when building you will not be able to see the build progress in the output window. The project status view is a tool window which shows all the projects in solution (abbreviated), and displays their build progress by using colors.
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/12/SNAGHTML21ef0a0.png)
+{% asset_img image8.png %}
 
 Please note that this is an experimental build technique, and it might not work correctly for your solution. Like all other features above, use this at your own risk.

@@ -2,7 +2,7 @@
 title: Installing Windows 8 on HP EliteBook 8570w
 date: 2012-09-30T11:37:29+00:00
 ---
-I just got my brand new [HP EliteBook 8570w](http://www.hp.com/united-states/campaigns/workstations/8570w_features.html). I was looking for a new development machine for a while, and after long consideration decided on this custom build of the Ivy Bridge-based EliteBook. Here are the (important) specs:
+<img style="float: right; padding: 5px;" width=200 src="http://www.www8-hp.com/in/en/images/8770w_hero_tcm_188_1453363.jpg" />I just got my brand new [HP EliteBook 8570w](http://www.hp.com/united-states/campaigns/workstations/8570w_features.html). I was looking for a new development machine for a while, and after long consideration decided on this custom build of the Ivy Bridge-based EliteBook. Here are the (important) specs:
 
 <!-- more -->
 
@@ -37,7 +37,7 @@ First things I noticed that the trackpad was not working. Like many Windows lapt
 
 N.B. The software and driver directories in swsetup are cryptically named. Fortunately, most of them contain a file with a .CVA extension. This is a plain-text file (you can open it with Notepad), it will tell you the complete software title (and description) of the files in the directory. You could use this information to rename the directories to something that makes more sense (I did).
 
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/09/SNAGHTML430b732.png)
+![](http://i.imgur.com/yhR3osh.png)
 
 Looking at the device manager, there are 4 unknown devices. I right-clicked on each of them, choosing Update Driver, and pointed the system to look at **swsetup** and its subdirectories. The setup quickly found the missing devices, all except one: an Unknown Device.
 

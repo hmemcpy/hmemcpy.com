@@ -11,3 +11,5 @@ Further digging led me to understand that there used to be a method modify the c
 I had discovered that on a Japanese blog called <a href="http://blog.sharplab.net/" target="_blank">SharpLab</a>, someone had posted <a href="http://blog.sharplab.net/computer/cprograming/windowslivewriter/433/" target="_blank">a way</a> to excavate an internal BlogManager object, which is used by Live Writer to edit the actual blog posts. The code needed a slight modification, but with the result I was able to modify the contents of my blog post!
 
 I extracted this into an extension method, use this at your own risk!
+
+<script src="https://gist.github.com/hmemcpy/938655.js" />

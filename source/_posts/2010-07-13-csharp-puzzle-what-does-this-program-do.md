@@ -36,4 +36,4 @@ What is the output of this program? Is it:
  3. Throws exception
  4. None of the above
   
-To find out the answer to this puzzle, as well as many others, watch the [*C# Puzzlers*](http://streaming.ndc2010.no/tcs/?id=E915B78B-D9B7-4CE9-96DA-2B794391AD2F) talk with <a href="http://blogs.msdn.com/b/ericlippert/">Eric Lippert</a> and <a href="http://gafter.blogspot.com/">Neal Gafter</a> from NDC 2010. How many did you get right?
+To find out the answer to this puzzle, as well as many others, watch the [C# Puzzlers](http://streaming.ndc2010.no/tcs/?id=E915B78B-D9B7-4CE9-96DA-2B794391AD2F) talk with <a href="http://blogs.msdn.com/b/ericlippert/">Eric Lippert</a> and <a href="http://gafter.blogspot.com/">Neal Gafter</a> from NDC 2010. How many did you get right?

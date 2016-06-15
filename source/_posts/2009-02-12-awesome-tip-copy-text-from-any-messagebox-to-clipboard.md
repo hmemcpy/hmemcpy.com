@@ -7,8 +7,8 @@ I just found out that it's possible to copy the text from any message box to cli
 <!-- more -->
 
 For example: 
+{% asset_img image.png %}
 
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML2be2e9c.png)
 Pressing Ctrl-C will copy the following to the clipboard:
 
 ```

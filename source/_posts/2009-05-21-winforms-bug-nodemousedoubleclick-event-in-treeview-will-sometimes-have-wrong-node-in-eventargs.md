@@ -21,12 +21,10 @@ To my surprise, I discovered today that by double clicking on a collapsed parent
 I noticed that it was not the same node all the time &#8211; it was different. I made a small WinForms application with just a TreeView, and I filled it with the contents of my **C:\Windows** directory. I placed a `MessageBox.Show(e.Node.Text);` in the `NodeMouseDoubleClick` handler. And that helped me realize that the `e.Node` is actually the node that is currently under the mouse cursor!
 
 Here's the initial state:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image17.png)
+{% asset_img image17.png %}
 
 Double clicking on **Fonts** makes the following happen:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image18.png)
+{% asset_img image18.png %}
 
 Notice where the cursor is &#8211; that's the node that was passed in the event handler. Apparently, during the expand, if there are more child nodes that fit on the screen, the parent node scrolls to the top, but the cursor stays in the same place where the double click occurred.
 

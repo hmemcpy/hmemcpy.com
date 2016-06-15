@@ -10,15 +10,13 @@ As it happens, Microsoft Excel is a great tool to assist with this task! Excel i
 
 _Note: I used Excel 2010 to perform this. I believe that this is possible with earlier versions, but I can't tell for sure._
 
-**1. We start by opening the log file, selecting all text, and pasting it into a new Excel worksheet.**
+We start by opening the log file, selecting all text, and pasting it into a new Excel worksheet.
+{% asset_img image1.png %}
 
- ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML3e149d7c_1.png)
-
-**2. Now we need to filter out anything not starting with the word \*PERFORMANCE\*.** 
+Now we need to filter out anything not starting with the word \*PERFORMANCE\*. 
 
 With the first column selected, go to **Data**, and press **Filter.**
-
- ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_3.png)
+{% asset_img image2.png %}
 
 This will add a dropdown arrow on the first cell, click it, go to **Text Filters**, then **Begins With.** In the dialog type \*PERFORMANCE\*, and press OK. This will leave only the lines starting with \*PERFORMANCE\*, however, Excel will still show the original row numbers. Select the first column excluding the first line (by clicking on the 1st \*PERFORMANCE\* cell, then pressing **Ctrl-Shift-Down Arrow**), copy then paste the selected lines into a new sheet. This will reduce the number of displayed rows dramatically.
 
@@ -27,31 +25,25 @@ This will add a dropdown arrow on the first cell, click it, go to **Text Filters
 Tip: you can <strike>skip this step</strike> reduce the number of steps here, if you output your performance text comma-separated.
 
 With the first column selected, in the **Data** pane, click **Text to Columns**. First, we're going to split the string by \*PERFORMANCE\*, so select **Fixed Width**, then **Next**. Click and drag the arrow head one character to the right, then press **Finish**.
-
- ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML3e3d5e3c_1.png)
+{% asset_img image3.png %}
 
 Now the first column only contains the word \*PERFORMANCE\*, so we can safely delete the entire first column.
 
-Let's repeat this step once more, this time selecting **Delimited** in the first page of the wizard, then **Next**. We want to split by the equals sign *=*, so let's type **=** into the text box next to **Other**. We can see in the preview how it will look like. Close the wizard by pressing **Finish**.
-
- ![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML3e412dbb_1.png)
+Let's repeat this step once more, this time selecting **Delimited** in the first page of the wizard, then **Next**. We want to split by the equals sign `=` so let's type `=` into the text box next to **Other**. We can see in the preview how it will look like. Close the wizard by pressing **Finish**.
+{% asset_img image4.png %}
 
 **4. Adding the numbers together using PivotTables**
 
 Now that we have two columns, one containing the method name, and the other the time it took the method to execute, we can summarize it using a PivotTable. But first, we need to give the columns some meaning in the pivot table, so insert a new row before the fist row, and above the first column type **Method**, and above the second row type **Time**.
-
- ![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/SNAGHTML3e456020_1.png)
+{% asset_img image5.png %}
 
 Select both columns except the first row (you can select just the two cells in row 2, then pressing **Ctrl-Shift-Down Arrow**). Go to **Insert**, then **PivotTable**, and press OK in the new dialog.
-
- ![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_6.png)
+{% asset_img image6.png %}
 
 Drag the **Time** field down to where it says **Values**. This should create a field called **Sum of Time**. Drag the **Method** field into the **Row Labels**.
-
- ![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_91.png)
+{% asset_img image7.png %}
 
 On the left we should now see all the methods with the time it took to run them nicely formatted:
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_14.png) 
+{% asset_img image8.png %}
 
 And that's it! We can now apply Excel's sorting to the columns and perform other analytical data with our *poor man's performance profiling* data.

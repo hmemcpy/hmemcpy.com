@@ -37,17 +37,14 @@ We can add either a search only pattern, or a search and replace pattern. Let's 
   * Fill in the description texts.
 
 The final result should look like this:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_7.png)
+{% asset_img image_7.png %}
 
 Press Save and close the Pattern Catalogue dialog.
 
 You will now be able to turn this:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_13.png)
+{% asset_img image_13.png %}
 
 into this:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image_16.png)
+{% asset_img image_16.png %}
 
 Happy coding!

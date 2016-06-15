@@ -11,47 +11,38 @@ Here are a few things I _don't_ do anymore:
 **1. Look for files in Solution Explorer**
 
 Gone are the days when I have to take my hands off the keyboard to use the mouse to find a file deep in the Solution Explorer. If I have to find a type, I use **Go To Type** (Ctrl-**T** [Visual Studio] or Ctrl-**N** [IntelliJ]):
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image.png)
+{% asset_img image.png %}
 
 Usually that's enough, since I almost always know the type name I'm looking for, otherwise I'd look for the file itself using **Go To File** (Ctrl-Shift-**T** [Visual Studio] or Ctrl-Shift-**N** [IntelliJ]):
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image1.png)
+{% asset_img image1.png %}
 
 Another great feature of those options is acronym support. For example, I can quickly navigate to **WebDavMethodLogger** class by typing **WDML** (if the type name is Pascal Cased), or **wdml** in lowercase:
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image2.png)
+{% asset_img image2.png %}
 
 More interesting Go To navigations: **Go To Symbol** (Alt-Shift-T [Visual Studio] or Ctrl-Alt-Shift-**N** [IntelliJ]), **Go To Member** (Alt- [Visual Studio] or Ctrl-**F12** [IntelliJ]).
 
 **2. Manually create constructors, fields, properties**
 
-Meet one of my best friends &#8211; **Generate** (Alt-Insert). Pressing this shortcut anywhere in the file will popup this menu:
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image3.png)
+Meet one of my best friends &ndash; **Generate** (Alt-Insert). Pressing this shortcut anywhere in the file will popup this menu:
+{% asset_img image3.png %}
 
 If I select **Constructor** from the menu, I'll get a dialog in which I'll be able to specify constructor parameters, and automatically map them into local fields.
 
 Let's say you've made an empty class *Person*, and manually typed out the following:
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image4.png)
-
+{% asset_img image4.png %}
 
 Notice two things here: the parameter names **name** and **lastName** are grayed out. It means that they are not (yet) used anywhere in our class. Also, notice the red bulb on the left side? That is my other best friend &#8211; the **Action** (Alt-Enter) key. Pressing Alt-Enter when will give this menu:
 
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image5.png)
-
+{% asset_img image5.png %}
 Few keystrokes later, and I have the following code:
 
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image6.png)
-
+{% asset_img image6.png %}
 The Action key presents contextual actions, such as removing unused methods, split/join variable declarations, turn string concatenations into **string.Format, **where they are applicable, and many more.
 
 **3. Rebuild the solution to find errors/making sure the code compiles**
 
 I wonder how many years have been spent watching the code trying to compile, only to get a nice list of errors with different reasons why it can't. ReSharper provides visual cues to things that are wrong with your code:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image7.png)
+{% asset_img image7.png %}
 
 Notice the little red lines on the scroll bar (on the left). These are compilation errors in the code. ReSharper analyzes the code as you type, and displays errors immediately. You can hover above them with the mouse, and the hint will show what's wrong. To navigate to the error, click with the mouse, or better use the **Go To Next Error** (Shift-Alt-PgUp/PgDown [Visual Studio] or Alt-**F12**/Shift-Alt-**F12** [IntelliJ]) key.
 
@@ -62,8 +53,7 @@ Other visual clues are Word-like squiggly lines under the used to describe other
 **4. Use text search/find references to navigate interfaces and abstract class implementations**
 
 One of the most useful features that ReSharper provides is navigation to implementers from base classes, and vice-versa. By using **Navigate from Here to** (Alt-`) I get a popup which allows to quickly navigate to all implementations:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image8.png)
+{% asset_img image8.png %}
 
 I can also go to the definition of the type by performing **Ctrl-Left click**, or pressing **F12** [Visual Studio] or Ctrl-**B** [IntelliJ] on the type name in the code.
 

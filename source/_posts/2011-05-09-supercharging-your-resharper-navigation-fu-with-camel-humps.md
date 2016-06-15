@@ -22,16 +22,13 @@ I recommend binding the _ReSharper_HumpNext_ and _ReSharper_HumpPrev_ to **Alt-R
 Here's how it works &ndash; let's say I want to rename the word _Spelling_ to _Proofreading_ in the method name, and the caret is inside the method body:
 
 **Step 1:** Press **Ctrl-[** to jump to containing method (jumps to start of the method name)
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2011/05/09-05-2011-00-56-01.png)
+{% asset_img image1.png %}
 
 **Step 2:** Press **Alt-Right** a few times to jump to the beginning of the word Spelling
-
-![](http://i2.wp.com/hmemcpy.com/wp-content/uploads/2011/05/09-05-2011-00-57-24.png)
+{% asset_img image2.png %}
 
 **Step 3:** Press **Alt-Shift-Right** to select the word Spelling
-
-![](http://i0.wp.com/hmemcpy.com/wp-content/uploads/2011/05/09-05-2011-00-57-53.png)
+{% asset_img image3.png %}
 
 I'm using <a href="http://osherove.com/" target="_blank">Roy Osherove's</a> excellent <a href="http://osherove.com/blog/2007/6/3/train-to-be-a-keyboard-master-with-keyboard-jedi.html" target="_blank">Keyboard Jedi</a> utility to demonstrate the keyboard shortcuts. Unfortunately it doesn't work on a 64-bit Windows, but you can fix it with this <a href="http://codebetter.com/jameskovacs/2008/04/25/keyboard-jedi-on-vista-x64/" target="_blank">little hack</a> by <a href="http://jameskovacs.com/" target="_blank">James Kovacs</a>.
 

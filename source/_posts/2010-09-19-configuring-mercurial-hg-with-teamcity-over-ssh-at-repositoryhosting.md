@@ -36,8 +36,7 @@ Here are the steps required for configuring Mercurial with SSH in TeamCity:
   <pre>ssh://mercirual.yourdomain.com/myproject/</pre> 
     
   * Under **User name** type in **hg**. Leave the password blank. 
-    
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2010/09/image24.png)
+{% asset_img image1.png %}
     
 **Part 3**: Modifying `Mercurial.ini`
     
@@ -45,7 +44,7 @@ Here are the steps required for configuring Mercurial with SSH in TeamCity:
   2. Open the file **Mercurial.ini** in a text editor, and locate the **[ui]** section
   3. Add (or modify) the following line:
     
-  <pre>ssh = "C:Program Files (x86)\TortoiseHg\TortoisePlink.exe" -ssh -2 -i "c:\&lt;path to your key&gt;\privateKey.ppk"</pre>
+  <pre>ssh = "C:\Program Files (x86)\TortoiseHg\TortoisePlink.exe" -ssh -2 -i "c:\&lt;path to your key&gt;\privateKey.ppk"</pre>
     
   Press **Test Connection**. If TeamCity seems to hang at this point, and there are no message boxes appear on your screen (from a process called TortoisePlink.exe),
     

@@ -16,7 +16,8 @@ On Windows 8, however, this registry key is not being read, so there is currentl
 
 Longer version: I decided to try and find out what happens during logon into Windows Server 2012, after a new install. I installed the trial version on a virtual machine, set a password for the Administrator account during setup. After the first login, I found myself in the desktop, and the Server Manager was launched automatically. I decided to turn off the automatic start in the settings.
 
-<img style="float:right; pdading: 5px;" src="http://i1.wp.com/hmemcpy.com/wp-content/uploads/2012/09/image_thumb.png?resize=244%2C141" />My next step was to take a *snapshot* of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job &ndash; [Process Monitor](http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx) by Sysinternals, I turned on **Enable Boot Logging**, located under Options, then rebooted Windows Server.
+My next step was to take a *snapshot* of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job &ndash; [Process Monitor](http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx) by Sysinternals, I turned on **Enable Boot Logging**, located under Options, then rebooted Windows Server.
+{% asset_img image1.png %}
 
 After the reboot, I launched Process Monitor again, and was prompted to save the results of the boot logging into a PML file. I closed Process Monitor, and proceeded [installing the Desktop Experience](http://www.win2012workstation.com/desktop-experience/) in the Server Manager, but not before I took a VM snapshot of the current system state. The system needed to reboot, and once everything had finished installing, upon login I was presented with the new Start screen (having some new icons in it, mainly the Windows Store, and other *client* utilities.
 
@@ -31,8 +32,7 @@ On the Desktop Experience snapshot it had the value 1, and on the pre-Desktop Ex
 **After rebooting, when I logged in, I was back in the desktop, even with the Desktop Expreience enabled!**
 
 Unfortunately, this trick does not work on Windows 8. Having done the same boot logging for Windows 8, I did not see any calls to the `ClientExperienceEnabled` key. Back in Windows Server, I wanted to know exactly who is responsible for calling that key. In Process Monitor, I double clicked on the line to bring up the **Event Properties** dialog, then went to the **Stack** tab.
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2012/09/image2.png)
+{% asset_img image2.png %}
 
 The Stack tab shows the call stack for the particular event, the pink <span style="color: #ff00ff;">**K**</span> specifies a kernel-mode calls, and the blue <span style="color: #0000ff;">**U**</span> specifies user-mode calls, which what I was looking for. It showed, that the calls to the registry were made by **twinui.dll**, a file that, turns out, exists in both Windows Server 2012 and Windows 8, however it's not being called in Windows 8.
 
