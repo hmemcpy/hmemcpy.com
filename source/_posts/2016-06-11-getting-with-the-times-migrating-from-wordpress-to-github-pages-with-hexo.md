@@ -25,7 +25,7 @@ Jekyll, being one of the older static generators, is widely supported, including
 
 Go to your WordPress admin panel and install the **WordPress to Jekyll Exporter** plugin. After installing and activating the plugin, you should have a new menu under **Tools** called **Export to Jekyll**. Depending on the size of your blog, this might take a few minutes to complete, but a new zip file called `jekyll-export.zip` should begin downloading.
 
-Exported data from WordPress will contain all the posts and other static pages in Markdown (.md) files. The blog posts themselves are contained in a `_posts` directory inside the `lekyll-export.zip` archive.
+Exported data from WordPress will contain all the posts and other static pages in Markdown (.md) files. The blog posts themselves are contained in a `_posts` directory inside the `jekyll-export.zip` archive.
 
 Since our ultimate goal is to eventually delete the WordPress blog, it's best to make a complete backup of all the content. You can do this via your hosting's FTP or with another great WordPress plugin called **Duplicator**, which can export everything for you into a zip file. We will also need the contents of this zip to replace any broken images and other files.
 
