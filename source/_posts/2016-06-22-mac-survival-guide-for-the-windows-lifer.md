@@ -21,7 +21,7 @@ Here are the tips in no particular order, which made my initial experience much 
 
 Specific tips: Solarized Dark theme for iTerm2, and [agnoster](https://gist.github.com/agnoster/3712874) theme for Oh My Zsh, and a patched font to go with it, if you don't see the status icons.
 
-In addition, I have installed [Autojump](https://github.com/wting/autojump) via brew, (which was the inspiration for my favorite PowerShell tools [Jump-Location](https://github.com/tkellogg/Jump-Location)), and enabled it in Oh my Zsh using the `autojump` plugin (edit `~/.zshrc` to add it to the `plugins` entry, e.g.:)
+In addition, I have installed [Autojump](https://github.com/wting/autojump) via brew, (which was the inspiration for my favorite PowerShell tool [Jump-Location](https://github.com/tkellogg/Jump-Location)), and enabled it in Oh my Zsh using the `autojump` plugin (edit `~/.zshrc` to add it to the `plugins` entry, e.g.:)
 
     plugins=(git zsh-autosuggestions autojump)
 
@@ -50,6 +50,9 @@ On the Mac, the rightmost control keys are: `Control`, `Option` and `Command`. T
 
 And some other tweaks. For the full listing, see [this gist](https://gist.github.com/hmemcpy/4e8e3eb73e3a5bf49939a457786f8a7e). To import it, go to Karabiner preferences, to the **Misc & Uninstall** tab, then in the **Custom Settings** press **Open private.xml**, and save the XML in that file. Finally, go to the **Change Key** tab and select the new custom settings you want to enable.
 
+**Update:** looks like this is also possible to do without Karabiner, by adjusting the Modifier Keys in the Keyboard settings. In addition, this lets you select the specific keyboard you want to adjust (instead of having two separate profiles for Karabiner). Big thanks to Michael Martz for his [comment below](#comment-2744578673)!
+{% asset_img image5.png %}
+
 ### Screenshots
 
 There are a few ways to [take a screenshot](https://support.apple.com/en-us/HT201361) on a Mac, most involve pressing several keys together. I found a nicer way to do this using an [Alfred Workflow](http://www.alfredforum.com/topic/902-take-quick-screenshots-using-the-screencapture-workflow/), which allows quickly launchig the screen capture tool from Alfred:
@@ -61,7 +64,7 @@ Other things I found useful/annoying when working on a Mac:
 
  * **Installing Applications** is the #1 difference between Windows and Mac - other than Brew mentioned earlier, the "standard" way to install applications on a Mac is simply dragging its icon to the Applications folder in Finder (Mac's "Explorer"). To remove the application, drag it to the trash can! Applications on the Mac are self-contained, no installers/uninstallers required.
 
- * **Minimizing** does not work the same as Windows: if you minimize the active window, it will shrink itself with a Genie next to the trash can, and won't be restored with `Command+Tab`! (equivalent of Alt+Tab on Windows). To make tabbing work like Windows, **Hide** (`Command+H`) the active windows instead. `Command+Q` quits the application. (thanks to [Jason Imison](https://twitter.com/JasonImison/status/739835159659307010) for the tips!)
+ * **Minimizing** does not work the same as Windows: if you minimize the active window, it will shrink itself with a "Genie effect" next to the trash can, and won't be restored with `Command+Tab`! (equivalent of Alt+Tab on Windows). To make tabbing work like Windows, **Hide** (`Command+H`) the active windows instead. `Command+Q` quits the application. (thanks to [Jason Imison](https://twitter.com/JasonImison/status/739835159659307010) for the tips!)
 
  * **Selecting text** behaves differently on a Mac: pressing `Command+Left/Right` jumps to the beginning/end of the line (holding `Shift` will select the text). To jump to the next/previous word, use `Option+Left/Right` instead (note: this doesn't seem to work in iTerm2 by default, it has to be [configured to enable it](https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x).)
  * **Other shortcut keys** which are different between Windows and Mac, in no particular order:
@@ -75,6 +78,3 @@ Other things I found useful/annoying when working on a Mac:
 I'm sure I forgot a bunch of things, but the hardest thing to adjust to, I found, is the Command/Ctrl switch: things like copy and paste on a Mac are Command+C/Command+V, which require a thumb press on the Command, which is very uncomfortable at first (think pressing Alt+C instead of Ctrl+C on Windows.)
 
 Overall, I'm happy with the experience. Things work a bit differently here, but it's not all bad. Most importantly, I finally have the [best command line utility](https://github.com/nvbn/thefuck) working on my Mac!
-
-
-
