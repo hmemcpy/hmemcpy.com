@@ -52,7 +52,7 @@ And some other tweaks. For the full listing, see [this gist](https://gist.github
 
 ### Screenshots
 
-There are a few ways to [take a screenshot](https://support.apple.com/en-us/HT201361) on a Mac, most involve pressing several keys together. I found a nicer way to do this using an [Alfred Workflow](http://www.alfredforum.com/topic/902-take-quick-screenshots-using-the-screencapture-workflow/), which allows quickly launchig tne screen capture tool from Alfred:
+There are a few ways to [take a screenshot](https://support.apple.com/en-us/HT201361) on a Mac, most involve pressing several keys together. I found a nicer way to do this using an [Alfred Workflow](http://www.alfredforum.com/topic/902-take-quick-screenshots-using-the-screencapture-workflow/), which allows quickly launchig the screen capture tool from Alfred:
 {% asset_img image4.png %}
 
 ### Misc
