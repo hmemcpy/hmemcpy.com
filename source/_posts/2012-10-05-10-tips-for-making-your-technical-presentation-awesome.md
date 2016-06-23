@@ -10,7 +10,7 @@ I am, by no means, a [professional speaker](http://www.speakinghacks.com/). I am
 
 <img style="background-image: none; float: right; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 5px; display: inline; padding-right: 0px; border-width: 0px;" title="" src="http://i2.wp.com/hmemcpy.com/wp-content/uploads/2012/10/image3.png?resize=244%2C154" alt="" align="right" border="0" data-recalc-dims="1" />There's an old Murphy's law, stating: *Anything that can go wrong, will go wrong*. Your computer might freeze, BSOD or reboot suddenly. The projector you're using might burn. Your code example might not compile due to the silliest thing (which you will miss due to pressure) &ndash; it's all OK!
 
-The best way out of this situation is to remain calm, breathe normally, and try your best to recover from a bad situation. Keep talking about what you're about to do. If you're going to reboot &ndash; say it out loud, your audience will understand. The most important thing is to keep talking about what you're doing &ndash; as well as listening. If your audience is technical, they might yell out something you missed which will solve the problem. Which brings us to*¦
+The best way out of this situation is to remain calm, breathe normally, and try your best to recover from a bad situation. Keep talking about what you're about to do. If you're going to reboot &ndash; say it out loud, your audience will understand. The most important thing is to keep talking about what you're doing &ndash; as well as listening. If your audience is technical, they might yell out something you missed which will solve the problem. Which brings us to...
 
 ## 9. ALWAYS HAVE BACKUP
 
