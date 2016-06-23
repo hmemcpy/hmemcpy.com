@@ -1,5 +1,5 @@
 ﻿---
-title: 'Book Review: *Pro .NET Performance* by Sasha Goldshtein, with Dima Zurbalev and Ido Flatow'
+title: "Book Review: 'Pro .NET Performance' by Sasha Goldshtein, with Dima Zurbalev and Ido Flatow"
 date: 2012-10-21T11:25:57+00:00
 ---
 <img style="float: left; padding: 5px;" src="http://i1.wp.com/ecx.images-amazon.com/images/I/513bgFFIlfL._SL160_.jpg?resize=121%2C160" />It is often said that all problems in computer science can be solved by another layer of indirection. All, except performance problems. Typically, when performance problems occur, it's best to approach them like peeling an onion &ndash; removing abstractions one by one.
