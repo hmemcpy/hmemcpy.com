@@ -48,7 +48,7 @@ $combined = Join-Path $rootDirectory "mySubdirectory"
 
 **It's concise** &ndash; everything in PowerShell can be verbose or very concise. By leveraging aliases there are many ways to say what you mean. Here's an example: the following function gets a list of changed files between two SVN revisions, by executing the [svn diff](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html) command, outputting the result as XML which looks like this:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <diff>
 <paths>
