@@ -14,11 +14,11 @@ public void OnConnection(object application, ext_ConnectMode connectMode, object
   _applicationObject = (DTE2)application;
   _addInInstance = (AddIn)addInInst;
 
-  const string guidString = “{7CAB9543-0A69-4971-B154-01BC2DAAE2ED}“;
+  const string guidString = "{7CAB9543-0A69-4971-B154-01BC2DAAE2ED}"
 
   object dummy = null;
   var windows = (Windows2)_applicationObject.Windows;
-  var buggyWindow = windows.CreateToolWindow2(_addInInstance, Assembly.GetExecutingAssembly().Location, typeof(WindowControl).FullName, “Buggy“, guidString, ref dummy);
+  var buggyWindow = windows.CreateToolWindow2(_addInInstance, Assembly.GetExecutingAssembly().Location, typeof(WindowControl).FullName, "Buggy", guidString, ref dummy);
 
   buggyWindow.Visible = true;
 
