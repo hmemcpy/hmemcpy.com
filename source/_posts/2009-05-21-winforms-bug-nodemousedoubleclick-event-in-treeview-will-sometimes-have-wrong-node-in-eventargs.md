@@ -9,7 +9,7 @@ Here's a strange bug I've encountered today in a WinForms application. Usually, 
 ```csharp
 void NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 {
-    if (e.Node.Nodes.Count == )
+    if (e.Node.Nodes.Count == 0)
     {
         // … handle child node
     }
