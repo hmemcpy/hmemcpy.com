@@ -27,7 +27,7 @@ In addition, I have installed [Autojump](https://github.com/wting/autojump) via 
 
 ### Productivity
 
-<img style="float: right; padding: 5px;" width="250" src="{% asset_path image2.jpg %}" />Right off the bat, I was advised to buy [Alfted](https://www.alfredapp.com/) a productivity tool for the Mac, which combines a launcher with a powerful search. I ended up buying it within the first 20 minutes because of the Clipboard History feature (which is a paid "Powerpack" addon). On Windows, I cannot live without my beloved [Ditto](http://ditto-cp.sourceforge.net/) clipboard manager, and Alfred offered a great alternative. Buying Alfred opens up additional possibilities via Workflows, which I'll mention later. 
+<img style="float: right; padding: 5px;" width="250" src="{% asset_path image2.jpg %}" />Right off the bat, I was advised to buy [Alfred](https://www.alfredapp.com/) a productivity tool for the Mac, which combines a launcher with a powerful search. I ended up buying it within the first 20 minutes because of the Clipboard History feature (which is a paid "Powerpack" addon). On Windows, I cannot live without my beloved [Ditto](http://ditto-cp.sourceforge.net/) clipboard manager, and Alfred offered a great alternative. Buying Alfred opens up additional possibilities via Workflows, which I'll mention later. 
 
 ### Keyboard
 
