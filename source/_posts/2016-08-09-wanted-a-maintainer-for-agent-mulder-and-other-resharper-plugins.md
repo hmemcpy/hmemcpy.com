@@ -5,6 +5,8 @@ tags:
 ---
 Sometime in 2011, I've seen a cool feature of [Castle Windsor IoC container](https://github.com/castleproject/Windsor/) - the ability to create [typed factories based on an interface](https://github.com/castleproject/Windsor/blob/master/docs/typed-factory-facility-interface-based.md), without any implementation. That day I realized 2 things: a) containers are magic, and b) such magic would never be allowed in production.
 
+<!-- more -->
+
 An idea was formed in my mind: what if my [favorite IDE extension](https://www.jetbrains.com/resharper/) could visualize types that are created in such magical ways, by the IoC/DI frameworks? If it were less magical, perhaps it could be used more. And thus, [Agent Mulder plugin for ReSharper](https://github.com/hmemcpy/AgentMulder) was born - it analyzes container registration code in your solution, and provides navigation to and finding usages of types registered or resolved via those containers.
 
 Here's an old demo of it in action:
