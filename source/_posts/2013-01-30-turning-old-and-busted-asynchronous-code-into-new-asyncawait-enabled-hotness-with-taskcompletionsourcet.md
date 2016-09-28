@@ -6,7 +6,7 @@ While working with a client to create a new version of their software, one of th
 
 <!-- more -->
 
-The API provided by the manufacturer was*¦ not ideal, to say the least. The API consisted of a managed wrapper over two classes, we'll call them Request and Response, providing asynchronous request and callback operations. For each operation on the Request object, a corresponding Answer operation would arrive asynchronously on the Response object, e.g. if a `GetPosition` method was called on Request, sometime later an `OnGetPositionAnswer` method would arrive on the Response object, containing the relevant information.
+The API provided by the manufacturer was not ideal, to say the least. The API consisted of a managed wrapper over two classes, we'll call them Request and Response, providing asynchronous request and callback operations. For each operation on the Request object, a corresponding Answer operation would arrive asynchronously on the Response object, e.g. if a `GetPosition` method was called on Request, sometime later an `OnGetPositionAnswer` method would arrive on the Response object, containing the relevant information.
 
 One of the requirements was to be able to wait for several of such callbacks to arrive, before doing another operation. Several options were considered, among them [Reactive Extensions (Rx)](http://www.introtorx.com/) and [TPL Dataflow](http://msdn.microsoft.com/en-us/devlabs/gg585582.aspx). In the end, I chose an approach based on the [`TaskCompletionSource<T>`](http://msdn.microsoft.com/en-us/library/dd449174.aspx) class (part of the TPL), which I describe below.
 
