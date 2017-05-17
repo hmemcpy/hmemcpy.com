@@ -37,7 +37,7 @@ The benefits, outlined in [this post](http://degoes.net/articles/easy-monads) by
 
 Those properties are voilated by "side-effects". We consider side-effects to be anything from reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be exact, it is said that functions that have side-effects violate [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expression, without changing the program's behavior. It is said that a function is "pure", if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves, for the function to be considered pure. A side-effect, therefore, is *anything* that violates RT.
 
-In this world of pure functions that always return a value, there is no such thing as `void`. All functions must return a value, that that value must always be the same for the same input. Given these "restrictions", how can we possibly do anything useful (e.g. making a REST call) in a functional language?
+In this world of pure functions that always return a value, there is no such thing as `void`. All functions must return a value, and that value must always be the same for the same input. Given these "restrictions", how can we possibly do anything useful (e.g. making a REST call) in a functional language?
 
 ### Hello, (functional) World
 
