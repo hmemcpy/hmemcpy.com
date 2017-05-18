@@ -102,7 +102,7 @@ Which brings me to the `IO` type. In Haskell, it is used to represent a value th
 
 In Haskell, and languages like Scala, F# and others we have an `Option` type (called `Maybe` in Haskell), whose purpose is to represent a value which may or may not be there. Regardless of whether or not the value exists, we can still perform operations on the `Option` type: we can pass it around, we can transform and `bind`/`map` its value with others. The *effect* of the `Option` type is to represent an optional value.
 
-Both `IO` and `Option` fulfil a purpose of representing an underlying value (or values) in a certain context. For `IO`, this context is an interaction with the outside world. For `Option`, the context is optionallity. Both these types are **monads**. Their purpose is to explicitly encode the type of **effect** performed by those types within the type definition itself. In essense, monads are used explicitly to represent the context in which the underlying values are computed, without actually having to directly interact with those values.
+Both `IO` and `Option` fulfil a purpose of representing an underlying value (or values) in a certain context. For `IO`, this context is an interaction with the outside world. For `Option`, the context is optionality. Both these types are **monads**. Their purpose is to explicitly encode the type of **effect** performed by those types within the type definition itself. In essense, monads are used explicitly to represent the context in which the underlying values are computed, without actually having to directly interact with those values.
 
 ### Learning to walk again
 
