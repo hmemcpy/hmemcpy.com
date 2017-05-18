@@ -94,7 +94,7 @@ The `name <- getLine` expression would be the equivalent of using the `let` expr
 
 ### Enter the Monad
 
-It should be no surprise at this point to discover that `IO` is a **monad**, [everything is Haskell is a monad](https://twitter.com/nixcraft/status/739383796626128896). I haven't yet attempted to explain what a monad is, and for now, I'm not going to. Instead, I'd like to try and explain the purpose of this construct, and why it is used.
+It should be no surprise at this point to discover that `IO` is a **monad**, [everything in Haskell is a monad](https://twitter.com/nixcraft/status/739383796626128896). I haven't yet attempted to explain what a monad is, and for now, I'm not going to. Instead, I'd like to try and explain the purpose of this construct, and why it is used.
 
 Haskell is a **purely-functional**, lazily-evaluated language. By definition, it has a limitation - all of its functions must be pure. This may sound very limiting - we can't just do a `File.Open` in the middle of a Haskell function - it just won't work. However, this gives us a very interesting benefit: since all functions in Haskell are pure, therefore referentially transparent, this means every Haskell program is a *single referentially transparent* expression! A program in Haskell represents an exact *description* of what it is about to do - it's pure data, as far as the developer (and Haskell compiler) is concerned. Reading a Haskell program describes **exactly** what is going to happen, when this program executes. There are no surprises, no *side-effects* to this.
 
