@@ -9,6 +9,8 @@ I can't think of another 5-letter word that strikes fear in the hearts of so man
 
 This post will not attempt to explain monads, at least, not on purpose. This [fantastic post](https://mkremins.github.io/blog/doors-headaches-intellectual-need/) by [Max Kreminski](https://twitter.com/maxkreminski) does this better than I ever could - by showing that most "monad tutorials" (or, educational blog posts in general) have *problem-solution ordering issues*. Please take a moment to read this wonderful post before continuing.
 
+<!-- more -->
+
 The problem with most monad tutorials is they present monads as a solution to a problem which is not clearly defined.
 
 Recently, I had my own epiphany, and finally "understood monads". That is, I've re-watched the same talks on the subject so many times, until it finally clicked. But then, something magical happened: just as Douglas Crockford [predicted](http://lambda-the-ultimate.org/node/4670), I lost my ability to explain it to others. And yet, I gained a retroactive understanding of the, previously literally-Greek, definitions. I developed an intuition that helped me understand the reasons and logic behind those definitions.
