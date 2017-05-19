@@ -3,7 +3,7 @@ title: "From .NET to Scala and beyond: a journey to Functional Programming"
 date: 2017-05-17 11:24:13
 tags:
 ---
-(Original title was "Monads solve a problem you might not have, but it's a nice problem to have", which is an homage to a [great post](http://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/) by [Krzysztof Koźmic](https://twitter.com/kkozmic) about IoC containers, which is also somewhat relevant to this post.)
+*Original title was "Monads solve a problem you might not have, but it's a nice problem to have", which is an homage to a [great post](http://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/) by [Krzysztof Koźmic](https://twitter.com/kkozmic) about IoC containers.*
 
 I can't think of another 5-letter word that strikes fear in the hearts of so many developers, coming from an object-oriended/imperative language to a functional one. So much so, this, and other M-words are outright [banned](https://fsharpforfunandprofit.com/about/#banned) on some resources.
 
