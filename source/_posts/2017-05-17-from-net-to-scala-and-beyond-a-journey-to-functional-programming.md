@@ -92,7 +92,7 @@ main = do
   putStrLn ("Hello, " ++ name)
 ```
 
-The `name <- getLine` expression would be the equivalent of using the `let` expression in a LINQ query in C#.
+The `name <- getLine` expression would be the equivalent of `from name in getLine` expression in a LINQ query.
 
 ### Enter the Monad
 
