@@ -59,8 +59,8 @@ menu_icons:
 
 # Schemes
 #scheme: Muse
-scheme: Mist
-#scheme: Pisces
+#scheme: Mist
+scheme: Pisces
 
 
 # ---------------------------------------------------------------
@@ -340,7 +340,7 @@ baidu_push: false
 use_motion: false
 
 # Fancybox
-fancybox: false
+fancybox: true
 
 
 # Script Vendors.
