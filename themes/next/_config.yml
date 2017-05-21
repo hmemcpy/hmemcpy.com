@@ -33,6 +33,7 @@ menu:
   twitter: https://twitter.com/hmemcpy
   github: https://github.com/hmemcpy
   linkedin: https://il.linkedin.com/in/igaltabachnik
+  stackoverflow: https://stackoverflow.com/users/8205/igal-tabachnik
 
 
 # Enable/Disable menu icons.
@@ -51,6 +52,7 @@ menu_icons:
   twitter: twitter
   github: github
   linkedin: linkedin
+  stackoverflow: stack-overflow
   rss: rss
 
 # ---------------------------------------------------------------
@@ -122,6 +124,7 @@ font:
 social:
   GitHub: https://github.com/hmemcpy
   Twitter: https://twitter.com/hmemcpy
+  StackOverflow: https://stackoverflow.com/users/8205/igal-tabachnik
 
 
 # Social Links Icons
@@ -136,13 +139,13 @@ social_icons:
   GitHub: github
   Twitter: twitter
   Weibo: 
+  StackOverflow: stack-overflow
 
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-#avatar:
-
+avatar:
 
 # Table Of Contents in the Sidebar
 toc:
