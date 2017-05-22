@@ -29,15 +29,15 @@
                src="{{ url_for( theme.avatar | default(theme.images + '/avatar.gif') ) }}"
                alt="{{ theme.author }}" />
           <p class="site-author-name" itemprop="name">{{ theme.author }}</p>
-           {% if theme.seo %}
+           {% if theme.seo and theme.signature %}
               <p class="site-description motion-element" itemprop="description">{{ theme.signature }}</p>
-           {% else %}
+           {% elseif theme.description %}
               <p class="site-description motion-element" itemprop="description">{{ theme.description }}</p>
           {% endif %}
         </div>
         <nav class="site-state motion-element">
 
-          {% if config.archive_dir != '/' %}
+          {% if config.archive_dir != '/' and theme.show_post_count %}
             <div class="site-state-item site-state-posts">
               <a href="{{ url_for(theme.menu.archives) }}">
                 <span class="site-state-item-count">{{ site.posts.length }}</span>
@@ -70,7 +70,7 @@
 
         </nav>
 
-        {% if theme.rss %}
+        {% if theme.rss and false %}
           <div class="feed-link motion-element">
             <a href="{{ url_for(theme.rss) }}" rel="alternate">
               <i class="fa fa-rss"></i>
