@@ -164,7 +164,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: /images/igal.jpg 
+avatar: https://avatars2.githubusercontent.com/u/601206?v=3&s=460
 
 
 # Table Of Contents in the Sidebar
@@ -280,7 +280,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night blue
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
