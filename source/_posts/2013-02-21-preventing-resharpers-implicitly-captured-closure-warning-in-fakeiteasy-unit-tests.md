@@ -14,21 +14,21 @@ The InstantHandle annotation tells ReSharper that the method parameter is comple
 
 To add this information about FakeItEasy's `A.CallTo()` overloads that accept delegates, we can create an external XML file, which looks like this:
 
-<div id="scid:f32c3428-b7e9-4f15-a8ea-c502c7ff2e88:7686fbc8-e740-476e-a89b-40eda4c1a306" class="wlWriterEditableSmartContent" style="float: none; padding-bottom: 0px; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px">
-  <pre class="brush: xml;">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;assembly name="FakeItEasy"&gt;
-  &lt;member name="M:FakeItEasy.A.CallTo(System.Linq.Expressions.Expression{System.Action})"&gt;
-    &lt;parameter name="callSpecification"&gt;
-      &lt;attribute ctor="M:JetBrains.Annotations.InstantHandleAttribute.#ctor" /&gt;
-    &lt;/parameter&gt;
-  &lt;/member&gt;
-  &lt;member name="M:FakeItEasy.A.CallTo``1(System.Linq.Expressions.Expression{System.Func{``0}})"&gt;
-    &lt;parameter name="callSpecification"&gt;
-      &lt;attribute ctor="M:JetBrains.Annotations.InstantHandleAttribute.#ctor" /&gt;
-    &lt;/parameter&gt;
-  &lt;/member&gt; 
-&lt;/assembly&gt;</pre>
-</div>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<assembly name="FakeItEasy">
+  <member name="M:FakeItEasy.A.CallTo(System.Linq.Expressions.Expression{System.Action})">
+    <parameter name="callSpecification">
+      <attribute ctor="M:JetBrains.Annotations.InstantHandleAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:FakeItEasy.A.CallTo1(System.Linq.Expressions.Expression{System.Func{0}})">
+    <parameter name="callSpecification">
+      <attribute ctor="M:JetBrains.Annotations.InstantHandleAttribute.#ctor" />
+    </parameter>
+  </member>
+</assembly>
+```
 
 Download the XML via [GitHub Gist](https://gist.github.com/hmemcpy/5003775),
 
