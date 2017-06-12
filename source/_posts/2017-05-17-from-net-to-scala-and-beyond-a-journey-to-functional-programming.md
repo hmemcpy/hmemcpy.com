@@ -31,7 +31,7 @@ Little did I know that a simple Hello World app in Haskell would change my views
 
 I was watching a talk by [Rúnar Bjarnason](https://twitter.com/runarorama), one of the authors of the book [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala) (AKA the "Red Book"), titled [Purely Functional I/O](https://www.infoq.com/presentations/io-functional-side-effects), which I highly recommend watching (at least, the first half, if you are not using Scala). He outlines the principles of functional programming, and why we can't really do "pure" FP in most programming languages. The problem lies with the fact that any function can perform I/O, or "have side-effects", causing us to lose most of the benefits of functional programming. 
 
-The benefits, outlined in [this post](http://degoes.net/articles/easy-monads) by John A De Goes, are just 3 properties that function must exhibit:
+The benefits, outlined in [this post](http://degoes.net/articles/easy-monads) by John A De Goes, are just 3 properties that functions must exhibit:
 
 1. **Totality**. A function must yield a value for every possible input.
 2. **Determinism**. A function must yield the same value for the same input.
