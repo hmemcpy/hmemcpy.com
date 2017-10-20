@@ -44,7 +44,7 @@ In one single moment, I suddenly understood the *idea* of Haskell, of why it wor
 I am thankful for [Andrea Magnorsky](https://twitter.com/silverSpoon)'s excellent keynote talk, [Inviting Everyone to the Party](https://www.youtube.com/watch?v=WBu43Tj0zOY), which helped me realize that not only what I had experienced had a name, it was, in fact, a textbook definition of the phenomenon: what I had experienced is called a **paradigm shift**.
 
 The term "paradigm shift", coined by [Thomas Kuhn](https://en.wikipedia.org/wiki/Thomas_Kuhn) in his 1962 book [The Structure of Scientific Revolutions](https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions), describes a process where if an established model no longer fits the world view, it is rejected and simultaneously replaced by another. Kuhn says:
-{% blockquote Thomas Kuhn, The Structure of Scientific Revolutions: 50th Anniversary Edition (p. 78) %}
+{% blockquote Thomas Kuhn, The Structure of Scientific Revolutions: 50th Anniversary Edition (pg. 78) %}
 The decision to reject one paradigm is always simultaneously the decision to accept another, and the judgement leading to that decision involves the comparison of both paradigms with nature and with each other.
 {% endblockquote %}
 
