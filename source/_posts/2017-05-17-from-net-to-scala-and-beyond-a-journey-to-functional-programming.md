@@ -37,7 +37,7 @@ The benefits, outlined in [this post](http://degoes.net/articles/easy-monads) by
 2. **Determinism**. A function must yield the same value for the same input.
 3. **Purity**. A function’s only effect must be the computation of its return value, *and nothing else*.
 
-These properties are voilated by "side-effects". We consider side-effects to be anything like reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be precise, functions that have side-effects violate [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expression, without changing the program's behavior. A function is considered "pure", if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves. A side-effect, therefore, is *anything* that violates RT.
+These properties are voilated by "side-effects". We consider side-effects to be anything like reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be precise, functions that have side-effects violate [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expressions, without changing the program's behavior. A function is considered "pure", if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves. A side-effect, therefore, is *anything* that violates RT.
 
 In this world of pure functions that always return a value, there is no such thing as `void`. All functions must return a value, and that value must always be the same for the same input. Given these "restrictions", how can we possibly do anything useful (e.g. talking to a database) in a functional language?
 
@@ -80,7 +80,7 @@ main = putStrLn "What is your name?" >>
        getLine >>= \n -> putStrLn ("Hello, " ++ n)
 ```
 
-Which *binds* the result of `getLine` with the input parameter `n` of a Lambda expression (Lambdas in Haskell are defined with a `\`, which makes it look like the symbol `λ`), which passes it to the `putStrLn` function.
+Which *binds* the result of `getLine` with the input parameter `n` of a Lambda expression, which passes it to the `putStrLn` function. (Lambdas in Haskell are defined with a `\`, which makes it look like the symbol `λ`.)
 
 Another way of writing this program is with a **do-notation**, which makes it look more imperative:
 
