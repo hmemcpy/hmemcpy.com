@@ -10,8 +10,6 @@ I'm writing this post mainly to myself, explaining how I figured out why this pa
  in my particualr case, (temporary) enabling the Administrator user (after running `sfc /scannow` in an elevated prompt, followed by `net user administrator /active:yes`) allowed the update to install successfully! After installing and rebooting the machine, I disabled the built-in Administrator account using `net user administrator /active:no` from an elevated prompt.
 {% endblockquote %}
 
-/verbose
-
 After failing to install the update, from both Windows Update and manually downloading it, I turned to the web, trying to find solutions. Most of the forums describing the problem were either abandoned, or given the basic generic troubleshooting tips, which are rarely useful (all they tell you there's a problem, as if you didn't know).
 
 One of those *tips* is running [sfc /scannow](https://support.microsoft.com/en-us/kb/929833). The result of running this check is a (sometimes huge) log file called CBS.log, located in 
