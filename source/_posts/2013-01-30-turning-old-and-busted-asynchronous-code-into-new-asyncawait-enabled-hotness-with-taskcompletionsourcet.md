@@ -18,7 +18,7 @@ public Task<PositionData> GetPositionAsync()
     var tcs = TaskCompletionSourc<PositionData>();
 
     // subscribe to the callback before firing the request
-    _response.GetPositionAnswer += (sender, args) =&gt;
+    _response.GetPositionAnswer += (sender, args) =>
     {
         PositionData data = ... // translate position data from the event's arguments
 	
