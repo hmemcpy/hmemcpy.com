@@ -102,13 +102,14 @@ font:
   global:
     # external: true will load this font family from host.
     external: true
-    family: PT Serif
+    family: Source Sans Pro
+    size: 18
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
   # Fallback to `global` font settings.
   headings:
     external: true
-    family: PT Serif
+    family: Roboto Condensed
 
   # Font settings for posts
   # Fallback to `global` font settings.
