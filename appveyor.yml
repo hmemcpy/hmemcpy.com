@@ -13,6 +13,7 @@ install:
   - npm install -g npm
   - npm install -g hexo-cli
   - npm install stable
+  - rm -rf node_modules/ && npm install
 cache:
   - node_modules -> package.json
 
