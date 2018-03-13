@@ -26,4 +26,5 @@ deploy_script:
   - git config --global user.email "hmemcpy@gmail.com"
   - git config --global user.name "Igal Tabachnik"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - rm -rf node_modules/ && npm install
   - hexo deploy --generate
