@@ -13,7 +13,7 @@ install:
   - ps: Install-Product node ''
   - npm install -g npm
   - npm install -g hexo-cli
-  - rm -rf node_modules/ && npm install
+  - npm install
 cache:
   # - node_modules -> package.json
 
