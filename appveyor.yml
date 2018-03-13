@@ -10,9 +10,10 @@ environment:
     secure: 1WheHu+kkZmDJrayiqakzJvDUfL6OOkzc3a+sd3RM6hJcjOvIJcvrOzegNHHzbCV
 
 install:
+  - Install-Product node ''
   - npm install -g npm
   - npm install -g hexo-cli
-  - npm install
+  - rm -rf node_modules/ && npm install
 cache:
   # - node_modules -> package.json
 
@@ -26,5 +27,4 @@ deploy_script:
   - git config --global user.email "hmemcpy@gmail.com"
   - git config --global user.name "Igal Tabachnik"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-  - rm -rf node_modules/ && npm install
   - hexo deploy --generate
