@@ -10,7 +10,7 @@ environment:
     secure: 1WheHu+kkZmDJrayiqakzJvDUfL6OOkzc3a+sd3RM6hJcjOvIJcvrOzegNHHzbCV
 
 install:
-  - Install-Product node ''
+  - ps: Install-Product node ''
   - npm install -g npm
   - npm install -g hexo-cli
   - rm -rf node_modules/ && npm install
