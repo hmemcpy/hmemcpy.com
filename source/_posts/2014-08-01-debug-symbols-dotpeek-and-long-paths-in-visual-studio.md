@@ -39,7 +39,7 @@ What I did was copy the entire contents of dotPeek's `SymbolCache\CSharp` direct
 
 After doing this, I could go back to debugging, was was able to step into methods that were previously unavailable!
 
-As the comments below mention, this is also possible to do without copying, by creating a (symbolic) link between the directories! From an elevator command shell, run:
+As the comments below mention, this is also possible to do without copying, by creating a (symbolic) link between the directories! From an elevated command shell, run:
 
 ```
 mklink /D d:\sym %localappdata%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp
