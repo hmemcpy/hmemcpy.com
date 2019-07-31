@@ -11,6 +11,8 @@ The expression `foldr f z list` replaces in `list`:
  2. Any occurrence of the nil constructor `[]` with `z`
 {% endblockquote %}
 
+<!-- more -->
+
 <br/>Or, to put it in a tweet:
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Intuition for `foldr` as &quot;constructor replacement&quot; is very helpful! <br><br>Given a list:<br><br>1 : 2 : 3 : []<br><br>foldr &quot;replaces&quot; the cons constructor (:) with a function:<br><br>1 `f` 2 `f` 3 `f` []<br><br>e.g.<br>foldr (*) 1 (1 : 2 : 3 : [])<br>replaces : with *, and [] with 1<br>== 1 * 2 * 3 * 1<br>== 6</p>&mdash; Igal Tabachnik (@hmemcpy) <a href="https://twitter.com/hmemcpy/status/1156061465532653568?ref_src=twsrc%5Etfw">July 30, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -180,7 +182,7 @@ This makes it very easy to see how we can use "constructor replacement" to appen
 -- | Flatten a list of lists to a list.
 --
 -- >>> flatten ((1 :. 2 :. 3 :. Nil) :. (4 :. 5 :. 6 :. Nil) :. (7 :. 8 :. 9 :. Nil) :. Nil)
---
+-- [1,2,3,4,5,6,7,8,9]
 flatten :: List (List a) -> List a 
 ```
 Here is again the intuition for constructor replacement helps us find the answer - the `flatten` functions takes a list of lists and *appends* them together into a single list! This should sound very familiar, as we *just* implemented a function that does that! We can use the `(++)` function to append two lists together, so all we need to do is replace the `:.` between the lists with `(++)`! The result is:
@@ -191,4 +193,4 @@ flatten = foldRight (++) Nil
 ---
 Hopefully, by now, it became clear how thinking of the right fold as "constructor replacement" can help visualize and guide towards the correct implementation. I recommend finishing the rest of the `List` module, then implement the `Optional` module using only `foldRight`.
 
-I will continue the [data61 FP course](https://github.com/data61/fp-course), and will share more gems as I learn them! Stay tuned!
+I will continue the [Data61 FP course](https://github.com/data61/fp-course), and will share more gems as I learn them! Stay tuned!
