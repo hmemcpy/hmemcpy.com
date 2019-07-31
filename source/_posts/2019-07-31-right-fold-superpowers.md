@@ -148,7 +148,7 @@ map f = foldRight (\a bs -> f a :. bs) Nil
 filter :: (a -> Bool) -> List a -> List a
 filter p = foldRight _cons _nil
 ```
-Very similar to `map`, except we use the predicate `b` to decide whether to take the element or drop it from our resulting list. The typed hole for `_cons` is `a -> List a -> List a`, satisfied with:
+Very similar to `map`, except we use the predicate `p` to decide whether to take the element or drop it from our resulting list. The typed hole for `_cons` is `a -> List a -> List a`, satisfied with:
 ```haskell
 \x xs -> if p x then x :. xs else xs
 ```
