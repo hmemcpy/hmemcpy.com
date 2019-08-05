@@ -11,7 +11,7 @@ keywords:
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: false
 
 # Specify the date when the site was setup
 since: 2009
@@ -47,7 +47,8 @@ menu:
   home: /
   #categories: /categories
   archives: /archives
-  rss: /atom.xml
+  cv: /cv.pdf
+  #rss: /atom.xml
   #tags: /tags
   #sitemap: /sitemap.xml
   #commonweal: /404.html
@@ -73,6 +74,7 @@ menu_icons:
   linkedin: linkedin
   stackoverflow: stack-overflow
   rss: rss
+  cv: vcard
 
 # ---------------------------------------------------------------
 # Scheme Settings
