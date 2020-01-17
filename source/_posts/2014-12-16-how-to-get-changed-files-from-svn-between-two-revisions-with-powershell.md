@@ -6,7 +6,21 @@ As part of [teaching myself PowerShell](/2014/12/the-2-minute-powershell-intro-f
 
 <!-- more -->
 
-<script src="http://gist.github.com/hmemcpy/3ff5b99bc7886042fa4a.js"></script>
+```powershell
+function Export-SvnDiff($repo, $fromRevision, $toRevision, $outputDirectory)
+{
+    $xpath = "/diff/paths/path[@kind='file' and (@item='added' or @item='modified')]"
+
+    [xml]$output = & svn diff -r $("{0}:{1}" -f $fromRevision, $toRevision) $repo --summarize --xml
+    $output | Select-Xml -XPath $xpath | % { $_.node."#text" } | % { 
+        $targetFile = Resolve-FullPath (Join-Path $outputDirectory ($_ -replace $repo))
+        $targetDir = $targetFile | Split-Path
+        New-Item -Force -ItemType directory -Path $targetDir | Out-Null
+        & svn export -r $toRevision -q --force $_ $targetFile
+        Write-Host ("$_ -> $targetFile")
+    }
+}
+```
 
 This script uses [`Resolve-FullPath`](https://github.com/michael-wolfenden/CodeCampServer/blob/master/scripts/Carbon/Path/Resolve-FullPath.ps1) cmdlet from the Carbon project. Turns out, PowerShell's own `Resolve-Path` doesn't work on files/paths that do not exist.
 
