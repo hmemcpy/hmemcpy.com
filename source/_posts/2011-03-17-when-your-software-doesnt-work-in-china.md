@@ -8,7 +8,7 @@ I had an interesting bug submitted by a user, he wrote that <a href="http://www.
 
 <!-- more -->
 
-When creating a new Visual Studio 2008 Add-in (under Other Project Types &ndash; Extensibility), if selected the *Yes, create a Tools menu item* in page 4 of the wizard, the following code is generated in `OnConnect` method after completing the wizard:
+When creating a new Visual Studio 2008 Add-in (under Other Project Types - Extensibility), if selected the *Yes, create a Tools menu item* in page 4 of the wizard, the following code is generated in `OnConnect` method after completing the wizard:
 
 ```csharp
 ...

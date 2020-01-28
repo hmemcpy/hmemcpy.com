@@ -2,15 +2,12 @@ branches:
   only:
     - master
 
-init:
-  - git config --global core.autocrlf true
-
 environment:
   access_token:
     secure: 1WheHu+kkZmDJrayiqakzJvDUfL6OOkzc3a+sd3RM6hJcjOvIJcvrOzegNHHzbCV
 
 install:
-  - ps: Install-Product node ''
+  - ps: Install-Product node
   - npm install -g npm
   - npm install -g hexo-cli
   - npm install

@@ -12,19 +12,19 @@ So let's suppose we want to put a breakpoint inside `Console.WriteLine` (or any 
 
 {% asset_img image1.png %}
 
-You can configure the port and the symbol generation settings in **Tools &ndash; Options**. The default address is `http://localhost:33417/`.
+You can configure the port and the symbol generation settings in **Tools - Options**. The default address is `http://localhost:33417/`.
 
-  * In Visual Studio, go to **Tools &ndash; Options**, then navigate to **Debugging &ndash; Symbols**. Add the location of the dotPeek symbol server.
+  * In Visual Studio, go to **Tools - Options**, then navigate to **Debugging - Symbols**. Add the location of the dotPeek symbol server.
 
 {% asset_img image2.png %}
 
 In addition, make sure that **Just My Code** (in **General**) is unchecked, and press OK. Some symbols will be loaded, this might take a few moments.
 
-  * Next, we need to set a breakpoint _inside_ the method which we're interested in. This can be done with a little-known Visual Studio trick, allowing you to create a breakpoint at any function. Go to **Debug &ndash; New Breakpoint &ndash; Break at Function**, and in the dialog enter the fully qualified method name, e.g. `System.Console.WriteLine`.
+  * Next, we need to set a breakpoint _inside_ the method which we're interested in. This can be done with a little-known Visual Studio trick, allowing you to create a breakpoint at any function. Go to **Debug - New Breakpoint - Break at Function**, and in the dialog enter the fully qualified method name, e.g. `System.Console.WriteLine`.
 
 {% asset_img image3.png %}
 
-After pressing OK, you'll get a message saying *IntelliSense could not find the specified location. Do you still want to set the breakpoint?*. It's fine &ndash; press Yes.
+After pressing OK, you'll get a message saying *IntelliSense could not find the specified location. Do you still want to set the breakpoint?*. It's fine - press Yes.
 
   * Finally, start your application with the debugger (F5) and you will stop at the breakpoint! You can use all familiar debugging options, such as stepping over/into, watch, autos and the datatip.
 

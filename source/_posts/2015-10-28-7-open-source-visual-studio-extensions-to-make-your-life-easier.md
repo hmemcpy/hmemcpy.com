@@ -30,13 +30,13 @@ Which brings me to:
 
 # NoGit
 
-[NoGit](https://visualstudiogallery.msdn.microsoft.com/146b404a-3c91-46ff-932a-fb0f8b826f94) ([source](https://github.com/markrendle/nogit)) does one thing and one thing only &ndash; it **disables** the built-in Visual Studio Git source-control provider, which has a habit of re-enabling itself whenever you open a solution that uses git. NoGit will turn off this provider always, whenever a solution is opened.
+[NoGit](https://visualstudiogallery.msdn.microsoft.com/146b404a-3c91-46ff-932a-fb0f8b826f94) ([source](https://github.com/markrendle/nogit)) does one thing and one thing only - it **disables** the built-in Visual Studio Git source-control provider, which has a habit of re-enabling itself whenever you open a solution that uses git. NoGit will turn off this provider always, whenever a solution is opened.
 
 {% asset_img no_git.png "NoGit" %}
 
 # Reopen Start Page
 
-Another time saver is [Reopen Start Page](https://visualstudiogallery.msdn.microsoft.com/e64380ab-e3aa-4ac7-aa11-95719c5c91e9) ([source](https://github.com/jlattimer/VSReopenStartPage)), which does exactly what it says &ndash; reopens the Visual Studio Start page when you close a solution. Personally, I make use of the recent solutions list on the Start page, which makes it really convenient to open recent solutions!
+Another time saver is [Reopen Start Page](https://visualstudiogallery.msdn.microsoft.com/e64380ab-e3aa-4ac7-aa11-95719c5c91e9) ([source](https://github.com/jlattimer/VSReopenStartPage)), which does exactly what it says - reopens the Visual Studio Start page when you close a solution. Personally, I make use of the recent solutions list on the Start page, which makes it really convenient to open recent solutions!
 
 # SaveAllTheTime
 
@@ -52,7 +52,7 @@ I discovered [TabSanity](https://visualstudiogallery.msdn.microsoft.com/ac4d4d6b
 
 # EmojiVS
 
-Finally, let's add some fun to our code with [EmojiVS](https://visualstudiogallery.msdn.microsoft.com/88575465-8486-4c5a-8406-05e8d1d5b09d) ([source](https://github.com/jbevain/EmojiVS)) &ndash; an extension that adds github emojis to your code (more specifically, code comments). Because, why not?
+Finally, let's add some fun to our code with [EmojiVS](https://visualstudiogallery.msdn.microsoft.com/88575465-8486-4c5a-8406-05e8d1d5b09d) ([source](https://github.com/jbevain/EmojiVS)) - an extension that adds github emojis to your code (more specifically, code comments). Because, why not?
 
 {% asset_img emojivs1.png "EmojiVS" %}
 

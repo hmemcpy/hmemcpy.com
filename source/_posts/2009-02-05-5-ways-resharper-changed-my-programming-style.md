@@ -23,7 +23,7 @@ More interesting Go To navigations: **Go To Symbol** (Alt-Shift-T [Visual Studio
 
 **2. Manually create constructors, fields, properties**
 
-Meet one of my best friends &ndash; **Generate** (Alt-Insert). Pressing this shortcut anywhere in the file will popup this menu:
+Meet one of my best friends - **Generate** (Alt-Insert). Pressing this shortcut anywhere in the file will popup this menu:
 {% asset_img image3.png %}
 
 If I select **Constructor** from the menu, I'll get a dialog in which I'll be able to specify constructor parameters, and automatically map them into local fields.

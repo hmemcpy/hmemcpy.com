@@ -1,4 +1,4 @@
-﻿---
+---
 title: Installing Windows 8 on HP EliteBook 8570w
 date: 2012-09-30T11:37:29+00:00
 ---
@@ -6,7 +6,7 @@ date: 2012-09-30T11:37:29+00:00
 
 <!-- more -->
 
-  * HP EliteBook 8570w 15.6*
+  * HP EliteBook 8570w 15.6"
   * i7-3820QM
   * 16GB RAM 1600MHz DDR3
   * 256GB SSD + 512GB HDD (instead of optical drive)
@@ -17,19 +17,19 @@ Unfortunately, like many branded laptops, it came bundled with tons of*¦ softwa
 
 The following is a recap of the steps I performed to upgrade my machine to Windows 8. Your configuration (and, therefore, experience) might be different.
 
-## STEP 0 &ndash; PREPARATION
+## Preparation
 
 I have always preferred having two partitions, C: and D:, having all my source code, utilities, music and other things on the D: partition, so if I reformat my computer (which used to happen fairly often), I would keep all my data. Since I now had two physical drives, I decided to have the SSD as my primary (system) drive, and the HDD as the storage.
 
 On HP machines, all the pre-installed software and drivers are located in the directory **swsetup**, located on the C: drive. I copied this directory to the D: drive. Next, I proceeded to **create an image** of the current system. HP machines come with a special partition that contain the recovery image (which restores the system to store-bought state). I usually _delete_ the recovery partition, since a) it takes 30GB off the primary storage (which in my case is an SSD, and 30GB is a lot of space for an SSD) and b) it defeats the purpose of the reinstall, since the preloaded software is still there.
 
-## STEP 1 &ndash; INSTALLATION
+## Installation
 
 After backing up the existing system, and copying the **swsetup** directory, I proceeded to install Windows 8. Since my new machine doesn't have an optical drive, I used the Windows USB Tool to create a bootable Windows 8 USB stick. I rebooted the machine, pressed Esc during the startup. In the boot menu, I selected F10 for boot order, and selected my USB drive.
 
-In the setup, I selected Custom to make a clean install of the OS, then in the partition selection I **deleted** all the partitions from **Disk 0** &ndash; _System Reserved, HP Tools and HP Recovery_ partitions were all deleted, as well as the OS partition. What remained was the now-unallocated space of Disk 0 and the existing Disk 1 (which is the 2<sup>nd</sup> physical drive). I proceeded to select the unallocated space of Disk 0, and Windows 8 did the rest.
+In the setup, I selected Custom to make a clean install of the OS, then in the partition selection I **deleted** all the partitions from **Disk 0** - _System Reserved, HP Tools and HP Recovery_ partitions were all deleted, as well as the OS partition. What remained was the now-unallocated space of Disk 0 and the existing Disk 1 (which is the 2<sup>nd</sup> physical drive). I proceeded to select the unallocated space of Disk 0, and Windows 8 did the rest.
 
-## STEP 3 &ndash; DRIVERS AND CONFIGURATION
+## Drivers and Configuration
 
 After (surprisingly smooth) Windows 8 installation, I proceeded to go to the Device Manager. Compared to a clean Windows 7 install, almost every device driver was automatically installed by Windows 8.
 
@@ -43,7 +43,7 @@ Looking at the device manager, there are 4 unknown devices. I right-clicked on e
 
 Double-clicking on the device revealed its ID, so a quick Google check revealed it was something called _Validity Sensors_, which turned out to be the fingerprint reader on my machine. There was a Validity Fingerprint Driver in the swsetup folder, and after installing it I didn't have any more yellow question marks!
 
-## STEP 4 &ndash; MORE STUFF AND FINAL WORDS
+## More stuff and final words
 
 Until HP releases Windows 8-compatible versions of their tools, I chose not to install the ProtectTools suite (for drive encryption/enhanced security log-on). I also didn't install any of the Intel and HP drivers, since Windows 8 picked most of them up. I did, however, install the **IDT HD Audio Driver**, for enhanced audio capabilities and the mute button support.
 

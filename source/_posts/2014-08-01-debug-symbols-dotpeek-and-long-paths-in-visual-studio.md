@@ -6,7 +6,7 @@ In my [previous post](/2014/07/how-to-debug-anything-with-visual-studio-and-jetb
 
 <!-- more -->
 
-While this is great, I noticed that there was one particular method I couldn't step into &ndash; the moment I tried I got the sadly familiar **Source Not Found** page:
+While this is great, I noticed that there was one particular method I couldn't step into - the moment I tried I got the sadly familiar **Source Not Found** page:
 
 {% asset_img image1.png %}
 
@@ -23,11 +23,11 @@ The file was not found in a project.
 ...
 ```
 
-And so on. Quick search for `OAProjectItems.cs` using my most favorite tool, [Everything](http://www.voidtools.com/), revealed that it was indeed present in that location, so why couldn't Visual Studio open it? I decided to open the file manually by pasting its full path into the Start &ndash; Run dialog (Win-R), but then I got the following error:
+And so on. Quick search for `OAProjectItems.cs` using my most favorite tool, [Everything](http://www.voidtools.com/), revealed that it was indeed present in that location, so why couldn't Visual Studio open it? I decided to open the file manually by pasting its full path into the Start - Run dialog (Win-R), but then I got the following error:
 
 {% asset_img image3.png %}
 
-Finally, I tried to go to the file location using the cmd, and I got my answer &ndash; the path was simply too long for Windows (and therefore, Visual Studio) to handle!
+Finally, I tried to go to the file location using the cmd, and I got my answer - the path was simply too long for Windows (and therefore, Visual Studio) to handle!
 
 {% asset_img image4.png %}
 
@@ -35,7 +35,7 @@ Windows has an unfortunate `MAX_PATH` limitation at 260 characters is the source
 
 {% asset_img image5.png %}
 
-What I did was copy the entire contents of dotPeek's `SymbolCache\CSharp` directory into a local directory `d:\sym`, and added it to the search list (pictured above). Also, I made sure to delete everything from the bottom list (Do not look for these source files) &ndash; if Visual Studio is unable, for any reason, to open a source file, it will add it to this blacklist. It was filled with the files I needed, so I removed them from the list.
+What I did was copy the entire contents of dotPeek's `SymbolCache\CSharp` directory into a local directory `d:\sym`, and added it to the search list (pictured above). Also, I made sure to delete everything from the bottom list (Do not look for these source files) - if Visual Studio is unable, for any reason, to open a source file, it will add it to this blacklist. It was filled with the files I needed, so I removed them from the list.
 
 After doing this, I could go back to debugging, was was able to step into methods that were previously unavailable!
 

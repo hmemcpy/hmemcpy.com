@@ -22,7 +22,7 @@ To begin converting, simply type:
 
     hg convert C:\code\YourProject
 
-Where `YourProject` is the SVN root of your project. Mercurial will create a new directory, appending the suffix &ndash;**hg** (e.g. YourProject-hg), and will use it as a destination. Please note that this may take a long time, depending on the size of your SVN repository.
+Where `YourProject` is the SVN root of your project. Mercurial will create a new directory, appending the suffix -**hg** (e.g. YourProject-hg), and will use it as a destination. Please note that this may take a long time, depending on the size of your SVN repository.
 
 If you'd like to convert a specific branch, or a specific revision, you can specify [additional options](http://mercurial.selenic.com/wiki/ConvertExtension) to the command.
 

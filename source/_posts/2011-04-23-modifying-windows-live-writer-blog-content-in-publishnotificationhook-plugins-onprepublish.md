@@ -1,4 +1,4 @@
-﻿---
+---
 title: Modifying Windows Live Writer blog content in PublishNotificationHook plugins' OnPrePublish
 date: 2011-04-23T18:51:49+00:00
 ---
@@ -12,4 +12,29 @@ I had discovered that on a Japanese blog called <a href="http://blog.sharplab.ne
 
 I extracted this into an extension method, use this at your own risk!
 
-<script src="https://gist.github.com/hmemcpy/938655.js" />
+```csharp
+// based on an old blog post in Japanese: http://blog.sharplab.net/computer/cprograming/windowslivewriter/433/
+// The field was moved to a base type in the latest version of Live Writer
+
+using System.Reflection;
+using WindowsLive.Writer.Api;
+using WindowsLive.Writer.Extensibility.BlogClient;
+using WindowsLive.Writer.PostEditor;
+
+namespace WindowsLiveWriterPlugin.Extensions
+{
+    public static class PublishingContextExtensions
+    {
+        public static void ReplaceText(this IPublishingContext publishingContext, string newText)
+        {
+            FieldInfo fieldInfo = publishingContext.GetType().BaseType.GetField("_editingContext", BindingFlags.NonPublic | BindingFlags.Instance);
+            BlogPostEditingManager manager = (BlogPostEditingManager)fieldInfo.GetValue(publishingContext);
+            BlogPost blogPost = (BlogPost)publishingContext.PostInfo;
+
+            blogPost.Contents = newText;
+
+            manager.EditPost(new BlogPostEditingContext(manager.BlogId, blogPost));
+        }
+    }
+}
+```

@@ -18,7 +18,7 @@ It uses slightly different mnemonics than Google IME, but it works well (and I s
 
 *Original post below:*
 
-<img style="float: right; padding: 5px;" src="{% asset_path image1.png %}" />I have recently discovered <a href="http://www.google.com/ime/transliteration/" target="_blank">Google IME</a> (Input Method Editor) &ndash; an extension of <a href="http://www.google.com/transliterate/" target="_blank">Google Transliteration</a>, brings the transliteration service to Windows as another language on your keyboard!
+<img style="float: right; padding: 5px;" src="{% asset_path image1.png %}" />I have recently discovered <a href="http://www.google.com/ime/transliteration/" target="_blank">Google IME</a> (Input Method Editor) - an extension of <a href="http://www.google.com/transliterate/" target="_blank">Google Transliteration</a>, brings the transliteration service to Windows as another language on your keyboard!
 
 Here is how it works: after installing Google IME <a href="http://www.google.com/ime/transliteration/" target="_blank">in your language</a>, you will have that language added in your languages bar. Then, when you switch to that language using Alt-Shift, you then can type in English letters, and Google IME will automatically convert it to the target language (even suggesting the correct spelling if you made a mistake!).
 

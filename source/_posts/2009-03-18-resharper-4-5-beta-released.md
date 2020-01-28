@@ -10,7 +10,7 @@ JetBrains just <a href="http://www.jetbrains.com/resharper/beta.html" target="_b
 
 Here are some of my first impressions:
 
-The installation was a snap &ndash; it asked to remove the previous version (4.1), and installed the new version instead, while keeping the previous settings.
+The installation was a snap - it asked to remove the previous version (4.1), and installed the new version instead, while keeping the previous settings.
   * There is a noticeable improvement in the Visual Studio 2008 responsiveness after startup, Start Page appears to be frozen much less than before.
   * Memory usage has dramatically improved! **devenv.exe** is no longer the hungriest process on my system, Firefox has regained its rightful place at the top of the Task Manager:
 

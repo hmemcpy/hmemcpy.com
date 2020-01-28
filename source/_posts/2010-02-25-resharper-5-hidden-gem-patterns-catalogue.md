@@ -8,7 +8,7 @@ Have I mentioned that I love ReSharper? While patiently waiting for the 5.0 rele
 
 <!-- more -->
 
-One of the things that improved the most with this release is the SSR &ndash; Structural Search and Replace. It's a new feature, allowing you to specify code patterns to be added as hints, errors or warnings to the ReSharper code analysis, as well as specifying a replacement pattern.
+One of the things that improved the most with this release is the SSR - Structural Search and Replace. It's a new feature, allowing you to specify code patterns to be added as hints, errors or warnings to the ReSharper code analysis, as well as specifying a replacement pattern.
 
 Here is an [example](http://blogs.jetbrains.com/dotnet/2010/02/resharper-5-beta-2-released/) of this feature, taken from the [JetBrains .NET Tools blog](http://blogs.jetbrains.com/dotnet/):
 

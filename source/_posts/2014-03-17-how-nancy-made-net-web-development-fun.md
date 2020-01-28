@@ -2,17 +2,17 @@
 title: How Nancy made .NET Web development fun!
 date: 2014-03-17T15:35:48+00:00
 ---
-Let's get this out of the way first: this is **not** a post about how to use [Nancy](http://nancyfx.org/) &ndash; there are lots of blog posts out there, written by people far better at it than me!
+Let's get this out of the way first: this is **not** a post about how to use [Nancy](http://nancyfx.org/) - there are lots of blog posts out there, written by people far better at it than me!
 
 I am not a web developer. During my career I mostly worked on desktop applications (with occasional dab in the database land, typical CRUD stuff). Over the years my passion for development shifted towards building development tools (Visual Studio, ReSharper plugins), and my dayjob now having a blast building [OzCode](http://www.oz-code.com/), a debugging productivity tool for Visual Studio.
 
 <!-- more -->
 
-So I never had the chance to *do* web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages &ndash; they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).
+So I never had the chance to *do* web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages - they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).
 
 Enter Nancy.
 
-When I first heard about Nancy, I was intrigued &ndash; an entire web application that fits in a tweet! If, in a highly unlikely event, you're reading about Nancy for the first time in this blog post, here's the canonical *hello world* app:
+When I first heard about Nancy, I was intrigued - an entire web application that fits in a tweet! If, in a highly unlikely event, you're reading about Nancy for the first time in this blog post, here's the canonical *hello world* app:
 
 ```csharp
 public class SampleModule : Nancy.NancyModule
@@ -26,9 +26,9 @@ public class SampleModule : Nancy.NancyModule
 
 And with [ScriptCS](http://scriptcs.net/) being the hot new thing, hosting Nancy apps [does not even require Visual Studio](https://github.com/adamralph/scriptcs-nancy)!
 
-So what makes Nancy so appealing to me, a non-web developer? First and foremost &ndash; the people behind it! Nancy is a perfect example of the Open Source spirit &ndash; with [more than 160 contributors](http://nancyfx.org/contribs.html), making it a fun, well-documented, well-tested, accessible framework for everyone and everything!
+So what makes Nancy so appealing to me, a non-web developer? First and foremost - the people behind it! Nancy is a perfect example of the Open Source spirit - with [more than 160 contributors](http://nancyfx.org/contribs.html), making it a fun, well-documented, well-tested, accessible framework for everyone and everything!
 
-But what I like most about Nancy has nothing to do with its actual application &ndash; it has to do with the way it works under the covers. Demonstrated by one of Nancy's lead developers, Andreas Håkansson ([@TheCodeJunkie](https://twitter.com/TheCodeJunkie) on twitter), in the [Guerilla Framework Design](https://www.youtube.com/watch?v=7jg0u-YaRxQ) talk at DevDay, Nancy uses lots of cool C# language hacks to achieve simplicity and make using of the framework as simple as possible!
+But what I like most about Nancy has nothing to do with its actual application - it has to do with the way it works under the covers. Demonstrated by one of Nancy's lead developers, Andreas Håkansson ([@TheCodeJunkie](https://twitter.com/TheCodeJunkie) on twitter), in the [Guerilla Framework Design](https://www.youtube.com/watch?v=7jg0u-YaRxQ) talk at DevDay, Nancy uses lots of cool C# language hacks to achieve simplicity and make using of the framework as simple as possible!
 
 Want examples? Let's start with the *hello world* app above: there are at least 3 cool things that don't require you to understand exactly how they work. For example, the funky `= _ =>` *smiley face*. While aesthetically pleasing, this is a lambda expression, defining the body of the HTTP Get method, with the route */*. This lambda passes a parameter which is a dynamic dictionary (specified by underscore in the above example). This dictionary contains, among other things, the URL parameters, so they can be used immediately inside the method body, e.g.:
 

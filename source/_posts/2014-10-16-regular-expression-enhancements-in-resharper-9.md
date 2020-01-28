@@ -8,13 +8,13 @@ Yesterday, JetBrains [announced](http://blog.jetbrains.com/dotnet/2014/10/13/int
 
 **Update:** read all about the new [Regex support in all its glory on the JetBrains blog](http://blog.jetbrains.com/dotnet/2014/10/27/regular-expression-support-in-resharper-9/)!
 
-There were always 2 ways to write regular expressions in C# code &ndash; either inside one of the methods of Regex class, e.g. `Regex.IsMatch`, or defining a string literal as a constant, and using it in a Regex class later.
+There were always 2 ways to write regular expressions in C# code - either inside one of the methods of Regex class, e.g. `Regex.IsMatch`, or defining a string literal as a constant, and using it in a Regex class later.
 
 ReSharper 9 has **Syntax Highlighting** and **Code Completion** for regex literals! When you start typing a regex into a Regex class, you'll see a list of suggestions, which is being narrowed down as you type:
 
 {% asset_img regex1.png "Code Completion" %}
 
-There's also a special syntax highlighting for the complete regex &ndash; as well as automatic checking for errors:
+There's also a special syntax highlighting for the complete regex - as well as automatic checking for errors:
 
 {% asset_img regex2.png "Syntax Highlighting" %}
 

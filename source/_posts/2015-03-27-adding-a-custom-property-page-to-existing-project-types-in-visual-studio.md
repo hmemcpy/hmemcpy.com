@@ -10,7 +10,7 @@ One common way to interact with those custom properties is by adding a page in t
 
 <!-- more -->
 
-But, when there's a will &ndash; there's a way. TL;DR: Here's how to add a custom property page to a regular C# console application:
+But, when there's a will - there's a way. TL;DR: Here's how to add a custom property page to a regular C# console application:
 
   1. Create an (empty) VSIX project 
   2. Add a reference to the following assemblies: `Microsoft.VisualStudio.AppDesigner.dll` (located in the GAC), and `Microsoft.VisualStudio.ManagedInterfaces.dll` (from the Visual Studio SDK) 
@@ -42,9 +42,9 @@ public class MyPropertyPageProvider : PropPageBase
 
 Make sure to provide a new GUID in the `GuidAttribute` (tip: if you use ReSharper, you can create new GUIDs on the fly by typing `nguid` and pressing Tab), we will need this GUID again soon. Specify the title of your property page, and provide an instance of a UserControl-derived (WinForms, baby!) page that will be the UI. Visual Studio provides an abstract `Microsoft.VisualStudio.Editors.PropertyPages.PropPageUserControlBase` class you can derive from.
 
-**Important:** Visual Studio will try reading the size of the control from the assembly's compiled resources &ndash; this requires a .resx file for the user control. Best to create a new User Control using the Add &ndash; User Control context menu (so it can have a .Designer and a .resx files), and change the base type to `PropPageUserControlBase` afterwards.
+**Important:** Visual Studio will try reading the size of the control from the assembly's compiled resources - this requires a .resx file for the user control. Best to create a new User Control using the Add - User Control context menu (so it can have a .Designer and a .resx files), and change the base type to `PropPageUserControlBase` afterwards.
 
-One last piece of the puzzle is hooking it up &ndash; this is where a bit of MSBuild magic comes in. After running your extension (in the Experimental Instance), create a new, say, C# Console application. When the project is created, open its .csproj file in Notepad (or your favorite editor), and add the following property into one of the `PropertyGroup`s (or create your own `PropertyGroup`, e.g.):
+One last piece of the puzzle is hooking it up - this is where a bit of MSBuild magic comes in. After running your extension (in the Experimental Instance), create a new, say, C# Console application. When the project is created, open its .csproj file in Notepad (or your favorite editor), and add the following property into one of the `PropertyGroup`s (or create your own `PropertyGroup`, e.g.):
 
 ```
 <PropertyGroup>

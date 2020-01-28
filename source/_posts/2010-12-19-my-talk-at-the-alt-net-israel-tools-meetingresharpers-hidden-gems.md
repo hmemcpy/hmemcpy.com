@@ -26,10 +26,10 @@ I learned this neat trick fairly recently from JetBrains' own [Hadi Hariri](http
 
   * ### Working with Solution-wide analysis
 
-I wrote about the benefits of turning Solution-wide analysis back when I [reviewed ReSharper 4.5 Beta](/2009/03/resharper-4-5-beta-released/). Several things happen when Solution-wide analysis is enabled &ndash; all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.
+I wrote about the benefits of turning Solution-wide analysis back when I [reviewed ReSharper 4.5 Beta](/2009/03/resharper-4-5-beta-released/). Several things happen when Solution-wide analysis is enabled - all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.
 
 {% blockquote %}
-A word of caution when changing visibility (or even removing) unused public classes &ndash; make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.
+A word of caution when changing visibility (or even removing) unused public classes - make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.
 {% asset_img image12.png %} {% asset_img image13.png %}
 {% endblockquote %}
 
@@ -37,7 +37,7 @@ Another important benefit of working with Solution-wide analysis enabled is the 
 
   * ### Code issues inspection
 
-At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings &ndash; indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
+At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings - indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
 {% asset_img image3.png %}
 
   * ### SSR (Structural Search and Replace) and Patterns Catalog
@@ -71,7 +71,7 @@ PSI Viewer is a great utility to create code snippets on the fly, and view their
 After turning on Internal mode, upon trying to build the solution for the first time, you will be presented with the following dialog:
 {% asset_img image6.png %}
 
-By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to _ReSharper &ndash; Options_. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under *Tools*, and select the *Internal* menu. On the right side make sure that the highlighted items are checked:
+By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to _ReSharper - Options_. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under *Tools*, and select the *Internal* menu. On the right side make sure that the highlighted items are checked:
 {% asset_img image7.png %}
 
 Since MSBuild is not integrated into Visual Studio, when building you will not be able to see the build progress in the output window. The project status view is a tool window which shows all the projects in solution (abbreviated), and displays their build progress by using colors.

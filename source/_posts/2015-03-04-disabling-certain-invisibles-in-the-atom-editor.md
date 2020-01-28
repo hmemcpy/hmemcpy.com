@@ -8,7 +8,7 @@ I recently started using GitHub's [Atom editor](https://atom.io/), and other tha
 
 <!-- more -->
 
-To remove the EOL/newline characters, go to **File &ndash; Open your Config**. The configuration file will open in a new tab, where you can modify the `invisibles:` entry like so:
+To remove the EOL/newline characters, go to **File - Open your Config**. The configuration file will open in a new tab, where you can modify the `invisibles:` entry like so:
 
 ```js
 "*":

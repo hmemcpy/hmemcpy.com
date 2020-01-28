@@ -2,7 +2,7 @@
 title: 'Boot to desktop in Windows 8: An in-depth analysis'
 date: 2012-09-08T20:40:30+00:00
 ---
-One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the *classic* Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 &ndash; it must be done via the new Start screen too.
+One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the *classic* Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 - it must be done via the new Start screen too.
 
 <!-- more -->
 
@@ -16,7 +16,7 @@ On Windows 8, however, this registry key is not being read, so there is currentl
 
 Longer version: I decided to try and find out what happens during logon into Windows Server 2012, after a new install. I installed the trial version on a virtual machine, set a password for the Administrator account during setup. After the first login, I found myself in the desktop, and the Server Manager was launched automatically. I decided to turn off the automatic start in the settings.
 
-My next step was to take a *snapshot* of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job &ndash; [Process Monitor](http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx) by Sysinternals, I turned on **Enable Boot Logging**, located under Options, then rebooted Windows Server.
+My next step was to take a *snapshot* of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job - [Process Monitor](http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx) by Sysinternals, I turned on **Enable Boot Logging**, located under Options, then rebooted Windows Server.
 {% asset_img image1.png %}
 
 After the reboot, I launched Process Monitor again, and was prompted to save the results of the boot logging into a PML file. I closed Process Monitor, and proceeded [installing the Desktop Experience](http://www.win2012workstation.com/desktop-experience/) in the Server Manager, but not before I took a VM snapshot of the current system state. The system needed to reboot, and once everything had finished installing, upon login I was presented with the new Start screen (having some new icons in it, mainly the Windows Store, and other *client* utilities.

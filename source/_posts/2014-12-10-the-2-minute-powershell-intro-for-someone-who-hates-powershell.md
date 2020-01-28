@@ -2,23 +2,24 @@
 title: 'The 2-minute PowerShell intro for someone who "hates PowerShell"'
 date: 2014-12-10T14:06:25+00:00
 ---
-Hi, I'm a developer, and I hate PowerShell<sup>*</sup>. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax &ndash; all those dollar signs reminded me of PHP.
+Hi, I'm a developer, and I hate PowerShell<sup>*</sup>. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax - all those dollar signs reminded me of PHP.
 
 <!-- more -->
 
-This recently changed, however. A client had a set of legacy perl scripts which nobody could maintain anymore &ndash; and I was tasked with rewriting them. Having recently spent some time writing a script for [Boxstarter](http://boxstarter.org/) &ndash; an amazing tool that allows you to automate software and environment installations of new machines, powered by [Chocolatey](https://chocolatey.org/), in PowerShell, I thought that it could be a good fit for the task. I knew the language is powerful enough to allow the creation of those very useful tools, so I decided to give it a shot. I was not disappointed!
+This recently changed, however. A client had a set of legacy perl scripts which nobody could maintain anymore - and I was tasked with rewriting them. Having recently spent some time writing a script for [Boxstarter](http://boxstarter.org/) - an amazing tool that allows you to automate software and environment installations of new machines, powered by [Chocolatey](https://chocolatey.org/), in PowerShell, I thought that it could be a good fit for the task. I knew the language is powerful enough to allow the creation of those very useful tools, so I decided to give it a shot. I was not disappointed!
 
 Luckily, you already have all the tools you need to get started! Every Windows machine comes with both PowerShell and PowerShell ISE (Integrated Scripting Environment) already installed.
 
-{% asset_img image.png "Figure 1: PowerShell ISE &ndash; an IDE for PowerShell with code completion (IntelliSense) and an integrated debugger." %}
+{% asset_img image.png "Figure 1: PowerShell ISE - an IDE for PowerShell with code completion (IntelliSense) and an integrated debugger." %}
 
 Here's what you need to know about PowerShell:
 
-You can do most of your development and debugging in the ISE &ndash; no need to type individual instructions in the PowerShell console. It's great as a REPL, but nothing beats an IDE. Tip: select a few lines in the ISE and press F8 &ndash; only those lines will be executed!
+You can do most of your development and debugging in the ISE - no need to type individual instructions in the PowerShell console. It's great as a REPL, but nothing beats an IDE. Tip: select a few lines in the ISE and press F8 - only those lines will be executed!
 
-### What's so great about PowerShell?
+What's so great about PowerShell?
+--
 
-**It's dynamic** &ndash; every variable can be treated as anything, but also support explicit typing (which are checked at runtime). Variables are prefixed with the `$` sign.
+**It's dynamic** - every variable can be treated as anything, but also support explicit typing (which are checked at runtime). Variables are prefixed with the `$` sign.
 
 ```ps
 $my = "some string"
@@ -27,7 +28,7 @@ $my = 23
 [xml]$myXml = $my 
 ```
 
-**It's pipelined** &ndash; every variable or the output of every function can be piped as an input to another function using the pipe (`|`) operator. It's extremely useful when dealing with collections and other enumerable objects &ndash; allowing you to filter the elements and transform the result into whatever you need.
+**It's pipelined** - every variable or the output of every function can be piped as an input to another function using the pipe (`|`) operator. It's extremely useful when dealing with collections and other enumerable objects - allowing you to filter the elements and transform the result into whatever you need.
 
 ```ps
 # a LINQ-like querying with pipelining. 
@@ -39,14 +40,14 @@ $ids = Get-Process | where {$_.Name -like "chrome" } | select -Property ID
 # "where" and "select" are aliases. Use Get-Alias to see all aliases in PowerShell.
 ```
 
-**It supports everything you know from .NET &ndash;** although PowerShell defines its own idioms with regards to common operations, such as formatting strings for joining paths, you can use all objects from .NET to do the same thing.
+**It supports everything you know from .NET -** although PowerShell defines its own idioms with regards to common operations, such as formatting strings for joining paths, you can use all objects from .NET to do the same thing.
 
 ```ps
 $combined = Join-Path $rootDirectory "mySubdirectory" 
 # can be written as: $combined = [System.IO.Path]::Combine($rootDirectory, "mySubdirectory")
 ```
 
-**It's concise** &ndash; everything in PowerShell can be verbose or very concise. By leveraging aliases there are many ways to say what you mean. Here's an example: the following function gets a list of changed files between two SVN revisions, by executing the [svn diff](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html) command, outputting the result as XML which looks like this:
+**It's concise** - everything in PowerShell can be verbose or very concise. By leveraging aliases there are many ways to say what you mean. Here's an example: the following function gets a list of changed files between two SVN revisions, by executing the [svn diff](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html) command, outputting the result as XML which looks like this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

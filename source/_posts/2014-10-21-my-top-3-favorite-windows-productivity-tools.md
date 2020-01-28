@@ -6,9 +6,9 @@ There are way more tools I love and use every day, but the following 3 are my mu
 
 <!-- more -->
 
-(Ok, there are actually 4 &ndash; the first one, [Chocolatey](https://chocolatey.org/) is a pre-requisite to the others. Chocolatey is a package manager, like **apt-get**, but made with Windows in mind. If you haven't already, install this first! I'll wait.)
+(Ok, there are actually 4 - the first one, [Chocolatey](https://chocolatey.org/) is a pre-requisite to the others. Chocolatey is a package manager, like **apt-get**, but made with Windows in mind. If you haven't already, install this first! I'll wait.)
 
-### #1 &ndash; Rapid Environment Editor (RapidEE)
+### Rapid Environment Editor (RapidEE)
 
 <div class="nuget-badge">
   <code>C:\&gt; choco install Devbox-RapidEE</code>
@@ -18,22 +18,22 @@ There are way more tools I love and use every day, but the following 3 are my mu
 
 {% asset_img rapidee.png "Rapid Environment Editor" %}
 
-### #2 &ndash; Everything
+### Everything
 
 <div class="nuget-badge">
   <code>C:\&gt; choco install Everything</code>
 </div>
 
-Imagine a list view, with a search box at the top, and nothing else, which finds **any file** in your computer **immediately** &ndash; you have just imagined [Everything](http://www.voidtools.com/). This lightweight search engine indexes your entire hard drive(s) in _seconds_ after installing, letting you then find any file, anywhere! My preference is to bind the shortcut for a New Window to **Ctrl-Shift-Z**, so I can pop open Everything everywhere with this single chord. Set it under Tools &ndash; Options &ndash; Keyboard.
+Imagine a list view, with a search box at the top, and nothing else, which finds **any file** in your computer **immediately** - you have just imagined [Everything](http://www.voidtools.com/). This lightweight search engine indexes your entire hard drive(s) in _seconds_ after installing, letting you then find any file, anywhere! My preference is to bind the shortcut for a New Window to **Ctrl-Shift-Z**, so I can pop open Everything everywhere with this single chord. Set it under Tools - Options - Keyboard.
 
 {% asset_img everything.png "Everything" %}
 
-### #3 &ndash; Ditto
+### Ditto
 
 <div class="nuget-badge">
   <code>C:\&gt; choco install ditto</code>
 </div>
 
-[Ditto](http://ditto-cp.sourceforge.net/) is a clipboard manager for Windows. If you ever used ReSharper's [Clipboard Manager](https://www.jetbrains.com/resharper/webhelp/Coding_Assistance__Multiple_Entries_Clipboard.html) you will appreciate this little tool &ndash; it remembers every single **Ctrl-C** you've ever done, allowing you to paste back any item at any time! The default shortcut for Ditto is **Ctrl-\`**, and it is packed with features, such as searching, exporting and removing entries, with full unicode support and ability to sync clipboards between machines. What's more, it supports *smart paste*, allowing you to paste entries in places such as the Windows Command Prompt, which will only support proper [copying and pasting only in Windows 10](http://www.hanselman.com/blog/Windows10GetsAFreshCommandPromptAndLotsOfHotkeys.aspx).
+[Ditto](http://ditto-cp.sourceforge.net/) is a clipboard manager for Windows. If you ever used ReSharper's [Clipboard Manager](https://www.jetbrains.com/resharper/webhelp/Coding_Assistance__Multiple_Entries_Clipboard.html) you will appreciate this little tool - it remembers every single **Ctrl-C** you've ever done, allowing you to paste back any item at any time! The default shortcut for Ditto is **Ctrl-\`**, and it is packed with features, such as searching, exporting and removing entries, with full unicode support and ability to sync clipboards between machines. What's more, it supports *smart paste*, allowing you to paste entries in places such as the Windows Command Prompt, which will only support proper [copying and pasting only in Windows 10](http://www.hanselman.com/blog/Windows10GetsAFreshCommandPromptAndLotsOfHotkeys.aspx).
 
 {% asset_img ditto.png "Ditto" %}

@@ -2,7 +2,7 @@
 title: Supercharging your ReSharper navigation-fu with Camel Humps
 date: 2011-05-09T01:30:34+00:00
 ---
-I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a *lot*, mostly due to it's being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given &ndash; use the keyboard shortcuts. A lot. Some even go completely mouseless!
+I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a *lot*, mostly due to it's being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given - use the keyboard shortcuts. A lot. Some even go completely mouseless!
 
 <!-- more -->
 
@@ -15,11 +15,11 @@ While this is a great feature, I wouldn't want it enabled all the time, since it
   * _ReSharper_HumpNextExtend_ &#8211; expand selection to next hump
   * _ReSharper_HumpPrevExtend_ &#8211; expand selection to previous hump
 
-I recommend binding the _ReSharper_HumpNext_ and _ReSharper_HumpPrev_ to **Alt-Right** and **Alt-Left**, and _ReSharper_HumpNextExtend_ and _ReSharper_HumpPrevExtend_ to **Alt-Shift-Right** and **Alt-Shift-Left**, respectively. Make sure you select **Text Editor** under *Use new shortcut in* in Tools &ndash; Options &ndash; Keyboard, or your binding might not work.
+I recommend binding the _ReSharper_HumpNext_ and _ReSharper_HumpPrev_ to **Alt-Right** and **Alt-Left**, and _ReSharper_HumpNextExtend_ and _ReSharper_HumpPrevExtend_ to **Alt-Shift-Right** and **Alt-Shift-Left**, respectively. Make sure you select **Text Editor** under *Use new shortcut in* in Tools - Options - Keyboard, or your binding might not work.
 
-**Please note:** the later binding breaks the <a href="http://weblogs.asp.net/scottgu/archive/2010/04/26/box-selection-and-multi-line-editing-with-vs-2010.aspx" target="_blank">Box Selection</a> feature in Visual Studio 2008, however greatly improves it in Visual Studio 2010 &ndash; it makes box selection respect the camelCase as well!
+**Please note:** the later binding breaks the <a href="http://weblogs.asp.net/scottgu/archive/2010/04/26/box-selection-and-multi-line-editing-with-vs-2010.aspx" target="_blank">Box Selection</a> feature in Visual Studio 2008, however greatly improves it in Visual Studio 2010 - it makes box selection respect the camelCase as well!
 
-Here's how it works &ndash; let's say I want to rename the word _Spelling_ to _Proofreading_ in the method name, and the caret is inside the method body:
+Here's how it works - let's say I want to rename the word _Spelling_ to _Proofreading_ in the method name, and the caret is inside the method body:
 
 **Step 1:** Press **Ctrl-[** to jump to containing method (jumps to start of the method name)
 {% asset_img image1.png %}

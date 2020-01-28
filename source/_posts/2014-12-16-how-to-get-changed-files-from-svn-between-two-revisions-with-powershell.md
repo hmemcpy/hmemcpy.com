@@ -26,7 +26,7 @@ This script uses [`Resolve-FullPath`](https://github.com/michael-wolfenden/CodeC
 
 Here's how it works:
 
-  1. It executes **[svn diff](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html)** command with &ndash;**r** switch, which takes a range of revisions, e.g. 1000:1050. The **summarize** argument shows only the high-level information, and **xml** outputs the data as XML. 
+  1. It executes **[svn diff](http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html)** command with -**r** switch, which takes a range of revisions, e.g. 1000:1050. The **summarize** argument shows only the high-level information, and **xml** outputs the data as XML. 
   2. This XML is being queried with an XPath, extracting only the names of the items of kind *˜file' which were *˜added' or *˜modified'. 
   3. For every such file, its relative path is being taken by subtracting the repository path from the full filename. 
   4. The target (sub)directory for that file is being created, if it doesn't exist. 

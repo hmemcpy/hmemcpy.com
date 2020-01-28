@@ -60,4 +60,4 @@ public class CallSynchronizer : IInterceptionListener
 }
 ```
 
-And that's it &ndash; using this code you can create a thread-safe fake objects to use in your tests, if you require.
+And that's it - using this code you can create a thread-safe fake objects to use in your tests, if you require.

@@ -8,7 +8,7 @@ Scott Guthrie [wrote](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-
 
 If you're a [ReSharper](http://www.jetbrains.com/resharper/) addict (like me), you will notice that some things just do not work or interfere with the way ReSharper does things. So here's a list of things that you can do to make ReSharper and the Productivity Power Tools work nicely together:
 
-Go to the Productivity Power Tools under **Tools &ndash; Options**:
+Go to the Productivity Power Tools under **Tools - Options**:
 {% asset_img image1.png %}
 
   * Turn off **Automatic Brace Completion** if you prefer ReSharper to do it for you.
@@ -23,7 +23,7 @@ One of the best features of the Productivity Power Tools is the **Quick Access**
 
 The default shortcut for this window is **Ctrl + 3**, however this key binding is used by ReSharper's Bookmarks system. If you're not using the bookmarks:
 
-  * Go to **Tools &ndash; Options &ndash; Keyboard**, find the command by typing **QuickAccess**. You should see it in the list as `View.QuickAccess`.
+  * Go to **Tools - Options - Keyboard**, find the command by typing **QuickAccess**. You should see it in the list as `View.QuickAccess`.
   * Under **Use new shortcut in** make sure it shows **Global**, then press **Ctrl+3** (without the + sign) in the adjacent text box, then click **Assign**.
   * Select **Text Editor** in the **Use new shortcut** and repeat the above step.
 

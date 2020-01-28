@@ -11,7 +11,7 @@ This post explains how to prevent a certain update from installing on a Windows 
 {% asset_img image.png "Show or hide updates" %}
 
 <hr/>
-During its preview, Windows 10 does not allow (by default), changing how updates are installed. It was possible to modify this using various [Group Policy settings and a bit of registry tweaking](http://www.askvg.com/how-to-change-windows-update-settings-when-managed-or-disabled-by-system-administrator/), but since build 10049 it no longer works &ndash; it's not possible to restore the *old* Windows Update applet in Control Panel.
+During its preview, Windows 10 does not allow (by default), changing how updates are installed. It was possible to modify this using various [Group Policy settings and a bit of registry tweaking](http://www.askvg.com/how-to-change-windows-update-settings-when-managed-or-disabled-by-system-administrator/), but since build 10049 it no longer works - it's not possible to restore the *old* Windows Update applet in Control Panel.
 
 On my machine (HP EliteBook 8570w), an update for the Synaptics TouchPad drivers took away my middle button, it simply did not appear anymore on the TouchPad properties. Uninstalling the update, and installing the Windows 8.1 Synaptics driver from the HP website helped, but within a day it was automatically updated again.
 
