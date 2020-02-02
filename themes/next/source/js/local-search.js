@@ -81,9 +81,9 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
     return {
-      hits           : hits,
-      start          : start,
-      end            : end,
+      hits,
+      start,
+      end,
       searchTextCount: searchTextCountInSlice
     };
   };
@@ -279,7 +279,7 @@ window.addEventListener('DOMContentLoaded', () => {
   } else {
     document.querySelector('.search-icon').addEventListener('click', inputEventFunction);
     input.addEventListener('keypress', event => {
-      if (event.keyCode === 13) {
+      if (event.key === 'Enter') {
         inputEventFunction();
       }
     });
