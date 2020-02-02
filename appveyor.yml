@@ -1,3 +1,7 @@
+image: Ubuntu
+
+stack: node 13
+
 branches:
   only:
     - master
@@ -7,8 +11,6 @@ environment:
     secure: 1WheHu+kkZmDJrayiqakzJvDUfL6OOkzc3a+sd3RM6hJcjOvIJcvrOzegNHHzbCV
 
 install:
-  - ps: Install-Product node
-  - npm install -g npm
   - npm install -g hexo-cli
   - npm install
 cache:
@@ -23,5 +25,8 @@ deploy_script:
   - git config --global credential.helper store
   - git config --global user.email "hmemcpy@gmail.com"
   - git config --global user.name "Igal Tabachnik"
-  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - echo "https://$access_token:x-oauth-basic@github.com" > ~/.git-credentials
+  # reset modified dates for the blog posts
+  # - git ls-files -z | while read -d '' path; do touch -d \"$(git log -1 --format=\"@%ct\" \"$path\")\" \"$path\"; done
+  # deploy
   - hexo deploy --generate
