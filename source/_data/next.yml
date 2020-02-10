@@ -443,7 +443,7 @@ font:
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family: Fira Sans Condensed
+    family: IBM Plex Sans Condensed
     size:
 
   # Font settings for posts (.post-body).
@@ -454,7 +454,7 @@ font:
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: Fira Code
+    family: IBM Plex Mono
 
 
 # ---------------------------------------------------------------
