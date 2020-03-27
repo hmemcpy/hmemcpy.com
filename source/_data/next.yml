@@ -128,6 +128,7 @@ menu:
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
+  Talks I liked: /talks-i-liked/ || file-video-o
   CV / Résumé: /cv.pdf || vcard
 
 # Enable / Disable menu icons / item badges.
