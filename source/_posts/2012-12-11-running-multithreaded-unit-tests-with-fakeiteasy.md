@@ -35,7 +35,7 @@ public static class MyPersonalFakeExtensions
 {
   public static IFakeOptionsBuilder Synchronized(this IFakeOptionsBuilder builder)
   {
-    return builder.OnFakeCreated(fake =&gt; 
+    return builder.OnFakeCreated(fake => 
 	Fake.GetFakeManager(fake).AddInterceptionListener(new CallSynchronizer()));
   }
 }
