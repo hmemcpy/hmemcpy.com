@@ -19,7 +19,7 @@ origin git@github.com:username/MyForkedRepository.git (fetch)
 origin git@github.com:username/MyForkedRepository.git (push)
 ```
 
-As you can see, the remote *˜origin' defines 2 URLs, one with label _fetch_ and one with _push_. Let's set a different URL for the original, upstream repository (the one to _**fetch**_ from):
+As you can see, the remote `origin` defines 2 URLs, one with label _fetch_ and one with _push_. Let's set a different URL for the original, upstream repository (the one to fetch from):
 
 ```
 git remote set-url origin git@github.com:NancyFx/Nancy.git
@@ -33,8 +33,6 @@ git remote set-url --push origin git@github.com:hmemcpy/Nancy.git
 
 And that's it, I can now fetch and push normally, without having to worry about which remote I'm using!
 
-N.B.
-
 You can also do this by directly modifying the `.git/config` file, and adding a separate `pushurl` value under `[remote "origin"]:`
 
 ```
@@ -45,7 +43,3 @@ You can also do this by directly modifying the `.git/config` file, and adding a 
  pushurl = git@github.com:hmemcpy/Nancy.git
 ...
 ```
-
-Alternatively, if you're using [GitExtensions](https://code.google.com/p/gitextensions/) on Windows, you can go to **Repository** - **Remote repositories** in the menu, and check the _Separate Push URL_ checkbox:
-
-![](http://i1.wp.com/hmemcpy.com/wp-content/uploads/2014/01/image.png?resize=670%2C332)
