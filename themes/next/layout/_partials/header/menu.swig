@@ -1,7 +1,8 @@
 {% import 'menu-item.swig' as menu_item with context %}
 
+<nav class="site-nav">
 {%- if theme.menu %}
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
     {%- for name, path in theme.menu %}
       {%- set respath = path %}
       {%- if path == '[object Object]' %}
@@ -30,3 +31,4 @@
     {%- endif %}
   </ul>
 {%- endif %}
+</nav>
