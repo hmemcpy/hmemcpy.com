@@ -57,6 +57,12 @@ And that's it! We now have a Postgres layer to plug into the ZIO tests.
 Once our container has started, we want to populate the database with our schema, before the tests are run. For this, ZIO Tests provides a mechanism called [Test Aspects](https://zio.dev/docs/howto/howto_test_effects#test-aspects), which allows, among other things, to execute an action *before* executing the tests. We can create a Test Aspect that runs the migration:
 
 ```scala
+import com.dimafeng.testcontainers.PostgreSQLContainer
+import org.flywaydb.core.Flyway
+import zio.ZIO
+import zio.blocking.effectBlocking
+import zio.test.TestAspect.before
+
 object MigrationAspects {
   def migrate(schema: String, paths: String*) = {
     val migration = for {
@@ -94,7 +100,7 @@ Finally, we can put it all together into a test that looks like this:
 
 ```scala
 object MyPostgresIntegrationSpec extends DefaultRunnableSpec {
-  val postgresLayer = Blocking.any >>> TestContainer.postgres()
+  val postgresLayer = Blocking.live >>> TestContainer.postgres()
   val testEnv = zio.test.environment.testEnvironment ++ postgresLayer
 
   val spec = suite("Postgres integration") {
@@ -102,7 +108,6 @@ object MyPostgresIntegrationSpec extends DefaultRunnableSpec {
       for {
         userId <- CustomerService.create("testUser", "testPassword")
         result <- CustomerService.find(userId)
-
       } yield assert(result.id)(equalTo(userId)) &&
               assert(result.username)(equalTo("testUser"))
     }
@@ -141,10 +146,12 @@ final class SchemaAwarePostgresContainer(
   }
 ```
 
-We'll extend `PostgreSQLContainer` to allow specifying the `currentSchema` as a constructor argument (in addition to all the others), and will override `jdbcUrl` to append it to the URL (if was specified). Now, let's replace our creation function with the new class:
+We'll extend `PostgreSQLContainer` to allow specifying the `currentSchema` as a constructor argument (in addition to all the others), and will override `jdbcUrl` to append it to the URL (if was specified). Now, let's replace our ZLayer creation function with the new class:
 
 ```scala
-  def postgres(currentSchema: Option[String] = None): ZLayer[Blocking, Nothing, Has[SchemaAwarePostgresContainer]] =
+  type Postgres = Has[SchemaAwarePostgresContainer]
+
+  def postgres(currentSchema: Option[String] = None): ZLayer[Blocking, Nothing, Postgres] =
     ZManaged.make {
       effectBlocking {
         val container = new SchemaAwarePostgresContainer(
