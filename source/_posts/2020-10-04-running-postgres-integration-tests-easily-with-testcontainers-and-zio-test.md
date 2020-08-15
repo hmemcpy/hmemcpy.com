@@ -1,6 +1,6 @@
 ---
 title: Running Postgres integration tests easily with TestContainers and ZIO Test
-date: 2020-10-04 09:36:33
+date: 2020-08-04 09:36:33
 tags:
 ---
 Integration/end-to-end testing is considered one of the best indicators that your code functions correctly, and everything is wired up as it should. [Testcontainers](https://www.testcontainers.org/) is a wonderful library for creating and running embeddable Docker containers that can run alongside your tests, so you can have real implementations of your third-party dependencies, instead of relying on fragile mocks. Testcontainers is a mature Java library that comes out of the box with integrations for Postgres, Kafka, RabbitMQ, and [many more](https://www.testcontainers.org/modules/databases/), as well as support for many test runners and even ports to [other languages](https://github.com/testcontainers).
