@@ -1,5 +1,5 @@
 ---
-title: Functional Programming in Haskell - Stepik course notes - module 2
+title: Functional Programming in Haskell (Stepik course notes) - module 2
 date: 2020-01-20 23:07:38
 tags:
 ---
