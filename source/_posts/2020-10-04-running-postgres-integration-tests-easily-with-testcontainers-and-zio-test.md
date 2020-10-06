@@ -7,6 +7,8 @@ Integration/end-to-end testing is considered one of the best indicators that you
 
 In this short post, I'll explain how to integrate Testcontainers (the [Scala flavor](https://github.com/testcontainers/testcontainers-scala)) to play nicely with ZIO Test, showcasing some of the great composability features ZIO provides.
 
+<!-- more -->
+
 I will use a Postgres Testcontainer and [Flyway](https://flywaydb.org/) to perform migrations, intializing the databse schemas.
 
 ## Getting started
