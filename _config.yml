@@ -32,7 +32,6 @@ skip_render:
 new_post_name: :year-:month-:day-:title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
 filename_case: 1 # Transform to lowercase
 render_drafts: false
 post_asset_folder: true
@@ -49,13 +48,16 @@ default_category: uncategorized
 category_map:
 tag_map:
 
+external_link:
+  enable: true
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: MMMM Do, YYYY
 time_format: HH:mm:ss
-use_date_for_updated: true
+updated_option: date
 
 # Pagination
 ## Set per_page to 0 to disable pagination
