@@ -13,7 +13,7 @@ I will use a Postgres Testcontainer and [Flyway](https://flywaydb.org/) to perfo
 
 ## Getting started
 
-To play nicely with ZIO Test, we need to expose the Testcontainer as a [ZLayer](https://zio.dev/docs/howto/howto_use_layers), so it can be added to ZIO's [Test Environment](https://zio.dev/docs/howto/howto_test_effects#using-test-environment).
+To play nicely with ZIO Test, we need to expose the Testcontainer as a [ZLayer](https://zio.dev/docs/howto/use-modules-and-layers), so it can be added to ZIO's [Test Environment](https://zio.dev/docs/howto/test-effects#using-test-environment).
 
 We'll need to add the following dependencies to our `build.sbt`:
 
