@@ -50,13 +50,13 @@ object TestContainer {
 
 By default, the Scala Postgres container wrapper will fetch version 9 of PostgreSQL, you can get a specific version by specifying the `imageName` parameter with a specific tag, e.g. `postgres:12.3`, or leaving `postgres` to fetch the `latest`.
 
-We use ZIO's [ZManaged](https://zio.dev/docs/datatypes/datatypes_managed) to wrap the creation and disposal of the container, wrapping the actual creation and shutdown in `effectBlocking` to signal to ZIO that this should be done on the blocking thread pool. This makes our ZLayer require the `Blocking` service. On shutdown, we stop the container. If creating or stopping fails for any reason, we'd like our test to terminate, which we do with `.orDie`, making any potential failures to be treated as defects, causing ZIO to shut down. Finally, we turn the ZManaged into a ZLayer by calling `toLayer` on it.
+We use ZIO's [ZManaged](https://zio.dev/docs/datatypes/resource/zmanaged) to wrap the creation and disposal of the container, wrapping the actual creation and shutdown in `effectBlocking` to signal to ZIO that this should be done on the blocking thread pool. This makes our ZLayer require the `Blocking` service. On shutdown, we stop the container. If creating or stopping fails for any reason, we'd like our test to terminate, which we do with `.orDie`, making any potential failures to be treated as defects, causing ZIO to shut down. Finally, we turn the ZManaged into a ZLayer by calling `toLayer` on it.
 
 And that's it! We now have a Postgres layer to plug into the ZIO tests.
 
 ## Performing migrations
 
-Once our container has started, we want to populate the database with our schema, before the tests are run. For this, ZIO Tests provides a mechanism called [Test Aspects](https://zio.dev/docs/howto/howto_test_effects#test-aspects), which allows, among other things, to execute an action *before* executing the tests. We can create a Test Aspect that runs the migration:
+Once our container has started, we want to populate the database with our schema, before the tests are run. For this, ZIO Tests provides a mechanism called [Test Aspects](https://zio.dev/docs/howto/test-effects#test-aspects), which allows, among other things, to execute an action *before* executing the tests. We can create a Test Aspect that runs the migration:
 
 ```scala
 import com.dimafeng.testcontainers.PostgreSQLContainer
