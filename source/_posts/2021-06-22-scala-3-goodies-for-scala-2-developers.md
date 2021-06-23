@@ -30,25 +30,17 @@ Here are some of my favorites:
 
 If you're following the [Smart Constructor](https://tuleism.github.io/blog/2020/scala-smart-constructors/) pattern in Scala 2, you'll discover that making the constructor of a case class `private` is not enough - the companion `apply`, and the `copy` methods of the case class will still be public. There are ways to [work around it](https://gist.github.com/tpolecat/a5cb0dc9adeacc93f846835ed21c92d2) - but they are no longer needed with the `-Xsource:3` flag! Enabling it makes case classes behave *correctly*, like they do in Scala 3, disabling the companion `apply` and `copy` on any case class with a private constructor.
 
-### Tuple destructuring in for-comprehensions
+### ~~Tuple destructuring in for-comprehensions~~
 
-One common Scala 2 wart was the inability in most cases to destructure tuples during for-comprehensions, e.g.:
-```scala
-for {
-  (name, age) <- getPerson()
-  ...
-} yield ...
-```
+**Update**: Looks like I got this one wrong. Guillaume Martres of the Scala 3 compiler team [comments](https://www.reddit.com/r/scala/comments/o5j1nt/scala_3_goodies_for_scala_2_developers/h2nsr7x/) about the purpose of this change:
 
-This did not compile out of the box (due to the special requirement of having `withFilter`). To solve this (and other issues), a very popular compiler plugin called [better-monadic-for](https://github.com/oleg-py/better-monadic-for) (bm4 for short) was used. However, in Scala 3 this is supported by adding the keyword `case` in front of the tuple:
-```scala
-for {
-  case (name, age) <- getPerson()
-  ...
-} yield ...
-```
+{% blockquote %}
 
-If you were using bm4 for this purpose - it is no longer required (and will make your migration to Scala 3 even easier, since Scala 3 does not support Scala 2's compiler plugins.)
+Adding the `case` keyword in for-comprehensions will only be needed in Scala 3 for non-exhaustive matches (see https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html#pattern-bindings-in-for-expressions), you don't need it to avoid having to use `withFilter` (in fact, not using `case` guarantees that `withFilter` will not be used in Scala 3). And in Scala 2 under `-Xsource:3`, `case` does nothing and is only supported to ease cross-compilation: https://github.com/scala/scala/pull/9558
+
+{% endblockquote %}
+
+So it seems the `case` keyword support was added to make cross-compilation between Scala 2 and Scala 3 easier, it does not change the behavior of pattern matching. In fact, the suggested refactoring in the image above is actually not needed, and I reported it as a bug to the IntelliJ tracker.
 
 ### Miscellaneous syntax changes
 
