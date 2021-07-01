@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Original title was “Monads solve a problem you might not have, but it’s a nice problem to have”, which is an homage to a great post by Krzysztof Koźmic about IoC containers. I can’t think of another 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From .NET to Scala and beyond: a journey to Functional Programming">
+<meta property="og:url" content="http://hmemcpy.com/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="Original title was “Monads solve a problem you might not have, but it’s a nice problem to have”, which is an homage to a great post by Krzysztof Koźmic about IoC containers. I can’t think of another 5">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-05-17T08:24:13.000Z">
+<meta property="article:modified_time" content="2017-05-17T08:24:13.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>From .NET to Scala and beyond: a journey to Functional Programming | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          From .NET to Scala and beyond: a journey to Functional Programming<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2017-05-17-from-net-to-scala-and-beyond-a-journey-to-functional-programming.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: May 17th, 2017 11:24:13" itemprop="dateCreated datePublished" datetime="2017-05-17T11:24:13+03:00">May 17th, 2017</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><em>Original title was “Monads solve a problem you might not have, but it’s a nice problem to have”, which is an homage to a <a target="_blank" rel="noopener" href="http://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/">great post</a> by <a target="_blank" rel="noopener" href="https://twitter.com/kkozmic">Krzysztof Koźmic</a> about IoC containers.</em></p>
+<p>I can’t think of another 5-letter word that strikes fear in the hearts of so many developers, coming from an object-oriended/imperative language to a functional one. So much so, this, and other M-words are outright <a target="_blank" rel="noopener" href="https://fsharpforfunandprofit.com/about/#banned">banned</a> on some resources.</p>
+<p>This post will not attempt to explain monads, at least, not on purpose. This <a target="_blank" rel="noopener" href="https://mkremins.github.io/blog/doors-headaches-intellectual-need/">fantastic post</a> by <a target="_blank" rel="noopener" href="https://twitter.com/maxkreminski">Max Kreminski</a> does this better than I ever could - by showing that most “monad tutorials” (or, educational blog posts in general) have <em>problem-solution ordering issues</em>. Please take a moment to read this wonderful post before continuing.</p>
+<span id="more"></span>
+
+<p>The problem with most monad tutorials is they present monads as a solution to a problem which is not clearly defined.</p>
+<p>Recently, I had my own epiphany, and finally “understood monads”. That is, I’ve re-watched the same talks on the subject so many times, until it finally clicked. But then, something magical happened: just as Douglas Crockford <a target="_blank" rel="noopener" href="http://lambda-the-ultimate.org/node/4670">predicted</a>, I lost my ability to explain it to others. And yet, I gained a retroactive understanding of the, previously literally-Greek, definitions. I developed an intuition that helped me understand the reasons and logic behind those definitions.</p>
+<p>With great power comes great responsibility of NOT writing yet another tutorial. Instead, I will use these powers for good, trying to recreate the <em>intellectual need</em> (as Max’ post puts it) for a problem that has monads as a solution.</p>
+<h2 id="Unlearning-to-walk"><a href="#Unlearning-to-walk" class="headerlink" title="Unlearning to walk"></a>Unlearning to walk</h2><p>The hardest part in learning something so radically different, is trying to apply it what you know already, failing miserably.</p>
+<p>About a year ago (at the time of writing), I decided to take a break from .NET, and go explore what else was out there. I landed a job at Wix.com, which I knew to be a (mostly) Scala company on the backend. As first step, I needed to learn Scala. There are plenty of great resources around, but pretty quickly it became apparent that there are two camps of Scala: those who use it as a “better Java” - a language with short, concise syntax, which has great support for many functional concepts, and those who use it as a kind of Haskell on the JVM.</p>
+<p>For most people coming from imperative/object-oriented languages, mere mention of Haskell typically results in pushing the back button in their browser. Haskell is usually associated with academics and recent university graduates, who had taken a course on FP. Until very recently, I was proudly in the group who dismissed Haskell as something irrelevant to me, because I could not imagine it being useful for solving Real Life&trade; problems, like building a Visual Studio plugin, or even typical CRUD app.</p>
+<p>Little did I know that a simple Hello World app in Haskell would change my views forever.</p>
+<h3 id="Functional-inception"><a href="#Functional-inception" class="headerlink" title="Functional inception"></a>Functional inception</h3><p>I was watching a talk by <a target="_blank" rel="noopener" href="https://twitter.com/runarorama">Rúnar Bjarnason</a>, one of the authors of the book <a target="_blank" rel="noopener" href="https://www.manning.com/books/functional-programming-in-scala">Functional Programming in Scala</a> (AKA the “Red Book”), titled <a target="_blank" rel="noopener" href="https://www.infoq.com/presentations/io-functional-side-effects">Purely Functional I/O</a>, which I highly recommend watching (at least, the first half, if you are not using Scala). He outlines the principles of functional programming, and why we can’t really do “pure” FP in most programming languages. The problem lies with the fact that any function can perform I/O, or “have side-effects”, causing us to lose most of the benefits of functional programming. </p>
+<p>The benefits, outlined in <a target="_blank" rel="noopener" href="http://degoes.net/articles/easy-monads">this post</a> by John A De Goes, are just 3 properties that functions must exhibit:</p>
+<ol>
+<li><strong>Totality</strong>. A function must yield a value for every possible input.</li>
+<li><strong>Determinism</strong>. A function must yield the same value for the same input.</li>
+<li><strong>Purity</strong>. A function’s only effect must be the computation of its return value, <em>and nothing else</em>.</li>
+</ol>
+<p>These properties are voilated by “side-effects”. We consider side-effects to be anything like reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be precise, functions that have side-effects violate <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Referential_transparency">referential transparency</a> (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expressions, without changing the program’s behavior. A function is considered “pure”, if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves. A side-effect, therefore, is <em>anything</em> that violates RT.</p>
+<p>In this world of pure functions that always return a value, there is no such thing as <code>void</code>. All functions must return a value, and that value must always be the same for the same input. Given these “restrictions”, how can we possibly do anything useful (e.g. talking to a database) in a functional language?</p>
+<h3 id="Hello-functional-World"><a href="#Hello-functional-World" class="headerlink" title="Hello, (functional) World"></a>Hello, (functional) World</h3><p>Here’s when my worldview flipped on its head. In practically any programming language in the world you can write a program that says hello. It will typically look like this in C#:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;What is your name?&quot;</span>);</span><br><span class="line">Console.WriteLine(<span class="string">&quot;Hello &quot;</span> + Console.ReadLine());</span><br></pre></td></tr></table></figure>
+
+<p>or like this in Scala:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">printLn(<span class="string">&quot;What is your name?&quot;</span>)</span><br><span class="line">printLn(<span class="string">&quot;Hello &quot;</span> + readLine)</span><br></pre></td></tr></table></figure>
+
+<p>When this program is compiled and run, it will print the first line to the screen, then wait until we type something and press enter. It will concatenate our input with the string <code>&quot;Hello &quot;</code>, printing the combined string to the screen. This is universally true in almost any programming language out there.</p>
+<p>If we try to write the same program in Haskell:</p>
+<figure class="highlight haskell"><table><tr><td class="code"><pre><span class="line"><span class="title">putStrLn</span> <span class="string">&quot;What is your name?&quot;</span></span><br><span class="line"><span class="title">putStrLn</span> (<span class="string">&quot;Hello, &quot;</span> ++ getLine)</span><br></pre></td></tr></table></figure>
+<p>It will not even compile, giving us the following error:</p>
+<blockquote>
+<p>Couldn’t match expected type <code>String</code> with actual type <code>IO String</code><br>In the second argument of <code>(++)</code>, namely <code>getLine</code></p>
+</blockquote>
+<p>The error tells us that the value returned from the <code>getLine</code> function is not a <code>String</code>, but rather something called <code>IO String</code>. What IO is doesn’t matter right now, but the point is, they are incompatible types. The IO serves as a wrapper, a container over some string value.</p>
+<p>The most obvious and immediate question is – fine, I have an <code>IO String</code>, how do I get the <code>String</code> out? The answer is - you <em>can’t</em>. There is no way to get the string out of <code>IO</code> using normal means. The only way to use the value is to <strong>bind</strong> it to another function (using a funny-looking Haskell operator <code>&gt;&gt;=</code>, pronounced <code>bind</code>). Here is what the “fixed” program looks like:</p>
+<figure class="highlight haskell"><table><tr><td class="code"><pre><span class="line"><span class="title">main</span> :: <span class="type">IO</span> ()</span><br><span class="line"><span class="title">main</span> = putStrLn <span class="string">&quot;What is your name?&quot;</span> &gt;&gt; </span><br><span class="line">       getLine &gt;&gt;= \n -&gt; putStrLn (<span class="string">&quot;Hello, &quot;</span> ++ n)</span><br></pre></td></tr></table></figure>
+
+<p>Which <em>binds</em> the result of <code>getLine</code> with the input parameter <code>n</code> of a Lambda expression, which passes it to the <code>putStrLn</code> function. (Lambdas in Haskell are defined with a <code>\</code>, which makes it look like the symbol <code>λ</code>.)</p>
+<p>Another way of writing this program is with a <strong>do-notation</strong>, which makes it look more imperative:</p>
+<figure class="highlight haskell"><table><tr><td class="code"><pre><span class="line"><span class="title">main</span> :: <span class="type">IO</span> () </span><br><span class="line"><span class="title">main</span> = <span class="keyword">do</span> </span><br><span class="line">  putStrLn <span class="string">&quot;What is your name?&quot;</span> </span><br><span class="line">  name &lt;- getLine </span><br><span class="line">  putStrLn (<span class="string">&quot;Hello, &quot;</span> ++ name)</span><br></pre></td></tr></table></figure>
+
+<p>The <code>name &lt;- getLine</code> expression would be the equivalent of <code>from name in getLine</code> expression in a LINQ query.</p>
+<h3 id="Enter-the-Monad"><a href="#Enter-the-Monad" class="headerlink" title="Enter the Monad"></a>Enter the Monad</h3><p>It should be no surprise at this point to discover that <code>IO</code> is a <strong>monad</strong>, <a target="_blank" rel="noopener" href="https://twitter.com/nixcraft/status/739383796626128896">everything in Haskell is a monad</a>. I haven’t yet attempted to explain what a monad is, and for now, I’m not going to. Instead, I’d like to try and explain the purpose of this construct, and why it is used.</p>
+<p>Haskell is a <strong>purely-functional</strong>, lazily-evaluated language. By definition, it has a limitation - all of its functions must be pure. This may sound very limiting - we can’t just do a <code>File.Open</code> in the middle of a Haskell function - it just won’t work. However, this gives us a very interesting benefit: since all functions in Haskell are pure, therefore referentially transparent, this means every Haskell program is a <em>single referentially transparent</em> expression! A program in Haskell represents an exact <em>description</em> of what it is about to do - it’s pure data, as far as the developer (and Haskell compiler) is concerned. Reading a Haskell program describes <strong>exactly</strong> what is going to happen, when this program executes. There are no surprises, no <em>side-effects</em> to this.</p>
+<p>Which brings me to the <code>IO</code> type. In Haskell, it is used to represent a value that is dependent on some I/O operation. We don’t know (we can’t know) what the value is - but it isn’t important. The <em>effect</em> that the <code>IO</code> type has is to produce a value that depends on an interaction with the outside world, but as far as the Haskell compiler is concerned - the “value” of this type is just that - <em>some value</em> of type <code>IO String</code>. This gives semantic meaning to the underlying value, puts it in a context of being dependent on an I/O operation.</p>
+<p>In Haskell, and languages like Scala, F# and others we have an <code>Option</code> type (called <code>Maybe</code> in Haskell), whose purpose is to represent a value which may or may not be there. Regardless of whether or not the value exists, we can still perform operations on the <code>Option</code> type: we can pass it around, we can transform and <code>bind</code>/<code>map</code> its value with others. The <em>effect</em> of the <code>Option</code> type is to represent an optional value.</p>
+<p>Both <code>IO</code> and <code>Option</code> fulfil a purpose of representing an underlying value (or values) in a certain context. For <code>IO</code>, this context is an interaction with the outside world. For <code>Option</code>, the context is optionality. Both these types are <strong>monads</strong>. Their purpose is to explicitly encode the type of <strong>effect</strong> performed by those types within the type definition itself. In essense, monads are used explicitly to represent the context in which the underlying values are computed, without actually having to directly interact with those values.</p>
+<h3 id="Learning-to-walk-again"><a href="#Learning-to-walk-again" class="headerlink" title="Learning to walk again"></a>Learning to walk again</h3><p>Which finally bings me to the point of this apparent “intro to Haskell” tutorial I ended up writing: it turned out that turning implicit side-effects into explicit monadic context was extremely useful for other concerns as well, such as reading values from some environment (the Reader monad, functional equivalent of “dependency injection”), writing to a log file (the Writer monad), modifying state (the State monad), and others. Problems that, superficially, seem different, could be solved using a very similar pattern. Unfortunately, as Max Kreminski put it in their <a target="_blank" rel="noopener" href="https://mkremins.github.io/blog/doors-headaches-intellectual-need/">post</a>, it takes a lot of writing code in a functional language to begin seeing this pattern.</p>
+<p>In Haskell, monads helped solve the problem of controlling effects, because there’s just no other way, therefore they are first-class concepts built into the standard library. In other (strict) functional languages like F# or Scala, they are optional, and can be used together with “impure” code.</p>
+<p>Most importantly, monads are just another tool in the toolbox. They are useful, but not the most important thing in FP.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>When I began writing this post I had no idea where it would go. I promised I won’t try to explain monads, but I feel that I inadvertently have. I would like to conclude with the following:</p>
+<p>I’m sorry, dear C# developers, no amount of tutorials are going to help you understand monads. Eric Lippert <a target="_blank" rel="noopener" href="https://ericlippert.com/category/monads/">made a great attempt</a> once, a whopping 13-part series, explaining monads in C#. Unfortunately, Eric suffers the same “monads tutorial” fallacy, losing many people around post #2. The series of posts is still highly recommended, however, as a great history behind LINQ, which is the closest thing to monadic computations C# currently has.</p>
+<p>The reason? Most problems in C# (or Java, or Ruby, or any other imperative language) are just solved differently - existing <a target="_blank" rel="noopener" href="https://github.com/louthy/csharp-monad">monad solutions</a> feel needlessly complicated where a simple <code>if</code> statement or a <code>null</code> check will suffice. You end up fighting the type system, needlessly verbose annotations and awkward syntax, just trying to use a “monadic” solution (not to mention the runtime overhead of needlessly creating closures).</p>
+<p>Unfortunately for you, the only way forward is realization that what we know as OOP had lived to its maximum potential. There’s nothing wrong with OOP per-se, but if you feel you’ve had <a href="http://hmemcpy.com/2017/03/enough/">Enough!</a> with ever-growing complexity, fighting tests or IoC containers, or general feeling of solving the same issues over and over, year after year, perhaps it’s time to consider moving onto something completely different.</p>
+<p>And that’s what Functional Programming is to OOP - just different. The goal is the same - working software, the means of getting there is just different. For better, or worse.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/enough/" rel="prev" title="Enough!">
+      <i class="fa fa-chevron-left"></i> Enough!
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/becoming-foolish/" rel="next" title="Becoming Foolish">
+      Becoming Foolish <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unlearning-to-walk"><span class="nav-number">1.</span> <span class="nav-text">Unlearning to walk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Functional-inception"><span class="nav-number">1.1.</span> <span class="nav-text">Functional inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-functional-World"><span class="nav-number">1.2.</span> <span class="nav-text">Hello, (functional) World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enter-the-Monad"><span class="nav-number">1.3.</span> <span class="nav-text">Enter the Monad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learning-to-walk-again"><span class="nav-number">1.4.</span> <span class="nav-text">Learning to walk again</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">2.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/";
+    this.page.identifier = "2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/";
+    this.page.title = "From .NET to Scala and beyond: a journey to Functional Programming";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

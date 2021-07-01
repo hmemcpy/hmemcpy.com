@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Ever since I started my Journey to Functional Programming, I’ve been watching a lot of talks and presentations that I found inspiring. Here’s a list, in no particular order, of talks I liked. Enjoy! F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Talks I liked">
+<meta property="og:url" content="http://hmemcpy.com/talks-i-liked/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="Ever since I started my Journey to Functional Programming, I’ve been watching a lot of talks and presentations that I found inspiring. Here’s a list, in no particular order, of talks I liked. Enjoy! F">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-27T08:54:39.000Z">
+<meta property="article:modified_time" content="2020-03-27T08:54:39.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/talks-i-liked/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Talks I liked | In Absentia
+</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Talks I liked<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/talks-i-liked/index.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <p>Ever since I started my <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=g1EvM4CbUvM">Journey to Functional Programming</a>, I’ve been watching a lot of talks and presentations that I found inspiring. Here’s a list, in no particular order, of talks I liked. Enjoy!</p>
+<h3 id="Functional-programming"><a href="#Functional-programming" class="headerlink" title="Functional programming"></a>Functional programming</h3><h4 id="Haskell"><a href="#Haskell" class="headerlink" title="Haskell"></a>Haskell</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DebDaiYev2M">What Makes Haskell Unique</a> — Michael Snoyman</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/96639840">How Haskell is Changing my Brain</a> — Alissa Pajer</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bmKYiUOEo2A">Denotational Design: From Meanings To Programs</a> — Conal Elliott</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=GZPup5Iuaqw">Next Level MTL</a> — George Wilson</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=VzNGF4V937o">Laws!</a> — George Wilson</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=R2afqbzWDiU">Communicating with Types</a> — Kris Jenkins</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kIwd1D9m1gE">Maintainable Software Architecture in Haskell (with Polysemy)</a> — Paweł Szulc</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3U3lV5VPmOU">What are Types for, or are they only Against?</a> — Conor McBride</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/64673035">Explain List Folds to Yourself</a> — Tony Morris</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=WsA7GtUQeB8">Applied category theory and abstract algebra</a> — Gabriel Gonzalez</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=v6de5KWFY6M">Parametricity—The Essence of Information Hiding</a> — Kris Nuttycombe</li>
+</ul>
+<h4 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.com/presentations/io-functional-side-effects/">Purely Functional I/O</a> — Rúnar Bjarnason (a talk that made FP “click” for me!)</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aAtPi23nLcw">Functional Programming for Beginners</a> — Rúnar Bjarnason (poor quality, but very good talk, chock-full of ideas!)</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hmX2s3pe_qk">The Interpreter Pattern Revisited</a> — Rúnar Bjarnason (a “sequel” to the previous talk)</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=30q6BkBv5MY">Functional Programming with Effects</a> — Rob Norris</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=pNhBQJN44YQ">Extreme Cleverness: Functional Data Structures in Scala</a> — Daniel Spiewak</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=g_jP47HFpWA">The Making of an IO</a> — Daniel Spiewak</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=gVXt1RG_yN0">May Your Data Ever Be Coherent</a> — Daniel Spiewak</li>
+<li><a target="_blank" rel="noopener" href="https://skillsmatter.com/skillscasts/11626-keynote-pushing-types-and-gazing-at-the-stars">Pushing Types and Gazing at the Stars</a> — Rob Norris</li>
+<li><a target="_blank" rel="noopener" href="https://skillsmatter.com/skillscasts/12648-types-vs-tests">Types vs Tests</a> — Julien Truffaut</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sxudIMiOo68">FP to the Max</a> — John De Goes</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TbASMeJSh9s">Reasoning with Types</a> — Adelbert Chang</li>
+</ul>
+<h4 id="Free-monads"><a href="#Free-monads" class="headerlink" title="Free monads"></a>Free monads</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=M258zVn4m2M">Composable Application Architecture with Reasonably Priced Monads</a> — Rúnar Bjarnason</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rK53C-xyPWw">A Year living Freely</a> — Chris Myers</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=U0lK0hnbc4U">Why the free Monad isn’t free</a> — Kelley Robinson</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/128467878">Free all the functors</a> — Alissa Pajer</li>
+</ul>
+<h4 id="Recursion-schemes"><a href="#Recursion-schemes" class="headerlink" title="Recursion schemes"></a>Recursion schemes</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rBmx9NsNSXM">Pure Functional Database Programming with Fixpoint Types</a> — Rob Norris</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=XZ9nPZbaYfE">Peeling the Banana: Recursion Schemes from First Principles</a> — Zainab Ali</li>
+<li><a target="_blank" rel="noopener" href="https://skillsmatter.com/skillscasts/10959-topiary-and-the-art-of-origami">Topiary and the art of origami</a> — Zainab Ali</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TrPlVnoLxTI">Exploring Decision Trees with Matryoshka</a> — Zainab Ali</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=24UoRaoKLjM">Recursion: Where Functional Programming Hits Bottom</a> — Greg Pfeil</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TQIHRBXM75E">Efficient Nanopass Compilers using Cats and Matryoshka</a> — Greg Pfeil</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=q_xPKaAcWtI">Recursion: schemes, algebras, finally tagless, data types</a> — Alexander Konovalov</li>
+</ul>
+<h4 id="General"><a href="#General" class="headerlink" title="General"></a>General</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.com/presentations/8-lines-code-refactoring/">8 Lines of Code</a> — Greg Young</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=I2tMmsZC1ZU">Functional Programming for the Object Oriented</a> — Øystein Kolsrud</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=cxs7oLGrxQ4">From Dependency injection to dependency rejection</a> — Mark Seemann</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=o9qL4HcDpIQ">Async injection</a> — Mark Seemann</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3VQ382QG-y4">Fundamentals of Lambda Calculus &amp; Functional Programming in JavaScript - Part I</a> — Gabriel Lebec</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=pAnLQ9jwN-E">A Flock of Functions: Combinators, Lambda Calculus, &amp; Church Encodings in JS - Part II</a> — Gabriel Lebec</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vpcKnqyNdSQ">Adopting FP: A Human-First approach</a> — Ken Scambler</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SfW9w-FogeE">The Many Faces of Modularity</a> — Eric Torreborre</li>
+</ul>
+<h3 id="Programming-languages"><a href="#Programming-languages" class="headerlink" title="Programming languages"></a>Programming languages</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=baxtyeFVn3w">What FP can learn from Smalltalk</a> — Aditya Siram (deech)</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=OyfBQmvr2Hc">The Most Beautiful Program Ever Written</a> — William Byrd</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=0fpDlAEQio4">Four Languages from Forty Years Ago</a> — Scott Wlaschin</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=43XaZEn2aLc">On the Expressive Power of Programming Languages</a> — Shriram Krishnamurthi</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=6MJHYQ4dmAI">Turing’s Toy - The story of a mathematical idea that changed the world</a> — Øystein Kolsrud</li>
+</ul>
+<h3 id="Mathematics-and-Logic"><a href="#Mathematics-and-Logic" class="headerlink" title="Mathematics and Logic"></a>Mathematics and Logic</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=IOiZatlZtGU">Propositions as Types</a> — Philip Wadler</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=c_nPnURW6BU">Finite of sense &amp; infinite of thought</a> — Ron Pressler</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ssx2_JKpB3U">A categorical view of computational effects</a> — Emily Riehl</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Nvw74z8uQVU">A Taste of Type Theory</a> — Bartosz Milewski</li>
+</ul>
+<h3 id="Makes-you-think"><a href="#Makes-you-think" class="headerlink" title="Makes you think"></a>Makes you think</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=GqmsQeSzMdw">Constraints Liberate, Liberties Constrain</a> — Rúnar Bjarnason</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ElLxn_l7P2I">Compositional Programming</a> — Rúnar Bjarnason</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/71278954">The Future of Programming</a> — Bret Victor</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/36579366">Inventing on Principle</a> — Bret Victor</li>
+<li><a target="_blank" rel="noopener" href="https://vimeo.com/108441214">The art of destroying software</a> — Greg Young</li>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.com/presentations/Simple-Made-Easy/">Simple Made Easy</a> — Rich Hickey</li>
+</ul>
+<h3 id="Rants"><a href="#Rants" class="headerlink" title="Rants"></a>Rants</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.com/presentations/debugging-microservices-production/">Debugging Microservices in Production</a> — Bryan Cantrill</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=csyL9EC0S0c">Programming is terrible—Lessons learned from a life wasted</a> — Thomas Figg (tef)</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2xyZeovFqCA">Why Johnny Can’t Code Good</a> — Chris Allen</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=TS1lpKBMkgg">We’re Doing It All Wrong</a> — Paul Phillips</li>
+</ul>
+<h3 id="Timeless-classics"><a href="#Timeless-classics" class="headerlink" title="Timeless classics"></a>Timeless classics</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.destroyallsoftware.com/talks/wat">Wat</a> — Gary Bernhardt</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=_ahvzDzKdB0">Growing a Language</a> — Guy Steele</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=oKg1hTOQXoY">The computer revolution hasn’t happened yet</a> — Alan Kay</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=lKXe3HUG2l4">The Mess We’re In</a> — Joe Armstrong</li>
+</ul>
+<h3 id="Miscellaneous"><a href="#Miscellaneous" class="headerlink" title="Miscellaneous"></a>Miscellaneous</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=R7EEoWg6Ekk">The MoVfuscator - Turning <code>mov</code> into a soul-crushing RE nightmare</a> — Christopher Domas</li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Functional-programming"><span class="nav-number">1.</span> <span class="nav-text">Functional programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Haskell"><span class="nav-number">1.1.</span> <span class="nav-text">Haskell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scala"><span class="nav-number">1.2.</span> <span class="nav-text">Scala</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Free-monads"><span class="nav-number">1.3.</span> <span class="nav-text">Free monads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursion-schemes"><span class="nav-number">1.4.</span> <span class="nav-text">Recursion schemes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#General"><span class="nav-number">1.5.</span> <span class="nav-text">General</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Programming-languages"><span class="nav-number">2.</span> <span class="nav-text">Programming languages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematics-and-Logic"><span class="nav-number">3.</span> <span class="nav-text">Mathematics and Logic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Makes-you-think"><span class="nav-number">4.</span> <span class="nav-text">Makes you think</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rants"><span class="nav-number">5.</span> <span class="nav-text">Rants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timeless-classics"><span class="nav-number">6.</span> <span class="nav-text">Timeless classics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miscellaneous"><span class="nav-number">7.</span> <span class="nav-text">Miscellaneous</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/talks-i-liked/index.html";
+    this.page.identifier = "talks-i-liked/index.html";
+    this.page.title = "Talks I liked";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

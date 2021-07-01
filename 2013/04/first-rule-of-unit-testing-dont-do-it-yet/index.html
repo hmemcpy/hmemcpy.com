@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="I wasn’t sure how I’d like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I’ll just dump all that boiled inside me for quite a while. Sarcasm and bitt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="First Rule of Unit Testing: Don&#39;t do it! (yet)">
+<meta property="og:url" content="http://hmemcpy.com/2013/04/first-rule-of-unit-testing-dont-do-it-yet/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="I wasn’t sure how I’d like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I’ll just dump all that boiled inside me for quite a while. Sarcasm and bitt">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2013-04-12T04:51:07.000Z">
+<meta property="article:modified_time" content="2013-04-12T04:51:07.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2013/04/first-rule-of-unit-testing-dont-do-it-yet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>First Rule of Unit Testing: Don't do it! (yet) | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">88</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2013/04/first-rule-of-unit-testing-dont-do-it-yet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          First Rule of Unit Testing: Don't do it! (yet)<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2013-04-12-first-rule-of-unit-testing-dont-do-it-yet.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: April 12th, 2013 07:51:07" itemprop="dateCreated datePublished" datetime="2013-04-12T07:51:07+03:00">April 12th, 2013</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2013/04/first-rule-of-unit-testing-dont-do-it-yet/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/04/first-rule-of-unit-testing-dont-do-it-yet/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>I wasn’t sure how I’d like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I’ll just dump all that boiled inside me for quite a while. Sarcasm and bitterness ahead!</p>
+<span id="more"></span>
+
+<p>I’ll start from the end: it wasn’t until a former colleague of mine, <a target="_blank" rel="noopener" href="http://www.gilzilberfeld.com/">Gil Zilberfeld</a>, wrote <a target="_blank" rel="noopener" href="http://www.gilzilberfeld.com/2013/04/processes-and-tools-over-individuals.html">his post</a> about how in our industry we shifted from choosing <em>individuals and interactions</em> over <em>tools and processes</em> (or whatever the Church of Agile calls it) to having an almost a knee-jerk reaction to someone doing horrible things to our vision of a perfect code.</p>
+<p>Think about it, how many times have you started a new job or met a new client, and once you’ve managed to get their code onto your machine, you shrieked in horror and facepalmed over some things <em>you people wouldn’t believe</em>? A SomethingManager class that takes in 12 dependencies?! No Unit Tests?! A solution with 180 projects?! Very-similar-but-with-slight-variations duplicated monster classes?! And you think to yourself: surely those people heard of the SOLID principles? Surely they’ve seen a <a href="http://hmemcpy.com/webinars/">webinar or two</a> on Unit testing and TDD? They might even know what IoC and DI is, and the difference between them. How is it possible, then, that after more than a decade since we got all those wonderful acronyms people still write and maintain horrible mess?</p>
+<p>The sad truth is, writing the perfect code is hard. It takes practice, years of experience in doing EXACTLY that - writing good code, and getting better at it. But we are all guilty of writing bad code. Because we don’t know any better. Sure, some are better than others, some have read a book or two on good software practices, some attend conferences and have open source projects - but they are the minority. Most of the time <em>you</em> will be the minority among your peers. Your colleagues don’t have time for your <em>unit-testing</em> nonsense, they have bugs to fix and deadlines to miss. If you are in a position of power, you may force some practices on your team because <em>you</em> have seen the light. And you’ll be lucky if they don’t hate you for it.</p>
+<p>What does this have to do with unit testing? Well, it depends on who you ask. People who claim to have tried unit testing and found it too hard and a waste of time will generally roll their eyes in your general direction during yet another presentation on <em>The Benefits of Unit Testing</em>. People who have never heard about it before (or otherwise completely unfamiliar) will be intrigued - unit <strong>testing</strong>? Great! <em>We want something that tests that our distributed systems can communicate with each other under load!</em>, they exclaim. You politely smile and say: <em>Well, not so fast! Unit tests are not actually testing anything! If only we could go back in time and remove the word <strong>testing</strong> from this practice, maybe it would be less confusing</em>¦*.</p>
+<p>And having seen the presentation, or read a book, or even attending a 3 day course on unit testing, those developers go back to their code bases, trying to apply what they had learned, and suddenly realizing that it’s too difficult! If only in the real world we were all building calculators and logging frameworks, surely the tests could be much simpler! But alas, we write distributed WCF systems, with transactions, states, workflows and proprietary protocols. How on earth are we going to unit test that?!</p>
+<p>We as developers often forget our own guidelines and <em>best practices</em>, just because doing something right would be too much work. The WCF service now needs to communicate with another external system? Not a problem, just inject that interface (of course an interface, what do you think we are, amateurs?!) in the constructor (it already takes 9, but surely we can fit one more in there)! Code code code, debug debug debug, fix fix fix, debug debug debug, run, done. What did we forget? Of course, the damn unit tests! Now they are all broken because the new interface needs to be mocked and its behavior stubbed. And hey, didn’t we have that <em>unit testing guy</em> around? Let him fix it!</p>
+<p>Which brings me to the actual point (if there is any) of this rant. It’s not just about unit testing. It’s about everything else too. I just tend to defend unit testing more because I am one of those who <em>had seen the light</em>, and I know exactly when to apply (or not) what I’ve learned. I have been practicing unit testing and TDD for years, but only recently had an epiphany. See, I always thought the problem with the term unit tests was the word <strong>test</strong> - people simply misunderstand the purpose of this - it’s not really testing anything, it is supposed to expose all the problems with using your API. Unit testing novices almost always will attempt to write the tests for the code they just wrote and will beat it into submission, until it passes. By that time, they have spent 20 minutes sweating, swearing and writing a very long test method, which has no real benefit or value.</p>
+<p>I came to realize the <em>real</em> problem with the concept of unit testing. This realization came to me shortly after <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14829818/refactoring-procedural-wcf-service">seeking help</a> (see? I am constantly learning!) on refactoring a mess of a WCF service. Steven (<a target="_blank" rel="noopener" href="https://twitter.com/dot_NET_Junkie">@dot_NET_Junkie</a>) posted an amazing, incredibly-detailed <a target="_blank" rel="noopener" href="http://stackoverflow.com/a/14832167/8205">answer</a> on how to approach this type of refactoring. By actually breaking responsibilities into smaller, self-contained components, or <em>units</em>, it suddenly became clear to me that the problem might actually be with the word <strong>unit</strong> itself - it is not a <em>unit of work</em> or a <em>method</em> or even a <em>class</em>, as it is often defined, but rather a <strong>level of abstraction</strong>. When all you have is a giant Manager class that takes 9 dependencies, and just one public method, the <em>only</em> possible way you can write a unit test for it is by directly invoking those dependencies - in essence, writing tests for the <em>implementation details</em> of the Manager class, and that’s a big no-no in unit testing - you should not write tests for the implementation details. This is why by adding a 10th dependency to the Manager class, you suddenly have to modify all your other tests to wire this dependency in, and mock it until it fits. This is why tests break and they become hard to write and maintain - they are not testing at the right level of abstraction, not at a <strong>unit</strong> level.</p>
+<p>In this order: Better abstractions lead to better design. Better design leads to better unit tests. Better unit tests lead to quicker responsiveness to change. Quicker responsiveness to change leads to predictable release cycles of <strong>working</strong> software. And isn’t it what it’s all about?</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2013/03/even-more-resharper-annotations-hackery-marking-3rd-party-code-as-obsolete/" rel="prev" title="Even more ReSharper Annotations hackery: marking 3rd party code as obsolete">
+      <i class="fa fa-chevron-left"></i> Even more ReSharper Annotations hackery: marking 3rd party code as obsolete
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/01/fworking-in-githuba-slightly-better-workflow/" rel="next" title="[FW]orking in Github - a slightly better workflow?">
+      [FW]orking in Github - a slightly better workflow? <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2013/04/first-rule-of-unit-testing-dont-do-it-yet/";
+    this.page.identifier = "2013/04/first-rule-of-unit-testing-dont-do-it-yet/";
+    this.page.title = "First Rule of Unit Testing: Don't do it! (yet)";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
