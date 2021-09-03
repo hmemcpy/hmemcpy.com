@@ -86,7 +86,7 @@ Ever since I started my [Journey to Functional Programming](https://www.youtube.
  * [The Future of Programming](https://vimeo.com/71278954) --- Bret Victor
  * [Inventing on Principle](https://vimeo.com/36579366) --- Bret Victor
  * [The art of destroying software](https://vimeo.com/108441214) --- Greg Young
- * [Simple Made Easy](https://www.infoq.com/presentations/Simple-Made-Easy/) --- Rich Hickey
+ * [Simple Made Easy](https://www.youtube.com/watch?v=LKtk3HCgTa8) --- Rich Hickey
 
 ### Rants
 
