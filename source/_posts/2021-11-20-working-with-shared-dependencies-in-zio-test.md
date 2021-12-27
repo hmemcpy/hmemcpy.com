@@ -46,7 +46,7 @@ object MySpec extends DefaultRunnableSpec {                 // (1)
 
 # Anatomy of a ZIO Test
 
-Most specs will typically extend [`DefaultRunnableSpec`](https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/DefaultRunnableSpec.scala#L28), a base class provided by the ZIO Test library, which is, in fact, a *standalone application*, implementing a `main()` method, which means it can be executed on the command line from `java --jar`. `DefaultRunnableSpec` extends a base trait `RunnableSpec[R, E]`, providing it with a common `TestEnvironment` in `R`:
+Most specs will typically extend [`DefaultRunnableSpec`](https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/DefaultRunnableSpec.scala#L28), a base class provided by the ZIO Test library, which is, in fact, a *standalone application*, implementing a `main()` method, which means it can be executed on the command line from `java -jar`. `DefaultRunnableSpec` extends a base trait `RunnableSpec[R, E]`, providing it with a common `TestEnvironment` in `R`:
 
 ```scala
 type TestEnvironment =
