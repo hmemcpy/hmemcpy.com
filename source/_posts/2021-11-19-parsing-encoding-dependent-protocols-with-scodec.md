@@ -3,7 +3,7 @@ title: Parsing character encoding-dependent protocols with scodec in Scala
 date: 2021-11-19 13:29:31
 tags:
 ---
-At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol called Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180) describes how cheques (checks, for the US folks) are transmitted electronically between financial institutions.
+At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, called Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or, checks, for the US folks) are transmitted electronically between financial institutions.
 
 X9.37 is one such archaic binary protocol, still in use today. The specification allows this file to be encoded either in the 8-bit IBM [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC) encoding, or ASCII, and it contains both plain-text characters, as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called [scodec](https://github.com/scodec/scodec), a combinator library for creating codecs for binary data. I recommend reading about the library a bit and getting familiarized with the syntax before reading further.
 
