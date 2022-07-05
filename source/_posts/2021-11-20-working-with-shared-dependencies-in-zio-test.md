@@ -3,7 +3,7 @@ title: Working with shared dependencies in ZIO Test
 date: 2021-11-20 10:08:54
 tags:
 ---
-ZIO Test is a [testing library](https://zio.dev/version-1.x/usecases/usecases_testing) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular---dependency management via the environment.
+ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular---dependency management via the environment.
 
 In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let's understand how ZIO Test works under the hood.
 
