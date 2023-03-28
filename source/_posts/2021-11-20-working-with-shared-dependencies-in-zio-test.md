@@ -114,11 +114,11 @@ The last point is often a source of confusion, so let's expand on it:
 In ZIO, the `provide*Some*` variants are used to satisfy/eliminate partial requirements and specify the *remainder* to be satisfied by the caller, higher up. In our example above, our tests have the type
 
 ```scala
-ZIO[TestEnvironment, Any , zio.test.TestResult]
+ZIO[TestEnvironment, E, zio.test.TestResult]
 ```
 but requiring `Has[UUID]` (due to the use of `ZIO.service`) caused it to be typed as:
 ```scala
-ZIO[TestEnvironment with Has[UUID], Any , zio.test.TestResult]
+ZIO[TestEnvironment with Has[UUID], E ,zio.test.TestResult]
 ```
 
 To (partially) satisfy this requirement, we can provide the `Has[UUID]` part ourselves, and the remaining `TestEnvironment` will be provided by the `DefaultRunnableSpec` itself.
