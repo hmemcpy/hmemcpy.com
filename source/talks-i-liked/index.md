@@ -19,7 +19,6 @@ Ever since I started my [Journey to Functional Programming](https://www.youtube.
  * [Maintainable Software Architecture in Haskell (with Polysemy)](https://www.youtube.com/watch?v=kIwd1D9m1gE) --- Paweł Szulc
  * [What are Types for, or are they only Against?](https://www.youtube.com/watch?v=3U3lV5VPmOU) --- Conor McBride
  * [Explain List Folds to Yourself](https://vimeo.com/64673035) --- Tony Morris
- * [Applied category theory and abstract algebra](https://www.youtube.com/watch?v=WsA7GtUQeB8) --- Gabriel Gonzalez
  * [Parametricity---The Essence of Information Hiding](https://www.youtube.com/watch?v=v6de5KWFY6M) --- Kris Nuttycombe
 
 #### Scala
