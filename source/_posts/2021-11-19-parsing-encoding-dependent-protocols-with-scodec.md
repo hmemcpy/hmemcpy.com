@@ -3,9 +3,9 @@ title: Parsing character encoding-dependent protocols with scodec in Scala
 date: 2021-11-19 13:29:31
 tags:
 ---
-At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, called Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or, checks, for the US folks) are transmitted electronically between financial institutions.
+At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or checks, for the US folks) are transmitted electronically between financial institutions.
 
-X9.37 is one such archaic binary protocol, still in use today. The specification allows this file to be encoded either in the 8-bit IBM [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC) encoding, or ASCII, and it contains both plain-text characters, as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called [scodec](https://github.com/scodec/scodec), a combinator library for creating codecs for binary data. I recommend reading about the library a bit and getting familiarized with the syntax before reading further.
+X9.37 is one such archaic binary protocol still in use today. The specification allows this file to be encoded either in the 8-bit IBM [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC) encoding or ASCII, and it contains both plain-text characters as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called [scodec](https://github.com/scodec/scodec), a combinator library for creating codecs for binary data. I recommend reading about the library and getting familiarized with the syntax before reading further.
 
 <!-- more -->
 
@@ -31,7 +31,7 @@ Both values are located after the first 32-bit integer value specifying the File
 
 ### The solution
 
-Armed with this knowledge, we can create a `Codec` that would detect this encoding and expose it as a `java.nio.charset.Charset`. Fortunately, many of the scodec `string` combinators take `Charset` as an implicit parameter, allowing us to specify the encoding with which we wish to read the strings! The inspiration for this idea came from a [similar solution](https://github.com/scodec/scodec/blob/main/unitTests/src/test/scala/scodec/examples/PcapExample.scala) of detecting byte ordering (endianness) in libpcap files.
+Armed with this knowledge, we can create a `Codec` to detect this encoding and expose it as a `java.nio.charset.Charset`. Fortunately, many scodec `string` combinators take `Charset` as an implicit parameter, allowing us to specify the encoding with which we wish to read the strings! The inspiration for this idea came from a [similar solution](https://github.com/scodec/scodec/blob/main/unitTests/src/test/scala/scodec/examples/PcapExample.scala) of detecting byte ordering (endianness) in libpcap files.
 
 The final codec looks like this:
 
@@ -60,11 +60,11 @@ implicit val charsetCodec: Codec[Charset] = new Codec[Charset] {
 }
 ```
 
-This codec will now be passed implicitly to all other codecs requiring an implicit `Charset`, allowing us to decode the strings correctly for both types of encoding!
+This codec will now be passed implicitly to all other codecs requiring an implicit `Charset`, allowing us to decode the strings correctly for both encoding types!
 
 #### Bonus: decoding a list of unknown length
 
-In the most simplified form, the X9.37 protocol contains record sections, each section contains a Header record, followed by several data records, and a Control record containing checksums and other verification information. Here's an example in ASCII-art form:
+In the most simplified form, the X9.37 protocol contains record sections, and each section contains a Header record, followed by several data records and a Control record containing checksums and other verification information. Here's an example in ASCII art form:
 
 ```
     ┌────────────────────────┬────────────────────────┐
@@ -77,9 +77,9 @@ In the most simplified form, the X9.37 protocol contains record sections, each s
                           └───────┘
 ```
 
-Unfortunately, the protocol specifies neither in the Header nor Control records the actual number of these Cash Letter records, and all scodec combinators I found that deal with lists expect to take a number, specifying the number of items to decode.
+Unfortunately, the protocol specifies neither in the Header nor Control records the actual number of these Cash Letter records, and all scodec combinators I found that deal with lists expect to take a number specifying the number of items to decode.
 
-After a few iterations I came up with the following function that tries to read a list of an unknown size, and when it fails - returns the number of items it read so far:
+After a few iterations, I came up with the following function that tries to read a list of unknown size, and when it fails - returns the number of items it read so far:
 
 ```scala
 /**
