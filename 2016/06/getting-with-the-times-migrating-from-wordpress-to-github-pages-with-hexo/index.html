@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="I was finally able to migrate from WordPress to a gorgeous, static, and blazing fast blog, hosted on GitHub Pages for free. Here is a recap of what I did, starting with exporting all data from WordPre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Getting with the times: migrating from WordPress to GitHub Pages with Hexo">
+<meta property="og:url" content="http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="I was finally able to migrate from WordPress to a gorgeous, static, and blazing fast blog, hosted on GitHub Pages for free. Here is a recap of what I did, starting with exporting all data from WordPre">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/token.png">
+<meta property="article:published_time" content="2016-06-11T11:22:11.000Z">
+<meta property="article:modified_time" content="2016-06-11T11:22:11.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/token.png">
+
+<link rel="canonical" href="http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Getting with the times: migrating from WordPress to GitHub Pages with Hexo | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Getting with the times: migrating from WordPress to GitHub Pages with Hexo<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2016-06-11-getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: June 11th, 2016 14:22:11" itemprop="dateCreated datePublished" datetime="2016-06-11T14:22:11+03:00">June 11th, 2016</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>I was finally able to migrate from WordPress to a gorgeous, static, and blazing fast blog, hosted on <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a> for free. Here is a recap of what I did, starting with exporting all data from WordPress, and finishing with setting up an automatic publishing with <a target="_blank" rel="noopener" href="https://www.appveyor.com/">AppVeyor</a>!</p>
+<p>Let’s begin!</p>
+<span id="more"></span>
+
+<p>There are many options for generating static websites available: Jekyll, Octopress, Wyam, Sandra.Snow, to name a few (see the complete list <a target="_blank" rel="noopener" href="https://www.staticgen.com/">here</a>), however I decided on a Node.js based generator called <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo.io</a>, based on a few recommendations.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>For the migration process, you will need the following:</p>
+<ul>
+<li>Existing (hosted) WordPress blog - admin access required to install several plugins (WordPress.com blogs are not supported)</li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> installed and ready</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/">GitHub</a> and <a target="_blank" rel="noopener" href="https://www.appveyor.com/">AppVeyor</a> accounts</li>
+<li>Favorite Markdown&#x2F;text editor (I prefer <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>)</li>
+</ul>
+<h3 id="Step-1-Export-WordPress-data-as-Jekyll"><a href="#Step-1-Export-WordPress-data-as-Jekyll" class="headerlink" title="Step 1: Export WordPress data as Jekyll"></a>Step 1: Export WordPress data as Jekyll</h3><p>Jekyll, being one of the older static generators, is widely supported, including this wonderful plugin for WordPress called <a target="_blank" rel="noopener" href="https://github.com/benbalter/wordpress-to-jekyll-exporter">WordPress to Jekyll Exporter</a>. </p>
+<p>Go to your WordPress admin panel and install the <strong>WordPress to Jekyll Exporter</strong> plugin. After installing and activating the plugin, you should have a new menu under <strong>Tools</strong> called <strong>Export to Jekyll</strong>. Depending on the size of your blog, this might take a few minutes to complete, but a new zip file called <code>jekyll-export.zip</code> should begin downloading.</p>
+<p>Exported data from WordPress will contain all the posts and other static pages in Markdown (.md) files. The blog posts themselves are contained in a <code>_posts</code> directory inside the <code>jekyll-export.zip</code> archive.</p>
+<p>Since our ultimate goal is to eventually delete the WordPress blog, it’s best to make a complete backup of all the content. You can do this via your hosting’s FTP or with another great WordPress plugin called <strong>Duplicator</strong>, which can export everything for you into a zip file. We will also need the contents of this zip to replace any broken images and other files.</p>
+<h3 id="Step-2-Configuring-Hexo"><a href="#Step-2-Configuring-Hexo" class="headerlink" title="Step 2: Configuring Hexo"></a>Step 2: Configuring Hexo</h3><p>Create a new Hexo site using e.g. <code>hexo init blog</code>, it will create a directory called <code>blog</code>, containing configuration files and a default theme. Perform any additional configuration as <a target="_blank" rel="noopener" href="https://hexo.io/docs/index.html">specified in the docs</a>.</p>
+<p>Next, we need to import our exported WordPress data. Follow the <a target="_blank" rel="noopener" href="https://hexo.io/docs/migration.html#Jekyll">migration instructions</a> on Hexo docs. This will make Hexo use the default Jekyll post format (<code>yyyy-MM-dd-title.md</code>), so no renaming is needed. I actually prefer it like this.</p>
+<p>Start the hexo server by running <code>hexo server --debug</code> (to output any parsing errors which may occur). This should launch the blog at address <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a>.</p>
+<p>The default post metadata inside each exported .md file will contain lots of tags that are not needed, like <code>id</code>, <code>permalink</code>, metadata for Akismet and Disqus (if relevant). This, in turn, might interfere with how Hexo creates post links. Remove all the extra metadata that is not required. </p>
+<p>In my particular case, I had removed ALL additional entries from the post headers, except <code>title</code> and <code>date</code>, e.g.:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: ReSharper 4.5 Beta Released - First Impressions</span><br><span class="line">date: date: 2009-03-18T06:46:28+00:00</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>After removing and saving the .md file, it will be automatically recompiled by Hexo (if the server is running). Refresh the browser window to see the changes</p>
+<h3 id="Step-3-Manual-labor"><a href="#Step-3-Manual-labor" class="headerlink" title="Step 3: Manual labor"></a>Step 3: Manual labor</h3><p>Here is the nasty part - fixing up any syntax errors and broken images. Unfortunately, in some cases the export does not do a very good job, so manual tweaks are needed. If you used Windows Live Writer to write posts (as I had), you’ll find it likes replacing <code>-</code> with <code>&amp;ndash;</code>, and worse. This part is, unfortunately, the most difficult in this entire process.</p>
+<p>Once you’re done fixing <em>most</em> issues, verifying each time it renders correctly in the browser, time to set up GitHub!</p>
+<p>Tip: make sure to utilize Hexo’s <a target="_blank" rel="noopener" href="https://hexo.io/docs/tag-plugins.html">Tag plugins</a> as much as possible, they really help when dealing with things like relative image locations.</p>
+<h3 id="Step-4-Deploying-to-GitHub"><a href="#Step-4-Deploying-to-GitHub" class="headerlink" title="Step 4: Deploying to GitHub"></a>Step 4: Deploying to GitHub</h3><p>There are two ways to set up GitHub pages: per user&#x2F;organization or per project. We will use the latter option, keeping both the source (.md files) and the generated static pages (.html) in the same repo (using the special <code>gh-pages</code> branch for the static files).</p>
+<p>We’ll start by creating a repository for our blog. I called mine after the domain name, <code>hmemcpy.com</code>. Copy the HTTPS (not SSH) URL of the repository to the clipboard (HTTPS is required for deploying from AppVeyor, see below).</p>
+<p>Next, we need to prepare the blog for automated git deployment, by using a plugin called <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html#Git">hexo-deployer-git</a>. Install the plugin per instructions. Add the following to the <code>_config.yml</code> file (under Deployment):</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> &#123;<span class="string">github-repo-https-address</span>&#125; <span class="comment">#(e.g. https://github.com/hmemcpy/hmemcpy.com.git)</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<p>Next, we need to make the <code>blog</code> directory into a git repo. We can do this by typing the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin &#123;your-git-repo-url&#125;</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;Hello Hexo!&quot;</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>Once everything is set, type <code>hexo deploy</code> to generate and deploy the site to GitHub! Once it’s done, verify it works by navigating to <em>username</em>.github.io&#x2F;<em>reponame</em>. This proves that Hexo is set up to deploy automatically to the correct branch (<code>gh-pages</code>). Lastly, we will automate this!</p>
+<h3 id="Step-5-Auto-deploy-to-GitHub-from-AppVeyor"><a href="#Step-5-Auto-deploy-to-GitHub-from-AppVeyor" class="headerlink" title="Step 5: Auto-deploy to GitHub from AppVeyor"></a>Step 5: Auto-deploy to GitHub from AppVeyor</h3><p><a target="_blank" rel="noopener" href="https://www.appveyor.com/">AppVeyor</a> is a great Continuous Delivery service, which can perform lots of tasks, including launching our own custom commands. Our goal is to perform <code>hexo deploy</code> for us, each time a change is made on the source (<code>master</code> branch).</p>
+<p>There are several things we need to do.</p>
+<p>First, in order to deploy to our repo from AppVeyor, we need to create a <a target="_blank" rel="noopener" href="https://github.com/blog/1509-personal-api-tokens">Personal access token</a> on GitHub. Go to <a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>, and click <strong>Generate new token</strong>. After entering your password for security purposes, create a new token with the <code>repo</code> permissions:</p>
+<img src="/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/token.png" class="">
+
+<p>After clicking <strong>Generate token</strong>, you’ll have the token appear. Copy it to the clipboard now! </p>
+<p>Next, to use the token securely from AppVeyor we need to <em>encrypt</em> it.</p>
+<p>Go to <a target="_blank" rel="noopener" href="https://ci.appveyor.com/tools/encrypt">https://ci.appveyor.com/tools/encrypt</a>, and paste the token value into the <strong>Value to encrypt</strong> input field, and press the <strong>Encrypt</strong> button. Copy the <em>Encrypted value</em> to the clipboard.</p>
+<p>Next, add a file called <code>appveyor.yml</code> to the root of your blog directory (next to <code>_config.yml</code>), containing the following:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line"><span class="attr">init:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">core.autocrlf</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">environment:</span></span><br><span class="line">  <span class="attr">access_token:</span></span><br><span class="line">    <span class="attr">secure:</span> &#123;<span class="string">Encrypted</span> <span class="string">token</span> <span class="string">value</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">npm</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">hexo-cli</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">node_modules</span> <span class="string">-&gt;</span> <span class="string">package.json</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Don&#x27;t actually build.</span></span><br><span class="line"><span class="attr">build:</span> <span class="string">off</span></span><br><span class="line"><span class="attr">test:</span> <span class="string">off</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy_script:</span></span><br><span class="line">  <span class="comment"># See http://www.appveyor.com/docs/how-to/git-push for more info</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">credential.helper</span> <span class="string">store</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">user.email</span> <span class="string">&quot;&#123;your email address&#125;&quot;</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">git</span> <span class="string">config</span> <span class="string">--global</span> <span class="string">user.name</span> <span class="string">&quot;&#123;your name&#125;&quot;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">ps:</span> <span class="string">Add-Content</span> <span class="string">&quot;$env:USERPROFILE\.git-credentials&quot;</span> <span class="string">&quot;https://$($env:access_token):x-oauth-basic@github.com`n&quot;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">deploy</span> <span class="string">--generate</span></span><br></pre></td></tr></table></figure>
+
+<p>Finally, we need to create a <a target="_blank" rel="noopener" href="https://help.github.com/articles/setting-up-your-pages-site-repository/">CNAME file</a>, if we want to use a custom domain with our repo. Luckily, Hexo supports deploying arbitrary files! Create a new file called <code>CNAME</code> (no extension), put the domain name without <code>http</code> or <code>https</code> prefix, and put it under the <code>source</code> directory of your blog, next to <code>_posts</code>. If you want a custom favicon or robots.txt, place them there as well.</p>
+<p>Save and push the files to GitHub. We’re now should be all set for automated deployment!</p>
+<p>In AppVeyor, click <strong>New Project</strong> and select your blog repo. With <code>appveyor.yml</code> in the repo root, there’s no need for any additional configuration! Press <strong>New Build</strong> and wait. If everything was successful, your new blog should be auto deployed to GitHub!</p>
+<p>Happy blogging! </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/01/solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10/" rel="prev" title="SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10">
+      <i class="fa fa-chevron-left"></i> SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/06/mac-survival-guide-for-the-windows-lifer/" rel="next" title="Mac survival guide for the Windows lifer">
+      Mac survival guide for the Windows lifer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-Export-WordPress-data-as-Jekyll"><span class="nav-number">1.1.</span> <span class="nav-text">Step 1: Export WordPress data as Jekyll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-Configuring-Hexo"><span class="nav-number">1.2.</span> <span class="nav-text">Step 2: Configuring Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-3-Manual-labor"><span class="nav-number">1.3.</span> <span class="nav-text">Step 3: Manual labor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-4-Deploying-to-GitHub"><span class="nav-number">1.4.</span> <span class="nav-text">Step 4: Deploying to GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-5-Auto-deploy-to-GitHub-from-AppVeyor"><span class="nav-number">1.5.</span> <span class="nav-text">Step 5: Auto-deploy to GitHub from AppVeyor</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/";
+    this.page.identifier = "2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/";
+    this.page.title = "Getting with the times: migrating from WordPress to GitHub Pages with Hexo";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

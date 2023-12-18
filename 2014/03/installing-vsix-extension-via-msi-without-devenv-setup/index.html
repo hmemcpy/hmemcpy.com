@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or manually, by copying the files f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;">
+<meta property="og:url" content="http://hmemcpy.com/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or manually, by copying the files f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-03-16T23:40:19.000Z">
+<meta property="article:modified_time" content="2014-03-16T23:40:19.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Installing a .vsix Extension via MSI without "devenv /setup" | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Installing a .vsix Extension via MSI without "devenv /setup"<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2014-03-17-installing-vsix-extension-via-msi-without-devenv-setup.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: March 17th, 2014 01:40:19" itemprop="dateCreated datePublished" datetime="2014-03-17T01:40:19+02:00">March 17th, 2014</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/03/installing-vsix-extension-via-msi-without-devenv-setup/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or <em>manually</em>, by copying the files from a custom installer, typically MSI (and specifying a special <code>&lt;InstalledByMsi&gt;true&lt;/InstalledByMsi&gt;</code> element in the <code>extension.vsixmanifest</code> file). The latter approach is generally used if the extension needs to perform additional tasks, such as running ngen or registering COM servers.</p>
+<span id="more"></span>
+
+<p><strong>TL;DR:</strong> it is possible to register custom Visual Studio extensions by <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Touch_(Unix))">touching</a> (modifying the last accessed date) of the file <code>extensions.configurationchanged</code>, which is located in the </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%VSInstallDir%\Common7\IDE\Extensions</span><br></pre></td></tr></table></figure>
+
+<p>directory (in Visual Studio 2012 and above). This will cause Visual Studio to reload all the packages - in essence, this is equivalent of installing the package using VSIX from Visual Studio gallery. No devenv &#x2F;setup required!</p>
+<p><strong>Update:</strong> a better way was found by <a target="_blank" rel="noopener" href="http://blog.lebosquain.net/">Julien Lebosquain</a>, without requiring elevation at all! You can run</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">devenv /updateconfiguration</span><br></pre></td></tr></table></figure>
+
+<p>and it will cause Visual Studio to refresh its package cache on next restart.</p>
+<hr>
+<p>The official Visual Studio guideline suggests that by using the MSI approach, the installer is required to run <code>devenv.exe /setup</code> after installation, to refresh Visual Studio package caches and settings, in order for the custom package to be installed. This approach, however, has several drawbacks and disadvantages to the VSIX installation.</p>
+<p>The first and foremost - speed. Running <code>devenv.exe /setup</code> rebuilds the entire Visual Studio settings from scratch, which takes significant amount of time, depending on the machine. This could be improved by running the command with the <code>/nosetupvstemplates</code> switch, if the package you’re installing does not install any templates.</p>
+<p>The second issue is stability - running &#x2F;setup on the user’s machine may sometimes cause other extensions not to register correctly, and cause other extensions to fail to load. As a commercial product, this is obviously a problem, since this usually results in a support ticket, followed by an uninstall of your software (whether to attempt to repair the situation before reinstall, or worse, remove and never try your software again).</p>
+<p>Failing to find an adequate solution, I <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/22300278/registering-an-unpacked-vsix-extension-via-msi-without-using-devenv-setup">asked on StackOverflow</a> about the possibility of migrating to a proper VSIX installation, with several limitations. In the end, after an extensive research of the problem, I discovered a solution which solved my immediate issue: VSIX installer, after unpacking the files into the target directory (it’s a .zip file, after all), will touch a file located in the Extensions directory root, called <code>extensions.configurationchanged</code>. The next time Visual Studio restarts, if it detects a date change in this file, will re-register all the .pkgdef files it finds. This significantly reduces both the amount of time Visual Studio takes to load (by not rebuilding the entire configuration cache), as well as risk of breaking the environment.</p>
+<p>Here’s how to do it from WIX (courtesy of <a target="_blank" rel="noopener" href="http://blogs.clariusconsulting.net/kzu/how-to-install-a-visual-studio-extension-with-templates-via-an-msi/">Daniel Cazzulino</a>):</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">CustomAction</span> <span class="attr">Id</span>=<span class="string">&#x27;VS2013TouchExtensions&#x27;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">Directory</span>=<span class="string">&#x27;VS2013_EXTENSIONS_DIR&#x27;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">Execute</span>=<span class="string">&quot;deferred&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">Impersonate</span>=<span class="string">&quot;no&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">ExeCommand</span>=<span class="string">&#x27;[SystemFolder]cmd.exe /c <span class="symbol">&amp;quot;</span>copy /b extensions.configurationchanged +,,<span class="symbol">&amp;quot;</span>&#x27;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">Return</span>=<span class="string">&#x27;ignore&#x27;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>(this executes the <code>copy /b filename +,,</code> command, which is the Windows equivalent of Unix <code>touch</code>)</p>
+<p>This is an unofficial, unsupported scenario. But, this is what VSIX installer does, and I see no reason not to do this myself. Beware, and use at your own risk!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/01/fworking-in-githuba-slightly-better-workflow/" rel="prev" title="[FW]orking in Github - a slightly better workflow?">
+      <i class="fa fa-chevron-left"></i> [FW]orking in Github - a slightly better workflow?
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/03/how-nancy-made-net-web-development-fun/" rel="next" title="How Nancy made .NET Web development fun!">
+      How Nancy made .NET Web development fun! <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/";
+    this.page.identifier = "2014/03/installing-vsix-extension-via-msi-without-devenv-setup/";
+    this.page.title = "Installing a .vsix Extension via MSI without \"devenv /setup\"";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

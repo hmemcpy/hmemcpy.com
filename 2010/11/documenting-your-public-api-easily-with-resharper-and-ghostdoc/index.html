@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="In my previous post on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, Agent Smith, I briefly mentioned that the described trick can be used to aid docum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Documenting your public API easily with ReSharper and GhostDoc">
+<meta property="og:url" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="In my previous post on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, Agent Smith, I briefly mentioned that the described trick can be used to aid docum">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image1.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image2.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image3.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image4.png">
+<meta property="article:published_time" content="2010-11-17T14:54:10.000Z">
+<meta property="article:modified_time" content="2010-11-17T14:54:10.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image1.png">
+
+<link rel="canonical" href="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Documenting your public API easily with ReSharper and GhostDoc | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Documenting your public API easily with ReSharper and GhostDoc<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2010-11-17-documenting-your-public-api-easily-with-resharper-and-ghostdoc.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: November 17th, 2010 16:54:10" itemprop="dateCreated datePublished" datetime="2010-11-17T16:54:10+02:00">November 17th, 2010</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>In my <a href="/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/">previous post</a> on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, <a target="_blank" rel="noopener" href="http://code.google.com/p/agentsmithplugin/">Agent Smith</a>, I briefly mentioned that the described trick can be used to aid documenting the public API. Some people have asked me to elaborate, so here goes:</p>
+<span id="more"></span>
+
+<p>Typically, documented API should cover all public implementations, classes and interfaces. Visual Studio provides a mechanism called <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/magazine/cc302121.aspx">XML Comments</a>, which allows you to decorate your classes, methods, fields and properties with XML, and later generate documentation from those comments. A free add-in for Visual Studio called <a target="_blank" rel="noopener" href="http://submain.com/products/ghostdoc.aspx">GhostDoc</a> can assist documenting the API - by pressing a shortcut key (default is Ctrl-Shift-D) on any part of the class (i.e. methods, properties, etc.) it will generate a stub XML comment.</p>
+<blockquote><p>For best results, default comments generated by GhostDog should almost always be replaced with a proper description.<br><img src="/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image1.png" class=""></p>
+</blockquote>
+
+<p>Depending on your preferences, you may not want to document any internal implementation. For this example, we will find all public members (methods, fields, etc.), except in <code>internal</code> classes.</p>
+<p>After installing Agent Smith plug-in and GhostDoc (and optionally disabling Agent Smith’s built-in naming conventions, which might conflict with those of ReSharper), go to <strong>ReSharper Options - C# - Formatting style - Agent Smith code style settings</strong>, and remove all existing rules:</p>
+<img src="/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image2.png" class="">
+
+<p>Now press <strong>Add</strong> on the left hand side, and select <em>Public</em> under Visibility:</p>
+<img src="/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image3.png" class="">
+
+<p>This will create a rule called <strong>Public Declaration</strong>, and will be applied to any member (method, property, field, etc.) having <code>public</code> visibility.</p>
+<p>On the right hand side, under <em>Except</em>, press <strong>Add</strong> and add the following:</p>
+<img src="/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/image4.png" class="">
+
+<p>This will add the exception on internal classes.</p>
+<p>The steps above will add a suggestion <em>Public declaration should have XML comment.</em> to all matching members across the solution. In order to find all of them, use either the Code Issues Inspector, or turn Agent Smith’s <em>Members must have XML comment</em> suggestion in Inspection Severity to <em>Show as error</em>, and navigate the errors using ReSharper shortcut keys. Both methods are further detailed in my <a href="/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/">previous post</a>.</p>
+<p>Press Ctrl-Shift-D (or whatever is bound to GhostDoc’s <strong>Document This</strong> command) on each matching member, and give a proper description, replacing the default generated comment. Please view the <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/b2s063f7.aspx">XML Documentation Comments guide</a> on MSDN for best practices.</p>
+<p>Happy documenting!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/" rel="prev" title="Finding static fields in solution using ReSharper and Agent Smith plug-in">
+      <i class="fa fa-chevron-left"></i> Finding static fields in solution using ReSharper and Agent Smith plug-in
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2010/11/how-to-fix-visual-studio-2008-not-building-x64-c-projects/" rel="next" title="How to fix Visual Studio 2008 not building x64 C++ projects">
+      How to fix Visual Studio 2008 not building x64 C++ projects <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/";
+    this.page.identifier = "2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/";
+    this.page.title = "Documenting your public API easily with ReSharper and GhostDoc";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
