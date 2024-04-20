@@ -41,7 +41,7 @@ object MySpec extends DefaultRunnableSpec {                 // (1)
 2. The abstract value `spec` must be implemented here by providing it with a `suite` containing tests or additional (nested) suites.
 3. The `test`/`testM` definition describes tests that perform or don't any ZIO effects, respectively.
 4. Part of ZIO Test's in-memory implementations of base services, here---a test console allowing to capture the output as a `Vector[String]`
-5. The assertion syntax of [Smart Assertions](https://zio.dev/next/howto/migrate/zio-2.x-migration-guide/#smart-assertion), which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.
+5. The assertion syntax of [Smart Assertions](https://zio.dev/reference/test/assertions/smart-assertions/), which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.
 6. Additional tests or suites, separated by commas.
 
 # Anatomy of a ZIO Test
