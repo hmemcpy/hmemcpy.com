@@ -31,7 +31,7 @@ Both values are located after the first 32-bit integer value specifying the File
 
 ### The solution
 
-Armed with this knowledge, we can create a `Codec` to detect this encoding and expose it as a `java.nio.charset.Charset`. Fortunately, many scodec `string` combinators take `Charset` as an implicit parameter, allowing us to specify the encoding with which we wish to read the strings! The inspiration for this idea came from a [similar solution](https://github.com/scodec/scodec/blob/97e18b3f298397e670b7a99778eafdec76ea005e/unitTests/jvm/src/test/scala/scodec/examples/PcapExample.scala#L48)) of detecting byte ordering (endianness) in libpcap files.
+Armed with this knowledge, we can create a `Codec` to detect this encoding and expose it as a `java.nio.charset.Charset`. Fortunately, many scodec `string` combinators take `Charset` as an implicit parameter, allowing us to specify the encoding with which we wish to read the strings! The inspiration for this idea came from a [similar solution](https://github.com/scodec/scodec/blob/97e18b3f298397e670b7a99778eafdec76ea005e/unitTests/jvm/src/test/scala/scodec/examples/PcapExample.scala#L48) of detecting byte ordering (endianness) in libpcap files.
 
 We create the codec for `Charset` that tries to decode the two bytes and match them against a known pattern:
 
