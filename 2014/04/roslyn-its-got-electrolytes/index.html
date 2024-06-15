@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Roslyn! It&#39;s got Electrolytes!">
+<meta property="og:url" content="http://hmemcpy.com/2014/04/roslyn-its-got-electrolytes/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already sta">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2014-04-10T21:10:59.000Z">
+<meta property="article:modified_time" content="2014-04-10T21:10:59.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2014/04/roslyn-its-got-electrolytes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Roslyn! It's got Electrolytes! | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2014/04/roslyn-its-got-electrolytes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Roslyn! It's got Electrolytes!<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2014-04-11-roslyn-its-got-electrolytes.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: April 11th, 2014 00:10:59" itemprop="dateCreated datePublished" datetime="2014-04-11T00:10:59+03:00">April 11th, 2014</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2014/04/roslyn-its-got-electrolytes/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2014/04/roslyn-its-got-electrolytes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already started predicting the demise of ReSharper. It’s been a week or so, and JetBrains finally <a target="_blank" rel="noopener" href="http://blog.jetbrains.com/dotnet/2014/04/10/resharper-and-roslyn-qa/">posted a Q&amp;A</a> where they explain their reasons for <strong>not</strong> moving to Roslyn as predicted, at least not in the foreseeable future. Which, in turn, caused yet another sea of comments, both supporting and condemning the decision.</p>
+<span id="more"></span>
+
+<p>Now, why do I care?</p>
+<p>I’ve been a developer for Visual Studio tooling for a while now. Anyone who has ever attempted to build a Visual Studio extension knows very well the limitations of certain APIs. In particular, the Visual Studio automation model (called DTE) and the code model are both very old and sometimes unpredictable APIs. Other than MSDN and associated forums, the only sources of information are a handful of people with years of painful experience developing on top of those APIs. Asking a Visual Studio Extensibility question on StackOverflow will almost always yield an answer from the same handful of people. You get to know their names, avatars, and positions at various divisions at Microsoft, where they work or worked at some point.</p>
+<p>Needless to say, developing Visual Studio extensions is hard. It’s made harder because each Visual Studio version is different, has different features, and has little quirks. To maintain the same, consistent experience throughout all Visual Studio versions requires painstakingly maintain different versions of the same code base, using #if directives, partial classes, linked source files, duplicated files – the list goes on. It’s a <em>dark art</em>, known only to a few dozen people, and it’s been this way for a long time, until now.</p>
+<p>Enter Roslyn.</p>
+<p>When Roslyn was publicly announced in 2011, it promised to change that. Initially described as a <em>compiler-as-a-service</em>, Roslyn became a promise of a better way developers could interact with what is traditionally a <em>black box</em>. This vast process happens behind the scenes in Visual Studio. Developers now have a chance to use a modern, clean API to do things previously considered impossible on the .NET platform - from <a target="_blank" rel="noopener" href="http://scriptcs.net/">turning C# into a scripting language</a> and <a target="_blank" rel="noopener" href="https://twitter.com/csainty/status/452119982411743232">compiling C# in Swedish</a> to creating <em>quick-fixes</em> and refactorings easily. It’s so easy, in fact, that Dustin Campbell did it <a target="_blank" rel="noopener" href="https://channel9.msdn.com/Events/Build/2014/2-577">live on stage</a> at Build in about 15 minutes, which was previously unheard of!</p>
+<p>The possibilities now open to .NET developers are endless, but so are the realities, which is this post’s point (if any). First, let’s peek into the Roslyn box. Roslyn, officially known as the .NET Compiler Platform, is comprised of several parts, mainly the compiler model (syntax tree and semantic model, code parsers, and generators) and a set of diagnostic APIs for building analysis tools, refactorings, and quick-fixes. These APIs are open-source and are available for everyone.</p>
+<p>However, a second part of the Roslyn story is the Visual Studio integration and features, currently in the Preview stages. Those are <strong>not</strong> currently open source, and it’s unknown whether they will be at some later stage (<strong>Update</strong>: the Visual Studio integration APIs were <a target="_blank" rel="noopener" href="https://github.com/dotnet/roslyn/tree/master/src/VisualStudio">open-sourced</a> as well). Those include base types and internal implementations of refactorings and quick-fixes that ship with the Preview, as well as numerous services tied directly to core services such as debugger, code editor, and other Visual Studio internals. You can read a great overview of what’s in the Roslyn box in <a target="_blank" rel="noopener" href="http://blog.slaks.net/2014-04-07/exploring-roslyn-part-1-introduction/">this post</a> by Schabse Laks (another name in the <em>dark art</em> crowd).</p>
+<p>So, what does this have to do with ReSharper? Well, simply put, for almost a decade ReSharper provided Visual Studio users with features that were only available on other platforms other IDEs. Over the years, as new Visual Studio versions got some of ReSharper’s features built into it, ReSharper relentlessly continued to innovate with better static analyses and code fixes, while ensuring all those innovations were all supported in older versions of Visual Studio. The latest version of ReSharper (v8.2 at the time of writing) supports almost all the same features on Visual Studio 2005 throughout 2013.</p>
+<p>As someone who understands the intricacies of supporting different versions and architectures of Visual Studio I am <em>dumbfounded</em> by the amount engineering effort that went into this. Years of abstracting, refining and stabilizing the layers that make Visual Studio disappear completely, from ReSharper’s point of view, allowing creating plugins for ReSharper that will <em>just work</em> on all supported Visual Studio versions. And if you need to find out how something works? Decompile it! They <em>want</em> you to do it, and even give you a tool for this.</p>
+<p>So, should ReSharper switch to Roslyn? JetBrains don’t think so. I don’t think so; why would they? ReSharper’s <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vnXOAWoNADw&t=1m17s">already got a George</a> - the entire ecosystem has been there for a decade and constantly improved. You don’t just replace it. As developers, we tend to jump on the new shiny, but honestly, how often do you switch out your database? Architecturally, Roslyn and ReSharper differ enough to make this change infeasible, not to mention dangerous - it would require almost a <em>complete rewrite</em> of ReSharper, and as Joel once said, this is something <a target="_blank" rel="noopener" href="http://www.joelonsoftware.com/articles/fog0000000069.html">you should never do</a>.</p>
+<p>In conclusion, if imitation is the best form of flattery, the guys over at JetBrains are plenty adulated. The internet is abuzz with talks of Roslyn and ReSharper, which must also be good for SEO. However, ReSharper isn’t going anywhere. They will continue to do what they do best. And Roslyn? Roslyn will allow developers previously afraid of <em>black boxes</em> to develop great tools for their fellow developers. Out of thin air, I predict that within two years, there will be an explosion of productivity tooling in Visual Studio galaxy, and we’re witnessing its birth. But time will tell.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/03/how-nancy-made-net-web-development-fun/" rel="prev" title="How Nancy made .NET Web development fun!">
+      <i class="fa fa-chevron-left"></i> How Nancy made .NET Web development fun!
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2014/04/how-to-remap-calc-exe-to-scriptcs-exe/" rel="next" title="How to remap calc.exe to scriptcs.exe">
+      How to remap calc.exe to scriptcs.exe <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2014/04/roslyn-its-got-electrolytes/";
+    this.page.identifier = "2014/04/roslyn-its-got-electrolytes/";
+    this.page.title = "Roslyn! It's got Electrolytes!";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
