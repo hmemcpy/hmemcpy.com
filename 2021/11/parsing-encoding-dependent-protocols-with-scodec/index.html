@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="At work, we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how che">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Parsing character encoding-dependent protocols with scodec in Scala">
+<meta property="og:url" content="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="At work, we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how che">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/x9-ebcdic.png">
+<meta property="og:image" content="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/x9-ascii.png">
+<meta property="article:published_time" content="2021-11-19T11:29:31.000Z">
+<meta property="article:modified_time" content="2021-11-19T11:29:31.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/x9-ebcdic.png">
+
+<link rel="canonical" href="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Parsing character encoding-dependent protocols with scodec in Scala | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Parsing character encoding-dependent protocols with scodec in Scala<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2021-11-19-parsing-encoding-dependent-protocols-with-scodec.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: November 19th, 2021 13:29:31" itemprop="dateCreated datePublished" datetime="2021-11-19T13:29:31+02:00">November 19th, 2021</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/11/parsing-encoding-dependent-protocols-with-scodec/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/11/parsing-encoding-dependent-protocols-with-scodec/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>At <a target="_blank" rel="noopener" href="https://unit.co/">work</a>, we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or checks, for the US folks) are transmitted electronically between financial institutions.</p>
+<p>X9.37 is one such archaic binary protocol still in use today. The specification allows this file to be encoded either in the 8-bit IBM <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/EBCDIC">EBCDIC</a> encoding or ASCII, and it contains both plain-text characters as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called <a target="_blank" rel="noopener" href="https://github.com/scodec/scodec">scodec</a>, a combinator library for creating codecs for binary data. I recommend reading about the library and getting familiarized with the syntax before reading further.</p>
+<span id="more"></span>
+
+<h3 id="The-problem"><a href="#The-problem" class="headerlink" title="The problem"></a>The problem</h3><p>Since both encodings are 8-bit, there’s no way to distinguish between the files by size or contents. Fortunately, the specification explains how to detect the encoding:</p>
+<blockquote><p>The coding scheme may be verified by inspecting the first two characters of<br>the X9.37 file that have the value ‘01’ (File Header Record Type 01, Field 1).</p>
+<p>The value ‘01’ is defined in EBCDIC with the hexadecimal value ‘F0F1’<br>and in ASCII with the hexadecimal value ‘3031’.</p>
+</blockquote>
+
+<p>And indeed, inspecting such files in a hex editor reveals this difference:</p>
+<table>
+<thead>
+<tr>
+<th>EBCDIC</th>
+<th>ASCII</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/2021/11/parsing-encoding-dependent-protocols-with-scodec/x9-ebcdic.png" class="" title="This is an example image"></td>
+<td><img src="/2021/11/parsing-encoding-dependent-protocols-with-scodec/x9-ascii.png" class="" title="This is an example image"></td>
+</tr>
+</tbody></table>
+<p>Both values are located after the first 32-bit integer value specifying the File Header Record length (always 0x50).</p>
+<h3 id="The-solution"><a href="#The-solution" class="headerlink" title="The solution"></a>The solution</h3><p>Armed with this knowledge, we can create a <code>Codec</code> to detect this encoding and expose it as a <code>java.nio.charset.Charset</code>. Fortunately, many scodec <code>string</code> combinators take <code>Charset</code> as an implicit parameter, allowing us to specify the encoding with which we wish to read the strings! The inspiration for this idea came from a <a target="_blank" rel="noopener" href="https://github.com/scodec/scodec/blob/97e18b3f298397e670b7a99778eafdec76ea005e/unitTests/jvm/src/test/scala/scodec/examples/PcapExample.scala#L48">similar solution</a> of detecting byte ordering (endianness) in libpcap files.</p>
+<p>We create the codec for <code>Charset</code> that tries to decode the two bytes and match them against a known pattern:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.nio.charset.&#123;<span class="type">Charset</span>, <span class="type">StandardCharsets</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">implicit</span> <span class="keyword">val</span> charsetCodec: <span class="type">Codec</span>[<span class="type">Charset</span>] = <span class="keyword">new</span> <span class="type">Codec</span>[<span class="type">Charset</span>] &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> <span class="type">EbcdicEncoding</span> = <span class="number">0xF0F1</span>.toShort <span class="comment">// &quot;01&quot; in EBCDIC (IBM037)</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> <span class="type">AsciiEncoding</span> = <span class="number">0x3031</span>.toShort <span class="comment">// &quot;01&quot; in ASCII (US_ASCII)</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">sizeBound</span></span>: <span class="type">SizeBound</span> = <span class="type">SizeBound</span>.exact(<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">encode</span></span>(charset: <span class="type">Charset</span>): <span class="type">Attempt</span>[<span class="type">BitVector</span>] =</span><br><span class="line">    string(charset).encode(<span class="string">&quot;01&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">decode</span></span>(bits: <span class="type">BitVector</span>): <span class="type">Attempt</span>[<span class="type">DecodeResult</span>[<span class="type">Charset</span>]] =</span><br><span class="line">    (ignore(<span class="number">32</span>) ~&gt; short16).decode(bits).flatMap &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="type">DecodeResult</span>(<span class="type">EbcdicEncoding</span>, _) =&gt; <span class="type">Attempt</span>.successful(<span class="type">DecodeResult</span>(<span class="type">Charset</span>.forName(<span class="string">&quot;IBM037&quot;</span>), bits))</span><br><span class="line">      <span class="keyword">case</span> <span class="type">DecodeResult</span>(<span class="type">AsciiEncoding</span>, _)  =&gt; <span class="type">Attempt</span>.successful(<span class="type">DecodeResult</span>(<span class="type">StandardCharsets</span>.<span class="type">US_ASCII</span>, bits))</span><br><span class="line">      <span class="keyword">case</span> <span class="type">DecodeResult</span>(other, _) =&gt;</span><br><span class="line">        <span class="keyword">val</span> hex = (other &amp; <span class="number">0xffff</span>).toHexString.toUpperCase</span><br><span class="line">        <span class="type">Attempt</span>.failure(</span><br><span class="line">          <span class="type">Err</span>(<span class="string">s&quot;Unable to detect the encoding using the values 0xF0F1 (EBCDIC) or 0x3031 (ASCII), found: 0x<span class="subst">$hex</span>&quot;</span>)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This codec will now be passed implicitly to all other codecs requiring an implicit <code>Charset</code>, allowing us to decode the strings correctly for both encoding types!</p>
+<h4 id="Bonus-decoding-a-list-of-unknown-length"><a href="#Bonus-decoding-a-list-of-unknown-length" class="headerlink" title="Bonus: decoding a list of unknown length"></a>Bonus: decoding a list of unknown length</h4><p>In the most simplified form, the X9.37 protocol contains record sections, and each section contains a Header record, followed by several data records and a Control record containing checksums and other verification information. Here’s an example in ASCII art form:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">    ┌────────────────────────┬────────────────────────┐</span><br><span class="line">    │                        │                        │</span><br><span class="line">┌───┴────┐               ┌───┴───┐               ┌────┴───┐</span><br><span class="line">│File    │               │┌──────┼┐              │File    │</span><br><span class="line">│Header  │               ││Cash  ││              │Control │</span><br><span class="line">│Record  │               ││Letter││              │Record  │</span><br><span class="line">└────────┘               └┼──────┘│              └────────┘</span><br><span class="line">                          └───────┘</span><br></pre></td></tr></table></figure>
+
+<p>Unfortunately, the protocol specifies neither in the Header nor Control records the actual number of these Cash Letter records, and all scodec combinators I found that deal with lists expect to take a number specifying the number of items to decode.</p>
+<p>After a few iterations, I came up with the following function that tries to read a list of unknown size, and when it fails - returns the number of items it read so far:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Decodes a list of unknown size, until the first failure, in which case returns the number of successful items.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tryList</span></span>[<span class="type">A</span>](codec: <span class="type">Codec</span>[<span class="type">A</span>]): <span class="type">Codec</span>[<span class="type">List</span>[<span class="type">A</span>]] = <span class="keyword">new</span> <span class="type">Codec</span>[<span class="type">List</span>[<span class="type">A</span>]] &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> unboundedList = list(codec)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">sizeBound</span> </span>= unboundedList.sizeBound</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">encode</span></span>(list: <span class="type">List</span>[<span class="type">A</span>]) = unboundedList.encode(list)</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">decode</span></span>(buffer: <span class="type">BitVector</span>) =</span><br><span class="line">    unboundedList.decode(buffer) <span class="keyword">match</span> &#123;</span><br><span class="line">      <span class="keyword">case</span> s @ <span class="type">Attempt</span>.<span class="type">Successful</span>(_) =&gt; s</span><br><span class="line">      <span class="keyword">case</span> e @ <span class="type">Attempt</span>.<span class="type">Failure</span>(err) =&gt;</span><br><span class="line">        err.context <span class="keyword">match</span> &#123;</span><br><span class="line">          <span class="keyword">case</span> count :: _ =&gt; listOfN(provide(count.toInt), codec).decode(buffer)</span><br><span class="line">          <span class="keyword">case</span> _          =&gt; e</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This did the job (and also got a thumbs up from Michael Pilquist, the creator of scodec, on the <a target="_blank" rel="noopener" href="https://discord.gg/wKn3cpfRVz">scodec Discord</a>!</p>
+<p>Finally, we can parse the X9.37 file using this top-level definition:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">X937File</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="class">  encoding: <span class="type">Charset</span>,</span></span></span><br><span class="line"><span class="params"><span class="class">  header: <span class="type">FileHeader</span>,</span></span></span><br><span class="line"><span class="params"><span class="class">  cashLetters: <span class="type">List</span>[<span class="type">CashLetter</span>],</span></span></span><br><span class="line"><span class="params"><span class="class">  control: <span class="type">FileControl</span></span></span></span><br><span class="line"><span class="params"><span class="class"></span>)</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">X937File</span> </span>&#123;</span><br><span class="line">  <span class="keyword">import</span> scala.util.<span class="type">Using</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> codec: <span class="type">Codec</span>[<span class="type">X937File</span>] =</span><br><span class="line">    <span class="string">&quot;X9.37 File&quot;</span>        | &#123;</span><br><span class="line">      (<span class="string">&quot;Charset&quot;</span>        | <span class="type">Codec</span>[<span class="type">Charset</span>]).flatPrepend &#123; <span class="keyword">implicit</span> charset =&gt;</span><br><span class="line">      	(<span class="string">&quot;File Header&quot;</span>  | <span class="type">Codec</span>[<span class="type">FileHeader</span>]) ::</span><br><span class="line">      	(<span class="string">&quot;Cash Letters&quot;</span> | tryList(<span class="type">Codec</span>[<span class="type">CashLetter</span>])) ::</span><br><span class="line">      	(<span class="string">&quot;File Control&quot;</span> | <span class="type">Codec</span>[<span class="type">FileControl</span>])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;.as[<span class="type">X937File</span>]</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">read</span></span>(file: <span class="type">File</span>): <span class="type">Either</span>[<span class="type">Throwable</span>, <span class="type">X937File</span>] =</span><br><span class="line">    <span class="type">Using</span>(<span class="keyword">new</span> <span class="type">FileInputStream</span>(file))(read).toEither.flatten</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">read</span></span>(in: <span class="type">InputStream</span>): <span class="type">Either</span>[<span class="type">Throwable</span>, <span class="type">X937File</span>] = &#123;</span><br><span class="line">    <span class="keyword">val</span> bv = <span class="type">BitVector</span>.fromInputStream(in)</span><br><span class="line">    codec.decodeValue(bv).toTry.toEither</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Implementations of <code>FileHeader</code>, <code>CashLetter</code>, <code>FileControl</code> and others are left as an exercise to the reader 😄</p>
+<p>Happy parsing!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/bsp-and-intellij/" rel="prev" title="Using BSP effectively in IntelliJ and Scala">
+      <i class="fa fa-chevron-left"></i> Using BSP effectively in IntelliJ and Scala
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/working-with-shared-dependencies-in-zio-test/" rel="next" title="Working with shared dependencies in ZIO Test">
+      Working with shared dependencies in ZIO Test <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-problem"><span class="nav-number">1.</span> <span class="nav-text">The problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-solution"><span class="nav-number">2.</span> <span class="nav-text">The solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bonus-decoding-a-list-of-unknown-length"><span class="nav-number">2.1.</span> <span class="nav-text">Bonus: decoding a list of unknown length</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2021/11/parsing-encoding-dependent-protocols-with-scodec/";
+    this.page.identifier = "2021/11/parsing-encoding-dependent-protocols-with-scodec/";
+    this.page.title = "Parsing character encoding-dependent protocols with scodec in Scala";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

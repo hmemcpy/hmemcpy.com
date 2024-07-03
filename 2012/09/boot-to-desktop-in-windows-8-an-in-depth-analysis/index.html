@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the classic Start Menu, and replacing it with the new MetroStart screen. Furthermore, Microsoft made">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boot to desktop in Windows 8: An in-depth analysis">
+<meta property="og:url" content="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the classic Start Menu, and replacing it with the new MetroStart screen. Furthermore, Microsoft made">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/image1.png">
+<meta property="og:image" content="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/image2.png">
+<meta property="article:published_time" content="2012-09-08T17:40:30.000Z">
+<meta property="article:modified_time" content="2012-09-08T17:40:30.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/image1.png">
+
+<link rel="canonical" href="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Boot to desktop in Windows 8: An in-depth analysis | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">91</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Boot to desktop in Windows 8: An in-depth analysis<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2012-09-08-boot-to-desktop-in-windows-8-an-in-depth-analysis.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: September 8th, 2012 20:40:30" itemprop="dateCreated datePublished" datetime="2012-09-08T20:40:30+03:00">September 8th, 2012</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the <em>classic</em> Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 - it must be done via the new Start screen too.</p>
+<span id="more"></span>
+
+<p>I was told on twitter that the new Windows Server 2012 does boot into desktop by default. This made me very curious, and I decided to try and figure out the differences in the two operating systems myself. Below are my findings:</p>
+<p>(Here’s the <strong>TL;DR</strong> version: Windows Server 2012 indeed boots into desktop by default. Upon installing the <em>Desktop Experience</em> feature in Windows Server 2012, and after the subsequent reboot, it will no longer boot into desktop, but rather into the Start screen, just like Windows 8. However, there exists a registry key, which allows changing this behavior, and booting into desktop even with the Desktop Experience enabled.</p>
+<p>On Windows 8, however, this registry key is not being read, so there is currently no way to <em>natively</em> boot into desktop, without using some 3<sup>rd</sup> party software)</p>
+<p><code>/output:verbose</code></p>
+<p>Longer version: I decided to try and find out what happens during logon into Windows Server 2012, after a new install. I installed the trial version on a virtual machine, set a password for the Administrator account during setup. After the first login, I found myself in the desktop, and the Server Manager was launched automatically. I decided to turn off the automatic start in the settings.</p>
+<p>My next step was to take a <em>snapshot</em> of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job - <a target="_blank" rel="noopener" href="http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx">Process Monitor</a> by Sysinternals, I turned on <strong>Enable Boot Logging</strong>, located under Options, then rebooted Windows Server.</p>
+<img src="/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/image1.png" class="">
+
+<p>After the reboot, I launched Process Monitor again, and was prompted to save the results of the boot logging into a PML file. I closed Process Monitor, and proceeded <a target="_blank" rel="noopener" href="http://www.win2012workstation.com/desktop-experience/">installing the Desktop Experience</a> in the Server Manager, but not before I took a VM snapshot of the current system state. The system needed to reboot, and once everything had finished installing, upon login I was presented with the new Start screen (having some new icons in it, mainly the Windows Store, and other <em>client</em> utilities.</p>
+<p>Turning on boot logging again in Process Monitor I rebooted the system again, and after login saved the new results into another PML file. The new file was significantly larger than the previous, probably having to do with new files added to the system. I saved another system snapshot, and reverted to pre-Desktop Experience. What I wanted to do is to see the new files that were added&#x2F;changed in the system. In order to do that, used the good *˜ol <strong>dir &#x2F;s</strong> command to list all files in the Windows directory, and its subdirectories, piping the output to a text file. I did the same after reverting to the post-Desktop Experience snapshot. I then loaded the two text files into my favorite diff tool, <a target="_blank" rel="noopener" href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare</a>, and proceeded to carefully look at the differences.</p>
+<p>Many files, having to do with <em>client</em> applications, were added to miscellaneous directories under Windows. There were additional references to something that is called <strong>Immersive.UI</strong>. I knew that sounded familiar, so I opened the two PML files side by side, and started looking for <em>Immersive</em>. After several identical results, I found a single difference between the two snapshots: a call by <strong>explorer.exe</strong> to a registry key called <strong>ClientExperienceEnabled</strong>, located at</p>
+<pre>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Server</pre>
+
+<p>On the Desktop Experience snapshot it had the value 1, and on the pre-Desktop Experience it was 0. Using Process Monitor, I <strong>Jumped To</strong> the registry key, and tried setting it to 0. I was prompted that I did not have permission to change that value, even though I was an administrator on the system. I right-clicked on the parent key in Registry Editor, and selected <strong>Permissions</strong>. It turns out that the key’s permissions were set to TrustedInstaller, meaning that the key can be only set by the operating system. I clicked <strong>Advanced</strong>, and changed the ownership to the Administrators group. Surprisingly, the system accepted the change, and I was then able to set the key’s value to 0.</p>
+<p><strong>After rebooting, when I logged in, I was back in the desktop, even with the Desktop Expreience enabled!</strong></p>
+<p>Unfortunately, this trick does not work on Windows 8. Having done the same boot logging for Windows 8, I did not see any calls to the <code>ClientExperienceEnabled</code> key. Back in Windows Server, I wanted to know exactly who is responsible for calling that key. In Process Monitor, I double clicked on the line to bring up the <strong>Event Properties</strong> dialog, then went to the <strong>Stack</strong> tab.</p>
+<img src="/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/image2.png" class="">
+
+<p>The Stack tab shows the call stack for the particular event, the pink <span style="color: #ff00ff;"><strong>K</strong></span> specifies a kernel-mode calls, and the blue <span style="color: #0000ff;"><strong>U</strong></span> specifies user-mode calls, which what I was looking for. It showed, that the calls to the registry were made by <strong>twinui.dll</strong>, a file that, turns out, exists in both Windows Server 2012 and Windows 8, however it’s not being called in Windows 8.</p>
+<p>At this point I’ll skip the gory details and give you the bottom line: <strong>twinui.dll</strong> (and several others) checks for several things:</p>
+<ul>
+<li>that we’re running in a Windows Server (by calling the <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms724385.aspx">GetSystemMetrics</a> API)</li>
+<li>that we are licensed for a feature called <strong>explorer-ClientLoginExperienceAllowed</strong> (by using the <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa965835.aspx">SLGetWindowsInformationDWORD</a> API, which is a part of the Windows <a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/cc296101.aspx">Software Licensing API</a>, responsible for querying the licensed system features<sup>[1]</sup></li>
+<li>that the registry key mentioned above exists, if the two conditions above are true</li>
+</ul>
+<p>In conclusion, without modifying protected system files, or otherwise modifying the system to trick <strong>twinui.dll</strong> into thinking we’re running on Windows Server, it’s currently not possible to have Windows 8 boot into desktop. There are several <a target="_blank" rel="noopener" href="http://www.howtogeek.com/118106/go-directly-to-desktop-mode-in-windows-8-on-login-without-installing-extra-software/">tricks</a> and <a target="_blank" rel="noopener" href="http://retroui.com/">utilities</a> that force Windows 8 into desktop after login, but a <em>native</em> way is currently not possible.</p>
+<hr>
+<p><sup>[1]</sup> A few words on the Windows Licensing model: Windows stores system features in a registry key called <a target="_blank" rel="noopener" href="http://technet.microsoft.com/en-us/library/cc727898.aspx"><strong>ProductOptions</strong></a>, located in</p>
+<pre>HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions</pre>
+
+<p>This key is protected by the operating system, and attempting to change its contents not only results in a Stop Error (<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff559317(v=vs.85).aspx">bug check code 0x9A</a>), it violates the Windows license agreement, disqualifying you from receiving Microsoft Support.</p>
+<p>Some information about how to <strong><em>read</em></strong> the Product Options is available <a target="_blank" rel="noopener" href="http://www.remkoweijnen.nl/blog/2010/06/15/having-fun-with-windows-licensing/">here</a>.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2012/06/jetbrains-nemerle-limitless-potential/" rel="prev" title="JetBrains + Nemerle = Limitless Potential!">
+      <i class="fa fa-chevron-left"></i> JetBrains + Nemerle = Limitless Potential!
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2012/09/installing-windows-8-on-hp-elitebook-8570w/" rel="next" title="Installing Windows 8 on HP EliteBook 8570w">
+      Installing Windows 8 on HP EliteBook 8570w <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/";
+    this.page.identifier = "2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/";
+    this.page.title = "Boot to desktop in Windows 8: An in-depth analysis";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
