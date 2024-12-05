@@ -102,7 +102,7 @@ def tryList[A](codec: Codec[A]): Codec[List[A]] = new Codec[List[A]] {
 }
 ```
 
-This did the job (and also got a thumbs up from Michael Pilquist, the creator of scodec, on the [scodec Discord](https://discord.gg/wKn3cpfRVz)!
+This did the job, and also got a thumbs up from Michael Pilquist, the creator of scodec, on the [scodec Discord](https://discord.gg/wKn3cpfRVz)!
 
 Finally, we can parse the X9.37 file using this top-level definition:
 
