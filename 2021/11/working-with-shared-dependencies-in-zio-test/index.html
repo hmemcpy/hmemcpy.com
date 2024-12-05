@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="ZIO Test is a testing library in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular—dependency">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Working with shared dependencies in ZIO Test">
+<meta property="og:url" content="http://hmemcpy.com/2021/11/working-with-shared-dependencies-in-zio-test/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="ZIO Test is a testing library in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular—dependency">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-20T08:08:54.000Z">
+<meta property="article:modified_time" content="2021-11-20T08:08:54.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2021/11/working-with-shared-dependencies-in-zio-test/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Working with shared dependencies in ZIO Test | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">90</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2021/11/working-with-shared-dependencies-in-zio-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Working with shared dependencies in ZIO Test<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2021-11-20-working-with-shared-dependencies-in-zio-test.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: November 20th, 2021 10:08:54" itemprop="dateCreated datePublished" datetime="2021-11-20T10:08:54+02:00">November 20th, 2021</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/11/working-with-shared-dependencies-in-zio-test/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/11/working-with-shared-dependencies-in-zio-test/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>ZIO Test is a <a target="_blank" rel="noopener" href="https://zio.dev/datatypes/test/">testing library</a> in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular—dependency management via the environment.</p>
+<p>In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let’s understand how ZIO Test works under the hood.</p>
+<span id="more"></span>
+
+<p>If you’re already familiar with ZIO Test and Test Aspects, feel free to <a href="#Modifying-shared-dependencies-for-each-test">skip to the last section</a>.</p>
+<h1 id="Introduction-to-ZIO-Test"><a href="#Introduction-to-ZIO-Test" class="headerlink" title="Introduction to ZIO Test"></a>Introduction to ZIO Test</h1><blockquote>
+<p><strong>Note</strong>: the following applies to ZIO 1.x. ZIO 2.0 introduces significant syntactic changes to the structure of the tests, though most details about the internals still apply.</p>
+</blockquote>
+<p>While ZIO Test (zio-test) is the library name, the tests themselves are broken into two categories: <em>Suites</em> and <em>Tests</em>. Suites are containers of tests; each suite may contain 0 or more tests inside of it. </p>
+<p>Here is the canonical “Hello world” ZIO Test. Let’s break it down:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zio.console._</span><br><span class="line"><span class="keyword">import</span> zio.test._</span><br><span class="line"><span class="keyword">import</span> zio.test.environment.<span class="type">TestConsole</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MySpec</span> <span class="keyword">extends</span> <span class="title">DefaultRunnableSpec</span> </span>&#123;                 <span class="comment">// (1)</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">spec</span> </span>= suite(<span class="string">&quot;My spec&quot;</span>)(                              <span class="comment">// (2)</span></span><br><span class="line">    testM(<span class="string">&quot;Hello world&quot;</span>) &#123;                                  <span class="comment">// (3)</span></span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">        _     &lt;- putStrLn(<span class="string">&quot;Hello world!&quot;</span>)</span><br><span class="line">        lines &lt;- <span class="type">TestConsole</span>.output                         <span class="comment">// (4)</span></span><br><span class="line">      &#125; <span class="keyword">yield</span> assertTrue(lines.contains(<span class="string">&quot;Hello world!\n&quot;</span>))  <span class="comment">// (5)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...                                                     <span class="comment">// (6)</span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>In ZIO Test, it’s common to refer to suites of tests as Specs, here we extend <code>DefaultRunnableSpec</code> which is responsible for several things. More on that later.</li>
+<li>The abstract value <code>spec</code> must be implemented here by providing it with a <code>suite</code> containing tests or additional (nested) suites.</li>
+<li>The <code>test</code>&#x2F;<code>testM</code> definition describes tests that perform or don’t any ZIO effects, respectively.</li>
+<li>Part of ZIO Test’s in-memory implementations of base services, here—a test console allowing to capture the output as a <code>Vector[String]</code></li>
+<li>The assertion syntax of <a target="_blank" rel="noopener" href="https://zio.dev/reference/test/assertions/smart-assertions/">Smart Assertions</a>, which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.</li>
+<li>Additional tests or suites, separated by commas.</li>
+</ol>
+<h1 id="Anatomy-of-a-ZIO-Test"><a href="#Anatomy-of-a-ZIO-Test" class="headerlink" title="Anatomy of a ZIO Test"></a>Anatomy of a ZIO Test</h1><p>Most specs will typically extend <a target="_blank" rel="noopener" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/DefaultRunnableSpec.scala#L28"><code>DefaultRunnableSpec</code></a>, a base class provided by the ZIO Test library, which is, in fact, a <em>standalone application</em>, implementing a <code>main()</code> method, which means it can be executed on the command line from <code>java -jar</code>. <code>DefaultRunnableSpec</code> extends a base trait <code>RunnableSpec[R, E]</code>, providing it with a common <code>TestEnvironment</code> in <code>R</code>:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> <span class="title">TestEnvironment</span> </span>=</span><br><span class="line">  <span class="type">Annotations</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">Live</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">Sized</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">TestClock</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">TestConfig</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">TestConsole</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">TestRandom</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">TestSystem</span></span><br><span class="line">    <span class="keyword">with</span> <span class="type">ZEnv</span></span><br></pre></td></tr></table></figure>
+
+<p>The <code>TestEnvironment</code> is comprised of test implementations for all services required by <code>ZEnv</code>, in addition to test-specific services such as a <code>TestConsole</code> for capturing and manipulating console output, <code>TestClock</code> for setting and controlling the passage of time, and others.</p>
+<p>Under the hood, the <code>RunnableSpec</code> implementation calls the actual <a target="_blank" rel="noopener" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestRunner.scala#L42"><code>TestRunner</code></a> instance associated with it, which runs the tests in the spec <em>in parallel</em> (with up to 4 tests by default), and each test is executed by a <a target="_blank" rel="noopener" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestExecutor.scala#L34-L36"><code>TestExecutor</code></a>:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span></span>(spec: <span class="type">ZSpec</span>[<span class="type">R</span>, <span class="type">E</span>], defExec: <span class="type">ExecutionStrategy</span>): <span class="type">UIO</span>[<span class="type">ExecutedSpec</span>[<span class="type">E</span>]] =</span><br><span class="line">  spec.annotated</span><br><span class="line">    .provideLayer(environment)</span><br><span class="line">    .foreachExec(defExec) ...</span><br><span class="line">  ... </span><br></pre></td></tr></table></figure>
+
+<p>Here, the <code>environment</code> is the “live” instance of our <code>TestEnvironment</code>, and it is provided to the spec using <code>provideLayer</code> (non-shared), which means that each test <em>gets a fresh copy</em> of the environment! It makes sense since we don’t want to re-use the <code>Random</code> instance, for example, between two tests, so each test gets a fresh copy of Random.</p>
+<p>If we want to share a (stateful) value&#x2F;service between the tests in the suite (for integration purposes, for instance), we need to provide it as <em>shared</em>, using one of the <code>provide*Shared</code> variants.</p>
+<h1 id="Using-shared-dependencies-in-ZIO-Test"><a href="#Using-shared-dependencies-in-ZIO-Test" class="headerlink" title="Using shared dependencies in ZIO Test"></a>Using shared dependencies in ZIO Test</h1><p>For illustration, here’s what using a shared value between tests looks like:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MySharedService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> live: <span class="type">ULayer</span>[<span class="type">Has</span>[<span class="type">UUID</span>]] = <span class="type">UIO</span>(<span class="type">UUID</span>.randomUUID()).toLayer    <span class="comment">// (1)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MySpec</span> <span class="keyword">extends</span> <span class="title">DefaultRunnableSpec</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">spec</span> </span>= suite(<span class="string">&quot;My suite&quot;</span>)(</span><br><span class="line">    testM(<span class="string">&quot;test1&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">        uuid &lt;- <span class="type">ZIO</span>.service[<span class="type">UUID</span>]                                 <span class="comment">// (2)</span></span><br><span class="line">        _    &lt;- putStrLn(uuid.toString)</span><br><span class="line">      &#125; <span class="keyword">yield</span> assertCompletes</span><br><span class="line">    &#125;,</span><br><span class="line">    testM(<span class="string">&quot;test2&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">        uuid &lt;- <span class="type">ZIO</span>.service[<span class="type">UUID</span>]                                 <span class="comment">// (2)</span></span><br><span class="line">        _    &lt;- putStrLn(uuid.toString)</span><br><span class="line">      &#125; <span class="keyword">yield</span> assertCompletes</span><br><span class="line">    &#125;</span><br><span class="line">  ).provideSomeLayerShared[<span class="type">TestEnvironment</span>](<span class="type">MySharedService</span>.live) <span class="comment">// (3)</span></span><br></pre></td></tr></table></figure>
+
+<p>Here we’re doing the following:</p>
+<ol>
+<li>A service layer definition. Here we’re using <code>UUID</code> as the service for illustration</li>
+<li>Get the UUID service (causing the test to require <code>Has[UUID]</code> in addition to <code>TestEnvironment</code>) and print it out to the console</li>
+<li>Provide the UUID service layer as a partial <em>shared</em> layer, satisfying&#x2F;eliminating the requirement for <code>Has[UUID]</code></li>
+</ol>
+<p>The last point is often a source of confusion, so let’s expand on it:</p>
+<p>In ZIO, the <code>provide*Some*</code> variants are used to satisfy&#x2F;eliminate partial requirements and specify the <em>remainder</em> to be satisfied by the caller, higher up. In our example above, our tests have the type</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="type">ZIO</span>[<span class="type">TestEnvironment</span>, <span class="type">E</span>, zio.test.<span class="type">TestResult</span>]</span><br></pre></td></tr></table></figure>
+<p>but requiring <code>Has[UUID]</code> (due to the use of <code>ZIO.service</code>) caused it to be typed as:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="type">ZIO</span>[<span class="type">TestEnvironment</span> <span class="keyword">with</span> <span class="type">Has</span>[<span class="type">UUID</span>], <span class="type">E</span> ,zio.test.<span class="type">TestResult</span>]</span><br></pre></td></tr></table></figure>
+
+<p>To (partially) satisfy this requirement, we can provide the <code>Has[UUID]</code> part ourselves, and the remaining <code>TestEnvironment</code> will be provided by the <code>DefaultRunnableSpec</code> itself.</p>
+<p>Finally, by using the <code>provideSomeLayerShared</code> variant on the <em>suite</em> level, we’re providing a layer that is <em>shared</em> between all the tests in that suite, and if we run this spec, we will see that the output is as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Testing started at 15:20 ...</span><br><span class="line">fc71c273-3824-46b2-8929-409544a19fa5</span><br><span class="line">fc71c273-3824-46b2-8929-409544a19fa5</span><br></pre></td></tr></table></figure>
+
+<p>This means that the service layer was created just once (creating a single UUID value), and all tests now accessing this value get the same one! What actually happens is that each test in the suite gets a <em>copy</em> of the suite’s environment, along with any shared values in it.</p>
+<h1 id="Modifying-shared-dependencies-for-each-test"><a href="#Modifying-shared-dependencies-for-each-test" class="headerlink" title="Modifying shared dependencies for each test"></a>Modifying shared dependencies for each test</h1><p>Now that we know how to provide shared dependencies to tests, sometimes there’s a need to modify a value&#x2F;service in the test before it’s executed (think of creating a fresh database per-test for Postgres Testcontiner integration tests, which is the subject of an upcoming post!).</p>
+<p>This is done with <a target="_blank" rel="noopener" href="https://zio.dev/version-1.x/howto/test-effects/#test-aspects">Test Aspects</a>. You can think of aspects as functions <code>ZIO =&gt; ZIO</code>, applying some transformation to the effect before&#x2F;after its execution. Test Aspects cannot be used to <em>provide</em> or <em>eliminate</em> requirements from tests, but they can be used to <em>modify</em> the environment contained within the test!</p>
+<p>Taking inspiration from the <a target="_blank" rel="noopener" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestAspect.scala">existing aspects</a>, we can create the following <em>per-test</em> aspect called <code>newUuid</code>:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">newUuid</span> </span>= <span class="keyword">new</span> <span class="type">PerTest</span>.<span class="type">AtLeastR</span>[<span class="type">Has</span>[<span class="type">UUID</span>]] &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">perTest</span></span>[<span class="type">R</span> &lt;: <span class="type">Has</span>[<span class="type">UUID</span>], <span class="type">E</span>](test: <span class="type">ZIO</span>[<span class="type">R</span>, <span class="type">TestFailure</span>[<span class="type">E</span>], <span class="type">TestSuccess</span>]) =</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">      randomUuid &lt;- <span class="type">UIO</span>(<span class="type">UUID</span>.randomUUID())</span><br><span class="line">      updated    &lt;- test.updateService[<span class="type">UUID</span>](_ =&gt; randomUuid)</span><br><span class="line">    &#125; <span class="keyword">yield</span> updated</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This aspect states that an environment containing <em>at least</em> <code>Has[UUID]</code> is required (and recall that by using <code>ZIO.service[UUID]</code> in our tests, we now require it). In the <code>perTest</code> method of the aspect, we are given the test as a ZIO effect and can perform any operation on it!</p>
+<p>In particular, we can call <code>updateService</code> on it, <em>replacing</em> the existing UUID service value with the one we created in the line above! This means that the original (shared) uuid is replaced with this fresh one, and because this is a per-test aspect, it will be applied to each test individually, resulting in:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Testing started at 15:23 ...</span><br><span class="line">dc723d70-83c1-4c6c-9478-7a2087533bb4</span><br><span class="line">728ed277-7d49-4b22-a5a3-6db3d32ff7b0</span><br></pre></td></tr></table></figure>
+
+<p>Meaning that each test got a fresh value for UUID, despite it being provided as shared initially.</p>
+<p>Finally, putting it all together looks like this:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MySharedService</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> live: <span class="type">ULayer</span>[<span class="type">Has</span>[<span class="type">UUID</span>]] = <span class="type">UIO</span>(<span class="type">UUID</span>.randomUUID()).toLayer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MySpec</span> <span class="keyword">extends</span> <span class="title">DefaultRunnableSpec</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">spec</span> </span>= (suite(<span class="string">&quot;My suite&quot;</span>)(</span><br><span class="line">    testM(<span class="string">&quot;test1&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">        uuid &lt;- <span class="type">ZIO</span>.service[<span class="type">UUID</span>]</span><br><span class="line">        _    &lt;- putStrLn(uuid.toString)</span><br><span class="line">      &#125; <span class="keyword">yield</span> assertCompletes</span><br><span class="line">    &#125;,</span><br><span class="line">    testM(<span class="string">&quot;test2&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> &#123;</span><br><span class="line">        uuid &lt;- <span class="type">ZIO</span>.service[<span class="type">UUID</span>]</span><br><span class="line">        _    &lt;- putStrLn(uuid.toString)</span><br><span class="line">      &#125; <span class="keyword">yield</span> assertCompletes</span><br><span class="line">    &#125;</span><br><span class="line">  ) @@ newUuid).provideSomeLayerShared[<span class="type">TestEnvironment</span>](<span class="type">MySharedService</span>.live)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>This post’s goal was to provide the background and motivation to using and modifying shared dependencies in ZIO Tests. In my upcoming post, I will explain how to take advantage of this technique to improve upon <a href="https://hmemcpy.com/2020/08/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/">integration testing with Postgres Testcontainers</a> by over <strong>70%</strong>, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/parsing-encoding-dependent-protocols-with-scodec/" rel="prev" title="Parsing character encoding-dependent protocols with scodec in Scala">
+      <i class="fa fa-chevron-left"></i> Parsing character encoding-dependent protocols with scodec in Scala
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-to-ZIO-Test"><span class="nav-number">1.</span> <span class="nav-text">Introduction to ZIO Test</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anatomy-of-a-ZIO-Test"><span class="nav-number">2.</span> <span class="nav-text">Anatomy of a ZIO Test</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using-shared-dependencies-in-ZIO-Test"><span class="nav-number">3.</span> <span class="nav-text">Using shared dependencies in ZIO Test</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modifying-shared-dependencies-for-each-test"><span class="nav-number">4.</span> <span class="nav-text">Modifying shared dependencies for each test</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2021/11/working-with-shared-dependencies-in-zio-test/";
+    this.page.identifier = "2021/11/working-with-shared-dependencies-in-zio-test/";
+    this.page.title = "Working with shared dependencies in ZIO Test";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
