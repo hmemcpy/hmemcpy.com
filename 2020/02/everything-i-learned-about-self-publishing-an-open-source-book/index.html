@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Over the past two years, the PDF version of Bartosz Milewski’s Category Theory for Programmers became a highly-successful open-source book, which was adapted to other programming languages, such as Sc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Everything I learned about self-publishing an open-source book">
+<meta property="og:url" content="http://hmemcpy.com/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="Over the past two years, the PDF version of Bartosz Milewski’s Category Theory for Programmers became a highly-successful open-source book, which was adapted to other programming languages, such as Sc">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-17T10:03:11.000Z">
+<meta property="article:modified_time" content="2020-02-17T10:03:11.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://hmemcpy.com/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Everything I learned about self-publishing an open-source book | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">90</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Everything I learned about self-publishing an open-source book<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2020-02-17-everything-i-learned-about-self-publishing-an-open-source-book.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: February 17th, 2020 12:03:11" itemprop="dateCreated datePublished" datetime="2020-02-17T12:03:11+02:00">February 17th, 2020</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/everything-i-learned-about-self-publishing-an-open-source-book/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Over the past two years, the PDF version of Bartosz Milewski’s <a target="_blank" rel="noopener" href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/"><em>Category Theory for Programmers</em></a> became a highly-successful <a target="_blank" rel="noopener" href="https://github.com/hmemcpy/milewski-ctfp-pdf">open-source book</a>, which was adapted to other programming languages, such as Scala and OCaml. There was a high demand for a physical copy of the book, so I went exploring the vast options, which I summarize below.</p>
+<span id="more"></span>
+
+<p>The book is published under a <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike</a> (CC-BY-SA), a license that allows free sharing and modification of the book. For that reason, I wanted to minimize the cost of publishing the book, and choose a self-publishing route. Here are the things I learned along the way, in no particular order:</p>
+<h4 id="Print-on-demand"><a href="#Print-on-demand" class="headerlink" title="Print-on-demand"></a>Print-on-demand</h4><p>There are several print-on-demand (POD) <a target="_blank" rel="noopener" href="https://blog.reedsy.com/print-on-demand-books/">services to choose from</a>: Lulu, Blurb, BookBaby, KDP (Kindle Direct Publishing), and IngramSpark. My requirements were: hardcover availability and a color print (because the book drawings are too adorable!), some services do not provide either or both of those options.</p>
+<p>Most POD services have a calculator that allows <em>guesstimating</em> the final cost, depending on the number of pages, choice of paper, whether it’s a hard or softcover, book size, and other parameters. I ended up choosing Blurb because they offer a <a target="_blank" rel="noopener" href="https://www.blurb.com/trade-books">hardcover print in economy color</a> significantly cheaper than the alternatives. For black-and-white books, Lulu is also a very good option.</p>
+<p>I also did quite a bit of research regarding the final quality of the book. There are posts <a target="_blank" rel="noopener" href="https://medium.com/@mwichary/my-experiences-printing-a-small-batch-of-books-c04141b63dfe">comparing various samples</a>, as well as video reviews on YouTube. Depending on your requirements, you may want to experiment with a smaller-size manuscript to determine the quality of your book.</p>
+<p>Most POD services will handle everything, from uploading the manuscript to distribution, providing you (in most cases) a free ISBN (a number, required for listing your book in online and brick-and-mortar bookstores). However, the options for book dimensions and paper quality may be limited. One exception is <a target="_blank" rel="noopener" href="https://www.ingramspark.com/">IngramSpark</a>, a POD service that offers a high degree of customization, but at a more expensive cost.</p>
+<h4 id="Book-sizes-and-dimensions"><a href="#Book-sizes-and-dimensions" class="headerlink" title="Book sizes and dimensions"></a>Book sizes and dimensions</h4><p>Most POD services offer a standard size for trade books at 6×9” (15×23 cm) and 8×10” (20×25 cm). Most technical books in my bookshelf (with an occasional oddity) are sized 6×9”, which is the size I chose. Blurb and others provide exact specifications for the paper and cover sizes needed for the print. Some provide a <a target="_blank" rel="noopener" href="https://www.blurb.com/make/pdf_to_book/booksize_calculator">specifications calculator</a>, allowing you to get the exact measurements for your book, including the <em>bleed</em> and <em>trim</em> lines. Others offer Adobe Publisher templates and custom tools. This step requires a lot of experimentation, as the final result may only be visible in the previewer of the particular service. And even then, the actual printed copy may contain slight variations.</p>
+<p>To set the dimensions in LaTeX, there are packages like <code>geometry</code>, if using a <code>\documentclass&#123;book&#125;</code>, and the <code>\documentclass&#123;memoir&#125;</code> allows additional arguments for specifying height, width, margins, bleed, and other parameters. Also, the <a target="_blank" rel="noopener" href="https://ctan.org/pkg/crop"><code>crop</code></a> package is a useful diagnostic tool, allowing cropping the pages at specified sizes for a better preview.</p>
+<p>The process of uploading a PDF and previewing it online before publishing varies between the POD services, but most offer a nice experience for it. However, the absolute final result can only be experienced by holding the physical copy in your hand. Some services, like Lulu, will send you a draft copy for free, before the final approval. Blurb does not offer this, and you will have to purchase a copy yourself. Other services may provide different terms.</p>
+<p>Some examples of specifying LaTeX dimensions for a 6×9” print can be found in online open-source books, like <a target="_blank" rel="noopener" href="https://github.com/HoTT/book/blob/29279f5d00f1fdb013d5c7fbe804b49cb25e61b1/opt-ustrade.tex">HoTT</a>, <a target="_blank" rel="noopener" href="https://github.com/rzach/forallx-yyc/blob/master/forallxyyc-print.tex">OpenLogic Project</a>, and, of course, the <a target="_blank" rel="noopener" href="https://github.com/hmemcpy/milewski-ctfp-pdf/blob/master/src/preamble.tex">book by yours truly</a>.</p>
+<h4 id="Publishing-on-Amazon"><a href="#Publishing-on-Amazon" class="headerlink" title="Publishing on Amazon"></a>Publishing on Amazon</h4><p>To have your book listed on Amazon (and other online and offline stores), it requires additional price markup on your book (Amazon requires a 15% markup on the price, as well as a $1.35 distribution fee for each book). Most POD services offer distribution on Amazon, allowing you to configure the list price in the book settings of your dashboard.</p>
+<p>One exception is KDP (Kindle Direct Publishing), which is an Amazon POD service (formerly CreateSpace). It allows publishing books directly on Amazon and even offers a wider range of available sizes and other options. Unfortunately, at the time of writing, Amazon KDP does not offer a hardcover print. </p>
+<p>As a data point, Fabien Sanglard, the author of <a target="_blank" rel="noopener" href="https://twitter.com/fabynou/status/1121093556720979969">Doom: Game Engine Black Book</a> breaks down the price of publishing his book <a target="_blank" rel="noopener" href="http://fabiensanglard.net/gebbdoom/">on his site</a>.</p>
+<p>In my case, I opted not to list the book on Amazon, and offer it directly via the publisher. The price remains just the cost of printing and orders and shipping are handled via the publisher.</p>
+<h4 id="Publishing-and-updating"><a href="#Publishing-and-updating" class="headerlink" title="Publishing and updating"></a>Publishing and updating</h4><p>Some more details about the process of uploading and listing the book. On Blurb, the process starts by <a target="_blank" rel="noopener" href="https://www.blurb.com/pdf-to-book">uploading the PDF</a>, as well as an additional cover PDF (alternatively, the cover may be included in the same PDF on the first and last pages). The file will be uploaded and processed by Blurb, scanned for any issues with size and quality. In some cases, it can automatically fix issues it encounters. </p>
+<p>After uploading is done, it’s possible to preview the book online. This step is crucial for finding any alignment issues and verifying exact dimensions.</p>
+<p>Finally, the book will appear in the dashboard, allowing you to configure metadata, such as author, description, category, etc., as well as setting a listing price of your choosing.</p>
+<p>A downside of this process is that each new upload generates a new entry, with a new permalink to the book. Blurb does not allow replacing existing book content with a new PDF. It does, however, offer a <a target="_blank" rel="noopener" href="https://www.blurb.com/bookwright">writing tool</a> that allows you to write the book, and submit as many revisions as needed.</p>
+<p>Other publishers, like Lulu, do allow you to modify the book after it was uploaded. This may be a better option if you need to keep the book information up-to-date.</p>
+<h4 id="Using-a-publisher"><a href="#Using-a-publisher" class="headerlink" title="Using a publisher"></a>Using a publisher</h4><p>The self-publishing route is a good solution if you prefer to work at your own pace and control all aspects of the process. You are, however, responsible for editing, proofreading, cover design, distribution, and, in some cases, registering trademarks and ISBNs. </p>
+<p>These services may be provided to you by an established publisher, such as Manning or Apress. They take care of the entire process, from editing to wide distribution. Publishers such as No Starch Press are always looking for new authors, so it may be wise to check about the possibility of publishing your book with them.</p>
+<p>Happy writing!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/speeding-up-your-latex-builds-by-reusing-minted-caches/" rel="prev" title="Speeding up your LaTeX builds by reusing minted caches">
+      <i class="fa fa-chevron-left"></i> Speeding up your LaTeX builds by reusing minted caches
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/your-csharp-is-already-functional/" rel="next" title="Your C# is already functional, but only if you let it">
+      Your C# is already functional, but only if you let it <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Print-on-demand"><span class="nav-number">1.</span> <span class="nav-text">Print-on-demand</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Book-sizes-and-dimensions"><span class="nav-number">2.</span> <span class="nav-text">Book sizes and dimensions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Publishing-on-Amazon"><span class="nav-number">3.</span> <span class="nav-text">Publishing on Amazon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Publishing-and-updating"><span class="nav-number">4.</span> <span class="nav-text">Publishing and updating</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Using-a-publisher"><span class="nav-number">5.</span> <span class="nav-text">Using a publisher</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/";
+    this.page.identifier = "2020/02/everything-i-learned-about-self-publishing-an-open-source-book/";
+    this.page.title = "Everything I learned about self-publishing an open-source book";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

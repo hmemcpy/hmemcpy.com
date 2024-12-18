@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2’s infamo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 3 goodies for Scala 2 developers">
+<meta property="og:url" content="http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2’s infamo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/intellij-refactor.gif">
+<meta property="article:published_time" content="2021-06-22T07:45:02.000Z">
+<meta property="article:modified_time" content="2021-06-22T07:45:02.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/intellij-refactor.gif">
+
+<link rel="canonical" href="http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Scala 3 goodies for Scala 2 developers | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">90</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Scala 3 goodies for Scala 2 developers<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2021-06-22-scala-3-goodies-for-scala-2-developers.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: June 22nd, 2021 10:45:02" itemprop="dateCreated datePublished" datetime="2021-06-22T10:45:02+03:00">June 22nd, 2021</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/06/scala-3-goodies-for-scala-2-developers/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/scala-3-goodies-for-scala-2-developers/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2’s infamous warts, many of which have been fixed (or made obsolete) by the new compiler. While some of the Scala 2 syntax still supported in Scala 3.0, it will be removed in Scala 3.1, so it’s best to migrate as early as possible.</p>
+<p>To make the process easier for Scala 2 users, the Scala compiler team have been <a target="_blank" rel="noopener" href="https://github.com/scala/scala/pull/9589">backporting</a> some of the new features to the Scala 2.x compiler, enabling them with the <code>-Xsource:3</code> compiler flag. In addition, users of the latest IntelliJ IDEA 2021.2 (in Early Access, at the time of writing) will get automatic refactoring suggestions, converting the old syntax to the new one.</p>
+<span id="more"></span>
+
+<img src="/2021/06/scala-3-goodies-for-scala-2-developers/intellij-refactor.gif" class="">
+
+<p>Here are the top features, enabled in Scala 2 by turning on the <code>-Xsource:3</code> compiler flag:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">scalacOptions ++= <span class="type">Seq</span>(</span><br><span class="line">  ...</span><br><span class="line">  <span class="string">&quot;-Xsource:3&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>After enabling this option, you might get lots of compiler warnings (or errors, depending on your configuration), explaining the deprecated features and suggesting ways to fix them. </p>
+<p><strong>Note</strong>: although some Scala 3 features have been ported to the earlier versions of the Scala 2 compiler, the new syntax changes were added in the recently-released (at the time of writing) <strong>2.13.6</strong>. Please upgrade your Scala versions to get the latest available features.</p>
+<p>Here are some of my favorites:</p>
+<h3 id="case-classes-with-a-private-constructor"><a href="#case-classes-with-a-private-constructor" class="headerlink" title="case classes with a private constructor"></a><code>case class</code>es with a private constructor</h3><p>If you’re following the <a target="_blank" rel="noopener" href="https://tuleism.github.io/blog/2020/scala-smart-constructors/">Smart Constructor</a> pattern in Scala 2, you’ll discover that making the constructor of a case class <code>private</code> is not enough - the companion <code>apply</code>, and the <code>copy</code> methods of the case class will still be public. There are ways to <a target="_blank" rel="noopener" href="https://gist.github.com/tpolecat/a5cb0dc9adeacc93f846835ed21c92d2">work around it</a> - but they are no longer needed with the <code>-Xsource:3</code> flag! Enabling it makes case classes behave <em>correctly</em>, like they do in Scala 3, disabling the companion <code>apply</code> and <code>copy</code> on any case class with a private constructor.</p>
+<h3 id="Tuple-destructuring-in-for-comprehensions"><a href="#Tuple-destructuring-in-for-comprehensions" class="headerlink" title="Tuple destructuring in for-comprehensions"></a><del>Tuple destructuring in for-comprehensions</del></h3><p><strong>Update</strong>: Looks like I got this one wrong. Guillaume Martres of the Scala 3 compiler team <a target="_blank" rel="noopener" href="https://www.reddit.com/r/scala/comments/o5j1nt/scala_3_goodies_for_scala_2_developers/h2nsr7x/">comments</a> about the purpose of this change:</p>
+<blockquote><p>Adding the <code>case</code> keyword in for-comprehensions will only be needed in Scala 3 for non-exhaustive matches (see <a target="_blank" rel="noopener" href="https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html#pattern-bindings-in-for-expressions">https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html#pattern-bindings-in-for-expressions</a>), you don’t need it to avoid having to use <code>withFilter</code> (in fact, not using <code>case</code> guarantees that <code>withFilter</code> will not be used in Scala 3). And in Scala 2 under <code>-Xsource:3</code>, <code>case</code> does nothing and is only supported to ease cross-compilation: <a target="_blank" rel="noopener" href="https://github.com/scala/scala/pull/9558">https://github.com/scala/scala/pull/9558</a></p>
+</blockquote>
+
+<p>So it seems the <code>case</code> keyword support was added to make cross-compilation between Scala 2 and Scala 3 easier, it does not change the behavior of pattern matching. In fact, the suggested refactoring in the image above is actually not needed, and I reported it as a bug to the IntelliJ tracker.</p>
+<h3 id="Miscellaneous-syntax-changes"><a href="#Miscellaneous-syntax-changes" class="headerlink" title="Miscellaneous syntax changes"></a>Miscellaneous syntax changes</h3><p>Some other syntactic changes&#x2F;improvements were backported in the latest Scala 2 versions:</p>
+<h4 id="instead-of-for-wildcard-imports"><a href="#instead-of-for-wildcard-imports" class="headerlink" title="* instead of _ for wildcard imports"></a><code>*</code> instead of <code>_</code> for wildcard imports</h4><p>Scala 3 imports now use the <code>*</code> character for imports (and the use of <code>_</code> for imports will be removed in Scala 3.1), allowing you to write:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.util.*</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong>: Unfortunately, this change does not work for wildcards inside braces due to an issue that <a target="_blank" rel="noopener" href="https://github.com/scala/scala/pull/9639">was already fixed</a>, but did not make it to the release as part of 2.13.6. It will be fixed in the next compiler release (2.13.7), when available. The following syntax:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.util.&#123;<span class="type">Try</span>, *&#125;</span><br></pre></td></tr></table></figure>
+<p>does not compile with Scala 2.13.6, failing with the error: <code>object * is not a member of package util</code>.</p>
+<h4 id="as-instead-of-gt-in-import-aliases"><a href="#as-instead-of-gt-in-import-aliases" class="headerlink" title="as instead of =&gt; in import aliases"></a><code>as</code> instead of <code>=&gt;</code> in import aliases</h4><p>Additional change to how imports are handled is the use of the keyword <code>as</code> instead of <code>=&gt;</code> when aliasing imported types.</p>
+<p>Instead of:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.&#123;<span class="type">List</span> =&gt; <span class="type">JList</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>Use:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.<span class="type">List</span> as <span class="type">JList</span> <span class="comment">// braces not required for a single import alias</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="instead-of-for-wildcard-types"><a href="#instead-of-for-wildcard-types" class="headerlink" title="? instead of _ for wildcard types"></a><code>?</code> instead of <code>_</code> for wildcard types</h4><p>A less-used feature, but a notable change is the use of <code>?</code> in the following syntax:</p>
+<p>Instead of:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> x: _ &lt;: <span class="type">Any</span> = ???</span><br></pre></td></tr></table></figure>
+<p>Use:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> x: ? &lt;: <span class="type">Any</span> = ???</span><br></pre></td></tr></table></figure>
+
+<h4 id="amp-instead-of-with-in-compound-type-declarations"><a href="#amp-instead-of-with-in-compound-type-declarations" class="headerlink" title="&amp; instead of with in compound type declarations:"></a><code>&amp;</code> instead of <code>with</code> in compound type declarations:</h4><p>Instead of:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> x: <span class="type">A</span> <span class="keyword">with</span> <span class="type">B</span> = <span class="keyword">new</span> <span class="type">A</span> <span class="keyword">with</span> <span class="type">B</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>we can now write:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> x: <span class="type">A</span> &amp; <span class="type">B</span> = <span class="keyword">new</span> <span class="type">A</span> <span class="keyword">with</span> <span class="type">B</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="vararg-splice-syntax-instead-of-and"><a href="#vararg-splice-syntax-instead-of-and" class="headerlink" title="vararg splice syntax (* instead of :_* and @_*)"></a>vararg splice syntax (<code>*</code> instead of <code>:_*</code> and <code>@_*</code>)</h4><p>One more simplification to the various ways of passing values into functions expecting variable arguments:</p>
+<p>Instead of:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">foo(s: _*)</span><br></pre></td></tr></table></figure>
+
+<p>Use:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">foo(s*)</span><br></pre></td></tr></table></figure>
+
+<p>And instead of:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> <span class="type">Seq</span>(a @_*) = ???</span><br></pre></td></tr></table></figure>
+
+<p>Use:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> <span class="type">Seq</span>(a*) = ??? <span class="comment">// RIP, 🐌 operator</span></span><br></pre></td></tr></table></figure>
+
+<p>More changes are being backported to Scala 2, I suggest keeping an eye on the release notes, and upgrading to the latest versions as soon as possible!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/" rel="prev" title="Running Postgres integration tests easily with TestContainers and ZIO Test">
+      <i class="fa fa-chevron-left"></i> Running Postgres integration tests easily with TestContainers and ZIO Test
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/bsp-and-intellij/" rel="next" title="Using BSP effectively in IntelliJ and Scala">
+      Using BSP effectively in IntelliJ and Scala <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-classes-with-a-private-constructor"><span class="nav-number">1.</span> <span class="nav-text">case classes with a private constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuple-destructuring-in-for-comprehensions"><span class="nav-number">2.</span> <span class="nav-text">Tuple destructuring in for-comprehensions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miscellaneous-syntax-changes"><span class="nav-number">3.</span> <span class="nav-text">Miscellaneous syntax changes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#instead-of-for-wildcard-imports"><span class="nav-number">3.1.</span> <span class="nav-text">* instead of _ for wildcard imports</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#as-instead-of-gt-in-import-aliases"><span class="nav-number">3.2.</span> <span class="nav-text">as instead of &#x3D;&gt; in import aliases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instead-of-for-wildcard-types"><span class="nav-number">3.3.</span> <span class="nav-text">? instead of _ for wildcard types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#amp-instead-of-with-in-compound-type-declarations"><span class="nav-number">3.4.</span> <span class="nav-text">&amp; instead of with in compound type declarations:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vararg-splice-syntax-instead-of-and"><span class="nav-number">3.5.</span> <span class="nav-text">vararg splice syntax (* instead of :_* and @_*)</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2021/06/scala-3-goodies-for-scala-2-developers/";
+    this.page.identifier = "2021/06/scala-3-goodies-for-scala-2-developers/";
+    this.page.title = "Scala 3 goodies for Scala 2 developers";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
