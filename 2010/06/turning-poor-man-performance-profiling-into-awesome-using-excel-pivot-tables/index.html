@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+  <meta name="google-site-verification" content="lYE6Wy4AMVpA-paUiNWFLIZFk8vqATN4AedYdumNuVo">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Gloria Hallelujah:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hmemcpy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}}};
+  </script>
+
+  <meta name="description" content="As I’m writing this, Dror Helper blogged about using a poor man’s performance profiler. This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Turning poor man&#39;s performance profiling into awesome using Excel and Pivot Tables">
+<meta property="og:url" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/index.html">
+<meta property="og:site_name" content="In Absentia">
+<meta property="og:description" content="As I’m writing this, Dror Helper blogged about using a poor man’s performance profiler. This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image1.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image2.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image3.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image4.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image5.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image6.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image7.png">
+<meta property="og:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image8.png">
+<meta property="article:published_time" content="2010-06-07T09:44:04.000Z">
+<meta property="article:modified_time" content="2010-06-07T09:44:04.000Z">
+<meta property="article:author" content="Igal Tabachnik">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image1.png">
+
+<link rel="canonical" href="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Turning poor man's performance profiling into awesome using Excel and Pivot Tables | In Absentia</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70273-3"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-70273-3');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">In Absentia</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">by Igal Tabachnik</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">90</span></a>
+
+  </li>
+        <li class="menu-item menu-item-talks-i-liked">
+
+    <a href="/talks-i-liked/" rel="section"><i class="fab fa-youtube fa-fw"></i>Talks I liked</a>
+
+  </li>
+        <li class="menu-item menu-item-cv-/-résumé">
+
+    <a href="/cv.pdf" rel="section"><i class="fas fa-address-card fa-fw"></i>CV / Résumé</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+      <meta itemprop="name" content="Igal Tabachnik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="In Absentia">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Turning poor man's performance profiling into awesome using Excel and Pivot Tables<a href="https://github.com/hmemcpy/hmemcpy.com/edit/master/source/_posts/2010-06-07-turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: June 7th, 2010 12:44:04" itemprop="dateCreated datePublished" datetime="2010-06-07T12:44:04+03:00">June 7th, 2010</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>As I’m writing this, <a target="_blank" rel="noopener" href="http://blogs.microsoft.co.il/blogs/dhelper/">Dror Helper</a> blogged about using a <a target="_blank" rel="noopener" href="http://blogs.microsoft.co.il/blogs/dhelper/archive/2010/06/02/poor-c-developer-s-performance-profiler.aspx">poor man’s performance profiler</a>. This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s) within our code. This information is usually logged, and after a run we’re left with a huge file containing hundreds (and sometimes thousands of lines). How do we make sense of this mess? How do we filter out and understand the relevant performance information?</p>
+<span id="more"></span>
+
+<p>As it happens, Microsoft Excel is a great tool to assist with this task! Excel is this part of Microsoft Office, which everyone has, but very few know how to use. I was watching as a colleague of mine, Doron, worked his magic with Excel, and now I’d like to share this information with the rest of the class:</p>
+<p><em>Note: I used Excel 2010 to perform this. I believe that this is possible with earlier versions, but I can’t tell for sure.</em></p>
+<p>We start by opening the log file, selecting all text, and pasting it into a new Excel worksheet.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image1.png" class="">
+
+<p>Now we need to filter out anything not starting with the word *PERFORMANCE*. </p>
+<p>With the first column selected, go to <strong>Data</strong>, and press <strong>Filter.</strong></p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image2.png" class="">
+
+<p>This will add a dropdown arrow on the first cell, click it, go to <strong>Text Filters</strong>, then <strong>Begins With.</strong> In the dialog type *PERFORMANCE*, and press OK. This will leave only the lines starting with *PERFORMANCE*, however, Excel will still show the original row numbers. Select the first column excluding the first line (by clicking on the 1st *PERFORMANCE* cell, then pressing <strong>Ctrl-Shift-Down Arrow</strong>), copy then paste the selected lines into a new sheet. This will reduce the number of displayed rows dramatically.</p>
+<p><strong>3. Split the text into columns using the Text-to-Columns feature</strong></p>
+<p>Tip: you can <strike>skip this step</strike> reduce the number of steps here, if you output your performance text comma-separated.</p>
+<p>With the first column selected, in the <strong>Data</strong> pane, click <strong>Text to Columns</strong>. First, we’re going to split the string by *PERFORMANCE*, so select <strong>Fixed Width</strong>, then <strong>Next</strong>. Click and drag the arrow head one character to the right, then press <strong>Finish</strong>.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image3.png" class="">
+
+<p>Now the first column only contains the word *PERFORMANCE*, so we can safely delete the entire first column.</p>
+<p>Let’s repeat this step once more, this time selecting <strong>Delimited</strong> in the first page of the wizard, then <strong>Next</strong>. We want to split by the equals sign <code>=</code> so let’s type <code>=</code> into the text box next to <strong>Other</strong>. We can see in the preview how it will look like. Close the wizard by pressing <strong>Finish</strong>.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image4.png" class="">
+
+<p><strong>4. Adding the numbers together using PivotTables</strong></p>
+<p>Now that we have two columns, one containing the method name, and the other the time it took the method to execute, we can summarize it using a PivotTable. But first, we need to give the columns some meaning in the pivot table, so insert a new row before the fist row, and above the first column type <strong>Method</strong>, and above the second row type <strong>Time</strong>.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image5.png" class="">
+
+<p>Select both columns except the first row (you can select just the two cells in row 2, then pressing <strong>Ctrl-Shift-Down Arrow</strong>). Go to <strong>Insert</strong>, then <strong>PivotTable</strong>, and press OK in the new dialog.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image6.png" class="">
+
+<p>Drag the <strong>Time</strong> field down to where it says <strong>Values</strong>. This should create a field called <strong>Sum of Time</strong>. Drag the <strong>Method</strong> field into the <strong>Row Labels</strong>.</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image7.png" class="">
+
+<p>On the left we should now see all the methods with the time it took to run them nicely formatted:</p>
+<img src="/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/image8.png" class="">
+
+<p>And that’s it! We can now apply Excel’s sorting to the columns and perform other analytical data with our <em>poor man’s performance profiling</em> data.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2010/02/resharper-5-hidden-gem-patterns-catalogue/" rel="prev" title="ReSharper 5.0 Hidden Gem - Patterns Catalogue">
+      <i class="fa fa-chevron-left"></i> ReSharper 5.0 Hidden Gem - Patterns Catalogue
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2010/06/visual-studio-2010-bug-when-opening-any-file-caused-by-docked-addin-tool-window/" rel="next" title="Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window">
+      Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Igal Tabachnik"
+      src="https://avatars2.githubusercontent.com/u/601206?v=3&s=460">
+  <p class="site-author-name" itemprop="name">Igal Tabachnik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hmemcpy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/hmemcpy" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/8205/igal-tabachnik?tab=profile" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik?tab&#x3D;profile" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://il.linkedin.com/in/igaltabachnik" title="LinkedIn → https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Igal Tabachnik</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hmemcpy.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://hmemcpy.com/2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/";
+    this.page.identifier = "2010/06/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/";
+    this.page.title = "Turning poor man's performance profiling into awesome using Excel and Pivot Tables";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hmemcpy.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
