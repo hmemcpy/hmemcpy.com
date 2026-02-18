@@ -64,7 +64,7 @@ What is the type of `(id id)`? The function itself is passed as an argument, mak
 (id id) :: t -> t
 ```
 
-Let's define a two-argument function `k` with parameters `x` and `y`. Not knowing anything about `x` and `y`, so the only thing we can do here is to return either `x` or `y`. Let's return `x`:
+Let's define a two-argument function `k` with parameters `x` and `y`. Not knowing anything about `x` and `y`, the only thing we can do here is return either `x` or `y`. Let's return `x`:
 
 ```
 > k x y = x
@@ -223,7 +223,7 @@ This function has 3 parameters: the function `f`, and two additional parameters 
 > (/) 4 2
 2.0
 > flip (/) 4 2
-0. 5
+0.5
 ```
 
 Here, because `flip` switches the order of parameters, we get `2 / 4` instead of `4 / 2`, resulting in 0.5.
@@ -465,7 +465,7 @@ In the lambda expression that extracts the first element from a pair of pairs, w
 sumFstFst'' = (+) `on` (fst . fst)
 ```
 
-The function `(fst . fst)` is a more compact equivalent of `(\pp -> fst $ fst pp)`, called the *point-free* style, allowing us to omit the the argument. Chains of function applications can be rewritten to this style:
+The function `(fst . fst)` is a more compact equivalent of `(\pp -> fst $ fst pp)`, called the *point-free* style, allowing us to omit the argument. Chains of function applications can be rewritten to this style:
 
 ```
 doIt x = f (g (h x)) == f ((g . h) x) == (f . (g . h)) x
@@ -1070,7 +1070,7 @@ instance Integral Integer -- Defined in ‘GHC.Real’
 instance Integral Int -- Defined in ‘GHC.Real’
 ```
 
-The functions `div` and `mod` are responsible for the division operations, `div` performing integer division, and `mod` finds the remainder. The function `divMod` simultaneously applies `div` and `mod`, returning the result a a pair. The `MINIMAL` pragma suggests that a minimal complete definition requires implementing `quoteRem` and `toInteger`.
+The functions `div` and `mod` are responsible for the division operations, `div` performing integer division, and `mod` finds the remainder. The function `divMod` simultaneously applies `div` and `mod`, returning the result as a pair. The `MINIMAL` pragma suggests that a minimal complete definition requires implementing `quoteRem` and `toInteger`.
 
 Haskell contains an implementation of `Integral` for the `Int` and `Integer` types, as shown by the output of the `:i` (`:info`) command.
 
@@ -1279,7 +1279,7 @@ This allows us to separate functions into two kinds: strict and non-strict. Howe
 
 #### Weak Head Normal Form
 
-In functional languages, expressions are reduced until they cannot be reduced further. The reduction process happens for as long as there are *redexes* remain in the expression, resulting in an expression that no longer contains any redexes. Those fully-reduced expressions are in a so-called *normal norm*, meaning that no more reductions are possible.
+In functional languages, expressions are reduced until they cannot be reduced further. The reduction process happens for as long as there are *redexes* that remain in the expression, resulting in an expression that no longer contains any redexes. Those fully-reduced expressions are in a so-called *normal form*, meaning that no more reductions are possible.
 
 In Haskell, there exists an intermediate reduction stage, called *weak head normal form* (abbreviated WHNF). Let's look at some examples:
 
@@ -1369,14 +1369,14 @@ Because both expressions above are already WHNF, `seq` is satisfied and does not
 
 #### Strict function application (call-by-value)
 
-Even though the `seq` primitive is useful, it's not very convenient. Haskell defines a a more convenient *call-by-value* operator `$!`, which can be used instead of `seq`:
+Even though the `seq` primitive is useful, it's not very convenient. Haskell defines a more convenient *call-by-value* operator `$!`, which can be used instead of `seq`:
 
 ```haskell
 ($!) :: (a -> b) -> a -> b
 f $! x = x `seq` f x
 ```
 
-The type of the `$!` operator is identical to the `$` operator, taking a function `a -> b` and and argument `a`, producing a `b`. Here, it is using `seq` in the infix style, and means the following: the argument `x` is first reduced until WHNF, and then the function `f` is applied to the reduced `x`. Reduction here happens before function application, allowing the operator to force strictness. Let's see some uses of this operator:
+The type of the `$!` operator is identical to the `$` operator, taking a function `a -> b` and an argument `a`, producing a `b`. Here, it is using `seq` in the infix style, and means the following: the argument `x` is first reduced until WHNF, and then the function `f` is applied to the reduced `x`. Reduction here happens before function application, allowing the operator to force strictness. Let's see some uses of this operator:
 
 ```
 > const 42 undefined
