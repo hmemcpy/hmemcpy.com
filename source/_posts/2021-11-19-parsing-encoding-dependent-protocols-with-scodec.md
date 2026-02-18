@@ -134,6 +134,6 @@ object X937File {
   }
 ```
 
-Implementations of `FileHeader`, `CashLetter`, `FileControl` and others are left as an exercise to the reader 😄
+Implementations of `FileHeader`, `CashLetter`, `FileControl` and others are left as an exercise for the reader 😄
 
 Happy parsing!

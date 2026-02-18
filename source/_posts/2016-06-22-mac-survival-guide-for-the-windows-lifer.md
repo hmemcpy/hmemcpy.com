@@ -68,7 +68,7 @@ Other things I found useful/annoying when working on a Mac:
 
  * **Selecting text** behaves differently on a Mac: pressing `Command+Left/Right` jumps to the beginning/end of the line (holding `Shift` will select the text). To jump to the next/previous word, use `Option+Left/Right` instead (note: this doesn't seem to work in iTerm2 by default, it has to be [configured to enable it](https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x).)
  * **Other shortcut keys** which are different between Windows and Mac, in no particular order:
-   * In **Chrome**, selecting the the address bar is `Command+L` and not Command+D (muscle memory for Alt+D on Windows)
+   * In **Chrome**, selecting the address bar is `Command+L` and not Command+D (muscle memory for Alt+D on Windows)
    * **Switching between languages** is `Command+Space`. It's not possible to bind language switching to Command+Shift (like Alt+Shift on Windows)
 
   The shortcuts found in all menus are represented by symbols, which can sometimes be annoying to remember (e.g. &#x2318; for the Command Key, &#x2325; for the Option Key). I have installed [KeyCastr](https://github.com/keycastr/keycastr) - a small keystroke visualization utility to help me remember which is which.
