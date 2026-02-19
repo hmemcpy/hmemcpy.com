@@ -20,7 +20,7 @@ This is the second module (out of 5) of my English summary of the Haskell MOOC o
 
 A function is said to be *polymorphic* if it can be used on values of different types. For example, the `+` operator may be used on values of type `Int`, returning an `Int` value, or `Double` values, returning a `Double`. This makes `+` a polymorphic operator.
 
-There are two kinds of polymorphism: *parametric polymorphism* and *ad hoc polymorphism*. The former means that the function implementation is identical for all types which this function can be used with, the latter implies that for each type used with this function, there exists a special implementation, specific to the type. Examples above, for using the `+` operator with `Int` and `Double` types is an example of ad hoc polymorphism, since the implementation of addition for those types behaves differently.
+There are two kinds of polymorphism: *parametric polymorphism* and *ad hoc polymorphism*. The former means that the function implementation is identical for all types which this function can be used with, the latter implies that for each type used with this function, there exists a special implementation, specific to the type. The examples above, using the `+` operator with `Int` and `Double` types, are examples of ad hoc polymorphism, since the implementation of addition for those types behaves differently.
 
 #### Polymorphic functions
 
