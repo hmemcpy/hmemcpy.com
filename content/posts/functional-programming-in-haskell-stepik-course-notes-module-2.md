@@ -1068,7 +1068,7 @@ instance Integral Integer -- Defined in ‘GHC.Real’
 instance Integral Int -- Defined in ‘GHC.Real’
 ```
 
-The functions `div` and `mod` are responsible for the division operations, `div` performing integer division, and `mod` finds the remainder. The function `divMod` simultaneously applies `div` and `mod`, returning the result as a pair. The `MINIMAL` pragma suggests that a minimal complete definition requires implementing `quoteRem` and `toInteger`.
+The functions `div` and `mod` are responsible for the division operations, `div` performing integer division, and `mod` finds the remainder. The function `divMod` simultaneously applies `div` and `mod`, returning the result as a pair. The `MINIMAL` pragma suggests that a minimal complete definition requires implementing `quotRem` and `toInteger`.
 
 Haskell contains an implementation of `Integral` for the `Int` and `Integer` types, as shown by the output of the `:i` (`:info`) command.
 

@@ -52,8 +52,8 @@ Console.WriteLine("Hello " + Console.ReadLine());
 or like this in Scala:
 
 ```scala
-printLn("What is your name?")
-printLn("Hello " + readLine)
+println("What is your name?")
+println("Hello " + readLine)
 ```
 
 When this program is compiled and run, it will print the first line to the screen, then wait until we type something and press enter. It will concatenate our input with the string `"Hello "`, printing the combined string to the screen. This is universally true in almost any programming language out there.

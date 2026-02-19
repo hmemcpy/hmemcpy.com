@@ -852,8 +852,8 @@ long factorial (int n) {
 Haskell has no loops and no mutable variables, however, we can implement the same idea using an additional parameter:
 
 ```haskell
-factorial5 = n | n >= 0    = helper 1 n
-               | otherwise = error "arg must be >= 0"
+factorial5 n | n >= 0    = helper 1 n
+             | otherwise = error "arg must be >= 0"
 
 helper acc 0 = acc
 helper acc n = helper (acc * n) (n - 1)
@@ -875,7 +875,7 @@ Let's look at the function `roots` defined below:
 
 ```haskell
 roots :: Double -> Double -> Double
-          -> (Double -> Double)
+          -> (Double, Double)
 roots a b c =
   (
     (-b - sqrt (b ^ 2) - 4 * a * c)) / (2 * a)
@@ -945,8 +945,8 @@ The only requirement that indentation inside the `let` block is on the same leve
 The `let .. in` construct can also be used to define local functions. In the previous section we defined a function `factorial5` with the helper function:
 
 ```haskell
-factorial5 = n | n >= 0    = helper 1 n
-               | otherwise = error "arg must be >= 0"
+factorial5 n | n >= 0    = helper 1 n
+             | otherwise = error "arg must be >= 0"
 
 helper acc 0 = acc
 helper acc n = helper (acc * n) (n - 1)
@@ -960,7 +960,7 @@ factorial6 n
       helper acc 0 = acc
       helper acc n = helper (acc * n) (n - 1)
     in helper 1 n
-  | otherwise error "arg must be >= 0"
+  | otherwise = error "arg must be >= 0"
 ```
 
 Again, the only requirement here is keeping the indentation consistent.
@@ -1009,7 +1009,7 @@ factorial6 n
       helper acc 0 = acc
       helper acc n = helper (acc * n) (n - 1)
     in helper 1 n
-  | otherwise error "arg must be >= 0"
+  | otherwise = error "arg must be >= 0"
 ```
 
 Suppose we wanted to use the `helper` function not only in the first guard but also in other guard expressions. Because of the different guards, the entire body of `factorial6` is no longer a single expression. This is where the `where` style may become useful, allowing us to declare a common binding for all individual guard clauses:
