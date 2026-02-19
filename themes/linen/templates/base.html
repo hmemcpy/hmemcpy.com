@@ -33,6 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/_pagefind/pagefind-ui.css">
   <link rel="stylesheet" href="{{ get_url(path='linen.css', cachebust=true) }}">
 </head>
 
@@ -62,8 +63,18 @@
           </ul>
         </nav>
       {% endif %}
+
+      <button class="search-toggle" id="search-toggle" aria-label="Search" title="Search (/)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
   </header>
+
+  <div class="search-overlay" id="search-overlay" hidden>
+    <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+      <div id="search"></div>
+    </div>
+  </div>
 
   <main class="main">
     <div class="main-inner">
@@ -92,12 +103,55 @@
   </footer>
 
   <script>
-    var toggle = document.querySelector('.nav-toggle');
-    if (toggle) {
-      toggle.addEventListener('click', function() {
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
         var nav = document.querySelector('.site-nav');
         var open = nav.classList.toggle('open');
         this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search overlay
+    var searchToggle = document.getElementById('search-toggle');
+    var searchOverlay = document.getElementById('search-overlay');
+
+    function openSearch() {
+      searchOverlay.hidden = false;
+      setTimeout(function() {
+        var input = searchOverlay.querySelector('input');
+        if (input) input.focus();
+      }, 50);
+    }
+
+    function closeSearch() {
+      searchOverlay.hidden = true;
+    }
+
+    searchToggle.addEventListener('click', openSearch);
+
+    searchOverlay.addEventListener('click', function(e) {
+      if (e.target === searchOverlay) closeSearch();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeSearch();
+      } else if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        openSearch();
+      }
+    });
+  </script>
+
+  <script src="/_pagefind/pagefind-ui.js"></script>
+  <script>
+    if (window.PagefindUI) {
+      new PagefindUI({
+        element: '#search',
+        showImages: false,
+        resetStyles: false,
       });
     }
   </script>
