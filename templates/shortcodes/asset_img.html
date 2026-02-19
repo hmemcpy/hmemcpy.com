@@ -1,6 +1,13 @@
 {% if path %}
+{% if page is defined %}
+  {% set img_url = page.permalink ~ path %}
+{% elif current_path is defined %}
+  {% set img_url = config.base_url ~ current_path ~ path %}
+{% else %}
+  {% set img_url = path %}
+{% endif %}
 <figure>
-    <img src="{{ page.permalink ~ path }}" alt="{{ alt | default(value='') }}">
+    <img src="{{ img_url }}" alt="{{ alt | default(value='') }}">
     {% if caption %}
     <figcaption>{{ caption }}</figcaption>
     {% endif %}
