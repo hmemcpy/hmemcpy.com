@@ -40,8 +40,11 @@ $site-author-image-border-color: $gainsboro;
 $font-family-base: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 $font-family-title: "Gloria Hallelujah", cursive;
 $font-family-mono: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, monospace;
-$font-size-base:   16px;
-$line-height-base: 1.6;
+$font-size-base:   17px;
+$line-height-base: 1.75;
+
+// Content
+$content-max-width: 860px;
 
 // Components
 $border-radius:       4px;

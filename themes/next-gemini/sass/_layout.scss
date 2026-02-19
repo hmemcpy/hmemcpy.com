@@ -43,6 +43,7 @@
 
 .main-inner {
   padding: 20px;
+  max-width: $content-max-width;
 }
 
 // Gemini: content-wrap has no card styling itself; each post-block is its own card

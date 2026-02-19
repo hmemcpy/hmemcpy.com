@@ -59,41 +59,113 @@
 
 // Post body content
 .post-body {
-  h1, h2 {
-    border-bottom: 1px solid $body-bg-color;
+  // On single post pages, constrain prose width for readability (~70–75 chars)
+  // but let code blocks, figures, and tables breathe at full width
+  > p, > ul, > ol, > dl, > blockquote, > h1, > h2, > h3, > h4, > h5, > h6 {
+    max-width: 72ch;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin-top: 1.75em;
     padding-bottom: 0.3em;
+    border-bottom: 2px solid $body-bg-color;
   }
 
   h3 {
-    border-bottom: 1px dotted $body-bg-color;
-    padding-bottom: 0.2em;
+    font-size: 1.15em;
+    margin-top: 1.5em;
+    color: $black-dim;
+  }
+
+  h4 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 1.25em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $grey-dark;
   }
 
   a {
-    color: $link-color;
-    border-bottom: 1px solid $link-color;
+    color: $orange;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
 
     &:hover {
-      color: $link-hover-color;
-      border-color: $link-hover-color;
+      border-bottom-color: $orange;
+    }
+  }
+
+  ul, ol {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+
+    li {
+      margin-bottom: 0.35em;
+      line-height: $line-height-base;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid $orange;
+    background: lighten($body-bg-color, 1%);
+    margin: 1.5em 0;
+    padding: 0.75em 1.25em;
+    border-radius: 0 $border-radius $border-radius 0;
+    color: $black-light;
+    font-style: italic;
+
+    p:last-child { margin-bottom: 0; }
+
+    footer {
+      margin-top: 0.5em;
+      font-style: normal;
+      font-size: $font-size-smaller;
+      color: $grey-dark;
     }
   }
 
   img {
     max-width: 100%;
     display: block;
-    margin: 1em auto;
+    margin: 1.5em auto;
+    border-radius: $border-radius;
   }
 
   figure {
     text-align: center;
-    margin: 1em 0;
+    margin: 1.5em 0;
 
     figcaption {
       font-size: $font-size-smaller;
       color: $grey-dark;
       margin-top: 0.5em;
+      font-style: italic;
     }
+  }
+
+  // Code within prose — distinguish inline code from blocks
+  code {
+    background: darken($body-bg-color, 3%);
+    color: darken($orange, 10%);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    font-size: 0.875em;
+  }
+
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: 0.875em;
+  }
+
+  // Horizontal rule
+  hr {
+    border: none;
+    border-top: 2px solid $gainsboro;
+    margin: 2em 0;
   }
 }
 

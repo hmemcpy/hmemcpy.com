@@ -54,6 +54,11 @@
               <p class="site-subtitle">{{ config.description }}</p>
             {% endif %}
           </div>
+          <button class="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="toggle-line"></span>
+            <span class="toggle-line"></span>
+            <span class="toggle-line"></span>
+          </button>
         </div>
 
         {% if config.extra.menu %}
@@ -117,5 +122,13 @@
       </footer>
     </main>
   </div>
+<script>
+  document.querySelector('.site-nav-toggle').addEventListener('click', function() {
+    var nav = document.querySelector('.site-nav');
+    var open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+    this.classList.toggle('active', open);
+  });
+</script>
 </body>
 </html>

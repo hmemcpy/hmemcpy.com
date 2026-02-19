@@ -5,9 +5,11 @@
   text-rendering: optimizeLegibility;
 }
 
-// Justified text in post body
-.post-body {
-  text-align: justify;
+// Justified text on desktop only (handled via responsive for mobile)
+@media screen and (min-width: 768px) {
+  .post-body {
+    text-align: justify;
+  }
 }
 
 // Code font size override
@@ -15,12 +17,22 @@ code {
   font-size: 0.9em;
 }
 
-// Linked code (underline to indicate link)
+// Linked code
 a code {
   text-decoration: underline;
 }
 
-// NuGet badge styling (from old theme custom styles)
+// Post card hover — subtle lift
+.post-block {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    transform: translateY(-1px);
+  }
+}
+
+// NuGet badge styling (from old theme)
 .nuget-badge code {
   background-color: #202020;
   border: 4px solid #c0c0c0;
