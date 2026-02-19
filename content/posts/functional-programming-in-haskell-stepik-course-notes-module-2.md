@@ -4,7 +4,7 @@ date = 2020-01-20T23:07:38Z
 +++
 This is the second module (out of 5) of my English summary of the Haskell MOOC on Stepik, available only in Russian. Read the first part in the *Introduction* module.
 
-1. [Introduction](/2020/01/functional-programming-in-haskell-stepik-course-notes-module-1/)
+1. [Introduction](/posts/functional-programming-in-haskell-stepik-course-notes-module-1/)
 2. **Programming fundamentals** (this page)
 3. Lists
 4. Data types

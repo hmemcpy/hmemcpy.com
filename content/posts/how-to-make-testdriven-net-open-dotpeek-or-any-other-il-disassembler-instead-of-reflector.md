@@ -8,7 +8,7 @@ date = 2011-05-15T11:34:10Z
 
 TestDriven.NET comes with a .NET Reflector integration plugin, allowing you to right-click anywhere in the class and choosing *Go To Reflector*. After the RedGate Reflector fiasco many companies created their own (free) Reflector alternatives. Until Jamie Cansdale (creator of TestDriven.NET) updates his wonderful product to reflect (pun somewhat intended) the changes in the .NET world, here's what you can do to trick TestDriven.NET to open any Reflector alternative: [Image File Execution Options](http://blogs.msdn.com/b/greggm/archive/2005/02/21/377663.aspx).
 
-I [previously wrote](/2010/12/how-to-debug-a-process-that-is-crashing-on-startup/) about using Image File Execution Options to debug a process that is crashing on startup. We can use it to have Windows open any executable when **reflector.exe** is requested:
+I [previously wrote](/posts/how-to-debug-a-process-that-is-crashing-on-startup/) about using Image File Execution Options to debug a process that is crashing on startup. We can use it to have Windows open any executable when **reflector.exe** is requested:
 
   * Run `regedit.exe`
   * Go to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options`

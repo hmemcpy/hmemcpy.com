@@ -10,7 +10,7 @@ Normally, the [`ObsoleteAttribute`](http://msdn.microsoft.com/en-us/library/syst
 
 It had occurred to me that perhaps this would be possible to achieve using one of [ReSharper's External Annotations](http://www.jetbrains.com/resharper/webhelp/Code_Analysis__External_Annotations.html), but there are no built-in annotations for this kind of task. The annotations mechanism is used to decorate various .NET types and methods with special attributes that provide ReSharper with additional information. Turns out, it is possible to use the same mechanism to apply the Obsolete attribute as well! This way, ReSharper could mark the usage as an error, even if it's not really a compilation error (which is good enough for me!).
 
-I [previously wrote](http://hmemcpy.com/2013/02/preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests/) about how to add external annotations using XML files. According to ReSharper's documentation, external annotation XMLs can be placed in one of the following locations:
+I [previously wrote](/posts/preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests/) about how to add external annotations using XML files. According to ReSharper's documentation, external annotation XMLs can be placed in one of the following locations:
 
   * `[ReSharper install directory]\Bin\ExternalAnnotations\[Assembly name].xml` 
   * `[ReSharper install directory]\Bin\ExternalAnnotations\[Assembly name]\[Any name].xml`, where `[Assembly name]` is the assembly name without the version 

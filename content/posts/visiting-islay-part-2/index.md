@@ -2,7 +2,7 @@
 title = "Visiting Islay, Part 2"
 date = 2010-01-14T06:50:00Z
 +++
-**Note:** this is part 2. Read part 1 of the trip [here](/2010/01/visiting-islay-part-1/).
+**Note:** this is part 2. Read part 1 of the trip [here](/posts/visiting-islay-part-1/).
 
 Early Saturday morning on Islay, and we are set to go on another adventure! After eating a delicious breakfast that our lovely host prepared for us, we were set to try and explore some more distilleries. Unfortunately there were no tours at Lagavulin and Ardbeg on a Saturday, so we decided to drive to the place where one of my most favorite [pictures](http://www.islayinfo.com/islay-pictures-wallpaper/kilnaughton_bay_1280x859.html) was taken &#8211; the Carraig Fhada Lighthouse.
 

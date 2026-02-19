@@ -26,7 +26,7 @@ I learned this neat trick fairly recently from JetBrains' own [Hadi Hariri](http
 
   * ### Working with Solution-wide analysis
 
-I wrote about the benefits of turning Solution-wide analysis back when I [reviewed ReSharper 4.5 Beta](/2009/03/resharper-4-5-beta-released/). Several things happen when Solution-wide analysis is enabled - all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.
+I wrote about the benefits of turning Solution-wide analysis back when I [reviewed ReSharper 4.5 Beta](/posts/resharper-4-5-beta-released/). Several things happen when Solution-wide analysis is enabled - all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.
 
 {% blockquote(author="") %}
 A word of caution when changing visibility (or even removing) unused public classes - make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.
@@ -42,7 +42,7 @@ At this point I was asked if there was a way to list all ReSharper hints, sugges
 
   * ### SSR (Structural Search and Replace) and Patterns Catalog
 
-The next thing I talked about is the SSR. I wrote about SSR [previously in greater detail](/2010/02/resharper-5-hidden-gem-patterns-catalogue/), and I demonstrated how to convert [NUnit's](http://www.nunit.org/) Assert syntax to its fluent API. I also demonstrated how to [use Agent Smith Plugin to document the public API](/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/).
+The next thing I talked about is the SSR. I wrote about SSR [previously in greater detail](/posts/resharper-5-hidden-gem-patterns-catalogue/), and I demonstrated how to convert [NUnit's](http://www.nunit.org/) Assert syntax to its fluent API. I also demonstrated how to [use Agent Smith Plugin to document the public API](/posts/documenting-your-public-api-easily-with-resharper-and-ghostdoc/).
 
   * ### **ReSharper.Internal**
 

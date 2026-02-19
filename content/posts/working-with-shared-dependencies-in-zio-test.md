@@ -188,4 +188,4 @@ object MySpec extends DefaultRunnableSpec {
 
 # Summary
 
-This post's goal was to provide the background and motivation to using and modifying shared dependencies in ZIO Tests. In my upcoming post, I will explain how to take advantage of this technique to improve upon [integration testing with Postgres Testcontainers](https://hmemcpy.com/2020/08/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/) by over **70%**, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!
+This post's goal was to provide the background and motivation to using and modifying shared dependencies in ZIO Tests. In my upcoming post, I will explain how to take advantage of this technique to improve upon [integration testing with Postgres Testcontainers](/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/) by over **70%**, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!

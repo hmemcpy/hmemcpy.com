@@ -12,7 +12,7 @@ I was tweaking a [Jekyll](http://jekyllrb.com/) theme to match the style of our 
 
 Alarmed, I didn't know what to make of this at first. It's a custom (paid) Bootstrap theme, so I suspected either the theme or one of its plugins was the culprit, however I could not find any code that seemed to inject this particular style.
 
-Armed with fairly [little knowledge](/2014/03/how-nancy-made-net-web-development-fun/) of dealing with web development, I decided to try and set a breakpoint inside the Chrome tools on the text inside the `<style>` element itself, by right-clicking and selecting **Break on - Subtree modifications**:
+Armed with fairly [little knowledge](/posts/how-nancy-made-net-web-development-fun/) of dealing with web development, I decided to try and set a breakpoint inside the Chrome tools on the text inside the `<style>` element itself, by right-clicking and selecting **Break on - Subtree modifications**:
 
 {{ image(path="image2.png") }}
 

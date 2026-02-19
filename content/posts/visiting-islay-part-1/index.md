@@ -50,4 +50,4 @@ The other distilleries were closed by now, so we began slowly driving towards th
 
 We grabbed a few things from the local Co-operative shop and fixed ourselves something to eat. It was already evening, and there was a strong smell of burning peat and coal in the air &#8211; people are probably using it to warm up their houses. At around 20:00 we went into the Ardview Inn &#8211; a local pub in Port Ellen, where we met some wonderful, already well intoxicated locals, who proceeded to buy us drinks, and we returned the favor many times. The whisky selection was unbelievable &#8211; they had so many Islay malts that I didn't know where to start. I settled on [Ardbeg Airigh Nam Beist](http://whisky.foodnwine.co.il/tag/airigh-nam-beist/), and went to sit by the fireplace at the pub to enjoy my drink.
 
-On to [Part 2](/2010/01/visiting-islay-part-2/ "Visiting Islay, Part 2")!
+On to [Part 2](/posts/visiting-islay-part-2/ "Visiting Islay, Part 2")!

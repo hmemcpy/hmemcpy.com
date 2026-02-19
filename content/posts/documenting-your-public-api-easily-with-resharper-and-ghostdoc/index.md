@@ -2,7 +2,7 @@
 title = "Documenting your public API easily with ReSharper and GhostDoc"
 date = 2010-11-17T16:54:10Z
 +++
-In my [previous post](/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/) on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, [Agent Smith](http://code.google.com/p/agentsmithplugin/), I briefly mentioned that the described trick can be used to aid documenting the public API. Some people have asked me to elaborate, so here goes:
+In my [previous post](/posts/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/) on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, [Agent Smith](http://code.google.com/p/agentsmithplugin/), I briefly mentioned that the described trick can be used to aid documenting the public API. Some people have asked me to elaborate, so here goes:
 
 <!-- more -->
 
@@ -28,7 +28,7 @@ On the right hand side, under *Except*, press **Add** and add the following:
 
 This will add the exception on internal classes.
 
-The steps above will add a suggestion *Public declaration should have XML comment.* to all matching members across the solution. In order to find all of them, use either the Code Issues Inspector, or turn Agent Smith's *Members must have XML comment* suggestion in Inspection Severity to *Show as error*, and navigate the errors using ReSharper shortcut keys. Both methods are further detailed in my [previous post](/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/).
+The steps above will add a suggestion *Public declaration should have XML comment.* to all matching members across the solution. In order to find all of them, use either the Code Issues Inspector, or turn Agent Smith's *Members must have XML comment* suggestion in Inspection Severity to *Show as error*, and navigate the errors using ReSharper shortcut keys. Both methods are further detailed in my [previous post](/posts/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/).
 
 Press Ctrl-Shift-D (or whatever is bound to GhostDoc's **Document This** command) on each matching member, and give a proper description, replacing the default generated comment. Please view the [XML Documentation Comments guide](http://msdn.microsoft.com/en-us/library/b2s063f7.aspx) on MSDN for best practices.
 

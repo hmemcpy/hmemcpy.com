@@ -11,7 +11,7 @@ Below is the summary of the first module, **Introduction**, out of 5.
 <!-- more -->
 
 1. **Introduction** (this page)
-2. [Programming fundamentals](/2020/01/functional-programming-in-haskell-stepik-course-notes-module-2/)
+2. [Programming fundamentals](/posts/functional-programming-in-haskell-stepik-course-notes-module-2/)
 3. Lists
 4. Data types
 5. Monads

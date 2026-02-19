@@ -28,7 +28,7 @@ For me, this was the core, the very foundation on which all the software is buil
 
 And it was like this, until **Haskell ruined it for me**!
 
-I will not go into details -- I inadvertently did that in my [previous post](/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/). But during watching a talk on seemingly unrelated topic, the speaker managed to sneak some Haskell in there! Until that moment, I haven't really seen any Haskell code before - I'd always dismissed it as irrelevant - and there it was, staring me in the face.
+I will not go into details -- I inadvertently did that in my [previous post](/posts/from-net-to-scala-and-beyond-a-journey-to-functional-programming/). But during watching a talk on seemingly unrelated topic, the speaker managed to sneak some Haskell in there! Until that moment, I haven't really seen any Haskell code before - I'd always dismissed it as irrelevant - and there it was, staring me in the face.
 
 ```haskell
 main :: IO () -- reads as 'main, having the return type of IO ()'
