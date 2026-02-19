@@ -2,7 +2,7 @@
 title = "Awesome tip: make View Code default double click action on a WinForm control"
 date = 2009-05-10T11:51:34Z
 +++
-Here is something I wish I'd known years ago &#8211; you can make the *View Source* action default when you double click on a WinForm control.
+Here is something I wish I'd known years ago: you can make the *View Source* action default when you double click on a WinForm control.
 
 <!-- more -->
 

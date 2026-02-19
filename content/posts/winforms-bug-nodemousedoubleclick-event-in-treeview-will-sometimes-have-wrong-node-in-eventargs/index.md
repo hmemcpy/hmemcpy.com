@@ -18,7 +18,7 @@ void NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 
 To my surprise, I discovered today that by double clicking on a collapsed parent node, the `e.Node` parameter was not the node I actually double clicked on, but one of the child nodes. Since the sub-child nodes count was 0, the event handled the (incorrect) node.
 
-I noticed that it was not the same node all the time &#8211; it was different. I made a small WinForms application with just a TreeView, and I filled it with the contents of my **C:\Windows** directory. I placed a `MessageBox.Show(e.Node.Text);` in the `NodeMouseDoubleClick` handler. And that helped me realize that the `e.Node` is actually the node that is currently under the mouse cursor!
+I noticed that it was not the same node all the time: it was different. I made a small WinForms application with just a TreeView, and I filled it with the contents of my **C:\Windows** directory. I placed a `MessageBox.Show(e.Node.Text);` in the `NodeMouseDoubleClick` handler. And that helped me realize that the `e.Node` is actually the node that is currently under the mouse cursor!
 
 Here's the initial state:
 {{ image(path="image17.png") }}
@@ -26,7 +26,7 @@ Here's the initial state:
 Double clicking on **Fonts** makes the following happen:
 {{ image(path="image18.png") }}
 
-Notice where the cursor is &#8211; that's the node that was passed in the event handler. Apparently, during the expand, if there are more child nodes that fit on the screen, the parent node scrolls to the top, but the cursor stays in the same place where the double click occurred.
+Notice where the cursor is: that's the node that was passed in the event handler. Apparently, during the expand, if there are more child nodes that fit on the screen, the parent node scrolls to the top, but the cursor stays in the same place where the double click occurred.
 
 I googled up this problem and I found that this bug was [reported on Connect](http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=304958), and it will be fixed in the next version.
 

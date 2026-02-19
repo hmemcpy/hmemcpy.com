@@ -37,7 +37,7 @@ Another important benefit of working with Solution-wide analysis enabled is the 
 
   * ### Code issues inspection
 
-At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings - indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper &#8211; Inspect_ menu, in the form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
+At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings - indeed there is, and it's called *Code Issues*. It's available from ReSharper's _ReSharper → Inspect_ menu, in the form of *Code Issues in Current Project* or *Code Issues in Solution*. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
 {{ image(path="image3.png") }}
 
   * ### SSR (Structural Search and Replace) and Patterns Catalog

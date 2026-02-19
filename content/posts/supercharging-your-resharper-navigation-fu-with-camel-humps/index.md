@@ -10,10 +10,10 @@ Here's a little tip to make navigation your code even better: <a href="http://bl
 
 While this is a great feature, I wouldn't want it enabled all the time, since it's also affects Extend/Shrink Selection (Ctrl-W), which sometimes can be annoying. Fortunately, those actions are available as Visual Studio actions, so they can be used even if CameHumps is turned off globally:
 
-  * _ReSharper_HumpNext_ &#8211; move caret to next hump/word
-  * _ReSharper_HumpPrev_ &#8211; move caret to previous hump/word
-  * _ReSharper_HumpNextExtend_ &#8211; expand selection to next hump
-  * _ReSharper_HumpPrevExtend_ &#8211; expand selection to previous hump
+  * _ReSharper_HumpNext_ — move caret to next hump/word
+  * _ReSharper_HumpPrev_ — move caret to previous hump/word
+  * _ReSharper_HumpNextExtend_ — expand selection to next hump
+  * _ReSharper_HumpPrevExtend_ — expand selection to previous hump
 
 I recommend binding the _ReSharper_HumpNext_ and _ReSharper_HumpPrev_ to **Alt-Right** and **Alt-Left**, and _ReSharper_HumpNextExtend_ and _ReSharper_HumpPrevExtend_ to **Alt-Shift-Right** and **Alt-Shift-Left**, respectively. Make sure you select **Text Editor** under *Use new shortcut in* in Tools - Options - Keyboard, or your binding might not work.
 

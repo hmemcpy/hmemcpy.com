@@ -2,21 +2,21 @@
 title = "Visiting Islay, Part 1"
 date = 2010-01-12T20:42:06Z
 +++
-Every whisky lover gets, at some point, to experience whisky from the island of Islay in Scotland. This experience will be remembered throughout his life &#8211; it can be either love at first taste, or loathing for eternity. Not everybody can handle the intensity and the powerful peaty flavor of (most) Islay whiskies, some may even stop drinking whisky altogether. Others, like myself, fall in love with the flavor and rarely able to drink anything else.
+Every whisky lover gets, at some point, to experience whisky from the island of Islay in Scotland. This experience will be remembered throughout his life: it can be either love at first taste, or loathing for eternity. Not everybody can handle the intensity and the powerful peaty flavor of (most) Islay whiskies, some may even stop drinking whisky altogether. Others, like myself, fall in love with the flavor and rarely able to drink anything else.
 
 <!-- more -->
 
 <img style="float: right; margin: 5px" src="image1.jpg" />The magic that is Islay begins to show its beauty even on the way to the island. Either by a flight from Glasgow to the small airport located on the road between Port Ellen and Bowmore, surrounded by peat fields. Or by a two hour ferry ride from the mainland to one of the two ports on Islay: Port Ellen, home to the three most famous distilleries Laphroaig, Lagavulin and Ardbeg. Or Port Askaig, on the other side of the island, home of Caol Ila and Bunnahabhain.
 
-It doesn't matter which way we will choose to get to Islay, one thing is certain &#8211; the island is like another world, different and unfamiliar; cold and wet, and at the same time warm and embracing, with strangers who make you feel like we've known them all our lives. Time and weather also work differently on Islay &#8211; while one side enjoys the warm sun, rain and wind sweep the other side of the island. In a clear day you can see Northern Ireland from the Laphroaig bay, and when it rains you can almost touch the dark clouds.
+It doesn't matter which way we will choose to get to Islay, one thing is certain: the island is like another world, different and unfamiliar; cold and wet, and at the same time warm and embracing, with strangers who make you feel like we've known them all our lives. Time and weather also work differently on Islay: while one side enjoys the warm sun, rain and wind sweep the other side of the island. In a clear day you can see Northern Ireland from the Laphroaig bay, and when it rains you can almost touch the dark clouds.
 
 The time is 08:40. The morning couldn't have started better than this. The weather app on my phone says that 15°C is expected, with not a cloud in the sky.
 
 Just a day prior my girlfriend and I arrived at the Edinburgh airport, picked up a rental car (with automatic transmission, a bit more expensive than manual, but worth it for driving on the *wrong side* of the road).
 
-After a few rounds in the huge rental car parking lot we began driving to our first destination &#8211; a small town called Tarbert, where we would spend a night before the ferry ride the next morning. Tip: make sure you take a GPS with you (or have one in your rental car) &#8211; not only will it show you the way, it's also a helpful reminder that you should turn **left** at roundabouts.
+After a few rounds in the huge rental car parking lot we began driving to our first destination, a small town called Tarbert, where we would spend a night before the ferry ride the next morning. Tip: make sure you take a GPS with you (or have one in your rental car), not only will it show you the way, but it's also a helpful reminder that you should turn **left** at roundabouts.
 
-The [West Loch Hotel](http://www.westlochhotel.co.uk/) couldn't be more perfectly located &#8211; less than 10 minutes away from Kennacraig Terminal, from which the Caledonian MacBrayne (or CalMac for short) ferry would take us to Port Ellen. The ferry hadn't arrived yet, so I used this opportunity to take a few photos of the breathtaking view.
+The [West Loch Hotel](http://www.westlochhotel.co.uk/) couldn't be more perfectly located: less than 10 minutes away from Kennacraig Terminal, from which the Caledonian MacBrayne (or CalMac for short) ferry would take us to Port Ellen. The ferry hadn't arrived yet, so I used this opportunity to take a few photos of the breathtaking view.
 
 <a href="https://goo.gl/photos/yY7FwKeY8x1H2wx67">{{ image(path="image2.jpg", alt="View from the Kennacraig terminal pier") }}</a>
 
@@ -24,7 +24,7 @@ Other cars started to arrive at the terminal, and after a short while the ferry 
 
 <img style="float: right; margin: 5px" src="image3.jpg" />The sea was very calm, and we could sit in the cafeteria and drink a cup of coffee at a price that wouldn't shame a major airport. There was also a shop with a nice selection of Islay single malts, and a local blend called Black Bottle, which I later discovered is produced by Bunnahabhain. Bunnahabhain, by the way, was the "malt of the month" on board the CalMac. Around me people were not concerned with the early hour, and were slowly sipping the very gentle malt with just a hint of peat (Bunnahabhain make one of the least peatiest whiskies on Islay). I joined the lucky people, and armed with a glass of liquid gold I went up to the deck to enjoy the fresh air and a divine view.
 
-We arrived at Port Ellen at noon, and from there a short drive to the [Oystercatcher B&B](http://www.islay-bedandbreakfast.com/), where our wonderful hostess Lynn prepared a room for us. After a short rest we immediately went to our first Islay destination &#8211; Laphroaig distillery.
+We arrived at Port Ellen at noon, and from there a short drive to the [Oystercatcher B&B](http://www.islay-bedandbreakfast.com/), where our wonderful hostess Lynn prepared a room for us. After a short rest we immediately went to our first Islay destination: Laphroaig distillery.
 
 The short drive to Laphroaig from our B&B was quite an experience by itself.
 
@@ -32,7 +32,7 @@ One of the many pleasures on the island is what is known as the *Islay Wave*. Pa
   
 Alongside the road we get a feel for the area surrounding it. Green fields covered with sheep and cows, roaming freely and eating the grass. On the other side of the road the ocean shows its dominance, and the smell of briny sea fills the air, not letting us forget, not even for a moment where we are.
 
-Oh what wonders this must be doing to our favorite whisky&#8230;
+Oh what wonders this must be doing to our favorite whisky...
 
 Even from the guest parking we could smell the strong malty scent in the air. We walked along the gravel road towards the visitors lounge, just in time to register for the last tour for the day. Until the tour began we could enjoy ourselves in the shop, visit the Laphroaig museum inside, or just relax on the comfortable leather couch at the Friends Lounge. In the museum there was a cupboard filled with flags from many countries (Israel not among them). Friends of Laphroaig can plant their country's flag into their own square foot on the island. There were also empty white flags, so I took a blue pen and drew a makeshift Israeli flag! I will remember to bring my own the next time.
 
@@ -54,10 +54,10 @@ After we were done tasting and relaxing in the lounge, we decided to go look for
 
 After that we came back to the visitors center to have one last look (for the day) at the beautiful hollow by the broad bay, take a few pictures.
 
-The other distilleries were closed by now, so we began slowly driving towards the [Kildalton Cross](http://www.islayinfo.com/islay_kildalton_cross.html), stopping at Lagavulin and Ardbeg to snap a few photos and write down the tour hours. We had to drive slow &#8211; there were deer on the road, and on Islay deer have the right of way! We arrived at the remains of the Kildalton Church and Cross, enjoying the beautiful scenery. We met with some of the folks that were with us at the distillery there. It was so quiet and relaxing there, I felt like I never wanted to leave. Unfortunately, we also were quite hungry by now, so we decided to drive back to our B&B.
+The other distilleries were closed by now, so we began slowly driving towards the [Kildalton Cross](http://www.islayinfo.com/islay_kildalton_cross.html), stopping at Lagavulin and Ardbeg to snap a few photos and write down the tour hours. We had to drive slow: there were deer on the road, and on Islay deer have the right of way! We arrived at the remains of the Kildalton Church and Cross, enjoying the beautiful scenery. We met with some of the folks that were with us at the distillery there. It was so quiet and relaxing there, I felt like I never wanted to leave. Unfortunately, we also were quite hungry by now, so we decided to drive back to our B&B.
 
-<img style="float: left; padding: 5px;" src="image6.jpg" />On the way back we got stuck in an Islay traffic jam &#8211; sheep. We slowly backed up into a driveway up the road, and waited for the cute little guys to pass. We got an Islay wave from the shepherd too!
+<img style="float: left; padding: 5px;" src="image6.jpg" />On the way back we got stuck in an Islay traffic jam: sheep. We slowly backed up into a driveway up the road, and waited for the cute little guys to pass. We got an Islay wave from the shepherd too!
 
-We grabbed a few things from the local Co-operative shop and fixed ourselves something to eat. It was already evening, and there was a strong smell of burning peat and coal in the air &#8211; people are probably using it to warm up their houses. At around 20:00 we went into the Ardview Inn &#8211; a local pub in Port Ellen, where we met some wonderful, already well intoxicated locals, who proceeded to buy us drinks, and we returned the favor many times. The whisky selection was unbelievable &#8211; they had so many Islay malts that I didn't know where to start. I settled on [Ardbeg Airigh Nam Beist](http://whisky.foodnwine.co.il/tag/airigh-nam-beist/), and went to sit by the fireplace at the pub to enjoy my drink.
+We grabbed a few things from the local Co-operative shop and fixed ourselves something to eat. It was already evening, and there was a strong smell of burning peat and coal in the air: people are probably using it to warm up their houses. At around 20:00 we went into the Ardview Inn: a local pub in Port Ellen, where we met some wonderful, already well intoxicated locals, who proceeded to buy us drinks, and we returned the favor many times. The whisky selection was unbelievable: they had so many Islay malts that I didn't know where to start. I settled on [Ardbeg Airigh Nam Beist](http://whisky.foodnwine.co.il/tag/airigh-nam-beist/), and went to sit by the fireplace at the pub to enjoy my drink.
 
 On to [Part 2](/posts/visiting-islay-part-2/ "Visiting Islay, Part 2")!

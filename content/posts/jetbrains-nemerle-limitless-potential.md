@@ -18,4 +18,4 @@ But what makes this most exciting is this quote from VladDQ, from the middle of 
 
 If I understand this correctly, this means that N2 will become the "core" language service of ReSharper, which would make it very easy to add tooling support (read: ReSharper support) for new languages, and extend existing ones, simply by implementing the N2 DSL!
 
-Of course, this is all speculation on my part, and we will know more once the "official" information begins to appear on the JetBrains tools blog. But I hope I am right &#8211; in which case, JetBrains + Nemerle = truly the most exiting news in developer tooling lately!
+Of course, this is all speculation on my part, and we will know more once the "official" information begins to appear on the JetBrains tools blog. But I hope I am right: in which case, JetBrains + Nemerle = truly the most exiting news in developer tooling lately!

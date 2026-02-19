@@ -31,7 +31,7 @@ If I select **Constructor** from the menu, I'll get a dialog in which I'll be ab
 Let's say you've made an empty class *Person*, and manually typed out the following:
 {{ image(path="image4.png") }}
 
-Notice two things here: the parameter names **name** and **lastName** are grayed out. It means that they are not (yet) used anywhere in our class. Also, notice the red bulb on the left side? That is my other best friend &#8211; the **Action** (Alt-Enter) key. Pressing Alt-Enter when will give this menu:
+Notice two things here: the parameter names **name** and **lastName** are grayed out. It means that they are not (yet) used anywhere in our class. Also, notice the red bulb on the left side? That is my other best friend: the **Action** (Alt-Enter) key. Pressing Alt-Enter when will give this menu:
 
 {{ image(path="image5.png") }}
 Few keystrokes later, and I have the following code:
