@@ -1,20 +1,19 @@
 base_url = "https://hmemcpy.com"
 title = "In Absentia"
 description = "by Igal Tabachnik"
+theme = "dinkleberg"
 
-# Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
-
-# Whether to build a search index to be used later on by a JavaScript library
-build_search_index = true
-
+build_search_index = false
 generate_feeds = true
 feed_filenames = ["atom.xml"]
 
-# Configuration of the Markdown rendering
+taxonomies = [
+    {name = "categories"},
+    {name = "tags"},
+]
+
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 [markdown.highlighting]
 enabled = true
 theme = "nord"
@@ -22,15 +21,31 @@ theme = "nord"
 [extra]
 author = "Igal Tabachnik"
 email = "hmemcpy@gmail.com"
-github = "hmemcpy"
-twitter = "hmemcpy"
-disqus_shortname = "hmemcpy"
 
-# Navigation
-[[extra.nav]]
-name = "Home"
-url = "/"
+blog_title = "In Absentia"
 
-[[extra.nav]]
-name = "About"
-url = "/about/"
+label_tags = "Tags"
+label_tag = "Tag"
+label_categories = "Categories"
+label_category = "Category"
+label_relative_posts = "Related Posts"
+label_next = "Next"
+label_previous = "Previous"
+label_page = "Page"
+label_of = "of"
+
+og_site_name = "In Absentia"
+og_image = ""
+og_alt_image = ""
+keywords = "programming, software, scala, haskell, functional programming"
+
+copyright_year = "2026"
+
+twitter_username = "@hmemcpy"
+
+sidebar = [
+    {name = "Links", urls = [
+        {name = "GitHub", url = "https://github.com/hmemcpy"},
+        {name = "Twitter", url = "https://twitter.com/hmemcpy"},
+    ]}
+]
