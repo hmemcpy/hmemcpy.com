@@ -5,7 +5,7 @@ tags:
 ---
 *Original title was "Monads solve a problem you might not have, but it's a nice problem to have", which is an homage to a [great post](http://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/) by [Krzysztof Koźmic](https://twitter.com/kkozmic) about IoC containers.*
 
-I can't think of another 5-letter word that strikes fear in the hearts of so many developers, coming from an object-oriended/imperative language to a functional one. So much so, this, and other M-words are outright [banned](https://fsharpforfunandprofit.com/about/#banned) on some resources.
+I can't think of another 5-letter word that strikes fear in the hearts of so many developers, coming from an object-oriented/imperative language to a functional one. So much so, this, and other M-words are outright [banned](https://fsharpforfunandprofit.com/about/#banned) on some resources.
 
 This post will not attempt to explain monads, at least, not on purpose. This [fantastic post](https://mkremins.github.io/blog/doors-headaches-intellectual-need/) by [Max Kreminski](https://twitter.com/maxkreminski) does this better than I ever could - by showing that most "monad tutorials" (or, educational blog posts in general) have *problem-solution ordering issues*. Please take a moment to read this wonderful post before continuing.
 
@@ -104,7 +104,7 @@ Which brings me to the `IO` type. In Haskell, it is used to represent a value th
 
 In Haskell, and languages like Scala, F# and others we have an `Option` type (called `Maybe` in Haskell), whose purpose is to represent a value which may or may not be there. Regardless of whether or not the value exists, we can still perform operations on the `Option` type: we can pass it around, we can transform and `bind`/`map` its value with others. The *effect* of the `Option` type is to represent an optional value.
 
-Both `IO` and `Option` fulfil a purpose of representing an underlying value (or values) in a certain context. For `IO`, this context is an interaction with the outside world. For `Option`, the context is optionality. Both these types are **monads**. Their purpose is to explicitly encode the type of **effect** performed by those types within the type definition itself. In essense, monads are used explicitly to represent the context in which the underlying values are computed, without actually having to directly interact with those values.
+Both `IO` and `Option` fulfil a purpose of representing an underlying value (or values) in a certain context. For `IO`, this context is an interaction with the outside world. For `Option`, the context is optionality. Both these types are **monads**. Their purpose is to explicitly encode the type of **effect** performed by those types within the type definition itself. In essence, monads are used explicitly to represent the context in which the underlying values are computed, without actually having to directly interact with those values.
 
 ### Learning to walk again
 
