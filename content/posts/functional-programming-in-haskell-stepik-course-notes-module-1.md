@@ -4,7 +4,7 @@ date = 2020-01-18T02:01:20Z
 +++
 There's a fantastic free online course (MOOC) for the Russian-speaking developer community on [Stepik](https://stepik.org/) for learning Haskell - a two-part course titled [Functional Programming in Haskell](https://stepik.org/course/75) by Denis Moskvin, (then) associate professor at the St. Petersburg Academic University. I recently re-watched the course (having completed it previously) and decided to take notes and summarize the course content in English for your enjoyment.
 
-I would like to thank Denis Moskvin for providing this amazing resource for free, and urge you, if you speak Russian and want to learn Haskell, to work through the course material and exercises!
+I would like to thank Denis Moskvin for providing this amazing resource for free. I urge you, if you speak Russian and want to learn Haskell, to work through the course material and exercises!
 
 Below is the summary of the first module, **Introduction**, out of 5.
 
@@ -66,7 +66,7 @@ Prelude> :set prompt "GHCi> "
 GHCi> _
 ```
 
-Note that changing the default prompt hides the name of the currently loaded module, and as such, not recommended.
+Note that changing the default prompt hides the name of the currently loaded module. As such, this is not recommended.
 
 #### Working with modules
 
@@ -104,7 +104,7 @@ Most commands can be shortened to the first letter (unless ambiguous) - instead 
 
 ### Functions
 
-In imperative languages, programs are sequences of instructions that are executed, and their result is stored in memory locations of the runtime, called variables. Subsequent instructions can refer to previous results stored in those variables. In most imperative languages, variables can be modified during the execution of the program.
+In imperative languages, programs are sequences of instructions that are executed. Their result is stored in memory locations of the runtime, called variables. Subsequent instructions can refer to previous results stored in those variables. In most imperative languages, variables can be modified during the execution of the program.
 
 In functional languages, programs are expressions, and executing the program means *reducing* those expressions until it's no longer possible to reduce it further. Reduced expressions are the result of the program execution.
 
@@ -940,7 +940,7 @@ roots''' a b c =
   in (x1, x2)
 ```
 
-The only requirement that indentation inside the `let` block is on the same level, otherwise this can cause syntax and compilation errors.
+The only requirement is that indentation inside the `let` block is on the same level. Otherwise this can cause syntax and compilation errors.
 
 The `let .. in` construct can also be used to define local functions. In the previous section we defined a function `factorial5` with the helper function:
 
@@ -952,7 +952,7 @@ helper acc 0 = acc
 helper acc n = helper (acc * n) (n - 1)
 ```
 
-Here, since the helper function was defined at indentation 0, it is now available to all other functions, even though only the factorial function requires it, polluting the global namespace. We can move it inside the `let` block, and rewrite it as follows:
+Here, since the helper function was defined at indentation 0, it is now available to all other functions. Even though only the factorial function requires it, this pollutes the global namespace. We can move it inside the `let` block and rewrite it as follows:
 
 ```haskell
 factorial6 n
