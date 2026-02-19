@@ -22,16 +22,6 @@ a code {
   text-decoration: underline;
 }
 
-// Post card hover — subtle lift
-.post-block {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
-    transform: translateY(-1px);
-  }
-}
-
 // NuGet badge styling (from old theme)
 .nuget-badge code {
   background-color: #202020;
