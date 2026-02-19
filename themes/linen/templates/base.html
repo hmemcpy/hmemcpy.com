@@ -125,10 +125,7 @@
         pagefind = await import('/_pagefind/pagefind.js');
         await pagefind.options({ excerptLength: 12 });
       } catch(e) {
-        // Pagefind not built yet (local dev) — search quietly does nothing
-        input.placeholder = 'Search unavailable';
-        input.disabled = true;
-        return;
+        return; // Pagefind not built yet (local dev) — fail silently
       }
 
       async function runSearch(query) {
