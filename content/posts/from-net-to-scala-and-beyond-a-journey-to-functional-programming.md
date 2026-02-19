@@ -18,7 +18,7 @@ With great power comes great responsibility of NOT writing yet another tutorial.
 
 ## Unlearning to walk
 
-The hardest part in learning something so radically different, is trying to apply it what you know already, failing miserably.
+The hardest part in learning something so radically different is trying to apply it to what you know already, then failing miserably.
 
 About a year ago (at the time of writing), I decided to take a break from .NET, and go explore what else was out there. I landed a job at Wix.com, which I knew to be a (mostly) Scala company on the backend. As first step, I needed to learn Scala. There are plenty of great resources around, but pretty quickly it became apparent that there are two camps of Scala: those who use it as a "better Java" - a language with short, concise syntax, which has great support for many functional concepts, and those who use it as a kind of Haskell on the JVM.
 
@@ -36,7 +36,7 @@ The benefits, outlined in [this post](http://degoes.net/articles/easy-monads) by
 2. **Determinism**. A function must yield the same value for the same input.
 3. **Purity**. A function’s only effect must be the computation of its return value, *and nothing else*.
 
-These properties are voilated by "side-effects". We consider side-effects to be anything like reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be precise, functions that have side-effects violate [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expressions, without changing the program's behavior. A function is considered "pure", if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves. A side-effect, therefore, is *anything* that violates RT.
+These properties are violated by "side-effects". We consider side-effects to be anything like reading a file, talking to a web server, starting threads, throwing exceptions, etc. To be precise, functions that have side-effects violate [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) (RT), a fundamental property of functional languages, where expressions that make up a program can be safely replaced with the result of evaluating said expressions, without changing the program's behavior. A function is considered "pure", if it is RT for all RT arguments, meaning that the arguments passed into a function must be pure themselves. A side-effect, therefore, is *anything* that violates RT.
 
 In this world of pure functions that always return a value, there is no such thing as `void`. All functions must return a value, and that value must always be the same for the same input. Given these "restrictions", how can we possibly do anything useful (e.g. talking to a database) in a functional language?
 
@@ -99,7 +99,7 @@ It should be no surprise at this point to discover that `IO` is a **monad**, [ev
 
 Haskell is a **purely-functional**, lazily-evaluated language. By definition, it has a limitation - all of its functions must be pure. This may sound very limiting - we can't just do a `File.Open` in the middle of a Haskell function - it just won't work. However, this gives us a very interesting benefit: since all functions in Haskell are pure, therefore referentially transparent, this means every Haskell program is a *single referentially transparent* expression! A program in Haskell represents an exact *description* of what it is about to do - it's pure data, as far as the developer (and Haskell compiler) is concerned. Reading a Haskell program describes **exactly** what is going to happen, when this program executes. There are no surprises, no *side-effects* to this.
 
-Which brings me to the `IO` type. In Haskell, it is used to represent a value that is dependent on some I/O operation. We don't know (we can't know) what the value is - but it isn't important. The *effect* that the `IO` type has is to produce a value that depends on an interaction with the outside world, but as far as the Haskell compiler is concerned - the "value" of this type is just that - *some value* of type `IO String`. This gives semantic meaning to the underlying value, puts it in a context of being dependent on an I/O operation.
+This brings me to the `IO` type. In Haskell, it is used to represent a value that is dependent on some I/O operation. We don't know (we can't know) what the value is - but it isn't important. The *effect* that the `IO` type has is to produce a value that depends on an interaction with the outside world, but as far as the Haskell compiler is concerned - the "value" of this type is just that - *some value* of type `IO String`. This gives semantic meaning to the underlying value, puts it in a context of being dependent on an I/O operation.
 
 In Haskell, and languages like Scala, F# and others we have an `Option` type (called `Maybe` in Haskell), whose purpose is to represent a value which may or may not be there. Regardless of whether or not the value exists, we can still perform operations on the `Option` type: we can pass it around, we can transform and `bind`/`map` its value with others. The *effect* of the `Option` type is to represent an optional value.
 
@@ -107,7 +107,7 @@ Both `IO` and `Option` fulfil a purpose of representing an underlying value (or 
 
 ### Learning to walk again
 
-Which finally bings me to the point of this apparent "intro to Haskell" tutorial I ended up writing: it turned out that turning implicit side-effects into explicit monadic context was extremely useful for other concerns as well, such as reading values from some environment (the Reader monad, functional equivalent of "dependency injection"), writing to a log file (the Writer monad), modifying state (the State monad), and others. Problems that, superficially, seem different, could be solved using a very similar pattern. Unfortunately, as Max Kreminski put it in their [post](https://mkremins.github.io/blog/doors-headaches-intellectual-need/), it takes a lot of writing code in a functional language to begin seeing this pattern.
+This finally brings me to the point of this apparent "intro to Haskell" tutorial I ended up writing: it turned out that turning implicit side-effects into explicit monadic context was extremely useful for other concerns as well, such as reading values from some environment (the Reader monad, functional equivalent of "dependency injection"), writing to a log file (the Writer monad), modifying state (the State monad), and others. Problems that, superficially, seem different, could be solved using a very similar pattern. Unfortunately, as Max Kreminski put it in their [post](https://mkremins.github.io/blog/doors-headaches-intellectual-need/), it takes a lot of writing code in a functional language to begin seeing this pattern.
 
 In Haskell, monads helped solve the problem of controlling effects, because there's just no other way, therefore they are first-class concepts built into the standard library. In other (strict) functional languages like F# or Scala, they are optional, and can be used together with "impure" code.
 
@@ -115,7 +115,7 @@ Most importantly, monads are just another tool in the toolbox. They are useful, 
 
 ## Conclusion
 
-When I began writing this post I had no idea where it would go. I promised I won't try to explain monads, but I feel that I inadvertently have. I would like to conclude with the following:
+When I began writing this post I had no idea where it would go. I promised I wouldn't try to explain monads, but I feel that I inadvertently have. I would like to conclude with the following:
 
 I'm sorry, dear C# developers, no amount of tutorials are going to help you understand monads. Eric Lippert [made a great attempt](https://ericlippert.com/category/monads/) once, a whopping 13-part series, explaining monads in C#. Unfortunately, Eric suffers the same "monads tutorial" fallacy, losing many people around post #2. The series of posts is still highly recommended, however, as a great history behind LINQ, which is the closest thing to monadic computations C# currently has.
 
