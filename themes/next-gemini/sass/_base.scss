@@ -9,6 +9,9 @@ body {
   color: $text-color;
   background: $body-bg-color;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 a {
@@ -21,7 +24,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $black-dim;
+  color: $text;
   font-weight: 600;
   line-height: 1.2;
   margin: 1em 0 0.5em;
@@ -33,16 +36,9 @@ p {
 
 code {
   font-family: $font-family-mono;
-  background: $gainsboro;
-  padding: 0.1em 0.3em;
-  border-radius: 2px;
-  font-size: 0.875em;
 }
 
 pre {
-  background: $black-dim;
-  color: $whitesmoke;
-  padding: 1em;
   border-radius: $border-radius;
   overflow-x: auto;
 
@@ -54,10 +50,12 @@ pre {
 }
 
 blockquote {
-  border-left: 4px solid $grey-lighter;
-  color: $grey-dim;
-  margin: 0 0 1em 0;
-  padding: 0.5em 1em;
+  border-left: 3px solid $orange;
+  background: rgba($orange, 0.04);
+  color: $black-light;
+  margin: 1.5em 0;
+  padding: 0.75em 1.25em;
+  font-style: italic;
 }
 
 img {
@@ -74,17 +72,17 @@ table {
 }
 
 th, td {
-  border: 1px solid $grey-lighter;
+  border: 1px solid $border;
   padding: 0.5em 0.75em;
 }
 
 th {
-  background: $whitesmoke;
+  background: $border-light;
   font-weight: 600;
 }
 
 hr {
   border: none;
-  border-top: 1px solid $gainsboro;
-  margin: 1.5em 0;
+  border-top: 1px solid $border;
+  margin: 2em 0;
 }

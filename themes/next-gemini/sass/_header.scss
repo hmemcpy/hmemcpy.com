@@ -1,67 +1,58 @@
-.site-brand-container {
-  background: $black-deep;
-  flex-shrink: 0;
+// Sticky top navigation bar
+.site-header {
+  background: $bg;
+  border-bottom: 1px solid $border;
+  position: sticky;
+  top: $headband-height;
+  z-index: 100;
 }
 
-.site-meta {
-  padding: 20px 10px;
-  text-align: center;
+.header-inner {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: 0 $content-padding;
+  height: $navbar-height;
+  display: flex;
+  align-items: center;
 }
 
-.brand {
-  display: block;
+// Blog title link (left side)
+.site-brand {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: inherit;
-
-  .logo-line-before i,
-  .logo-line-after i {
-    display: block;
-    height: 1px;
-    background: rgba(255, 255, 255, .2);
-    margin: 8px 20px;
-  }
+  flex-shrink: 0;
+  margin-right: auto;
 }
 
 .site-title {
-  color: #fff;
   font-family: $font-family-title;
-  font-size: 1.375em;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
+  font-size: 1.05em;
+  color: $text;
+  white-space: nowrap;
+  line-height: 1;
 }
 
-.site-subtitle {
-  color: $grey-lighter;
-  font-size: $font-size-smaller;
-  margin: 8px 10px 0;
-}
-
-.site-nav-toggle {
-  display: none; // shown on mobile via _responsive.scss
+// Hamburger toggle (shown on mobile only)
+.nav-toggle {
+  display: none;
   cursor: pointer;
   background: none;
   border: none;
-  padding: 12px 16px;
-  position: absolute;
-  top: 12px;
-  right: 0;
+  padding: 8px 4px;
+  flex-shrink: 0;
+  order: 3;
 
   .toggle-line {
     display: block;
     width: 22px;
     height: 2px;
-    background: rgba(255, 255, 255, .7);
+    background: $text;
     margin: 5px 0;
     transition: background 0.2s;
   }
 
-  &:hover .toggle-line,
-  &.active .toggle-line {
-    background: #fff;
+  &:hover .toggle-line {
+    background: $orange;
   }
-}
-
-.site-brand-container {
-  position: relative; // anchor for absolute toggle button
 }

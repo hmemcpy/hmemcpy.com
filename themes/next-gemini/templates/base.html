@@ -31,7 +31,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lato:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="{{ get_url(path='next-gemini.css', cachebust=true) }}">
 </head>
@@ -39,96 +39,67 @@
 <body>
   <div class="headband"></div>
 
-  <div class="container">
-    <header class="header">
-      <div class="header-inner">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{{ config.base_url }}" class="site-brand">
+        <span class="site-title">{{ config.title }}</span>
+      </a>
 
-        <div class="site-brand-container">
-          <div class="site-meta">
-            <a href="{{ config.base_url }}" class="brand" rel="start">
-              <span class="logo-line-before"><i></i></span>
-              <h1 class="site-title">{{ config.title }}</h1>
-              <span class="logo-line-after"><i></i></span>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      {% if config.extra.menu %}
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            {% for item in config.extra.menu %}
+              <li class="nav-item{% if current_path is defined and current_path == item.url %} active{% endif %}">
+                <a href="{{ item.url }}">{{ item.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      {% block content %}{% endblock content %}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      {% if config.extra.social %}
+        <div class="footer-social">
+          {% for item in config.extra.social %}
+            <a href="{{ item.url }}" title="{{ item.name }}" target="_blank" rel="noopener">
+              {% if item.icon %}<i class="{{ item.icon }}"></i>{% else %}{{ item.name }}{% endif %}
             </a>
-            {% if config.description %}
-              <p class="site-subtitle">{{ config.description }}</p>
-            {% endif %}
-          </div>
-          <button class="site-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-            <span class="toggle-line"></span>
-            <span class="toggle-line"></span>
-            <span class="toggle-line"></span>
-          </button>
+          {% endfor %}
         </div>
-
-        {% if config.extra.menu %}
-          <nav class="site-nav">
-            <ul class="main-menu menu">
-              {% for item in config.extra.menu %}
-                <li class="menu-item{% if current_path is defined and current_path == item.url %} menu-item-active{% endif %}">
-                  <a href="{{ item.url }}">{{ item.name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </nav>
-        {% endif %}
-
-        <div class="site-overview-wrap">
-          <div class="site-overview">
-            {% if config.extra.avatar %}
-              <div class="site-author-image-wrap">
-                <img class="site-author-image" src="{{ config.extra.avatar }}" alt="{{ config.extra.author }}">
-              </div>
-            {% endif %}
-            {% if config.extra.author %}
-              <p class="site-author-name">{{ config.extra.author }}</p>
-            {% endif %}
-            {% if config.extra.bio %}
-              <div class="site-description">{{ config.extra.bio }}</div>
-            {% endif %}
-            {% if config.extra.social %}
-              <div class="links-of-author">
-                {% for item in config.extra.social %}
-                  <span class="links-of-author-item">
-                    <a href="{{ item.url }}" title="{{ item.name }}" target="_blank" rel="noopener">
-                      {% if item.icon %}<i class="{{ item.icon }}"></i>{% else %}{{ item.name }}{% endif %}
-                    </a>
-                  </span>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        </div>
-
+      {% endif %}
+      <div class="footer-copyright">
+        &copy;
+        {% if config.extra.copyright_since %}{{ config.extra.copyright_since }} &ndash; {% endif %}
+        {% if config.extra.copyright_year %}{{ config.extra.copyright_year }}{% endif %}
+        {% if config.extra.author %}<span class="author">{{ config.extra.author }}</span>{% endif %}
       </div>
-    </header>
+    </div>
+  </footer>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div class="content {% block content_class %}{% endblock content_class %}">
-            {% block content %}{% endblock content %}
-          </div>
-        </div>
-        {% block sidebar %}{% endblock sidebar %}
-      </div>
-      <footer class="footer">
-        <div class="footer-inner">
-          &copy;
-          {% if config.extra.copyright_since %}{{ config.extra.copyright_since }} &ndash; {% endif %}
-          {% if config.extra.copyright_year %}{{ config.extra.copyright_year }}{% endif %}
-          {% if config.extra.author %}<span class="author">{{ config.extra.author }}</span>{% endif %}
-        </div>
-      </footer>
-    </main>
-  </div>
-<script>
-  document.querySelector('.site-nav-toggle').addEventListener('click', function() {
-    var nav = document.querySelector('.site-nav');
-    var open = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', open);
-    this.classList.toggle('active', open);
-  });
-</script>
+  <script>
+    var toggle = document.querySelector('.nav-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+  </script>
 </body>
 </html>

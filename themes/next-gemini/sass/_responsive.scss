@@ -1,108 +1,55 @@
+// Mobile
 @media screen and (max-width: 767px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .header {
-    width: 100%;
-  }
-
-  .header-inner {
-    position: relative;
-    top: 0;
-    width: 100%;
-    overflow: visible;
-    box-shadow: $box-shadow;
-  }
-
-  .site-nav-toggle {
+  .nav-toggle {
     display: block;
   }
 
-  // Collapse nav on mobile (JS toggle adds .open class)
+  // Nav collapses into dropdown below the header
   .site-nav {
     display: none;
+    position: absolute;
+    top: $navbar-height + $headband-height;
+    left: 0;
+    right: 0;
+    background: $bg;
+    border-bottom: 1px solid $border;
+    z-index: 99;
+    padding: 0.5em 0 1em;
 
     &.open { display: block; }
   }
 
-  // Hide avatar on mobile — saves space, name + icons are sufficient
-  .site-author-image-wrap {
-    display: none;
+  .site-header {
+    position: relative; // so nav dropdown is positioned relative to header
   }
 
-  .site-overview-wrap {
-    padding: 12px $sidebar-padding;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 $content-padding;
   }
 
-  .site-overview {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    text-align: left;
+  .nav-item a {
+    padding: 0.6em 0;
+    font-size: 1em;
   }
 
-  .site-author-name {
-    margin: 0;
-    font-size: 0.9em;
-  }
-
-  .links-of-author {
-    margin-top: 0;
-    flex-shrink: 0;
-  }
-
-  .main-inner {
-    padding: $content-mobile-padding;
-    max-width: 100%;
-  }
-
-  .post-block {
-    padding: 20px $content-mobile-padding * 2;
-    border-radius: 0;
-    box-shadow: none;
-    border-bottom: 1px solid $gainsboro;
-  }
-
-  // Don't constrain prose width on mobile — let it fill the screen
-  .post-body {
-    > p, > ul, > ol, > dl, > blockquote,
-    > h1, > h2, > h3, > h4, > h5, > h6 {
-      max-width: 100%;
-    }
-
-    // No justify on mobile — rivers of whitespace are unreadable
-    text-align: left;
+  .main {
+    padding: 1.5rem ($content-padding / 2) 3rem;
   }
 
   .post-nav .post-nav-item {
     max-width: 100%;
   }
 
-  .footer {
-    padding: 1em $content-mobile-padding;
+  .post-list-date {
+    min-width: 5.5em;
   }
 }
 
-// Tablet — partial sidebar
+// Tablet
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .header {
-    width: 200px;
-  }
-
-  .header-inner {
-    width: 200px;
-  }
-
-  .main-inner {
-    padding: 16px;
-  }
-
-  .post-block {
-    padding: 24px;
+  .main {
+    padding: 2rem 20px 3rem;
   }
 }

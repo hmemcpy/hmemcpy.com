@@ -1,116 +1,156 @@
-// Individual post card (Gemini's key visual distinction)
-.post-block {
-  background: $content-bg-color;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  padding: $content-desktop-padding;
-  margin-bottom: $sidebar-offset;
+// ── Index: clean date + title list ──────────────────────────────────
 
-  &:last-child {
-    margin-bottom: 0;
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25em;
+  padding: 0.65em 0;
+  border-bottom: 1px solid $border-light;
+
+  &:first-child {
+    border-top: 1px solid $border-light;
   }
 }
 
-// Post header
-.post-header {
-  margin-bottom: 1em;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid $gainsboro;
+.post-list-date {
+  color: $text-muted;
+  font-size: 0.8em;
+  font-family: $font-family-mono;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 6.25em;
 }
 
-// Index: h2 title (link)
+.post-list-title {
+  a {
+    color: $text;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.4;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+
+// ── Single post ──────────────────────────────────────────────────────
+
+.post-block {
+  // No card chrome — clean, flat
+}
+
+.post-header {
+  margin-bottom: 2em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid $border;
+}
+
 .post-title {
-  font-size: 1.5em;
-  margin: 0 0 0.4em;
+  font-size: 2em;
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  font-weight: 600;
+  color: $text;
 
   a {
-    color: $black-dim;
+    color: $text;
     text-decoration: none;
-    border: none;
-
-    &:hover { color: $black-deep; }
-  }
-
-  // Single post: h1, no link
-  &.post-title-single {
-    font-size: 1.75em;
-    margin-bottom: 0.5em;
+    &:hover { color: $orange; }
   }
 }
 
-// Post metadata row
 .post-meta {
   font-size: $font-size-smaller;
-  color: $grey-dark;
+  color: $text-muted;
+  font-family: $font-family-mono;
   line-height: 1.8;
 
   .post-meta-item {
-    margin-right: 1em;
+    margin-right: 1.25em;
     display: inline-block;
   }
 
-  a {
-    color: $grey-dark;
-    border-bottom: 1px dashed $grey-dark;
+  .post-meta-item-icon {
+    margin-right: 0.3em;
+  }
 
-    &:hover { color: $black-light; }
+  a {
+    color: $text-muted;
+    border-bottom: 1px dashed $grey-light;
+    &:hover { color: $orange; }
   }
 }
 
-// Post body content
+
+// ── Post body — serif typography ─────────────────────────────────────
+
 .post-body {
-  // On single post pages, constrain prose width for readability (~70–75 chars)
-  // but let code blocks, figures, and tables breathe at full width
-  > p, > ul, > ol, > dl, > blockquote, > h1, > h2, > h3, > h4, > h5, > h6 {
-    max-width: 72ch;
+  h2, h3, h4 {
+    font-family: $font-family-base;
+    font-weight: 600;
   }
 
   h2 {
-    font-size: 1.4em;
-    margin-top: 1.75em;
+    font-size: 1.5em;
+    margin-top: 2em;
     padding-bottom: 0.3em;
-    border-bottom: 2px solid $body-bg-color;
+    border-bottom: 1px solid $border;
+    color: $text;
   }
 
   h3 {
-    font-size: 1.15em;
-    margin-top: 1.5em;
-    color: $black-dim;
+    font-size: 1.2em;
+    margin-top: 1.75em;
+    color: $text;
   }
 
   h4 {
     font-size: 1em;
-    font-weight: 700;
-    margin-top: 1.25em;
+    margin-top: 1.5em;
+    color: $text-muted;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: $grey-dark;
+    letter-spacing: 0.06em;
+  }
+
+  p {
+    margin: 0 0 1.25em;
   }
 
   a {
     color: $orange;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
+    text-decoration: underline;
+    text-decoration-color: rgba($orange, 0.35);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s;
 
     &:hover {
-      border-bottom-color: $orange;
+      text-decoration-color: $orange;
     }
   }
 
   ul, ol {
     padding-left: 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
 
     li {
-      margin-bottom: 0.35em;
+      margin-bottom: 0.4em;
       line-height: $line-height-base;
     }
   }
 
   blockquote {
     border-left: 3px solid $orange;
-    background: lighten($body-bg-color, 1%);
-    margin: 1.5em 0;
+    background: rgba($orange, 0.04);
+    margin: 1.75em 0;
     padding: 0.75em 1.25em;
     border-radius: 0 $border-radius $border-radius 0;
     color: $black-light;
@@ -122,80 +162,77 @@
       margin-top: 0.5em;
       font-style: normal;
       font-size: $font-size-smaller;
-      color: $grey-dark;
+      color: $text-muted;
     }
   }
 
   img {
     max-width: 100%;
     display: block;
-    margin: 1.5em auto;
+    margin: 2em auto;
     border-radius: $border-radius;
   }
 
   figure {
     text-align: center;
-    margin: 1.5em 0;
+    margin: 2em 0;
 
     figcaption {
       font-size: $font-size-smaller;
-      color: $grey-dark;
+      color: $text-muted;
       margin-top: 0.5em;
       font-style: italic;
     }
   }
 
-  // Code within prose — distinguish inline code from blocks
   code {
-    background: darken($body-bg-color, 3%);
-    color: darken($orange, 10%);
+    background: $border-light;
+    color: darken($orange, 8%);
     padding: 0.15em 0.4em;
     border-radius: 3px;
     font-size: 0.875em;
+    font-family: $font-family-mono;
   }
 
   pre code {
     background: none;
     color: inherit;
     padding: 0;
-    font-size: 0.875em;
+    font-size: inherit;
   }
 
-  // Horizontal rule
   hr {
     border: none;
-    border-top: 2px solid $gainsboro;
-    margin: 2em 0;
+    border-top: 1px solid $border;
+    margin: 2.5em 0;
   }
-}
 
-// "Read More" button
-.post-button {
-  margin-top: 1.5em;
-  text-align: right;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.9em;
 
-  .btn {
-    display: inline-block;
-    padding: 0.35em 1em;
-    border: 1px solid $black-dim;
-    border-radius: $btn-radius;
-    color: $black-dim;
-    font-size: $font-size-smaller;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    th, td {
+      border: 1px solid $border;
+      padding: 0.5em 0.75em;
+    }
 
-    &:hover {
-      background: $black-dim;
-      color: #fff;
+    th {
+      background: $border-light;
+      font-weight: 600;
+      color: $text;
     }
   }
 }
 
-// Post footer (tags, prev/next)
+
+// ── Post footer ───────────────────────────────────────────────────────
+
 .post-footer {
-  margin-top: 1.5em;
-  padding-top: 1em;
-  border-top: 1px solid $gainsboro;
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid $border;
 }
 
 .post-tags {
@@ -204,88 +241,114 @@
   a {
     display: inline-block;
     margin-right: 0.5em;
-    color: $grey-dim;
+    color: $text-muted;
     font-size: $font-size-smaller;
     text-decoration: none;
-    border: none;
+    font-family: $font-family-mono;
 
     &::before { content: '#'; }
     &:hover { color: $orange; }
   }
 }
 
-// Prev/next navigation on single post
+// Prev/next navigation
 .post-nav {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1em;
+  margin-top: 1em;
 
   .post-nav-item {
     max-width: 48%;
 
     a {
-      color: $link-color;
+      color: $text-muted;
       font-size: $font-size-smaller;
-      border: none;
-
-      &:hover { color: $link-hover-color; }
+      text-decoration: none;
+      &:hover { color: $orange; }
     }
 
-    &.next-post { text-align: right; }
+    &.post-nav-prev { text-align: right; }
   }
 }
 
-// Archive list (section.html)
+// "Read More" link (kept for safety)
+.post-button {
+  margin-top: 1.5em;
+
+  .btn {
+    display: inline-block;
+    padding: 0.35em 1em;
+    border: 1px solid $border;
+    border-radius: $btn-radius;
+    color: $text-muted;
+    font-size: $font-size-smaller;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: $orange;
+      color: $orange;
+    }
+  }
+}
+
+
+// ── Archive list (section.html) ───────────────────────────────────────
+
 .posts-collapse {
   .collection-title {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 
     h2 {
       font-size: 1.25em;
-      color: $black-dim;
+      color: $text;
       border: none;
     }
   }
 
   .collection-year {
-    font-size: 1em;
-    color: $grey-dark;
+    font-size: 0.875em;
+    color: $text-muted;
+    font-family: $font-family-mono;
     font-weight: 600;
-    margin: 1.5em 0 0.5em;
+    margin: 2em 0 0.5em;
     padding-bottom: 0.25em;
-    border-bottom: 1px solid $gainsboro;
+    border-bottom: 1px solid $border;
   }
 }
 
 .post-collapse-item {
   display: flex;
   align-items: baseline;
-  padding: 0.35em 0;
-  border-bottom: 1px dashed $grey-lighter;
+  gap: 1em;
+  padding: 0.4em 0;
+  border-bottom: 1px solid $border-light;
 
   .post-collapse-date {
-    color: $grey-dark;
+    color: $text-muted;
     font-size: $font-size-smaller;
-    min-width: 4.5em;
+    font-family: $font-family-mono;
+    min-width: 4em;
     flex-shrink: 0;
   }
 
   .post-collapse-title a {
-    color: $text-color;
+    color: $text;
     text-decoration: none;
-    border: none;
-
     &:hover { color: $orange; }
   }
 }
 
-// Tag cloud
+
+// ── Tag cloud ─────────────────────────────────────────────────────────
+
 .tag-cloud {
   .tag-cloud-title {
     font-size: 1.25em;
     font-weight: 600;
-    color: $black-dim;
+    color: $text;
     margin-bottom: 1em;
   }
 
@@ -293,35 +356,8 @@
     a {
       display: inline-block;
       margin: 0.3em;
-      color: $grey-dim;
+      color: $text-muted;
       text-decoration: none;
-      border: none;
-
-      &:hover { color: $orange; }
-    }
-  }
-}
-
-// TOC sidebar (on single post, if enabled)
-.post-toc-wrap {
-  padding: 1em;
-
-  .post-toc {
-    ol, ul {
-      list-style: none;
-      padding-left: 1em;
-      margin: 0;
-    }
-
-    li {
-      margin: 0.3em 0;
-    }
-
-    a {
-      color: $grey-dim;
-      font-size: $font-size-smaller;
-      text-decoration: none;
-      border: none;
 
       &:hover { color: $orange; }
     }

@@ -1,34 +1,35 @@
+// Horizontal nav (desktop)
 .site-nav {
-  background: $black-deep;
-  padding: 0 0 10px;
+  display: flex;
+  align-items: center;
+  order: 2;
 }
 
-.main-menu {
+.nav-menu {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 
-.menu-item {
+.nav-item {
   a {
     display: block;
-    padding: 6px 20px;
-    color: $grey-lighter;
+    padding: 0.4em 0.75em;
+    color: $text-muted;
     text-decoration: none;
-    border-left: 4px solid transparent;
-    transition: background-color 0.2s, border-color 0.2s;
-    font-size: 0.9375em;
+    font-size: 0.875em;
+    font-family: $font-family-base;
+    font-weight: 400;
+    transition: color 0.15s;
 
     &:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, .1);
-      border-left-color: $orange;
+      color: $text;
     }
   }
 
-  &.menu-item-active a {
-    color: #fff;
-    background: rgba(255, 255, 255, .08);
-    border-left-color: $orange;
+  &.active a {
+    color: $orange;
   }
 }

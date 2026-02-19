@@ -1,9 +1,7 @@
 .pagination {
-  background: $content-bg-color;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  padding: 1em $content-desktop-padding;
-  margin-top: $sidebar-offset;
+  margin-top: 2.5em;
+  padding-top: 1.5em;
+  border-top: 1px solid $border-light;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,21 +11,20 @@
     display: inline-block;
     padding: 0.3em 0.7em;
     border-radius: $border-radius;
-    color: $text-color;
+    color: $text-muted;
     text-decoration: none;
-    border: none;
     font-size: $font-size-smaller;
-    transition: background 0.2s;
+    font-family: $font-family-mono;
+    transition: color 0.15s;
   }
 
   a:hover {
-    background: $body-bg-color;
     color: $orange;
   }
 
-  .pagination-current {
-    background: $black-deep;
-    color: #fff;
+  .page-number.current,
+  span.page-number.current {
+    color: $orange;
     font-weight: 600;
   }
 }

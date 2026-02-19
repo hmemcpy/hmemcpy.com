@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
-{% block content_class %}index posts-expand{% endblock content_class %}
-
 {% block content %}
+<ul class="post-list">
   {% for page in paginator.pages %}
     {% if not page.extra.skip_in_feed %}
-      {{ macros::post_card(page=page, is_index=true) }}
+      <li class="post-list-item">
+        <time class="post-list-date" datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+        <span class="post-list-title"><a href="{{ page.permalink }}">{{ page.title }}</a></span>
+      </li>
     {% endif %}
   {% endfor %}
+</ul>
 
-  {{ macros::pagination(paginator=paginator) }}
+{{ macros::pagination(paginator=paginator) }}
 {% endblock content %}
