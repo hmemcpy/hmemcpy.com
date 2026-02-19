@@ -1,13 +1,15 @@
-// Zola outputs highlighted code inside <pre class="z-code"> with a data-lang attribute.
+// Zola outputs highlighted code inside <pre class="language-*"> with a data-lang attribute.
 // Nord theme colors are applied by Zola — we just style the chrome.
 
-pre {
+pre,
+pre[class^="language-"] {
   border-radius: $border-radius;
   overflow-x: auto;
   margin: 1.75em 0;
   position: relative;
 
-  code {
+  code,
+  code[class^="language-"] {
     display: block;
     padding: 1.25em;
     font-family: $font-family-mono;
@@ -19,7 +21,8 @@ pre {
 }
 
 // Language label shown above code block
-pre[data-lang]::before {
+pre[data-lang]::before,
+pre[class^="language-"][data-lang]::before {
   content: attr(data-lang);
   display: block;
   padding: 0.35em 1.25em;
