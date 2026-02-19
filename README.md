@@ -5,7 +5,7 @@ Source for my blog at [hmemcpy.com](https://hmemcpy.com) — a professional blog
 ## Stack
 
 - **[Zola](https://www.getzola.org/)** (v0.19.2+) — static site generator
-- **linen** — custom theme (see `themes/linen/`)
+- **[linen](https://github.com/hmemcpy/zola-theme-linen)** — custom theme (see `themes/linen/`)
 - **GitHub Pages** — hosting, deployed via GitHub Actions on every push to `main`
 
 ## Local development
@@ -27,6 +27,8 @@ The site is available at `http://127.0.0.1:1111`.
 ## Theme — linen
 
 A minimal, single-column reading theme in `themes/linen/`. Named for its warm off-white background (`#faf9f7`).
+
+The theme is also published as a standalone Zola theme at **[hmemcpy/zola-theme-linen](https://github.com/hmemcpy/zola-theme-linen)**.
 
 | Feature | Details |
 |---|---|
