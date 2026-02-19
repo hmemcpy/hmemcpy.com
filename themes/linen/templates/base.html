@@ -122,7 +122,7 @@
       var pagefind;
 
       try {
-        pagefind = await import('/_pagefind/pagefind.js');
+        pagefind = await import('/pagefind/pagefind.js');
         await pagefind.options({ excerptLength: 12 });
       } catch(e) {
         return; // Pagefind not built yet (local dev) — fail silently
