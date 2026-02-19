@@ -5,7 +5,9 @@
 
 {% block content %}
   {% for page in paginator.pages %}
-    {{ macros::post_card(page=page, is_index=true) }}
+    {% if not page.extra.skip_in_feed %}
+      {{ macros::post_card(page=page, is_index=true) }}
+    {% endif %}
   {% endfor %}
 
   {{ macros::pagination(paginator=paginator) }}
