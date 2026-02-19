@@ -22,7 +22,7 @@ This little extension shows you the status of your build process, how long it to
 
 [GitDiffMargin](https://visualstudiogallery.msdn.microsoft.com/cf49cf30-2ca6-4ea0-b7cc-6a8e0dadc1a8) ([source](https://github.com/laurentkempe/GitDiffMargin)) adds a margin on the left column (or the scroll bar, if you prefer) of the Visual Studio editor, and shows you the diffs between your changed/deleted lines, allowing you to navigate and revert quickly to the previous change!
 
-{{ image(path="git_diff_margin.png", alt=""Git Diff Margin"") }}
+{{ image(path="git_diff_margin.png", alt="Git Diff Margin") }}
 
 It's a perfect companion to git projects (so, all of them!), and it works very nicely with the Visual Studio Git Provider, if you use it. 
 
@@ -32,7 +32,7 @@ Which brings me to:
 
 [NoGit](https://visualstudiogallery.msdn.microsoft.com/146b404a-3c91-46ff-932a-fb0f8b826f94) ([source](https://github.com/markrendle/nogit)) does one thing and one thing only - it **disables** the built-in Visual Studio Git source-control provider, which has a habit of re-enabling itself whenever you open a solution that uses git. NoGit will turn off this provider always, whenever a solution is opened.
 
-{{ image(path="no_git.png", alt=""NoGit"") }}
+{{ image(path="no_git.png", alt="NoGit") }}
 
 # Reopen Start Page
 
@@ -44,7 +44,7 @@ Another time saver is [Reopen Start Page](https://visualstudiogallery.msdn.micro
 
 In addition, SaveAllTheTime contains a small widget, reminding you to commit often. If you're a git power user, or don't use git(ಠ_ಠ), you can disable this widget.
 
-{{ image(path="no_git.png", alt=""Save All The Time"") }}
+{{ image(path="no_git.png", alt="Save All The Time") }}
 
 # TabSanity
 
@@ -54,10 +54,10 @@ I discovered [TabSanity](https://visualstudiogallery.msdn.microsoft.com/ac4d4d6b
 
 Finally, let's add some fun to our code with [EmojiVS](https://visualstudiogallery.msdn.microsoft.com/88575465-8486-4c5a-8406-05e8d1d5b09d) ([source](https://github.com/jbevain/EmojiVS)) - an extension that adds github emojis to your code (more specifically, code comments). Because, why not?
 
-{{ image(path="emojivs1.png", alt=""EmojiVS"") }}
+{{ image(path="emojivs1.png", alt="EmojiVS") }}
 
 And it even gives you IntelliSense:
 
-{{ image(path="emojivs2.png", alt=""EmojiVS in Action"") }}
+{{ image(path="emojivs2.png", alt="EmojiVS in Action") }}
 
 Note: if you're a ReSharper user, you need to install the [ReMoji](https://github.com/hmemcpy/ReSharper.ReMoji) extension _in addition to_ EmojiVS to get code completion.

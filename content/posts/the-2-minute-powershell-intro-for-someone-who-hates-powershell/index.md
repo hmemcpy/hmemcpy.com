@@ -10,7 +10,7 @@ This recently changed, however. A client had a set of legacy perl scripts which 
 
 Luckily, you already have all the tools you need to get started! Every Windows machine comes with both PowerShell and PowerShell ISE (Integrated Scripting Environment) already installed.
 
-{{ image(path="image.png", alt=""Figure 1: PowerShell ISE - an IDE for PowerShell with code completion (IntelliSense) and an integrated debugger."") }}
+{{ image(path="image.png", alt="Figure 1: PowerShell ISE - an IDE for PowerShell with code completion (IntelliSense) and an integrated debugger.") }}
 
 Here's what you need to know about PowerShell:
 

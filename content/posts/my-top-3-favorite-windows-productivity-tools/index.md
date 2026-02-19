@@ -16,7 +16,7 @@ There are way more tools I love and use every day, but the following 3 are my mu
 
 [RapidEE](http://www.rapidee.com) is an editor for the Windows environment variables! No more being stuck squinting in the unresizeable Windows dialog, this tool will not only let you add, search and modify envvars easily, it will also show invalid paths in red, letting you find dead entries quickly!
 
-{{ image(path="rapidee.png", alt=""Rapid Environment Editor"") }}
+{{ image(path="rapidee.png", alt="Rapid Environment Editor") }}
 
 ### Everything
 
@@ -26,7 +26,7 @@ There are way more tools I love and use every day, but the following 3 are my mu
 
 Imagine a list view, with a search box at the top, and nothing else, which finds **any file** in your computer **immediately** - you have just imagined [Everything](http://www.voidtools.com/). This lightweight search engine indexes your entire hard drive(s) in _seconds_ after installing, letting you then find any file, anywhere! My preference is to bind the shortcut for a New Window to **Ctrl-Shift-Z**, so I can pop open Everything everywhere with this single chord. Set it under Tools - Options - Keyboard.
 
-{{ image(path="everything.png", alt=""Everything"") }}
+{{ image(path="everything.png", alt="Everything") }}
 
 ### Ditto
 
@@ -36,4 +36,4 @@ Imagine a list view, with a search box at the top, and nothing else, which finds
 
 [Ditto](http://ditto-cp.sourceforge.net/) is a clipboard manager for Windows. If you ever used ReSharper's [Clipboard Manager](https://www.jetbrains.com/resharper/webhelp/Coding_Assistance__Multiple_Entries_Clipboard.html) you will appreciate this little tool - it remembers every single **Ctrl-C** you've ever done, allowing you to paste back any item at any time! The default shortcut for Ditto is **Ctrl-\`**, and it is packed with features, such as searching, exporting and removing entries, with full unicode support and ability to sync clipboards between machines. What's more, it supports *smart paste*, allowing you to paste entries in places such as the Windows Command Prompt, which will only support proper [copying and pasting only in Windows 10](http://www.hanselman.com/blog/Windows10GetsAFreshCommandPromptAndLotsOfHotkeys.aspx).
 
-{{ image(path="ditto.png", alt=""Ditto"") }}
+{{ image(path="ditto.png", alt="Ditto") }}

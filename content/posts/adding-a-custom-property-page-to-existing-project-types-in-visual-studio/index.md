@@ -54,7 +54,7 @@ One last piece of the puzzle is hooking it up - this is where a bit of MSBuild m
 
 Using the GUID from before. Save the .csproj file, and when you reload it in Visual Studio, you will now have a brand new (albeit empty) property page in the project's properties!
 
-{{ image(path="prop.png", alt=""Hello Property Page!"") }}
+{{ image(path="prop.png", alt="Hello Property Page!") }}
 
 (You can probably add this property dynamically with DTE from your extension, instead of modifying existing projects, but I haven't tried it.)
 

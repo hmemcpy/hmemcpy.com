@@ -12,7 +12,7 @@ The time is 08:40. The morning couldn't have started better than this. The weath
 
 The [West Loch Hotel](http://www.westlochhotel.co.uk/) couldn't be more perfectly located &#8211; less than 10 minutes away from Kennacraig Terminal, from which the Caledonian MacBrayne (or CalMac for short) ferry would take us to Port Ellen. The ferry hadn't arrived yet, so I used this opportunity to take a few photos of the breathtaking view.
 
-<a href="https://goo.gl/photos/yY7FwKeY8x1H2wx67">{{ image(path="image2.jpg", alt=""View from the Kennacraig terminal pier"") }}</a>
+<a href="https://goo.gl/photos/yY7FwKeY8x1H2wx67">{{ image(path="image2.jpg", alt="View from the Kennacraig terminal pier") }}</a>
 
 Other cars started to arrive at the terminal, and after a short while the ferry arrived, and like belly of the beast, opened its mouth and let out cars (and several trucks). After that we drove in, parked and went upstairs to the lounge.
 

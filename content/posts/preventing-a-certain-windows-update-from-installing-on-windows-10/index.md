@@ -8,7 +8,7 @@ This post explains how to prevent a certain update from installing on a Windows 
 
 **UPDATE:** Microsoft has released a [tool to hide unwanted updates](https://support.microsoft.com/en-us/kb/3073930), which makes the process described below much simpler:
 
-{{ image(path="image.png", alt=""Show or hide updates"") }}
+{{ image(path="image.png", alt="Show or hide updates") }}
 
 <hr/>
 During its preview, Windows 10 does not allow (by default), changing how updates are installed. It was possible to modify this using various [Group Policy settings and a bit of registry tweaking](http://www.askvg.com/how-to-change-windows-update-settings-when-managed-or-disabled-by-system-administrator/), but since build 10049 it no longer works - it's not possible to restore the *old* Windows Update applet in Control Panel.

@@ -33,7 +33,7 @@ So it seems that it was trying to load a user account with SID ending in `-500`,
 
 Which led me to see that the problematic SID belonged to the Administrator user! On Windows 10 machines, the Administrator account is disabled by default, and this is why I suspected the update was trying to install itself into the Administrator user's hive, but couldn't find it.
 
-{{ image(path="powershell.png", alt=""Listing output in PowerShell"") }}
+{{ image(path="powershell.png", alt="Listing output in PowerShell") }}
 
 I've enabled the Administrator account using a net user command:
 
