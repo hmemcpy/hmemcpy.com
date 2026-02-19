@@ -2,7 +2,7 @@
 title = "Working with shared dependencies in ZIO Test"
 date = 2021-11-20T10:08:54Z
 +++
-ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular---dependency management via the environment.
+ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular-dependency management via the environment.
 
 In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let's understand how ZIO Test works under the hood.
 
@@ -39,7 +39,7 @@ object MySpec extends DefaultRunnableSpec {                 // (1)
 1. In ZIO Test, it's common to refer to suites of tests as Specs, here we extend `DefaultRunnableSpec` which is responsible for several things. More on that later.
 2. The abstract value `spec` must be implemented here by providing it with a `suite` containing tests or additional (nested) suites.
 3. The `test`/`testM` definition describes tests that perform or don't any ZIO effects, respectively.
-4. Part of ZIO Test's in-memory implementations of base services, here---a test console allowing to capture the output as a `Vector[String]`
+4. Part of ZIO Test's in-memory implementations of base services, here-a test console allowing to capture the output as a `Vector[String]`
 5. The assertion syntax of [Smart Assertions](https://zio.dev/reference/test/assertions/smart-assertions/), which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.
 6. Additional tests or suites, separated by commas.
 

@@ -22,13 +22,13 @@ public static void main(String[] args)
 ```
 In most programming languages that we've ever experienced, the world as we know it *lives and dies* in the confines of the opening and closing brace of the `main` function, which is the entry point to our application. Everything that happens in our program, the universe our program interacts with, happens between those two braces. By its very definition, our program returns an *exit code*, specifying whether it succeeded or not, and everything else happens as a side-effect.
 
-The implication, that all the work is done between the two braces of the `main` method, is what drives **everything** we know about this model --- every design pattern, every practice, every discipline, every tool, library, and framework - was created to let us manage this model of our world that exists between those two braces. We have decades of knowledge in how to do this properly in almost any language.
+The implication, that all the work is done between the two braces of the `main` method, is what drives **everything** we know about this model - every design pattern, every practice, every discipline, every tool, library, and framework - was created to let us manage this model of our world that exists between those two braces. We have decades of knowledge in how to do this properly in almost any language.
 
 For me, this was the core, the very foundation on which all the software is built! It was the one thing that was the ultimate truth, regardless of the programming language.
 
 And it was like this, until **Haskell ruined it for me**!
 
-I will not go into details -- I inadvertently did that in my [previous post](/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/). But during watching a talk on seemingly unrelated topic, the speaker managed to sneak some Haskell in there! Until that moment, I haven't really seen any Haskell code before --- I'd always dismissed it as irrelevant - and there it was, staring me in the face.
+I will not go into details -- I inadvertently did that in my [previous post](/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/). But during watching a talk on seemingly unrelated topic, the speaker managed to sneak some Haskell in there! Until that moment, I haven't really seen any Haskell code before - I'd always dismissed it as irrelevant - and there it was, staring me in the face.
 
 ```haskell
 main :: IO () -- reads as 'main, having the return type of IO ()'
