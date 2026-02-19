@@ -872,7 +872,7 @@ class (Eq a) => Ord a where
 
 The `Ord` type class is parameterized by `a` and itself has a *context* of `Eq a`. When placing such context in the type class definition (rather than the instance), it means that the `Ord` type class *extends* the `Eq` type class. In order to define an instance of `Ord` we must first define an instance `Eq`.
 
-The `Ord` type class defines the ordering behavior used in comparisons. Other than the usual ordering operators `<`, `<=`, `>=`, and `>`, we can define the `max` and `min` functions, as well as a function `compare`, which can be used for a more detailed comparison. The `compare` function returns a result `Ordering`, which is a type comprised of 3 values: LT, EQ, and GT (less than, equals, and greater than):
+The `Ord` type class defines the ordering behavior used in comparisons. Other than the usual ordering operators `<`, `<=`, `>=`, and `>`, we can define the `max` and `min` functions, as well as a function `compare`, which can be used for a more detailed comparison. The `compare` function returns a result `Ordering`, which is a type consisting of 3 values: LT, EQ, and GT (less than, equals, and greater than):
 
 ```
 Prelude> :i Ordering
@@ -1304,7 +1304,7 @@ sin (pi / 2)
 
 Redexes exist in all of the above examples, meaning they can be further reduced, therefore are not considered normal form.
 
-Weak head normal form is a special case of an expression which contain redexes, comprised of the following:
+Weak head normal form is a special case of an expression which contain redexes, consisting of the following:
 
 1. a lambda *abstraction*
 2. a data constructor

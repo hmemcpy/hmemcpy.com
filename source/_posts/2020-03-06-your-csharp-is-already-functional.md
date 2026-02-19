@@ -37,7 +37,7 @@ public static void Main(string[] args)
 
 The novelty here lies in using a tuple (pair) to capture the result of both equations together (`x % 3 == 0` and `x % 5 == 0`). This allows using pattern matching to deconstruct the tuple and examine both values together. If none of the cases match, a default (`_`) case will always match, returning the string value of the number.
 
-However, none of the many "functional" features used in the snippet (including LINQ-style `foreach` loops) is what makes this approach in itself *functional*. What makes it functional is the fact that except for the final printing to the console, all of the methods used in this program are ***expressions***.
+However, none of the many "functional" features used in the snippet (including LINQ-style `foreach` loops) are what makes this approach in itself *functional*. What makes it functional is the fact that except for the final printing to the console, all of the methods used in this program are ***expressions***.
 
 **Expression-oriented programming**
 
