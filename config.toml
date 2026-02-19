@@ -15,8 +15,8 @@ taxonomies = [
 
 [markdown]
 [markdown.highlighting]
-enabled = true
 theme = "nord"
+style = "inline"
 
 [extra]
 author = "Igal Tabachnik"
