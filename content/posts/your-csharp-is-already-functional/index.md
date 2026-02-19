@@ -89,7 +89,7 @@ This might not look like a dramatic change (and it could be implemented in vario
 3. It can be tested and reused on its own, without any additional dependencies or setup
 4. The caller of this function is free to do whatever it wants with the result -- not our responsibility
 
-And here lies the *essence* of functional programming - all functional code is made up of expressions, producing some value and returning it to their callers. These expressions are usually stand-alone, completely specified by their input parameters. At the very top, the entry point (or, sometimes known as "the end of the world") these values are gathered and interacted upon with the rest of the world. In object-oriented jargon, this is sometimes called the "Onion architecture" (or "Ports and Adapters") - a pure core comprised of business logic and the imperative outer shell that is responsible for interactions with the external world.
+And here lies the *essence* of functional programming - all functional code is made up of expressions, producing some value and returning it to their callers. These expressions are usually stand-alone, completely specified by their input parameters. At the very top, the entry point (or, sometimes known as "the end of the world") these values are gathered and interacted upon with the rest of the world. In object-oriented jargon, this is sometimes called the "Onion architecture" (or "Ports and Adapters") - a pure core consisting of business logic and the imperative outer shell that is responsible for interactions with the external world.
 
 <img src="onion.png" width="400" style="display: block; margin: 0 auto;" />
 

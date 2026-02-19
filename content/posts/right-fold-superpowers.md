@@ -25,7 +25,7 @@ We get a definition of a list as follows:
 ```haskell
 data List t = Nil | t :. List t
 ```
-Like the builtin Haskell list type `[]`, this custom `List` is comprised of nil and cons data constructors, `Nil` and `:.`. The List module also defines a `foldRight` function that operates on this `List`. We will use all this information to implement the functions for `List` using `foldRight` only.
+Like the builtin Haskell list type `[]`, this custom `List` consists of nil and cons data constructors, `Nil` and `:.`. The List module also defines a `foldRight` function that operates on this `List`. We will use all this information to implement the functions for `List` using `foldRight` only.
 
 Let's start with a couple of easy ones: `product` and `sum`. Given the following list:
 

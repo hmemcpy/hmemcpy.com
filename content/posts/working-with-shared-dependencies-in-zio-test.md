@@ -60,7 +60,7 @@ type TestEnvironment =
     with ZEnv
 ```
 
-The `TestEnvironment` is comprised of test implementations for all services required by `ZEnv`, in addition to test-specific services such as a `TestConsole` for capturing and manipulating console output, `TestClock` for setting and controlling the passage of time, and others.
+The `TestEnvironment` consists of test implementations for all services required by `ZEnv`, in addition to test-specific services such as a `TestConsole` for capturing and manipulating console output, `TestClock` for setting and controlling the passage of time, and others.
 
 Under the hood, the `RunnableSpec` implementation calls the actual [`TestRunner`](https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestRunner.scala#L42) instance associated with it, which runs the tests in the spec *in parallel* (with up to 4 tests by default), and each test is executed by a [`TestExecutor`](https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestExecutor.scala#L34-L36):
 
