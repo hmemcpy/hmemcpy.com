@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using BSP effectively in IntelliJ and Scala | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Using BSP effectively in IntelliJ and Scala">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Using BSP effectively in IntelliJ and Scala</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2021-09-20T09:54:44Z">2021-09-20</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;bsp-and-intellij&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I've been using the BSP support in IntelliJ for over 6 months now, and while the experience wasn't always smooth, it's definitely worth considering switching to BSP over sbt. I've recently contributed a couple of fixes to sbt's implementation of BSP, adding a few missing pieces, allowing improved support in IntelliJ using sbt's native BSP server. I am grateful to sbt maintainer <a rel="external" href="https://github.com/adpi2">Adrien Piquerez</a> of Scala Center and <a rel="external" href="https://github.com/jastice">Justin Kaeser</a> of JetBrains, who implemented the BSP support in IntelliJ for their hard work and great help!</p>
+<p>This post is a step-by-step tutorial on how to use and get the most out of the BSP support in IntelliJ.</p>
+<span id="continue-reading"></span><h3 id="background">Background</h3>
+<p>BSP, or the <a rel="external" href="https://build-server-protocol.github.io/">Build Server Protocol</a>, is a specification for abstracting over build tools, designed in collaboration between JetBrains and the Scala Center. It derives from LSP (Language Server Protocol), a <a rel="external" href="https://microsoft.github.io/language-server-protocol/">Microsoft specification</a> for building rich editor tooling for various programming languages, such as Scala (via <a rel="external" href="https://scalameta.org/metals/">Metals</a>) or Haskell (via <a rel="external" href="https://github.com/haskell/lsp">haskell-lsp</a>).</p>
+<p>The BSP makes the job of integrating build tooling into IDEs easier. Traditionally, the editor would have to execute the build tool (e.g. sbt or mvn) as an external process, read its output, and render the result accordingly. By exposing a common protocol, the IDE (the BSP client) can speak to the build tool (the BSP server) directly, resulting in much faster and more fine-grained incremental compilation, as well as receiving the output payload back via the protocol. For more information, I recommend <a rel="external" href="https://blog.jetbrains.com/scala/2019/08/08/integrating-developer-experiences-the-build-server-protocol-in-the-intellij-scala-plugin/">this blog post</a> from Justin Kaeser of the Scala plugin team at JetBrains.</p>
+<p>The major benefit of using BSP instead of importing the sbt project directly is the fact that the server will <em>run constantly in the background</em>, allowing IntelliJ to communicate via the protocol instead of launching external processes. In addition, the <strong>build on save</strong> feature enables a much faster feedback whether your code really compiles, especially since IntelliJ may sometimes incorrectly mark perfectly compiling code with red squigglies or other types of errors. Finally, build tools other than sbt may implement the BSP protocol, and will be available to use in IntelliJ without having to add custom support.</p>
+<h3 id="support-in-sbt">Support in sbt</h3>
+<p>Prior to sbt 1.4, BSP support in Scala was only available via a tool called <a rel="external" href="https://scalacenter.github.io/bloop/">bloop</a> - a client and a server that implements the BSP protocol. As of version 1.4, sbt <a rel="external" href="https://www.scala-lang.org/blog/2020/10/27/bsp-in-sbt.html">natively supports BSP</a> which technically makes bloop no longer required, however some outstanding issues in sbt were only <a rel="external" href="https://eed3si9n.com/sbt-1.6.0-beta">fixed in the recent versions</a> (1.6.0-M1 at the time of writing).</p>
+<p>IntelliJ supports BSP using <em>both</em> bloop and sbt, however there are slight differences between them. In particular, IntelliJ will fail to highlight and provide code completion (or detect changes) in the <code>build.sbt</code> file imported with bloop due to some missing functionality that's only available in sbt. On the other hand, sbt versions prior to 1.6.0-M1 did not have full support for the Rebuild Project functionality, sometimes causing IntelliJ to hang.</p>
+<p>If you're using an sbt version prior to 1.4 - use the bloop option when importing your project. Otherwise, please upgrade to the latest sbt for better support.</p>
+<h3 id="getting-started">Getting Started</h3>
+<p>The following steps will work for IntelliJ IDEA 2020.1 and up, however it is highly recommended you use the latest available IntelliJ (2021.2.2 at the time of writing), as well as <strong>at least sbt 1.6.0-M1</strong>, if possible, otherwise some things may not work.</p>
+<p>Here are the steps to import your sbt project into IntelliJ as a BSP project:</p>
+<h4 id="step-0-delete-existing-bsp-bloop-metadata">Step 0 - delete existing BSP/bloop metadata</h4>
+<p>To ensure import operation succeeds, first <strong>delete</strong> the following directories in your project's root:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>$ rm -rf .bloop</span></span>
+<span class="giallo-l"><span>$ rm -rf .bsp</span></span></code></pre><h4 id="step-1-import-from-existing-sources">Step 1 - import from existing sources</h4>
+<p>To import the project as BSP, close the current project, and IntelliJ will return to the Welcome screen. In this screen, press the <strong>Find Action</strong> shortcut (<kbd>⇧⌘A</kbd> on macOS, <kbd>Ctrl+Shift+A</kbd> on Windows/Linux), and type <code>existing</code>, OR go to <strong>File | New | Project from existing sources</strong> in the menu, when you have a project open:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;1-import-existing-welcome.jpg" alt="800">
+    
+</figure>
+
+<p>Select <strong>Import Project from Existing Sources</strong>, and select the <code>build.sbt</code> of the project you wish to import. The following dialog will appear:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;2-project-model.jpg" alt="500">
+    
+</figure>
+
+<p>Select <strong>BSP</strong> and press Next. Yet another dialog will appear, asking you how to import the project (i.e. which BSP engine to use, sbt native or bloop):</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;3-sbt-or-bloop.jpg" alt="500">
+    
+</figure>
+
+<p>Select <strong>sbt (recommended)</strong> and press Finish. IntelliJ will begin syncing the project with BSP.</p>
+<h4 id="step-2-enable-compile-on-save">Step 2 - enable compile on save</h4>
+<p>To really take advantage of BSP builds, enable the <strong>Build on Save</strong> feature in Settings. Go to <strong>Preferences | Build, Execution, Deployment | Build Tools | BSP</strong> and check the <strong>build automatically on file save</strong>. Please note, this setting is stored per-project, so when importing other projects (or re-importing the current one), it will have to be enabled again.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;4-build-on-save.png" alt="500">
+    
+</figure>
+
+<p>Tip: it is also recommended to disable <strong>Automatically show first error in editor</strong>, to prevent IntelliJ jumping to the error location in case of a compilation error. To disable, go to <strong>Preferences | Build, Execution, Deployment | Compiler</strong> and uncheck the option. Note that this option can be stored globally, so if you want it to apply to all future projects, do this action from the Welcome screen, when no other projects are opened.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;5-first-error.jpg" alt="500">
+    
+</figure>
+
+<p><strong>And that's it!</strong> You can now continue working normally, except each time you save your current file, BSP will automatically build the changed module and will let you know immediately if there are any compilation errors. This is very similar to running with <code>~compile</code> enabled in sbt, except better integrated into the IDE, and much faster! You can see the build progress in the <strong>Build Output</strong> tab inside the IDE:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;bsp-compile.png" alt="500">
+    
+</figure>
+
+<p>Here it is in action: changing the code and pressing Save will trigger immediate compilation of the changed module, showing actual compilation errors in the window:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;live.gif" alt="">
+    
+</figure>
+
+<p>This workflow tremendously improves the feedback cycle I get from writing Scala, ensuring I know whether my code compiles or not (even when IntelliJ might sometimes claim otherwise!)</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>In some rare occasions, IntelliJ might lose sync and/or stop building the project completely. When this happens, there are several things you might try:</p>
+<h4 id="stop-the-bsp-connection-and-try-again">Stop the BSP connection and try again</h4>
+<p>On the status bar, click the blue BSP Connection icon, and select <strong>Stop all BSP connections</strong>:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;stop-bsp-connections.png" alt="500">
+    
+</figure>
+
+<p>Afterwards, try rebuilding the project or sync the bsp using the sync button in the bsp tab:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;sync-bsp.png" alt="500">
+    
+</figure>
+
+<p>In addition, it might be useful to enable BSP tracing to log all the protocol output. To enable, go to <strong>Preferences | Build, Execution, Deployment | Build Tools | BSP</strong>, and enable the BSP trace log. The log will be available in the IntelliJ log directory, which can be opened from the <strong>Help | Show Log in Finder</strong> menu.</p>
+<p>If this still fails, try re-importing the bsp project using the steps outlined above (including deleting the <code>.bloop</code> and <code>.bsp</code> directories).</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;scala-3-goodies-for-scala-2-developers&#x2F;" rel="next" title="Scala 3 goodies for Scala 2 developers">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Scala 3 goodies for Scala 2 developers</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;parsing-encoding-dependent-protocols-with-scodec&#x2F;" rel="prev" title="Parsing character encoding-dependent protocols with scodec in Scala">
+        <span class="nav-title">Parsing character encoding-dependent protocols with scodec in Scala</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

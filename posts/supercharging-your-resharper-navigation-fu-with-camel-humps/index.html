@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supercharging your ReSharper navigation-fu with Camel Humps | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Supercharging your ReSharper navigation-fu with Camel Humps">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Supercharging your ReSharper navigation-fu with Camel Humps</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2011-05-09T01:30:34Z">2011-05-09</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a <em>lot</em>, mostly due to its being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given - use the keyboard shortcuts. A lot. Some even go completely mouseless!</p>
+<span id="continue-reading"></span>
+<p>Here's a little tip to make navigation your code even better: <a href="http://blogs.jetbrains.com/dotnet/2008/02/resharper-in-detail-camelhumps/" target="_blank">CamelHumps</a>. CamelHumps is a ReSharper feature that allows navigating and selecting parts of compound names, according to <a href="http://en.wikipedia.org/wiki/CamelCase" target="_blank">camelCase</a> rules, so that if you have a method named <code>CreateUser_WithValidUsernameAndPassword_UserIsCreated</code> (like I name my unit tests, <code>UnderTest_Scenario_ExpectedResult</code>), with CamelHumps enabled, you would be able to move the caret to the beginning of every word using <strong>Ctrl-Left/Right</strong>.</p>
+<p>While this is a great feature, I wouldn't want it enabled all the time, since it's also affects Extend/Shrink Selection (Ctrl-W), which sometimes can be annoying. Fortunately, those actions are available as Visual Studio actions, so they can be used even if CameHumps is turned off globally:</p>
+<ul>
+<li><em>ReSharper_HumpNext</em> — move caret to next hump/word</li>
+<li><em>ReSharper_HumpPrev</em> — move caret to previous hump/word</li>
+<li><em>ReSharper_HumpNextExtend</em> — expand selection to next hump</li>
+<li><em>ReSharper_HumpPrevExtend</em> — expand selection to previous hump</li>
+</ul>
+<p>I recommend binding the <em>ReSharper_HumpNext</em> and <em>ReSharper_HumpPrev</em> to <strong>Alt-Right</strong> and <strong>Alt-Left</strong>, and <em>ReSharper_HumpNextExtend</em> and <em>ReSharper_HumpPrevExtend</em> to <strong>Alt-Shift-Right</strong> and <strong>Alt-Shift-Left</strong>, respectively. Make sure you select <strong>Text Editor</strong> under <em>Use new shortcut in</em> in Tools - Options - Keyboard, or your binding might not work.</p>
+<p><strong>Please note:</strong> the later binding breaks the <a href="http://weblogs.asp.net/scottgu/archive/2010/04/26/box-selection-and-multi-line-editing-with-vs-2010.aspx" target="_blank">Box Selection</a> feature in Visual Studio 2008, however greatly improves it in Visual Studio 2010 - it makes box selection respect the camelCase as well!</p>
+<p>Here's how it works - let's say I want to rename the word <em>Spelling</em> to <em>Proofreading</em> in the method name, and the caret is inside the method body:</p>
+<p><strong>Step 1:</strong> Press <strong>Ctrl-[</strong> to jump to containing method (jumps to start of the method name)
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<p><strong>Step 2:</strong> Press <strong>Alt-Right</strong> a few times to jump to the beginning of the word Spelling
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<p><strong>Step 3:</strong> Press <strong>Alt-Shift-Right</strong> to select the word Spelling
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;image3.png" alt="">
+    
+</figure>
+
+</p>
+<p>I'm using <a href="http://osherove.com/" target="_blank">Roy Osherove's</a> excellent <a href="http://osherove.com/blog/2007/6/3/train-to-be-a-keyboard-master-with-keyboard-jedi.html" target="_blank">Keyboard Jedi</a> utility to demonstrate the keyboard shortcuts. Unfortunately it doesn't work on a 64-bit Windows, but you can fix it with this <a href="http://codebetter.com/jameskovacs/2008/04/25/keyboard-jedi-on-vista-x64/" target="_blank">little hack</a> by <a href="http://jameskovacs.com/" target="_blank">James Kovacs</a>.</p>
+<p>Unfortunately, this doesn't work in the rename dialog (and others). There's a 3-year old <a href="http://youtrack.jetbrains.net/issue/RSRP-40844" target="_blank">issue</a> reported on the ReSharper's Issue Tracker about this, however it hasn't been added yet. Maybe it's time, guys?</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish&#x2F;" rel="next" title="Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-make-testdriven-net-open-dotpeek-or-any-other-il-disassembler-instead-of-reflector&#x2F;" rel="prev" title="How to make TestDriven.NET open dotPeek (or any other IL disassembler) instead of Reflector">
+        <span class="nav-title">How to make TestDriven.NET open dotPeek (or any other IL disassembler) instead of Reflector</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

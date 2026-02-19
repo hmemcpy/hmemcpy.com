@@ -1,0 +1,1915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>In Absentia</title>
+    <subtitle>by Igal Tabachnik</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://hmemcpy.com/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://hmemcpy.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2021-11-20T10:08:54+00:00</updated>
+    <id>https://hmemcpy.com/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Working with shared dependencies in ZIO Test</title>
+        <published>2021-11-20T10:08:54+00:00</published>
+        <updated>2021-11-20T10:08:54+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/working-with-shared-dependencies-in-zio-test/"/>
+        <id>https://hmemcpy.com/posts/working-with-shared-dependencies-in-zio-test/</id>
+        
+        <summary type="html">&lt;p&gt;ZIO Test is a &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;zio.dev&#x2F;datatypes&#x2F;test&#x2F;&quot;&gt;testing library&lt;&#x2F;a&gt; in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular-dependency management via the environment.&lt;&#x2F;p&gt;
+&lt;p&gt;In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let&#x27;s understand how ZIO Test works under the hood.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Parsing character encoding-dependent protocols with scodec in Scala</title>
+        <published>2021-11-19T13:29:31+00:00</published>
+        <updated>2021-11-19T13:29:31+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/parsing-encoding-dependent-protocols-with-scodec/"/>
+        <id>https://hmemcpy.com/posts/parsing-encoding-dependent-protocols-with-scodec/</id>
+        
+        <summary type="html">&lt;p&gt;At &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;unit.co&quot;&gt;work&lt;&#x2F;a&gt;, we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or checks, for the US folks) are transmitted electronically between financial institutions.&lt;&#x2F;p&gt;
+&lt;p&gt;X9.37 is one such archaic binary protocol still in use today. The specification allows this file to be encoded either in the 8-bit IBM &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;EBCDIC&quot;&gt;EBCDIC&lt;&#x2F;a&gt; encoding or ASCII, and it contains both plain-text characters as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;scodec&#x2F;scodec&quot;&gt;scodec&lt;&#x2F;a&gt;, a combinator library for creating codecs for binary data. I recommend reading about the library and getting familiarized with the syntax before reading further.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Using BSP effectively in IntelliJ and Scala</title>
+        <published>2021-09-20T09:54:44+00:00</published>
+        <updated>2021-09-20T09:54:44+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/bsp-and-intellij/"/>
+        <id>https://hmemcpy.com/posts/bsp-and-intellij/</id>
+        
+        <summary type="html">&lt;p&gt;I&#x27;ve been using the BSP support in IntelliJ for over 6 months now, and while the experience wasn&#x27;t always smooth, it&#x27;s definitely worth considering switching to BSP over sbt. I&#x27;ve recently contributed a couple of fixes to sbt&#x27;s implementation of BSP, adding a few missing pieces, allowing improved support in IntelliJ using sbt&#x27;s native BSP server. I am grateful to sbt maintainer &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;adpi2&quot;&gt;Adrien Piquerez&lt;&#x2F;a&gt; of Scala Center and &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;jastice&quot;&gt;Justin Kaeser&lt;&#x2F;a&gt; of JetBrains, who implemented the BSP support in IntelliJ for their hard work and great help!&lt;&#x2F;p&gt;
+&lt;p&gt;This post is a step-by-step tutorial on how to use and get the most out of the BSP support in IntelliJ.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Scala 3 goodies for Scala 2 developers</title>
+        <published>2021-06-22T10:45:02+00:00</published>
+        <updated>2021-06-22T10:45:02+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/scala-3-goodies-for-scala-2-developers/"/>
+        <id>https://hmemcpy.com/posts/scala-3-goodies-for-scala-2-developers/</id>
+        
+        <summary type="html">&lt;p&gt;Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2&#x27;s infamous warts, many of which have been fixed (or made obsolete) by the new compiler. While some of the Scala 2 syntax still supported in Scala 3.0, it will be removed in Scala 3.1, so it&#x27;s best to migrate as early as possible.&lt;&#x2F;p&gt;
+&lt;p&gt;To make the process easier for Scala 2 users, the Scala compiler team have been &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;scala&#x2F;scala&#x2F;pull&#x2F;9589&quot;&gt;backporting&lt;&#x2F;a&gt; some of the new features to the Scala 2.x compiler, enabling them with the &lt;code&gt;-Xsource:3&lt;&#x2F;code&gt; compiler flag. In addition, users of the latest IntelliJ IDEA 2021.2 (in Early Access, at the time of writing) will get automatic refactoring suggestions, converting the old syntax to the new one.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Running Postgres integration tests easily with TestContainers and ZIO Test</title>
+        <published>2020-08-04T09:36:33+00:00</published>
+        <updated>2020-08-04T09:36:33+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/"/>
+        <id>https://hmemcpy.com/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/</id>
+        
+        <summary type="html">&lt;p&gt;Integration&#x2F;end-to-end testing is considered one of the best indicators that your code functions correctly, and everything is wired up as it should. &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.testcontainers.org&#x2F;&quot;&gt;Testcontainers&lt;&#x2F;a&gt; is a wonderful library for creating and running embeddable Docker containers that can run alongside your tests, so you can have real implementations of your third-party dependencies, instead of relying on fragile mocks. Testcontainers is a mature Java library that comes out of the box with integrations for Postgres, Kafka, RabbitMQ, and &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.testcontainers.org&#x2F;modules&#x2F;databases&#x2F;&quot;&gt;many more&lt;&#x2F;a&gt;, as well as support for many test runners and even ports to &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;testcontainers&quot;&gt;other languages&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;In this short post, I&#x27;ll explain how to integrate Testcontainers (the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;testcontainers&#x2F;testcontainers-scala&quot;&gt;Scala flavor&lt;&#x2F;a&gt;) to play nicely with ZIO Test, showcasing some of the great composability features ZIO provides.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Talks I liked</title>
+        <published>2020-03-27T11:54:39+00:00</published>
+        <updated>2020-03-27T11:54:39+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/talks-i-liked/"/>
+        <id>https://hmemcpy.com/talks-i-liked/</id>
+        
+        <content type="html" xml:base="https://hmemcpy.com/talks-i-liked/">&lt;p&gt;Ever since I started my &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=g1EvM4CbUvM&quot;&gt;Journey to Functional Programming&lt;&#x2F;a&gt;, I&#x27;ve been watching a lot of talks and presentations that I found inspiring. Here&#x27;s a list, in no particular order, of talks I liked. Enjoy!&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;functional-programming&quot;&gt;Functional programming&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;haskell&quot;&gt;Haskell&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=DebDaiYev2M&quot;&gt;What Makes Haskell Unique&lt;&#x2F;a&gt; — Michael Snoyman&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;96639840&quot;&gt;How Haskell is Changing my Brain&lt;&#x2F;a&gt; — Alissa Pajer&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=bmKYiUOEo2A&quot;&gt;Denotational Design: From Meanings To Programs&lt;&#x2F;a&gt; — Conal Elliott&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=GZPup5Iuaqw&quot;&gt;Next Level MTL&lt;&#x2F;a&gt; — George Wilson&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=VzNGF4V937o&quot;&gt;Laws!&lt;&#x2F;a&gt; — George Wilson&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=R2afqbzWDiU&quot;&gt;Communicating with Types&lt;&#x2F;a&gt; — Kris Jenkins&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=kIwd1D9m1gE&quot;&gt;Maintainable Software Architecture in Haskell (with Polysemy)&lt;&#x2F;a&gt; — Paweł Szulc&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=3U3lV5VPmOU&quot;&gt;What are Types for, or are they only Against?&lt;&#x2F;a&gt; — Conor McBride&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;64673035&quot;&gt;Explain List Folds to Yourself&lt;&#x2F;a&gt; — Tony Morris&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=v6de5KWFY6M&quot;&gt;Parametricity---The Essence of Information Hiding&lt;&#x2F;a&gt; — Kris Nuttycombe&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;scala&quot;&gt;Scala&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.infoq.com&#x2F;presentations&#x2F;io-functional-side-effects&#x2F;&quot;&gt;Purely Functional I&#x2F;O&lt;&#x2F;a&gt; — Rúnar Bjarnason (a talk that made FP &quot;click&quot; for me!)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=aAtPi23nLcw&quot;&gt;Functional Programming for Beginners&lt;&#x2F;a&gt; — Rúnar Bjarnason (poor quality, but very good talk, chock-full of ideas!)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=hmX2s3pe_qk&quot;&gt;The Interpreter Pattern Revisited&lt;&#x2F;a&gt; — Rúnar Bjarnason (a &quot;sequel&quot; to the previous talk)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=30q6BkBv5MY&quot;&gt;Functional Programming with Effects&lt;&#x2F;a&gt; — Rob Norris&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=pNhBQJN44YQ&quot;&gt;Extreme Cleverness: Functional Data Structures in Scala&lt;&#x2F;a&gt; — Daniel Spiewak&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=g_jP47HFpWA&quot;&gt;The Making of an IO&lt;&#x2F;a&gt; — Daniel Spiewak&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=gVXt1RG_yN0&quot;&gt;May Your Data Ever Be Coherent&lt;&#x2F;a&gt; — Daniel Spiewak&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;skillsmatter.com&#x2F;skillscasts&#x2F;11626-keynote-pushing-types-and-gazing-at-the-stars&quot;&gt;Pushing Types and Gazing at the Stars&lt;&#x2F;a&gt; — Rob Norris&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;skillsmatter.com&#x2F;skillscasts&#x2F;12648-types-vs-tests&quot;&gt;Types vs Tests&lt;&#x2F;a&gt; — Julien Truffaut&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=sxudIMiOo68&quot;&gt;FP to the Max&lt;&#x2F;a&gt; — John De Goes&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=TbASMeJSh9s&quot;&gt;Reasoning with Types&lt;&#x2F;a&gt; — Adelbert Chang&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;free-monads&quot;&gt;Free monads&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=M258zVn4m2M&quot;&gt;Composable Application Architecture with Reasonably Priced Monads&lt;&#x2F;a&gt; — Rúnar Bjarnason&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rK53C-xyPWw&quot;&gt;A Year living Freely&lt;&#x2F;a&gt; — Chris Myers&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=U0lK0hnbc4U&quot;&gt;Why the free Monad isn&#x27;t free&lt;&#x2F;a&gt; — Kelley Robinson&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;128467878&quot;&gt;Free all the functors&lt;&#x2F;a&gt; — Alissa Pajer&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;recursion-schemes&quot;&gt;Recursion schemes&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rBmx9NsNSXM&quot;&gt;Pure Functional Database Programming with Fixpoint Types&lt;&#x2F;a&gt; — Rob Norris&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=XZ9nPZbaYfE&quot;&gt;Peeling the Banana: Recursion Schemes from First Principles&lt;&#x2F;a&gt; — Zainab Ali&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;skillsmatter.com&#x2F;skillscasts&#x2F;10959-topiary-and-the-art-of-origami&quot;&gt;Topiary and the art of origami&lt;&#x2F;a&gt; — Zainab Ali&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=TrPlVnoLxTI&quot;&gt;Exploring Decision Trees with Matryoshka&lt;&#x2F;a&gt; — Zainab Ali&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=24UoRaoKLjM&quot;&gt;Recursion: Where Functional Programming Hits Bottom&lt;&#x2F;a&gt; — Greg Pfeil&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=TQIHRBXM75E&quot;&gt;Efficient Nanopass Compilers using Cats and Matryoshka&lt;&#x2F;a&gt; — Greg Pfeil&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=q_xPKaAcWtI&quot;&gt;Recursion: schemes, algebras, finally tagless, data types&lt;&#x2F;a&gt; — Alexander Konovalov&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;general&quot;&gt;General&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.infoq.com&#x2F;presentations&#x2F;8-lines-code-refactoring&#x2F;&quot;&gt;8 Lines of Code&lt;&#x2F;a&gt; — Greg Young&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=I2tMmsZC1ZU&quot;&gt;Functional Programming for the Object Oriented&lt;&#x2F;a&gt; — Øystein Kolsrud&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=cxs7oLGrxQ4&quot;&gt;From Dependency injection to dependency rejection&lt;&#x2F;a&gt; — Mark Seemann&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=o9qL4HcDpIQ&quot;&gt;Async injection&lt;&#x2F;a&gt; — Mark Seemann&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=3VQ382QG-y4&quot;&gt;Fundamentals of Lambda Calculus &amp;amp; Functional Programming in JavaScript - Part I&lt;&#x2F;a&gt; — Gabriel Lebec&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=pAnLQ9jwN-E&quot;&gt;A Flock of Functions: Combinators, Lambda Calculus, &amp;amp; Church Encodings in JS - Part II&lt;&#x2F;a&gt; — Gabriel Lebec&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=vpcKnqyNdSQ&quot;&gt;Adopting FP: A Human-First approach&lt;&#x2F;a&gt; — Ken Scambler&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=SfW9w-FogeE&quot;&gt;The Many Faces of Modularity&lt;&#x2F;a&gt; — Eric Torreborre&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;programming-languages&quot;&gt;Programming languages&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=baxtyeFVn3w&quot;&gt;What FP can learn from Smalltalk&lt;&#x2F;a&gt; — Aditya Siram (deech)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=OyfBQmvr2Hc&quot;&gt;The Most Beautiful Program Ever Written&lt;&#x2F;a&gt; — William Byrd&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=0fpDlAEQio4&quot;&gt;Four Languages from Forty Years Ago&lt;&#x2F;a&gt; — Scott Wlaschin&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=43XaZEn2aLc&quot;&gt;On the Expressive Power of Programming Languages&lt;&#x2F;a&gt; — Shriram Krishnamurthi&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=6MJHYQ4dmAI&quot;&gt;Turing&#x27;s Toy - The story of a mathematical idea that changed the world&lt;&#x2F;a&gt; — Øystein Kolsrud&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;mathematics-and-logic&quot;&gt;Mathematics and Logic&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=IOiZatlZtGU&quot;&gt;Propositions as Types&lt;&#x2F;a&gt; — Philip Wadler&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=c_nPnURW6BU&quot;&gt;Finite of sense &amp;amp; infinite of thought&lt;&#x2F;a&gt; — Ron Pressler&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Ssx2_JKpB3U&quot;&gt;A categorical view of computational effects&lt;&#x2F;a&gt; — Emily Riehl&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Nvw74z8uQVU&quot;&gt;A Taste of Type Theory&lt;&#x2F;a&gt; — Bartosz Milewski&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;makes-you-think&quot;&gt;Makes you think&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=GqmsQeSzMdw&quot;&gt;Constraints Liberate, Liberties Constrain&lt;&#x2F;a&gt; — Rúnar Bjarnason&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ElLxn_l7P2I&quot;&gt;Compositional Programming&lt;&#x2F;a&gt; — Rúnar Bjarnason&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;71278954&quot;&gt;The Future of Programming&lt;&#x2F;a&gt; — Bret Victor&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;36579366&quot;&gt;Inventing on Principle&lt;&#x2F;a&gt; — Bret Victor&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;vimeo.com&#x2F;108441214&quot;&gt;The art of destroying software&lt;&#x2F;a&gt; — Greg Young&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=SxdOUGdseq4&quot;&gt;Simple Made Easy&lt;&#x2F;a&gt; — Rich Hickey&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;rants&quot;&gt;Rants&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.infoq.com&#x2F;presentations&#x2F;debugging-microservices-production&#x2F;&quot;&gt;Debugging Microservices in Production&lt;&#x2F;a&gt; — Bryan Cantrill&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=csyL9EC0S0c&quot;&gt;Programming is terrible—Lessons learned from a life wasted&lt;&#x2F;a&gt; — Thomas Figg (tef)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=2xyZeovFqCA&quot;&gt;Why Johnny Can&#x27;t Code Good&lt;&#x2F;a&gt; — Chris Allen&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=TS1lpKBMkgg&quot;&gt;We&#x27;re Doing It All Wrong&lt;&#x2F;a&gt; — Paul Phillips&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;timeless-classics&quot;&gt;Timeless classics&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.destroyallsoftware.com&#x2F;talks&#x2F;wat&quot;&gt;Wat&lt;&#x2F;a&gt; — Gary Bernhardt&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=_ahvzDzKdB0&quot;&gt;Growing a Language&lt;&#x2F;a&gt; — Guy Steele&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=oKg1hTOQXoY&quot;&gt;The computer revolution hasn&#x27;t happened yet&lt;&#x2F;a&gt; — Alan Kay&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=lKXe3HUG2l4&quot;&gt;The Mess We&#x27;re In&lt;&#x2F;a&gt; — Joe Armstrong&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;miscellaneous&quot;&gt;Miscellaneous&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=R7EEoWg6Ekk&quot;&gt;The MoVfuscator - Turning &lt;code&gt;mov&lt;&#x2F;code&gt; into a soul-crushing RE nightmare&lt;&#x2F;a&gt; — Christopher Domas&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Your C# is already functional, but only if you let it</title>
+        <published>2020-03-06T00:00:27+00:00</published>
+        <updated>2020-03-06T00:00:27+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/your-csharp-is-already-functional/"/>
+        <id>https://hmemcpy.com/posts/your-csharp-is-already-functional/</id>
+        
+        <summary type="html">&lt;p&gt;A few days ago I &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy&#x2F;status&#x2F;1235287026364276737&quot;&gt;tweeted&lt;&#x2F;a&gt; a C# code snippet, showing a &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Fizz_buzz&quot;&gt;FizzBuzz&lt;&#x2F;a&gt; implementation using some of the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;dotnet&#x2F;csharp&#x2F;whats-new&#x2F;csharp-8&quot;&gt;new features in C# 8.0&lt;&#x2F;a&gt;. The tweet &quot;went viral&quot;, as the kids say, with several people admiring the terse and &lt;em&gt;functional&lt;&#x2F;em&gt; aspect of it, while others asked me why I wasn&#x27;t writing it in F# in the first place?&lt;&#x2F;p&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;First time writing C# in 4 years :P &lt;a href=&quot;https:&#x2F;&#x2F;t.co&#x2F;m7kM9j9skN&quot;&gt;pic.twitter.com&#x2F;m7kM9j9skN&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;&amp;mdash; Igal Tabachnik (@hmemcpy) &lt;a href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;hmemcpy&#x2F;status&#x2F;1235287026364276737?ref_src=twsrc%5Etfw&quot;&gt;March 4, 2020&lt;&#x2F;a&gt;&lt;&#x2F;blockquote&gt; &lt;script async src=&quot;https:&#x2F;&#x2F;platform.twitter.com&#x2F;widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;&#x2F;script&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Everything I learned about self-publishing an open-source book</title>
+        <published>2020-02-17T12:03:11+00:00</published>
+        <updated>2020-02-17T12:03:11+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/everything-i-learned-about-self-publishing-an-open-source-book/"/>
+        <id>https://hmemcpy.com/posts/everything-i-learned-about-self-publishing-an-open-source-book/</id>
+        
+        <summary type="html">&lt;p&gt;Over the past two years, the PDF version of Bartosz Milewski&#x27;s &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;bartoszmilewski.com&#x2F;2014&#x2F;10&#x2F;28&#x2F;category-theory-for-programmers-the-preface&#x2F;&quot;&gt;&lt;em&gt;Category Theory for Programmers&lt;&#x2F;em&gt;&lt;&#x2F;a&gt; became a highly-successful &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;milewski-ctfp-pdf&quot;&gt;open-source book&lt;&#x2F;a&gt;, which was adapted to other programming languages, such as Scala and OCaml. There was a high demand for a physical copy of the book, so I went exploring the vast options, which I summarize below.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Speeding up your LaTeX builds by reusing minted caches</title>
+        <published>2020-02-15T16:35:51+00:00</published>
+        <updated>2020-02-15T16:35:51+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/speeding-up-your-latex-builds-by-reusing-minted-caches/"/>
+        <id>https://hmemcpy.com/posts/speeding-up-your-latex-builds-by-reusing-minted-caches/</id>
+        
+        <summary type="html">&lt;p&gt;Over the past two years, the PDF version of Bartosz Milewski&#x27;s &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;bartoszmilewski.com&#x2F;2014&#x2F;10&#x2F;28&#x2F;category-theory-for-programmers-the-preface&#x2F;&quot;&gt;&lt;em&gt;Category Theory for Programmers&lt;&#x2F;em&gt;&lt;&#x2F;a&gt; became a highly-successful &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;milewski-ctfp-pdf&quot;&gt;open-source book&lt;&#x2F;a&gt;, which was adapted to other programming languages, such as Scala and OCaml. Unfortunately, building this 400+ page PDF from LaTeX sources in multiple editions took a significant amount of time, sometimes upwards of 15 minutes. One of the reasons was, all the code snippets are loaded from external code files (so that they can be easily adapted to other programming languages), and they have to be compiled each time in a format LaTeX understands.&lt;&#x2F;p&gt;
+&lt;p&gt;I recently explored some possibilities to reduce the time it takes for the snippets to build, and I&#x27;m happy to report the results: a &lt;strong&gt;60% improvement&lt;&#x2F;strong&gt; overall! Big thanks to &lt;em&gt;muzimuzhi&lt;&#x2F;em&gt; from the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;gpoore&#x2F;minted&#x2F;issues&#x2F;252&quot;&gt;minted github&lt;&#x2F;a&gt;, who generously helped me to arrive at the solution below.&lt;&#x2F;p&gt;
+&lt;p&gt;Here&#x27;s a quick summary of my changes, that resulted in reducing my &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;travis-ci.org&#x2F;hmemcpy&#x2F;milewski-ctfp-pdf&#x2F;builds&quot;&gt;Travis CI builds&lt;&#x2F;a&gt; from 14-16 minutes to mere 6!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Setting up a Haskell development environment in minutes in Visual Studio Code</title>
+        <published>2020-02-01T13:58:22+00:00</published>
+        <updated>2020-02-01T13:58:22+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/setting-up-a-haskell-development-environment-in-minutes-in-vscode/"/>
+        <id>https://hmemcpy.com/posts/setting-up-a-haskell-development-environment-in-minutes-in-vscode/</id>
+        
+        <summary type="html">&lt;p&gt;This was initially a long post, detailing all the manual steps required to set up a complete Haskell development environment, however, thanks to a &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;k_cieslak&#x2F;status&#x2F;1222115319881310210&quot;&gt;hint&lt;&#x2F;a&gt; by &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;k_cieslak&quot;&gt;Krzysztof Cieślak&lt;&#x2F;a&gt;, this process is now fully automated, allowing you to get started in &lt;em&gt;minutes&lt;&#x2F;em&gt;. All thanks to a Visual Studio Code feature called &lt;em&gt;devcontainers&lt;&#x2F;em&gt;, supporting running the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;code.visualstudio.com&#x2F;docs&#x2F;remote&#x2F;containers&quot;&gt;development environment in a Docker container&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Functional Programming in Haskell (Stepik course notes) - module 2</title>
+        <published>2020-01-20T23:07:38+00:00</published>
+        <updated>2020-01-20T23:07:38+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/functional-programming-in-haskell-stepik-course-notes-module-2/"/>
+        <id>https://hmemcpy.com/posts/functional-programming-in-haskell-stepik-course-notes-module-2/</id>
+        
+        <summary type="html">&lt;p&gt;This is the second module (out of 5) of my English summary of the Haskell MOOC on Stepik, available only in Russian. Read the first part in the &lt;em&gt;Introduction&lt;&#x2F;em&gt; module.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-1&#x2F;&quot;&gt;Introduction&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Programming fundamentals&lt;&#x2F;strong&gt; (this page)&lt;&#x2F;li&gt;
+&lt;li&gt;Lists&lt;&#x2F;li&gt;
+&lt;li&gt;Data types&lt;&#x2F;li&gt;
+&lt;li&gt;Monads&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Functional Programming in Haskell (Stepik course notes) - module 1</title>
+        <published>2020-01-18T02:01:20+00:00</published>
+        <updated>2020-01-18T02:01:20+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/functional-programming-in-haskell-stepik-course-notes-module-1/"/>
+        <id>https://hmemcpy.com/posts/functional-programming-in-haskell-stepik-course-notes-module-1/</id>
+        
+        <summary type="html">&lt;p&gt;There&#x27;s a fantastic free online course (MOOC) for the Russian-speaking developer community on &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;stepik.org&#x2F;&quot;&gt;Stepik&lt;&#x2F;a&gt; for learning Haskell - a two-part course titled &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;stepik.org&#x2F;course&#x2F;75&quot;&gt;Functional Programming in Haskell&lt;&#x2F;a&gt; by Denis Moskvin, (then) associate professor at the St. Petersburg Academic University. I recently re-watched the course (having completed it previously) and decided to take notes and summarize the course content in English for your enjoyment.&lt;&#x2F;p&gt;
+&lt;p&gt;I would like to thank Denis Moskvin for providing this amazing resource for free. I urge you, if you speak Russian and want to learn Haskell, to work through the course material and exercises!&lt;&#x2F;p&gt;
+&lt;p&gt;Below is the summary of the first module, &lt;strong&gt;Introduction&lt;&#x2F;strong&gt;, out of 5.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Right fold superpowers!</title>
+        <published>2019-07-31T09:25:58+00:00</published>
+        <updated>2019-07-31T09:25:58+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/right-fold-superpowers/"/>
+        <id>https://hmemcpy.com/posts/right-fold-superpowers/</id>
+        
+        <summary type="html">&lt;p&gt;It&#x27;s amazing how sometimes just having a different framing of the problem helps with developing a much deeper understanding of the problem. I was working through the exercises of the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;data61&#x2F;fp-course&quot;&gt;Data61 Functional Programming course&lt;&#x2F;a&gt;, assisted by Brian McKenna&#x27;s &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=NzIZzvbplSM&amp;amp;list=PLly9WMAVMrayYo2c-1E_rIRwBXG_FbLBW&quot;&gt;video streams&lt;&#x2F;a&gt;, and I came accross a definition of a &lt;em&gt;right fold&lt;&#x2F;em&gt; that can be thought of as &quot;constructor replacement&quot;:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+    &lt;p&gt;The expression &lt;code&gt;foldr f z list&lt;&#x2F;code&gt; replaces in &lt;code&gt;list&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Every occurence of the cons constructor &lt;code&gt;(:)&lt;&#x2F;code&gt; with &lt;code&gt;f&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Any occurrence of the nil constructor &lt;code&gt;[]&lt;&#x2F;code&gt; with &lt;code&gt;z&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+
+    
+    &lt;footer&gt;— Tony Morris https:&amp;#x2F;&amp;#x2F;vimeo.com&amp;#x2F;64673035 Explain List Folds to Yourself&lt;&#x2F;footer&gt;
+    
+&lt;&#x2F;blockquote&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Becoming Foolish</title>
+        <published>2017-10-20T08:00:39+00:00</published>
+        <updated>2017-10-20T08:00:39+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/becoming-foolish/"/>
+        <id>https://hmemcpy.com/posts/becoming-foolish/</id>
+        
+        <summary type="html">&lt;p&gt;The book &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;pragprog.com&#x2F;book&#x2F;tpp&#x2F;the-pragmatic-programmer&quot;&gt;&lt;em&gt;The Pragmatic Programmer: From Journeyman to Master&lt;&#x2F;em&gt;&lt;&#x2F;a&gt; by Andy Hunt and Dave Thomas suggests that as developers, we should &quot;learn at least one new language every year.&quot; (pg. 14)&lt;&#x2F;p&gt;
+&lt;p&gt;When I recently asked a roomful of developers, if there&#x27;s anyone who had learned a new language this year, only very few hands went up. A year ago today, that would have been me in the audience, keeping my hands down.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>From .NET to Scala and beyond: a journey to Functional Programming</title>
+        <published>2017-05-17T11:24:13+00:00</published>
+        <updated>2017-05-17T11:24:13+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/from-net-to-scala-and-beyond-a-journey-to-functional-programming/"/>
+        <id>https://hmemcpy.com/posts/from-net-to-scala-and-beyond-a-journey-to-functional-programming/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;em&gt;Original title was &quot;Monads solve a problem you might not have, but it&#x27;s a nice problem to have&quot;, which is an homage to a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;kozmic.net&#x2F;2012&#x2F;10&#x2F;23&#x2F;ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have&#x2F;&quot;&gt;great post&lt;&#x2F;a&gt; by &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;kkozmic&quot;&gt;Krzysztof Koźmic&lt;&#x2F;a&gt; about IoC containers.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I can&#x27;t think of another 5-letter word that strikes fear in the hearts of so many developers, coming from an object-oriented&#x2F;imperative language to a functional one. So much so, this, and other M-words are outright &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;fsharpforfunandprofit.com&#x2F;about&#x2F;#banned&quot;&gt;banned&lt;&#x2F;a&gt; on some resources.&lt;&#x2F;p&gt;
+&lt;p&gt;This post will not attempt to explain monads, at least, not on purpose. This &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;mkremins.github.io&#x2F;blog&#x2F;doors-headaches-intellectual-need&#x2F;&quot;&gt;fantastic post&lt;&#x2F;a&gt; by &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;maxkreminski&quot;&gt;Max Kreminski&lt;&#x2F;a&gt; does this better than I ever could - by showing that most &quot;monad tutorials&quot; (or, educational blog posts in general) have &lt;em&gt;problem-solution ordering issues&lt;&#x2F;em&gt;. Please take a moment to read this wonderful post before continuing.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Enough!</title>
+        <published>2017-03-07T12:52:52+00:00</published>
+        <updated>2017-03-07T12:52:52+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/enough/"/>
+        <id>https://hmemcpy.com/posts/enough/</id>
+        
+        <summary type="html">&lt;p&gt;Layered architectures were good, until they weren&#x27;t. Someone said ORMs, and we were tearing out our SQL statements in favor of magic.&lt;&#x2F;p&gt;
+&lt;p&gt;ORMs were good, until they weren&#x27;t. You couldn&#x27;t use the generated entities in your presentation layers, because they knew too much. Someone said DTOs.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Mac survival guide for the Windows lifer</title>
+        <published>2016-06-22T11:45:51+00:00</published>
+        <updated>2016-06-22T11:45:51+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/mac-survival-guide-for-the-windows-lifer/"/>
+        <id>https://hmemcpy.com/posts/mac-survival-guide-for-the-windows-lifer/</id>
+        
+        <summary type="html">&lt;p&gt;I recently started a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;wix.engineering&#x2F;&quot;&gt;shiny new job&lt;&#x2F;a&gt;, and got a shiny new Macbook Pro to go with it. Having spent most of my personal and professional life on Windows, I knew that an adjustment period would have to follow. Below are my impressions, the good, bad, and the ugly side of adjusting to One Cupertino Way after a lifetime on Windows.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Getting with the times: migrating from WordPress to GitHub Pages with Hexo</title>
+        <published>2016-06-11T14:22:11+00:00</published>
+        <updated>2016-06-11T14:22:11+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/"/>
+        <id>https://hmemcpy.com/posts/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/</id>
+        
+        <summary type="html">&lt;p&gt;I was finally able to migrate from WordPress to a gorgeous, static, and blazing fast blog, hosted on &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;pages.github.com&#x2F;&quot;&gt;GitHub Pages&lt;&#x2F;a&gt; for free. Here is a recap of what I did, starting with exporting all data from WordPress, and finishing with setting up an automatic publishing with &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.appveyor.com&#x2F;&quot;&gt;AppVeyor&lt;&#x2F;a&gt;!&lt;&#x2F;p&gt;
+&lt;p&gt;Let&#x27;s begin!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10</title>
+        <published>2016-01-12T18:19:35+00:00</published>
+        <updated>2016-01-12T18:19:35+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10/"/>
+        <id>https://hmemcpy.com/posts/solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10/</id>
+        
+        <summary type="html">&lt;p&gt;I&#x27;m writing this post mainly to myself, explaining how I figured out why this particular Windows Update package was failing to install on my Windows 10 (installation began, then rolled back). This can serve as a general troubleshooting step when google searches lead you nowhere.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Review: my new HP Spectre x360 2-in-1 convertible laptop</title>
+        <published>2015-12-04T16:38:45+00:00</published>
+        <updated>2015-12-04T16:38:45+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/review-my-new-hp-spectre-x360-2-in-1-convertible-laptop/"/>
+        <id>https://hmemcpy.com/posts/review-my-new-hp-spectre-x360-2-in-1-convertible-laptop/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;img style=&quot;float: right; padding: 5px;&quot; src=&quot;image1.png&quot; &#x2F;&gt;I decided to get with the times, and get myself a mid-level ultraportable machine I can carry around while traveling. Knowing almost nothing about this category of computers (and having avoided touch-enabled hybrids&#x2F;tables until now), I spent considerable time researching. My requirements were simple:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;a secondary machine (my 3 year old behemoth HP EliteBook 8570w is still the best development machine I&#x27;ve got)&lt;&#x2F;li&gt;
+&lt;li&gt;light, portable (so, about 13&quot;), touch-enabled (most of them are, anyway)&lt;&#x2F;li&gt;
+&lt;li&gt;good typing experience (I considered a Surface 3&#x2F;4 with Type Cover keyboard, but typing experience got mixed reviews)&lt;&#x2F;li&gt;
+&lt;li&gt;$1000 or less&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>7 open-source Visual Studio Extensions to make your life easier</title>
+        <published>2015-10-28T22:15:19+00:00</published>
+        <updated>2015-10-28T22:15:19+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/7-open-source-visual-studio-extensions-to-make-your-life-easier/"/>
+        <id>https://hmemcpy.com/posts/7-open-source-visual-studio-extensions-to-make-your-life-easier/</id>
+        
+        <summary type="html">&lt;p&gt;It&#x27;s time to upgrade your &lt;em&gt;favorite&lt;&#x2F;em&gt; IDE! In this post I will list some of my favorite &quot;off-the-beaten-path&quot; extensions for Visual Studio that make my daily tasks much easier. I will not list the obvious ones, such as &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt; and &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.oz-code.com&#x2F;&quot;&gt;OzCode&lt;&#x2F;a&gt; (or even &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;vswebessentials.com&#x2F;&quot;&gt;Web Essentials&lt;&#x2F;a&gt;), but rather few relatively unknown ones that do some very cool things.&lt;&#x2F;p&gt;
+&lt;p&gt;Are you ready? Let&#x27;s begin!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Preventing a certain Windows Update from installing on Windows 10</title>
+        <published>2015-04-15T15:30:26+00:00</published>
+        <updated>2015-04-15T15:30:26+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/preventing-a-certain-windows-update-from-installing-on-windows-10/"/>
+        <id>https://hmemcpy.com/posts/preventing-a-certain-windows-update-from-installing-on-windows-10/</id>
+        
+        <summary type="html">&lt;p&gt;This post explains how to prevent a certain update from installing on a Windows 10 machine (at the time of writing, build 10049). The information below might not be accurate&#x2F;relevant for future updates.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Adding a custom property page to existing project types in Visual Studio</title>
+        <published>2015-03-27T22:53:18+00:00</published>
+        <updated>2015-03-27T22:53:18+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/adding-a-custom-property-page-to-existing-project-types-in-visual-studio/"/>
+        <id>https://hmemcpy.com/posts/adding-a-custom-property-page-to-existing-project-types-in-visual-studio/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;em&gt;Note: this post assumes some knowledge developing Visual Studio Extensions (VSIX).&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Suppose you&#x27;re developing custom tooling that enhances (or otherwise modifies) current project types (for example, C# class libraries or Web applications). This is most commonly done by specifying custom MSBuild properties, typically by adding a &lt;code&gt;.targets&lt;&#x2F;code&gt; file to the project file itself (possibly via NuGet, which can &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;docs.nuget.org&#x2F;Release-Notes&#x2F;NuGet-2.5#automatic-import-of-msbuild-targets-and-props-files&quot;&gt;import &lt;code&gt;.targets&lt;&#x2F;code&gt; files automatically&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;One common way to interact with those custom properties is by adding a page in the project properties, however, most documentation about extending project properties refers to creating your own project systems. Any documentation about extending existing projects is either out of date, or nonexistent.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Disabling certain &quot;invisibles&quot; in the Atom Editor</title>
+        <published>2015-03-04T15:00:27+00:00</published>
+        <updated>2015-03-04T15:00:27+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/disabling-certain-invisibles-in-the-atom-editor/"/>
+        <id>https://hmemcpy.com/posts/disabling-certain-invisibles-in-the-atom-editor/</id>
+        
+        <summary type="html">&lt;p&gt;I recently started using GitHub&#x27;s &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;atom.io&#x2F;&quot;&gt;Atom editor&lt;&#x2F;a&gt;, and other than the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;atom&#x2F;atom&#x2F;issues&#x2F;2654&quot;&gt;slow-ish startup time&lt;&#x2F;a&gt;, I love it very much!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img style=&quot;float: right; padding: 5px;&quot; src=&quot;image.png&quot; &#x2F;&gt;One of the things I hate most is redundant whitespaces, so in all editors I use, I try to work with visible whitespace enabled, so I can keep those tiny dots in check. In the Atom editor, this feature is called &lt;strong&gt;Show Invisibles&lt;&#x2F;strong&gt;, however by default it shows &lt;em&gt;all&lt;&#x2F;em&gt; the invisible characters, including endof and newline characters. There&#x27;s no UI (yet?) to toggle which ones you want to see, but luckily, Atom is completely &lt;em&gt;hackable&lt;&#x2F;em&gt;, allowing us to change just about anything!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A case of mysterious spam links!</title>
+        <published>2015-03-03T13:01:13+00:00</published>
+        <updated>2015-03-03T13:01:13+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/a-case-of-mysterious-spam-links-injection-by-block/"/>
+        <id>https://hmemcpy.com/posts/a-case-of-mysterious-spam-links-injection-by-block/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;strong&gt;Update:&lt;&#x2F;strong&gt; &lt;em&gt;I was rightly corrected by the creator of uBlock, those are not links, but CSS selectors inside a &lt;code&gt;&amp;lt;style&amp;gt;&lt;&#x2F;code&gt; tag, to cause the offending links to be removed from the page. Furthermore, those particular rules are being fed from AdBlock Plus&#x27;&lt;&#x2F;em&gt; &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;easylist.adblockplus.org&#x2F;en&#x2F;&quot;&gt;&lt;em&gt;EasyList&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;&lt;em&gt;, and they are not related to uBlock.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I was tweaking a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;jekyllrb.com&#x2F;&quot;&gt;Jekyll&lt;&#x2F;a&gt; theme to match the style of our Bootstrap-based site, when I suddenly noticed an alarming links to porn&#x2F;spam sites, visible inside Chrome tools:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to get changed files from SVN between two revisions with PowerShell</title>
+        <published>2014-12-16T13:38:07+00:00</published>
+        <updated>2014-12-16T13:38:07+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-get-changed-files-from-svn-between-two-revisions-with-powershell/"/>
+        <id>https://hmemcpy.com/posts/how-to-get-changed-files-from-svn-between-two-revisions-with-powershell/</id>
+        
+        <summary type="html">&lt;p&gt;As part of &lt;a href=&quot;&#x2F;posts&#x2F;the-2-minute-powershell-intro-for-someone-who-hates-powershell&#x2F;&quot;&gt;teaching myself PowerShell&lt;&#x2F;a&gt; (and converting a legacy mess of perl scripts into something more manageable), I needed a way to export the files that were added or modified between two SVN revisions. After some searching, I came up with this PowerShell script: it takes a repository URL, a &lt;em&gt;from&lt;&#x2F;em&gt; and &lt;em&gt;to&lt;&#x2F;em&gt; revision numbers, and an output directory into which to export the files.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot;</title>
+        <published>2014-12-10T14:06:25+00:00</published>
+        <updated>2014-12-10T14:06:25+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/the-2-minute-powershell-intro-for-someone-who-hates-powershell/"/>
+        <id>https://hmemcpy.com/posts/the-2-minute-powershell-intro-for-someone-who-hates-powershell/</id>
+        
+        <summary type="html">&lt;p&gt;Hi, I&#x27;m a developer, and I hate PowerShell&lt;sup&gt;*&lt;&#x2F;sup&gt;. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax - all those dollar signs reminded me of PHP.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My top 3 favorite Windows productivity tools!</title>
+        <published>2014-10-21T11:20:44+00:00</published>
+        <updated>2014-10-21T11:20:44+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/my-top-3-favorite-windows-productivity-tools/"/>
+        <id>https://hmemcpy.com/posts/my-top-3-favorite-windows-productivity-tools/</id>
+        
+        <summary type="html">&lt;p&gt;There are way more tools I love and use every day, but the following 3 are my must-haves on every Windows machine I use, so I wanted to share them with you. And they are completely &lt;strong&gt;free&lt;&#x2F;strong&gt;!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Regular Expression enhancements in ReSharper 9</title>
+        <published>2014-10-16T02:03:45+00:00</published>
+        <updated>2014-10-16T02:03:45+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/regular-expression-enhancements-in-resharper-9/"/>
+        <id>https://hmemcpy.com/posts/regular-expression-enhancements-in-resharper-9/</id>
+        
+        <summary type="html">&lt;p&gt;Yesterday, JetBrains &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;blog.jetbrains.com&#x2F;dotnet&#x2F;2014&#x2F;10&#x2F;13&#x2F;introducing-the-resharper-9-early-access-program&#x2F;&quot;&gt;announced&lt;&#x2F;a&gt; the first public EAP of ReSharper 9! While I&#x27;m sure they will dedicate whole blog posts about the new (and truly amazing!) features of ReSharper 9, I wanted to beat JetBrains to the punch, and let you know about one incredible feature (which I consider a &lt;em&gt;killer feature&lt;&#x2F;em&gt; of ReSharper 9). I am talking about the improvements in dealing with Regular Expressions (Regex)!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Debug symbols, dotPeek and long paths in Visual Studio</title>
+        <published>2014-08-01T14:06:04+00:00</published>
+        <updated>2014-08-01T14:06:04+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/debug-symbols-dotpeek-and-long-paths-in-visual-studio/"/>
+        <id>https://hmemcpy.com/posts/debug-symbols-dotpeek-and-long-paths-in-visual-studio/</id>
+        
+        <summary type="html">&lt;p&gt;In my &lt;a href=&quot;&#x2F;posts&#x2F;how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2&#x2F;&quot;&gt;previous post&lt;&#x2F;a&gt;, I explained how to use the symbol server in &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;decompiler&#x2F;&quot;&gt;dotPeek 1.2&lt;&#x2F;a&gt; to debug any assembly in Visual Studio, allowing you to set breakpoints and step into any method (provided it was decompiled by dotPeek).&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to debug anything with Visual Studio and JetBrains dotPeek v1.2!</title>
+        <published>2014-07-16T14:30:35+00:00</published>
+        <updated>2014-07-16T14:30:35+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2/"/>
+        <id>https://hmemcpy.com/posts/how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2/</id>
+        
+        <summary type="html">&lt;p&gt;Sometimes, we wish we could just step into some 3&lt;sup&gt;rd&lt;&#x2F;sup&gt; party library, to figure out how it works, but we either don&#x27;t have the source code, or otherwise just can&#x27;t. Fortunately, this is made possible by &lt;strong&gt;dotPeek v1.2&lt;&#x2F;strong&gt; that was &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;blog.jetbrains.com&#x2F;dotnet&#x2F;2014&#x2F;07&#x2F;16&#x2F;dotpeek-1-2-is-released&#x2F;&quot;&gt;just released&lt;&#x2F;a&gt;, which can act as a symbol server for decompiled assemblies!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Migrating from TFS to git to Visual Studio Online - the survival guide</title>
+        <published>2014-06-29T23:28:16+00:00</published>
+        <updated>2014-06-29T23:28:16+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide/"/>
+        <id>https://hmemcpy.com/posts/migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide/</id>
+        
+        <summary type="html">&lt;p&gt;This is a step-by-step recount of my attempt to migrate an existing 3-year old TFS (TFVC) repository to git, while &lt;em&gt;keeping all the history&lt;&#x2F;em&gt;, and then moving it to &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.visualstudio.com&#x2F;&quot;&gt;Visual Studio Online&lt;&#x2F;a&gt;, a TFS in the cloud. This wasn&#x27;t an easy task, as there is no direct export-import built into either tools. I also ran into some problems during this lengthy process, and I describe the steps to solve them. Set aside a few hours of your time, brew some coffee (or tea), and let&#x27;s get started!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>When good permissions gone bad - a case of a failed build</title>
+        <published>2014-06-09T16:08:08+00:00</published>
+        <updated>2014-06-09T16:08:08+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/when-good-permissions-gone-bada-case-of-a-failed-build/"/>
+        <id>https://hmemcpy.com/posts/when-good-permissions-gone-bada-case-of-a-failed-build/</id>
+        
+        <summary type="html">&lt;p&gt;I was called over to see if I could help solve a strange issue - every time the build script (Ant) for the client&#x27;s Android app ran - certain files that were modified by the build script (a &lt;code&gt;.properties&lt;&#x2F;code&gt; file, few others), were suddenly inaccessible to other people logging to the machine - only the user who initiated the build could still write to the files. Looking at the file permissions tab proved as much: only the current user and the Administrators group could access the file!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to enable login verifications on Twitter from &quot;unsuppored&quot; countries</title>
+        <published>2014-04-26T17:35:45+00:00</published>
+        <updated>2014-04-26T17:35:45+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-enable-login-verifications-on-twitter-from-unsupported-countries/"/>
+        <id>https://hmemcpy.com/posts/how-to-enable-login-verifications-on-twitter-from-unsupported-countries/</id>
+        
+        <summary type="html">&lt;p&gt;It&#x27;s funny how a random twitter rant can yield valid solutions. One such rant between &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;omervk&quot;&gt;@omervk&lt;&#x2F;a&gt; (who co-runs &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;plaintextoffenders.com&quot;&gt;plaintextoffenders.com&lt;&#x2F;a&gt;) and myself regarding enabling Two Factor Authentication (2FA, or &lt;em&gt;login verification&lt;&#x2F;em&gt;) on twitter being unavailable for people in Israel, caught the attention of &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;thorsheim&quot;&gt;Per Thorsheim&lt;&#x2F;a&gt;, an independent security consultant and founder of the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;passwordscon.org&#x2F;&quot;&gt;Passwords conference&lt;&#x2F;a&gt;. Per, turns out, was interested in this problem because of another matter, that Twitter seemingly &lt;em&gt;turned off&lt;&#x2F;em&gt; login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;securitynirvana.blogspot.no&#x2F;2014&#x2F;04&#x2F;did-twitter-silently-remove-login.html&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to remap calc.exe to scriptcs.exe</title>
+        <published>2014-04-20T19:41:56+00:00</published>
+        <updated>2014-04-20T19:41:56+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-remap-calc-exe-to-scriptcs-exe/"/>
+        <id>https://hmemcpy.com/posts/how-to-remap-calc-exe-to-scriptcs-exe/</id>
+        
+        <summary type="html">&lt;p&gt;Lately I found myself launching &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;scriptcs.net&#x2F;&quot;&gt;scriptcs&lt;&#x2F;a&gt; more and more to do simple calculations. I half-jokingly said on twitter that I&#x27;d better remap &lt;code&gt;calc.exe&lt;&#x2F;code&gt; to &lt;code&gt;scriptcs.exe&lt;&#x2F;code&gt; on my machine. However it seems that my joke tweet was taken seriously by some people, and I was asked how this was done. So here goes!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Roslyn! It&#x27;s got Electrolytes!</title>
+        <published>2014-04-11T00:10:59+00:00</published>
+        <updated>2014-04-11T00:10:59+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/roslyn-its-got-electrolytes/"/>
+        <id>https://hmemcpy.com/posts/roslyn-its-got-electrolytes/</id>
+        
+        <summary type="html">&lt;p&gt;Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already started predicting the demise of ReSharper. It&#x27;s been a week or so, and JetBrains finally &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;blog.jetbrains.com&#x2F;dotnet&#x2F;2014&#x2F;04&#x2F;10&#x2F;resharper-and-roslyn-qa&#x2F;&quot;&gt;posted a Q&amp;amp;A&lt;&#x2F;a&gt; where they explain their reasons for &lt;strong&gt;not&lt;&#x2F;strong&gt; moving to Roslyn as predicted, at least not in the foreseeable future. Which, in turn, caused yet another sea of comments, both supporting and condemning the decision.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How Nancy made .NET Web development fun!</title>
+        <published>2014-03-17T15:35:48+00:00</published>
+        <updated>2014-03-17T15:35:48+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-nancy-made-net-web-development-fun/"/>
+        <id>https://hmemcpy.com/posts/how-nancy-made-net-web-development-fun/</id>
+        
+        <summary type="html">&lt;p&gt;Let&#x27;s get this out of the way first: this is &lt;strong&gt;not&lt;&#x2F;strong&gt; a post about how to use &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;nancyfx.org&#x2F;&quot;&gt;Nancy&lt;&#x2F;a&gt; - there are lots of blog posts out there, written by people far better at it than me!&lt;&#x2F;p&gt;
+&lt;p&gt;I am not a web developer. During my career I mostly worked on desktop applications (with occasional dab in the database land, typical CRUD stuff). Over the years my passion for development shifted towards building development tools (Visual Studio, ReSharper plugins), and my dayjob now having a blast building &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.oz-code.com&#x2F;&quot;&gt;OzCode&lt;&#x2F;a&gt;, a debugging productivity tool for Visual Studio.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;</title>
+        <published>2014-03-17T01:40:19+00:00</published>
+        <updated>2014-03-17T01:40:19+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/installing-vsix-extension-via-msi-without-devenv-setup/"/>
+        <id>https://hmemcpy.com/posts/installing-vsix-extension-via-msi-without-devenv-setup/</id>
+        
+        <summary type="html">&lt;p&gt;There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or &lt;em&gt;manually&lt;&#x2F;em&gt;, by copying the files from a custom installer, typically MSI (and specifying a special &lt;code&gt;&amp;lt;InstalledByMsi&amp;gt;true&amp;lt;&#x2F;InstalledByMsi&amp;gt;&lt;&#x2F;code&gt; element in the &lt;code&gt;extension.vsixmanifest&lt;&#x2F;code&gt; file). The latter approach is generally used if the extension needs to perform additional tasks, such as running ngen or registering COM servers.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>[FW]orking in Github - a slightly better workflow?</title>
+        <published>2014-01-06T11:53:06+00:00</published>
+        <updated>2014-01-06T11:53:06+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/fworking-in-githuba-slightly-better-workflow/"/>
+        <id>https://hmemcpy.com/posts/fworking-in-githuba-slightly-better-workflow/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;em&gt;If you don&#x27;t understand the title, I tried to be clever and used &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.regular-expressions.info&#x2F;charclass.html&quot;&gt;regular expressions&lt;&#x2F;a&gt;. I now have 2 problems.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>First Rule of Unit Testing: Don&#x27;t do it! (yet)</title>
+        <published>2013-04-12T07:51:07+00:00</published>
+        <updated>2013-04-12T07:51:07+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/first-rule-of-unit-testing-dont-do-it-yet/"/>
+        <id>https://hmemcpy.com/posts/first-rule-of-unit-testing-dont-do-it-yet/</id>
+        
+        <summary type="html">&lt;p&gt;I wasn&#x27;t sure how I&#x27;d like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I&#x27;ll just dump all that boiled inside me for quite a while. Sarcasm and bitterness ahead!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Even more ReSharper Annotations hackery: marking 3rd party code as obsolete</title>
+        <published>2013-03-24T23:16:14+00:00</published>
+        <updated>2013-03-24T23:16:14+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/even-more-resharper-annotations-hackery-marking-3rd-party-code-as-obsolete/"/>
+        <id>https://hmemcpy.com/posts/even-more-resharper-annotations-hackery-marking-3rd-party-code-as-obsolete/</id>
+        
+        <summary type="html">&lt;p&gt;As part of transitioning to a new API, I wanted a way to mark the old API as obsolete, so that Visual Studio (or ReSharper) would flag using of the old API as an error.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>More fun with ReSharper annotations in ASP.NET MVC!</title>
+        <published>2013-02-26T15:47:38+00:00</published>
+        <updated>2013-02-26T15:47:38+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/more-fun-with-resharper-annotations-in-asp-net-mvc/"/>
+        <id>https://hmemcpy.com/posts/more-fun-with-resharper-annotations-in-asp-net-mvc/</id>
+        
+        <summary type="html">&lt;p&gt;After my previous blog post on the subject, my good friend Avi Pinto asked if it was possible to &lt;em&gt;teach&lt;&#x2F;em&gt; ReSharper to treat an ASP.NET MVC &lt;code&gt;HtmlHelper&lt;&#x2F;code&gt; extension method to understand and navigate to relative paths within the project. I&#x27;m happy to report that not only this is possible, it also requires almost no effort at all!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests</title>
+        <published>2013-02-21T14:08:51+00:00</published>
+        <updated>2013-02-21T14:08:51+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests/"/>
+        <id>https://hmemcpy.com/posts/preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests/</id>
+        
+        <summary type="html">&lt;p&gt;I noticed that some of my unit tests have a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt; warning on the &lt;code&gt;A.CallTo()&lt;&#x2F;code&gt; methods of &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;FakeItEasy&#x2F;FakeItEasy&quot;&gt;FakeItEasy&lt;&#x2F;a&gt;, suggesting that some local variables are captured implicitly by the lambda expression.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;</title>
+        <published>2013-01-30T22:38:36+00:00</published>
+        <updated>2013-01-30T22:38:36+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet/"/>
+        <id>https://hmemcpy.com/posts/turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet/</id>
+        
+        <summary type="html">&lt;p&gt;While working with a client to create a new version of their software, one of the tasks was creating a service that talked to a hardware laser tracker, a device which allows tracking certain points (&lt;em&gt;targets&lt;&#x2F;em&gt;) over a large distance.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Running multithreaded unit tests with FakeItEasy</title>
+        <published>2012-12-11T21:39:08+00:00</published>
+        <updated>2012-12-11T21:39:08+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/running-multithreaded-unit-tests-with-fakeiteasy/"/>
+        <id>https://hmemcpy.com/posts/running-multithreaded-unit-tests-with-fakeiteasy/</id>
+        
+        <summary type="html">&lt;p&gt;While running some of my tests today, I suddenly got an &lt;code&gt;IndexOutOfRangeException&lt;&#x2F;code&gt;, with the following stack trace:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to disable Windows Narrator appearing on Win-Enter in Windows 8</title>
+        <published>2012-12-10T16:46:53+00:00</published>
+        <updated>2012-12-10T16:46:53+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-disable-windows-narrator-appearing-on-win-enter-in-windows-8/"/>
+        <id>https://hmemcpy.com/posts/how-to-disable-windows-narrator-appearing-on-win-enter-in-windows-8/</id>
+        
+        <summary type="html">&lt;p&gt;My colleague was annoyed that pressing Win-Enter on Windows 8 would pop open Windows Narrator, and there was seemingly no way to disable it. He told me that the answer he found on one of the forums suggested &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;jake.ginnivan.net&#x2F;diable-narrator-in-windows-8&quot;&gt;removing the &lt;em&gt;execute&lt;&#x2F;em&gt; permission&lt;&#x2F;a&gt; from the Narrator.exe file, however, since this involves preventing file execution, this led me to an idea to try and use my old friend &lt;a href=&quot;&#x2F;posts&#x2F;how-to-debug-a-process-that-is-crashing-on-startup&#x2F;&quot;&gt;Image File Execution Options&lt;&#x2F;a&gt;, which I&#x27;m happy to report, worked!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book Review: &#x27;Pro .NET Performance&#x27; by Sasha Goldshtein, with Dima Zurbalev and Ido Flatow</title>
+        <published>2012-10-21T11:25:57+00:00</published>
+        <updated>2012-10-21T11:25:57+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/book-review-pro-net-performance-by-sasha-goldshtein-with-dima-zurbalev-and-ido-flatow/"/>
+        <id>https://hmemcpy.com/posts/book-review-pro-net-performance-by-sasha-goldshtein-with-dima-zurbalev-and-ido-flatow/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;img style=&quot;float: left; padding: 5px;&quot; src=&quot;http:&#x2F;&#x2F;i1.wp.com&#x2F;ecx.images-amazon.com&#x2F;images&#x2F;I&#x2F;513bgFFIlfL._SL160_.jpg?resize=121%2C160&quot; &#x2F;&gt;It is often said that all problems in computer science can be solved by another layer of indirection. All, except performance problems. Typically, when performance problems occur, it&#x27;s best to approach them like peeling an onion - removing abstractions one by one.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>10 tips for making your technical presentation awesome!</title>
+        <published>2012-10-05T16:07:46+00:00</published>
+        <updated>2012-10-05T16:07:46+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/10-tips-for-making-your-technical-presentation-awesome/"/>
+        <id>https://hmemcpy.com/posts/10-tips-for-making-your-technical-presentation-awesome/</id>
+        
+        <summary type="html">&lt;p&gt;I am, by no means, a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.speakinghacks.com&#x2F;&quot;&gt;professional speaker&lt;&#x2F;a&gt;. I am developer with passion for technology and learning, and being known for talking &lt;strong&gt;&lt;em&gt;a lot&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt;, I sometimes speak at local user groups about particular topics. Here are some tips I&#x27;ve gathered for making my presentations a little bit better.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Fixing a failed scheduled task: The operator or administrator has refused the request 0x800710E0</title>
+        <published>2012-10-04T11:10:26+00:00</published>
+        <updated>2012-10-04T11:10:26+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/fixing-a-failed-scheduled-task-the-operator-or-administrator-has-refused-the-request-0x800710e0/"/>
+        <id>https://hmemcpy.com/posts/fixing-a-failed-scheduled-task-the-operator-or-administrator-has-refused-the-request-0x800710e0/</id>
+        
+        <summary type="html">&lt;p&gt;I use the incredible &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.voidtools.com&#x2F;&quot;&gt;Everything&lt;&#x2F;a&gt; to find files on my computers. It&#x27;s very fast and I have bound it to Win-Z (but not on Windows 8, more on that in another post) for easy access.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Installing Windows 8 on HP EliteBook 8570w</title>
+        <published>2012-09-30T11:37:29+00:00</published>
+        <updated>2012-09-30T11:37:29+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/installing-windows-8-on-hp-elitebook-8570w/"/>
+        <id>https://hmemcpy.com/posts/installing-windows-8-on-hp-elitebook-8570w/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;img style=&quot;float: right; padding: 5px;&quot; width=200 src=&quot;http:&#x2F;&#x2F;www.www8-hp.com&#x2F;in&#x2F;en&#x2F;images&#x2F;8770w_hero_tcm_188_1453363.jpg&quot; &#x2F;&gt;I just got my brand new &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.hp.com&#x2F;united-states&#x2F;campaigns&#x2F;workstations&#x2F;8570w_features.html&quot;&gt;HP EliteBook 8570w&lt;&#x2F;a&gt;. I was looking for a new development machine for a while, and after long consideration decided on this custom build of the Ivy Bridge-based EliteBook. Here are the (important) specs:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Boot to desktop in Windows 8: An in-depth analysis</title>
+        <published>2012-09-08T20:40:30+00:00</published>
+        <updated>2012-09-08T20:40:30+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/boot-to-desktop-in-windows-8-an-in-depth-analysis/"/>
+        <id>https://hmemcpy.com/posts/boot-to-desktop-in-windows-8-an-in-depth-analysis/</id>
+        
+        <summary type="html">&lt;p&gt;One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the &lt;em&gt;classic&lt;&#x2F;em&gt; Start Menu, and replacing it with the new &lt;strike&gt;Metro&lt;&#x2F;strike&gt;Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 - it must be done via the new Start screen too.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>JetBrains + Nemerle = Limitless Potential!</title>
+        <published>2012-06-23T17:17:00+00:00</published>
+        <updated>2012-06-23T17:17:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/jetbrains-nemerle-limitless-potential/"/>
+        <id>https://hmemcpy.com/posts/jetbrains-nemerle-limitless-potential/</id>
+        
+        <summary type="html">&lt;p&gt;There has been some excitement last Friday, as JetBrains&#x27; .NET tools program manager Ilya &quot;orangy&quot; Ryzhenkov &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;orangy&#x2F;status&#x2F;216127804482404352&quot;&gt;announced&lt;&#x2F;a&gt; via twitter that JetBrains are bringing on board the team behind the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;nemerle.org&#x2F;&quot;&gt;Nemerle&lt;&#x2F;a&gt; programming language. This happened a few days after hinting on twitter that a major announcement is coming.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Type in Russian (or any other language) with Google IME</title>
+        <published>2011-08-11T13:17:23+00:00</published>
+        <updated>2011-08-11T13:17:23+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/type-in-russian-or-any-other-language-with-google-ime/"/>
+        <id>https://hmemcpy.com/posts/type-in-russian-or-any-other-language-with-google-ime/</id>
+        
+        <summary type="html">&lt;p&gt;I speak Russian, but I never bothered to learn how to properly type it on the keyboard. Every time I needed to search or write something, I would use a transliteration service, such as &lt;a href=&quot;http:&#x2F;&#x2F;www.translit.ru&quot; target=&quot;_blank&quot;&gt;translit.ru&lt;&#x2F;a&gt;, then copy the translated text to clipboard and paste it to the target window (such as a Skype chat session).&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Where unit testing fails</title>
+        <published>2011-06-24T20:34:42+00:00</published>
+        <updated>2011-06-24T20:34:42+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/where-unit-testing-fails/"/>
+        <id>https://hmemcpy.com/posts/where-unit-testing-fails/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note:&lt;&#x2F;strong&gt; I wrote this post before watching Uncle Bob&#x27;s excellent NDC 2011 talk called &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;cleancoder.posterous.com&#x2F;the-transformation-priority-premise&quot;&gt;Transformation Priority Premise&lt;&#x2F;a&gt;, which talks exactly about the subject below, however I am still not convinced. I will write a follow-up to this post.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I remembered a story from a few years ago about &lt;em&gt;some guy&lt;&#x2F;em&gt; who tried to build a Sudoku solver using TDD (Test Driven Development) five times, failing and giving up, while &lt;em&gt;another guy&lt;&#x2F;em&gt; simply wrote a solver that worked.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Making the Internet better, one site at a time</title>
+        <published>2011-06-03T14:43:01+00:00</published>
+        <updated>2011-06-03T14:43:01+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/making-the-internet-better-one-site-at-a-time/"/>
+        <id>https://hmemcpy.com/posts/making-the-internet-better-one-site-at-a-time/</id>
+        
+        <summary type="html">&lt;p&gt;Sometime ago my friend &lt;a href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;omervk&quot; target=&quot;_blank&quot;&gt;@omervk&lt;&#x2F;a&gt; and myself created &lt;a href=&quot;http:&#x2F;&#x2F;plaintextoffenders.com&#x2F;&quot; target=&quot;_blank&quot;&gt;Plain Text Offenders&lt;&#x2F;a&gt; - a wall of shame for websites that store and email your own password to you in plaintext. I didn&#x27;t expect this kind of explosion - hundreds of submissions already posted and dozens of new ones arriving every day!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book Review: &#x27;Clean Coder: A Code of Conduct for Professional Programmers&#x27; by Robert &#x27;Uncle Bob&#x27; Martin</title>
+        <published>2011-05-29T11:38:03+00:00</published>
+        <updated>2011-05-29T11:38:03+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/book-review-clean-coder-a-code-of-conduct-for-professional-programmers-by-robert-uncle-bob-martin/"/>
+        <id>https://hmemcpy.com/posts/book-review-clean-coder-a-code-of-conduct-for-professional-programmers-by-robert-uncle-bob-martin/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;img style=&quot;float: left; padding: 5px;&quot; src=&quot;http:&#x2F;&#x2F;i0.wp.com&#x2F;ecx.images-amazon.com&#x2F;images&#x2F;I&#x2F;51BSQqef%2B6L._SL160_.jpg?resize=123%2C160&quot; &#x2F;&gt;In popular culture, computer programmers, sometimes confused with sysadmins, are often described as teenage punks, sitting in a dark, lit only by the glow of their monitor, empty cartons of pizza and Mountain Dew bottles scattered strategically around, frantically hacking away on their keyboard.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to make TestDriven.NET open dotPeek (or any other IL disassembler) instead of Reflector</title>
+        <published>2011-05-15T11:34:10+00:00</published>
+        <updated>2011-05-15T11:34:10+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-make-testdriven-net-open-dotpeek-or-any-other-il-disassembler-instead-of-reflector/"/>
+        <id>https://hmemcpy.com/posts/how-to-make-testdriven-net-open-dotpeek-or-any-other-il-disassembler-instead-of-reflector/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;testdriven.net&#x2F;&quot;&gt;TestDriven.NET&lt;&#x2F;a&gt; is a free (for personal use) test runner for Visual Studio, that allows you to run unit tests from the context menu (&quot;Run Tests&quot;) using any unit testing framework. What I like particularly about TestDriven.NET, is that it allows running or debugging any arbitrary method as well!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Supercharging your ReSharper navigation-fu with Camel Humps</title>
+        <published>2011-05-09T01:30:34+00:00</published>
+        <updated>2011-05-09T01:30:34+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/supercharging-your-resharper-navigation-fu-with-camel-humps/"/>
+        <id>https://hmemcpy.com/posts/supercharging-your-resharper-navigation-fu-with-camel-humps/</id>
+        
+        <summary type="html">&lt;p&gt;I blog about &lt;a href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot; target=&quot;_blank&quot;&gt;ReSharper&lt;&#x2F;a&gt; a &lt;em&gt;lot&lt;&#x2F;em&gt;, mostly due to its being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given - use the keyboard shortcuts. A lot. Some even go completely mouseless!&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish</title>
+        <published>2011-04-23T18:51:49+00:00</published>
+        <updated>2011-04-23T18:51:49+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish/"/>
+        <id>https://hmemcpy.com/posts/modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish/</id>
+        
+        <summary type="html">&lt;p&gt;I&#x27;m writing a &lt;a href=&quot;http:&#x2F;&#x2F;msdn.microsoft.com&#x2F;en-us&#x2F;library&#x2F;ff747355.aspx&quot; target=&quot;_blank&quot;&gt;PublishNotificationHook&lt;&#x2F;a&gt; plugin for Windows Live Writer (don&#x27;t worry, I will soon reveal what it is), and I noticed that there doesn&#x27;t seem to be a way to control the contents (text or HTML) of the blog post in this type of plugin.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Announcing Plain Text Offenders</title>
+        <published>2011-04-05T22:57:24+00:00</published>
+        <updated>2011-04-05T22:57:24+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/announcing-plain-text-offenders/"/>
+        <id>https://hmemcpy.com/posts/announcing-plain-text-offenders/</id>
+        
+        <summary type="html">&lt;img style=&quot;float: right; padding: 5px;&quot; src=&quot;image.jpg&quot; &#x2F;&gt;
+&lt;p&gt;In the worst security breach in &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;gawker.com&#x2F;&quot;&gt;Gawker Media&lt;&#x2F;a&gt; history, a 500mb file containing Gawker&#x27;s source code, and employee passwords was &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.wired.com&#x2F;threatlevel&#x2F;2010&#x2F;12&#x2F;gawker-hacked&#x2F;&quot;&gt;released to the internet&lt;&#x2F;a&gt;, compromising email addresses and passwords of hundreds of thousands of users.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book Review: Zero Day: A Novel by Mark Russinovich</title>
+        <published>2011-03-18T20:19:49+00:00</published>
+        <updated>2011-03-18T20:19:49+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/book-review-zero-day-a-novel-by-mark-russinovich/"/>
+        <id>https://hmemcpy.com/posts/book-review-zero-day-a-novel-by-mark-russinovich/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.amazon.com&#x2F;Zero-Day-Novel-Mark-Russinovich&#x2F;dp&#x2F;031261246X?SubscriptionId=AKIAI4TIA44MOSRMVWNA&amp;amp;tag=inabs-20&quot;&gt;&lt;img style=&quot;float: left; padding: 5px&quot; src=&quot;http:&#x2F;&#x2F;i2.wp.com&#x2F;ecx.images-amazon.com&#x2F;images&#x2F;I&#x2F;51s-8x8YWEL._SL160_.jpg?resize=107%2C160&quot; &#x2F;&gt;&lt;&#x2F;a&gt;The name Mark Russinovich should be familiar to anyone in the IT industry. He&#x27;s the co-founder of Winternals (which operated the Sysinternals website), now owned by Microsoft. Mark is a co-author of the &lt;a href=&quot;http:&#x2F;&#x2F;amzn.to&#x2F;eKaXDx&quot; target=&quot;_blank&quot;&gt;Windows Internals&lt;&#x2F;a&gt; books, and the creator of such tools as &lt;a href=&quot;http:&#x2F;&#x2F;technet.microsoft.com&#x2F;en-us&#x2F;sysinternals&#x2F;bb896653&quot; target=&quot;_blank&quot;&gt;Process Explorer&lt;&#x2F;a&gt;, &lt;a href=&quot;http:&#x2F;&#x2F;technet.microsoft.com&#x2F;en-us&#x2F;sysinternals&#x2F;bb963902&quot; target=&quot;_blank&quot;&gt;Autoruns&lt;&#x2F;a&gt; and &lt;a href=&quot;http:&#x2F;&#x2F;technet.microsoft.com&#x2F;en-us&#x2F;sysinternals&#x2F;bb896645&quot; target=&quot;_blank&quot;&gt;Process Monitor&lt;&#x2F;a&gt;, which are just a small subset of the Sysinternals tools arsenal, which is being used daily by programmers, IT and computer forensics experts around the world.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>When your software doesn&#x27;t work in China</title>
+        <published>2011-03-17T13:57:31+00:00</published>
+        <updated>2011-03-17T13:57:31+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/when-your-software-doesnt-work-in-china/"/>
+        <id>https://hmemcpy.com/posts/when-your-software-doesnt-work-in-china/</id>
+        
+        <summary type="html">&lt;p&gt;I had an interesting bug submitted by a user, he wrote that &lt;a href=&quot;http:&#x2F;&#x2F;www.typemock.com&quot; target=&quot;_blank&quot;&gt;our product&lt;&#x2F;a&gt; was crashing in his Visual Studio 2010, which was a Traditional Chinese edition.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.typemock.com&#x2F;typemock-isolator-product3&quot; target=&quot;_blank&quot;&gt;Typemock Isolator&lt;&#x2F;a&gt;, being a Visual Studio add-in, adds a menu next to the Tools menu in Visual Studio. It does so by looking for an index of the &lt;em&gt;Tools&lt;&#x2F;em&gt; menu in the main menu bar, and simply adding the &lt;em&gt;Typemock&lt;&#x2F;em&gt; menu after it. However, the &lt;em&gt;Tools&lt;&#x2F;em&gt; menu is only called that in the English locale. In other languages, the menu might be called differently. In French, for instance, it&#x27;s called &lt;em&gt;Outils&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Upgrading TortoiseHg to v2.0</title>
+        <published>2011-03-07T12:16:50+00:00</published>
+        <updated>2011-03-07T12:16:50+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/upgrading-tortoisehg-to-v2-0/"/>
+        <id>https://hmemcpy.com/posts/upgrading-tortoisehg-to-v2-0/</id>
+        
+        <summary type="html">&lt;p&gt;Version 2.0 of &lt;a href=&quot;http:&#x2F;&#x2F;tortoisehg.bitbucket.org&#x2F;&quot; target=&quot;_blank&quot;&gt;TortoiseHg&lt;&#x2F;a&gt;, the best Windows client for the &lt;a href=&quot;http:&#x2F;&#x2F;mercurial.selenic.com&#x2F;&quot; target=&quot;_blank&quot;&gt;Mercurial&lt;&#x2F;a&gt; distributed source control system, was released a few days ago, featuring a complete UI overhaul and numerous fixes and improvements.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Installing Ubuntu in Windows Virtual PC</title>
+        <published>2011-02-16T11:20:46+00:00</published>
+        <updated>2011-02-16T11:20:46+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/installing-ubuntu-in-windows-virtual-pc/"/>
+        <id>https://hmemcpy.com/posts/installing-ubuntu-in-windows-virtual-pc/</id>
+        
+        <summary type="html">&lt;p&gt;I was trying to install Ubuntu using &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.hanselman.com&#x2F;blog&#x2F;InstallingUbuntu104LTSOnWindowsVirtualPCOnWindows7.aspx&quot;&gt;this tutorial&lt;&#x2F;a&gt; by Scott Hanselman, where upon pressing &lt;em&gt;Create virtual machine&lt;&#x2F;em&gt;, I was met with the following error message:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Meet the Marketing - the dark side of software development</title>
+        <published>2011-02-07T23:04:51+00:00</published>
+        <updated>2011-02-07T23:04:51+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/meet-the-marketing-the-dark-side-of-software-development/"/>
+        <id>https://hmemcpy.com/posts/meet-the-marketing-the-dark-side-of-software-development/</id>
+        
+        <summary type="html">&lt;p&gt;Working on a greenfield project with a great team of developers is probably the best thing that can happen. You&#x27;re engaged in shaping and molding your ideas into code. Better if you&#x27;re an agile team, continuously improving and adding value.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to debug a process that is crashing on startup</title>
+        <published>2010-12-20T21:51:45+00:00</published>
+        <updated>2010-12-20T21:51:45+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-debug-a-process-that-is-crashing-on-startup/"/>
+        <id>https://hmemcpy.com/posts/how-to-debug-a-process-that-is-crashing-on-startup/</id>
+        
+        <summary type="html">&lt;p&gt;Here&#x27;s a neat trick which allows you to debug a process by attaching a debugger upon process start. It&#x27;s useful at times when you can&#x27;t directly launch an application with debugger attached, or you have a process which accepts command line parameters which are not directly under your control (such as &lt;code&gt;QTAgent32.exe&lt;&#x2F;code&gt;, which is the MSTest unit test runner, launched by Visual Studio).&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My talk at the ALT.NET Israel Tools meeting - ReSharper&#x27;s Hidden Gems</title>
+        <published>2010-12-19T12:13:11+00:00</published>
+        <updated>2010-12-19T12:13:11+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems/"/>
+        <id>https://hmemcpy.com/posts/my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems/</id>
+        
+        <summary type="html">&lt;p&gt;I was delighted to talk about &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt; at the recent meeting of the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;groups.google.com&#x2F;group&#x2F;altnetisrael&quot;&gt;ALT.NET Israel&lt;&#x2F;a&gt; group. I chose ReSharper for the reason that I use it every day, and I can&#x27;t imagine myself programming without it. I wanted to share with the rest some tips, tricks and general hidden features of this wonderful tool that I&#x27;ve learned over the years using it.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to convert Subversion repository to Mercurial (Hg) - it&#x27;s easier than you think!</title>
+        <published>2010-11-26T14:51:35+00:00</published>
+        <updated>2010-11-26T14:51:35+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-convert-subversion-repository-to-mercurial-hgits-easier-than-you-think/"/>
+        <id>https://hmemcpy.com/posts/how-to-convert-subversion-repository-to-mercurial-hgits-easier-than-you-think/</id>
+        
+        <summary type="html">&lt;p&gt;Converting SVN to Mercurial, while keeping all the commit history, might sound like a hard thing to do, but in fact it isn&#x27;t! This functionality is already built into Mercurial, it&#x27;s just not enabled by default.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to fix Visual Studio 2008 not building x64 C++ projects</title>
+        <published>2010-11-25T08:09:25+00:00</published>
+        <updated>2010-11-25T08:09:25+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/how-to-fix-visual-studio-2008-not-building-x64-c-projects/"/>
+        <id>https://hmemcpy.com/posts/how-to-fix-visual-studio-2008-not-building-x64-c-projects/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;img style=&quot;float: right; padding: 5px;&quot; src=&quot;image1.png&quot; &#x2F;&gt;Something happened to my Visual Studio 2008 install, and I was no longer able to compile C++ projects in x64 configuration - the build would always skip it. The problem also manifested itself by showing an error message: &lt;strong&gt;The operation could not be completed. Unspecified error&lt;&#x2F;strong&gt; when I tried to view the C++ project properties in x64 configuration. I ran a repair installation of Visual Studio and &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.microsoft.com&#x2F;downloads&#x2F;en&#x2F;details.aspx?FamilyId=FBEE1648-7106-44A7-9649-6D9F6D58056E&amp;amp;displaylang=en&quot;&gt;Service Pack 1&lt;&#x2F;a&gt;, it didn&#x27;t help.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Documenting your public API easily with ReSharper and GhostDoc</title>
+        <published>2010-11-17T16:54:10+00:00</published>
+        <updated>2010-11-17T16:54:10+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/documenting-your-public-api-easily-with-resharper-and-ghostdoc/"/>
+        <id>https://hmemcpy.com/posts/documenting-your-public-api-easily-with-resharper-and-ghostdoc/</id>
+        
+        <summary type="html">&lt;p&gt;In my &lt;a href=&quot;&#x2F;posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;&quot;&gt;previous post&lt;&#x2F;a&gt; on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;code.google.com&#x2F;p&#x2F;agentsmithplugin&#x2F;&quot;&gt;Agent Smith&lt;&#x2F;a&gt;, I briefly mentioned that the described trick can be used to aid documenting the public API. Some people have asked me to elaborate, so here goes:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Finding static fields in solution using ReSharper and Agent Smith plug-in</title>
+        <published>2010-11-16T14:49:36+00:00</published>
+        <updated>2010-11-16T14:49:36+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/"/>
+        <id>https://hmemcpy.com/posts/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/</id>
+        
+        <summary type="html">&lt;p&gt;Today I came across a need to find all static fields in my entire solution I&#x27;m working on. Finding things usually is a no-brainer with &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt;, but this time I didn&#x27;t find an option to do this easily.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting</title>
+        <published>2010-09-19T11:30:00+00:00</published>
+        <updated>2010-09-19T11:30:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting/"/>
+        <id>https://hmemcpy.com/posts/configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting/</id>
+        
+        <summary type="html">&lt;p&gt;At &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;site.typemock.com&#x2F;&quot;&gt;Typemock&lt;&#x2F;a&gt;, we&#x27;re making the change of moving our source control from SVN to Mercurial (Hg). Side note: &lt;strong&gt;Hg&lt;&#x2F;strong&gt; is a symbol for [Mercury](http:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Mercury_(element) in the periodic table.&lt;&#x2F;p&gt;
+&lt;p&gt;We use &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;teamcity&#x2F;&quot;&gt;TeamCity&lt;&#x2F;a&gt; as our continuous integration server, and it took some trickery to configure it to recognize the repository. For this, I will use a repository hosted at &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;repositoryhosting.com&#x2F;&quot;&gt;RepositoryHosting&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Here are the steps required for configuring Mercurial with SSH in TeamCity:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Summary: the 2nd Software Craftsmanship group meeting in Israel</title>
+        <published>2010-07-22T06:55:48+00:00</published>
+        <updated>2010-07-22T06:55:48+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/summary-the-2nd-software-craftsmanship-group-meeting-in-israel/"/>
+        <id>https://hmemcpy.com/posts/summary-the-2nd-software-craftsmanship-group-meeting-in-israel/</id>
+        
+        <summary type="html">&lt;p&gt;Yesterday I attended the 2nd Software Craftsmanship meeting, led by &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.irefactor.net&#x2F;&quot;&gt;Uri Lavi&lt;&#x2F;a&gt;, held in the headquarters of &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.picscout.com&#x2F;&quot;&gt;PicScout&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Making Productivity Power Tools for Visual Studio 2010 play nicely with ReSharper</title>
+        <published>2010-07-21T21:02:02+00:00</published>
+        <updated>2010-07-21T21:02:02+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/making-productivity-power-tools-visual-studio-2010-play-nicely-with-resharper/"/>
+        <id>https://hmemcpy.com/posts/making-productivity-power-tools-visual-studio-2010-play-nicely-with-resharper/</id>
+        
+        <summary type="html">&lt;p&gt;Scott Guthrie &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;weblogs.asp.net&#x2F;scottgu&#x2F;archive&#x2F;2010&#x2F;07&#x2F;19&#x2F;vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx&quot;&gt;wrote&lt;&#x2F;a&gt; about VS 2010 Productivity Power Tools update, and I went to the Extensions Gallery to download it. I won&#x27;t write an overview about it, ScottGu has already done an excellent job on &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;weblogs.asp.net&#x2F;scottgu&#x2F;archive&#x2F;2010&#x2F;07&#x2F;19&#x2F;vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx&quot;&gt;his blog&lt;&#x2F;a&gt;. You can also find more information on the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;visualstudiogallery.msdn.microsoft.com&#x2F;en-us&#x2F;d0d33361-18e2-46c0-8ff2-4adea1e34fef&quot;&gt;extension&#x27;s page&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>C# Puzzle: What does this program do?</title>
+        <published>2010-07-13T07:04:11+00:00</published>
+        <updated>2010-07-13T07:04:11+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/csharp-puzzle-what-does-this-program-do/"/>
+        <id>https://hmemcpy.com/posts/csharp-puzzle-what-does-this-program-do/</id>
+        
+        <summary type="html">&lt;p&gt;Consider the following code:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo&quot; style=&quot;color: #D8DEE9; background-color: #2E3440;&quot;&gt;&lt;code data-lang=&quot;csharp&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;class&lt;&#x2F;span&gt;&lt;span style=&quot;color: #8FBCBB;&quot;&gt; Woot&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;{&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;    private static float&lt;&#x2F;span&gt;&lt;span&gt; PI&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;    private static bool&lt;&#x2F;span&gt;&lt;span&gt; initialized&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt; =&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt; doInitialize&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;    private static bool&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt; doInitialize&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;()&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;    {&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;        if&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt; (&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;!&lt;&#x2F;span&gt;&lt;span&gt;initialized&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;        {&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;            var&lt;&#x2F;span&gt;&lt;span&gt; thread&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt; = new&lt;&#x2F;span&gt;&lt;span&gt; Thread&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;(()&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt; =&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt; {&lt;&#x2F;span&gt;&lt;span&gt; PI&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt; =&lt;&#x2F;span&gt;&lt;span style=&quot;color: #B48EAD;&quot;&gt; 3.14f&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt; })&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;            thread&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt;Start&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;            thread&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt;Join&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;()&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;        }&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;        return true;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;    }&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;    public static void&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt; Main&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;string&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;[]&lt;&#x2F;span&gt;&lt;span&gt; args&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;    {&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;        Console&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color: #88C0D0;&quot;&gt;WriteLine&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;PI&lt;&#x2F;span&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color: #81A1C1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;    }&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #ECEFF4;&quot;&gt;}&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;What is the output of this program? Is it:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Ever wanted to know why you got the badge on StackOverflow? Now you can!</title>
+        <published>2010-07-11T07:09:05+00:00</published>
+        <updated>2010-07-11T07:09:05+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/ever-wanted-to-know-why-you-got-the-badge-on-stackoverflow-now-you-can/"/>
+        <id>https://hmemcpy.com/posts/ever-wanted-to-know-why-you-got-the-badge-on-stackoverflow-now-you-can/</id>
+        
+        <summary type="html">&lt;p&gt;Badges are an integral part of the StackOverflow, which reward participants. According to &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.codinghorror.com&quot;&gt;Jeff Atwood&lt;&#x2F;a&gt;, those are based on the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.xbox360achievements.org&#x2F;index.php&quot;&gt;Xbox 360 Achievement System&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window</title>
+        <published>2010-06-27T07:04:44+00:00</published>
+        <updated>2010-06-27T07:04:44+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/visual-studio-2010-bug-when-opening-any-file-caused-by-docked-addin-tool-window/"/>
+        <id>https://hmemcpy.com/posts/visual-studio-2010-bug-when-opening-any-file-caused-by-docked-addin-tool-window/</id>
+        
+        <summary type="html">&lt;p&gt;Here&#x27;s an issue I&#x27;ve been struggling with: it seems that by accessing a certain property of a &lt;em&gt;docked&lt;&#x2F;em&gt; tool window of an add-in, an exception is thrown somewhere inside Visual Studio 2010. It&#x27;s caught internally, and the exception message, &lt;em&gt;Object reference is not set to an instance of an object&lt;&#x2F;em&gt;, is shown whenever I was trying to open any file (code or otherwise).&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Turning poor man&#x27;s performance profiling into awesome using Excel and Pivot Tables</title>
+        <published>2010-06-07T12:44:04+00:00</published>
+        <updated>2010-06-07T12:44:04+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/"/>
+        <id>https://hmemcpy.com/posts/turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables/</id>
+        
+        <summary type="html">&lt;p&gt;As I&#x27;m writing this, &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;blogs.microsoft.co.il&#x2F;blogs&#x2F;dhelper&#x2F;&quot;&gt;Dror Helper&lt;&#x2F;a&gt; blogged about using a &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;blogs.microsoft.co.il&#x2F;blogs&#x2F;dhelper&#x2F;archive&#x2F;2010&#x2F;06&#x2F;02&#x2F;poor-c-developer-s-performance-profiler.aspx&quot;&gt;poor man&#x27;s performance profiler&lt;&#x2F;a&gt;. This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s) within our code. This information is usually logged, and after a run we&#x27;re left with a huge file containing hundreds (and sometimes thousands of lines). How do we make sense of this mess? How do we filter out and understand the relevant performance information?&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>ReSharper 5.0 Hidden Gem - Patterns Catalogue</title>
+        <published>2010-02-25T21:06:26+00:00</published>
+        <updated>2010-02-25T21:06:26+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/resharper-5-hidden-gem-patterns-catalogue/"/>
+        <id>https://hmemcpy.com/posts/resharper-5-hidden-gem-patterns-catalogue/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;strong&gt;[November 16, 2010]&lt;&#x2F;strong&gt; While the information below is still very much relevant, please download the latest version of &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt; from JetBrains website.&lt;&#x2F;p&gt;
+&lt;p&gt;Have I mentioned that I love ReSharper? While patiently waiting for the 5.0 release to RTM, the team at JetBrains have shipped the &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;beta&#x2F;beta.html&quot;&gt;Beta 2 release&lt;&#x2F;a&gt; (build 1618). This is a very stable, very good improvement over the previous &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;confluence.jetbrains.net&#x2F;display&#x2F;ReSharper&#x2F;ReSharper+5.0+Nightly+Builds&quot;&gt;nightly builds&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Visiting Islay, Part 2</title>
+        <published>2010-01-14T06:50:00+00:00</published>
+        <updated>2010-01-14T06:50:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/visiting-islay-part-2/"/>
+        <id>https://hmemcpy.com/posts/visiting-islay-part-2/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;strong&gt;Note:&lt;&#x2F;strong&gt; this is part 2. Read part 1 of the trip &lt;a href=&quot;&#x2F;posts&#x2F;visiting-islay-part-1&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Early Saturday morning on Islay, and we are set to go on another adventure! After eating a delicious breakfast that our lovely host prepared for us, we were set to try and explore some more distilleries. Unfortunately there were no tours at Lagavulin and Ardbeg on a Saturday, so we decided to drive to the place where one of my most favorite &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.islayinfo.com&#x2F;islay-pictures-wallpaper&#x2F;kilnaughton_bay_1280x859.html&quot;&gt;pictures&lt;&#x2F;a&gt; was taken: the Carraig Fhada Lighthouse.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Visiting Islay, Part 1</title>
+        <published>2010-01-12T20:42:06+00:00</published>
+        <updated>2010-01-12T20:42:06+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/visiting-islay-part-1/"/>
+        <id>https://hmemcpy.com/posts/visiting-islay-part-1/</id>
+        
+        <summary type="html">&lt;p&gt;Every whisky lover gets, at some point, to experience whisky from the island of Islay in Scotland. This experience will be remembered throughout his life: it can be either love at first taste, or loathing for eternity. Not everybody can handle the intensity and the powerful peaty flavor of (most) Islay whiskies, some may even stop drinking whisky altogether. Others, like myself, fall in love with the flavor and rarely able to drink anything else.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Configure Fiddler to use a 3rd party Diff tool</title>
+        <published>2009-09-16T07:08:52+00:00</published>
+        <updated>2009-09-16T07:08:52+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/configure-fiddler-to-use-3rd-party-diff-tool/"/>
+        <id>https://hmemcpy.com/posts/configure-fiddler-to-use-3rd-party-diff-tool/</id>
+        
+        <summary type="html">&lt;p&gt;I use the awesome &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.fiddler2.com&#x2F;fiddler2&#x2F;&quot;&gt;Fiddler2&lt;&#x2F;a&gt; to debug HTTP, and I needed to compare sessions. Fiddler has a support for this, but when I clicked &lt;strong&gt;Tools → Compare Sessions&lt;&#x2F;strong&gt;, it prompted me to install &lt;strong&gt;Windiff.exe&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>This is why I love Google</title>
+        <published>2009-07-23T09:56:40+00:00</published>
+        <updated>2009-07-23T09:56:40+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/this-is-why-i-love-google/"/>
+        <id>https://hmemcpy.com/posts/this-is-why-i-love-google/</id>
+        
+        <summary type="html">&lt;p&gt;Google &lt;em&gt;&lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.google.com&#x2F;search?q=recursion&quot;&gt;recursion&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WinForms bug: NodeMouseDoubleClick event in TreeView will sometimes have the wrong node in EventArgs</title>
+        <published>2009-05-21T16:46:15+00:00</published>
+        <updated>2009-05-21T16:46:15+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/winforms-bug-nodemousedoubleclick-event-in-treeview-will-sometimes-have-wrong-node-in-eventargs/"/>
+        <id>https://hmemcpy.com/posts/winforms-bug-nodemousedoubleclick-event-in-treeview-will-sometimes-have-wrong-node-in-eventargs/</id>
+        
+        <summary type="html">&lt;p&gt;Here&#x27;s a strange bug I&#x27;ve encountered today in a WinForms application. Usually, double clicking on a collapsed tree node (which obviously has child nodes) will expand it. Most of the time when we need something to happen when a child node is double clicked, but not the parent, we write something similar to:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Smart Paste Add-In for Visual Studio 2008</title>
+        <published>2009-05-19T05:57:18+00:00</published>
+        <updated>2009-05-19T05:57:18+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/smart-paste-add-in-for-visual-studio-2008/"/>
+        <id>https://hmemcpy.com/posts/smart-paste-add-in-for-visual-studio-2008/</id>
+        
+        <summary type="html">&lt;p&gt;Say you need to paste a chunk of XML (or &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Well-known_text&quot;&gt;WKT&lt;&#x2F;a&gt;) into Visual Studio as a string literal (for your unit tests, or what not). How would you do it?&lt;&#x2F;p&gt;
+&lt;p&gt;In C#, string literals can be represented in two ways:&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Awesome tip: make View Code default double click action on a WinForm control</title>
+        <published>2009-05-10T11:51:34+00:00</published>
+        <updated>2009-05-10T11:51:34+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/make-view-code-default-double-click-action-on-a-winform-control/"/>
+        <id>https://hmemcpy.com/posts/make-view-code-default-double-click-action-on-a-winform-control/</id>
+        
+        <summary type="html">&lt;p&gt;Here is something I wish I&#x27;d known years ago: you can make the &lt;em&gt;View Source&lt;&#x2F;em&gt; action default when you double click on a WinForm control.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>ReSharper: Fixing array and object initializer indentation</title>
+        <published>2009-04-22T04:55:49+00:00</published>
+        <updated>2009-04-22T04:55:49+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/resharper-fixing-array-object-initializer-indentation/"/>
+        <id>https://hmemcpy.com/posts/resharper-fixing-array-object-initializer-indentation/</id>
+        
+        <summary type="html">&lt;p&gt;There are tons of options when it comes to configuring your coding style in ReSharper. Somehow I managed to screw the indentation of array and object initializers&#x27; variables. This is what it looked like (I use &lt;strong&gt;At Next Line (BSD style)&lt;&#x2F;strong&gt; setting):&lt;&#x2F;p&gt;&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>ReSharper 4.5 Beta Released - First Impressions</title>
+        <published>2009-03-18T06:46:28+00:00</published>
+        <updated>2009-03-18T06:46:28+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/resharper-4-5-beta-released/"/>
+        <id>https://hmemcpy.com/posts/resharper-4-5-beta-released/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;em&gt;[&lt;strong&gt;Update:&lt;&#x2F;strong&gt; this article is now obsolete, and the links below might not work. Please download the latest ReSharper version from the JetBrains website.]&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;JetBrains just &lt;a href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;beta.html&quot; target=&quot;_blank&quot;&gt;announced&lt;&#x2F;a&gt; that ReSharper 4.5 has reached Beta status, and now available to &lt;a href=&quot;http:&#x2F;&#x2F;download.jetbrains.com&#x2F;resharper&#x2F;ReSharperSetup.4.5.1208.6.msi&quot; target=&quot;_blank&quot;&gt;download&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Awesome tip: Copy text from any Message Box to Clipboard</title>
+        <published>2009-02-12T16:10:00+00:00</published>
+        <updated>2009-02-12T16:10:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/awesome-tip-copy-text-from-any-messagebox-to-clipboard/"/>
+        <id>https://hmemcpy.com/posts/awesome-tip-copy-text-from-any-messagebox-to-clipboard/</id>
+        
+        <summary type="html">&lt;p&gt;I just found out that it&#x27;s possible to copy the text from any message box to clipboard by pressing &lt;strong&gt;Ctrl-C&lt;&#x2F;strong&gt; when the message box appears! Think of all the times you needed to search for an exact error message text, and needed to switch back and forth between the message and your browser window.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>5 ways ReSharper changed my programming style</title>
+        <published>2009-02-05T12:35:38+00:00</published>
+        <updated>2009-02-05T12:35:38+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/5-ways-resharper-changed-my-programming-style/"/>
+        <id>https://hmemcpy.com/posts/5-ways-resharper-changed-my-programming-style/</id>
+        
+        <summary type="html">&lt;p&gt;I love &lt;a rel=&quot;external&quot; href=&quot;http:&#x2F;&#x2F;www.jetbrains.com&#x2F;resharper&#x2F;&quot;&gt;ReSharper&lt;&#x2F;a&gt;. It has completely changed the way I think about code. When I have to use Visual Studio without ReSharper installed, I feel like I&#x27;m writing the code in Notepad. As my first actual post on this blog I&#x27;d like to present a &lt;em&gt;few&lt;&#x2F;em&gt; features of ReSharper 4.1 that help me code faster, better, (stronger) and with much higher accuracy.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Console.WriteLine(&quot;Hello World!&quot;);</title>
+        <published>2009-02-04T15:53:00+00:00</published>
+        <updated>2009-02-04T15:53:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://hmemcpy.com/posts/console-writeline-hello-world/"/>
+        <id>https://hmemcpy.com/posts/console-writeline-hello-world/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rUGIocJK9Tc&quot;&gt;Welcome to my fortress tall...&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve finally decided to give this blogging thing a try. So please, stay tuned until I figure something remotely interesting to write.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debug symbols, dotPeek and long paths in Visual Studio | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Debug symbols, dotPeek and long paths in Visual Studio">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Debug symbols, dotPeek and long paths in Visual Studio</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-08-01T14:06:04Z">2014-08-01</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>In my <a href="/posts/how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2/">previous post</a>, I explained how to use the symbol server in <a rel="external" href="http://www.jetbrains.com/decompiler/">dotPeek 1.2</a> to debug any assembly in Visual Studio, allowing you to set breakpoints and step into any method (provided it was decompiled by dotPeek).</p>
+<span id="continue-reading"></span>
+<p>While this is great, I noticed that there was one particular method I couldn't step into - the moment I tried I got the sadly familiar <strong>Source Not Found</strong> page:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;image1.png" alt="">
+    
+</figure>
+
+<p>Clicking the <strong>Browse and find...</strong> link did <em>nothing</em>, and the <strong>Source search information</strong> dropdown appeared below. Expanding it, I could see where Visual Studio attempted to load the source file from:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;image2.png" alt="">
+    
+</figure>
+
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Locating source for &#39;C:\Users\Igal\AppData\Local\JetBrains\dotPeek\v1.2\SymbolCache\CSharp\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb\538887009A094E419882756878C69B2A1\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\VisualStudio\ProjectSystem\VS\Implementation\Package\Automation\OAProjectItems.cs&#39;. (No checksum.)</span></span>
+<span class="giallo-l"><span>The file &#39;C:\Users\Igal\AppData\Local\JetBrains\dotPeek\v1.2\SymbolCache\CSharp\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb\538887009A094E419882756878C69B2A1\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\VisualStudio\ProjectSystem\VS\Implementation\Package\Automation\OAProjectItems.cs&#39; does not exist.</span></span>
+<span class="giallo-l"><span>Looking in script documents for &#39;C:\Users\Igal\AppData\Local\JetBrains\dotPeek\v1.2\SymbolCache\CSharp\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb\538887009A094E419882756878C69B2A1\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\VisualStudio\ProjectSystem\VS\Implementation\Package\Automation\OAProjectItems.cs&#39;...</span></span>
+<span class="giallo-l"><span>Looking in the projects for &#39;C:\Users\Igal\AppData\Local\JetBrains\dotPeek\v1.2\SymbolCache\CSharp\Microsoft.VisualStudio.ProjectSystem.VS.Implementation.pdb\538887009A094E419882756878C69B2A1\Microsoft.VisualStudio.ProjectSystem.VS.Implementation\VisualStudio\ProjectSystem\VS\Implementation\Package\Automation\OAProjectItems.cs&#39;.</span></span>
+<span class="giallo-l"><span>The file was not found in a project.</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+<p>And so on. Quick search for <code>OAProjectItems.cs</code> using my most favorite tool, <a rel="external" href="http://www.voidtools.com/">Everything</a>, revealed that it was indeed present in that location, so why couldn't Visual Studio open it? I decided to open the file manually by pasting its full path into the Start - Run dialog (Win-R), but then I got the following error:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;image3.png" alt="">
+    
+</figure>
+
+<p>Finally, I tried to go to the file location using the cmd, and I got my answer - the path was simply too long for Windows (and therefore, Visual Studio) to handle!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;image4.png" alt="">
+    
+</figure>
+
+<p>Windows has an unfortunate <code>MAX_PATH</code> limitation at 260 characters is the source of great pain, and I hope Microsoft fixes it one day. Meanwhile, here's how to <em>work around</em> this particular issue: dotPeek generates debug symbols under <code>%LOCALAPPDATA%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp</code> for C# code, and unfortunately, it isn't possible to configure. Luckily, it is possible to configure where Visual Studio looks for debug symbols. This is a little-known page in the <strong>Solution</strong> properties called <strong>Debug Source Files</strong>:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;debug-symbols-dotpeek-and-long-paths-in-visual-studio&#x2F;image5.png" alt="">
+    
+</figure>
+
+<p>What I did was copy the entire contents of dotPeek's <code>SymbolCache\CSharp</code> directory into a local directory <code>d:\sym</code>, and added it to the search list (pictured above). Also, I made sure to delete everything from the bottom list (Do not look for these source files) - if Visual Studio is unable, for any reason, to open a source file, it will add it to this blacklist. It was filled with the files I needed, so I removed them from the list.</p>
+<p>After doing this, I could go back to debugging, was was able to step into methods that were previously unavailable!</p>
+<p>As the comments below mention, this is also possible to do without copying, by creating a (symbolic) link between the directories! From an elevated command shell, run:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>mklink /D d:\sym %localappdata%\JetBrains\dotPeek\v1.2\SymbolCache\CSharp</span></span></code></pre>
+<p>Thanks guys!</p>
+<p>Happy debugging!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2&#x2F;" rel="next" title="How to debug anything with Visual Studio and JetBrains dotPeek v1.2!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How to debug anything with Visual Studio and JetBrains dotPeek v1.2!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;regular-expression-enhancements-in-resharper-9&#x2F;" rel="prev" title="Regular Expression enhancements in ReSharper 9">
+        <span class="nav-title">Regular Expression enhancements in ReSharper 9</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

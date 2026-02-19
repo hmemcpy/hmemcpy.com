@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to enable login verifications on Twitter from &quot;unsuppored&quot; countries | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How to enable login verifications on Twitter from &quot;unsuppored&quot; countries">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">How to enable login verifications on Twitter from &quot;unsuppored&quot; countries</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-04-26T17:35:45Z">2014-04-26</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>It's funny how a random twitter rant can yield valid solutions. One such rant between <a rel="external" href="https://twitter.com/omervk">@omervk</a> (who co-runs <a rel="external" href="http://plaintextoffenders.com">plaintextoffenders.com</a>) and myself regarding enabling Two Factor Authentication (2FA, or <em>login verification</em>) on twitter being unavailable for people in Israel, caught the attention of <a rel="external" href="https://twitter.com/thorsheim">Per Thorsheim</a>, an independent security consultant and founder of the <a rel="external" href="http://passwordscon.org/">Passwords conference</a>. Per, turns out, was interested in this problem because of another matter, that Twitter seemingly <em>turned off</em> login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter <a rel="external" href="http://securitynirvana.blogspot.no/2014/04/did-twitter-silently-remove-login.html">here</a>.</p>
+<span id="continue-reading"></span>
+<p>So what is the problem exactly? In order to enable login verifications on Twitter, turns out, you need to <em>either</em> associate your mobile phone number with twitter, or enable sending login verifications to your iOS or Android twitter app. The latter, turns out <em>also</em> requires your phone number!</p>
+<p>Here's how it supposed to work: you go to the <a rel="external" href="https://twitter.com/settings/security"><strong>Security and privacy</strong></a> settings in your twitter account. If no phone number is associated, you will see these options:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image1.png" alt="">
+    
+</figure>
+
+<p>Notice that both <em>Send</em> options are disabled. Pressing the <strong>add a phone</strong> link takes you to a page where you can enter your phone number (after selecting your country and carrier), however in my case, I got this message after submitting:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image2.png" alt="">
+    
+</figure>
+
+<p>OK, so I can't add a phone number on the twitter website. Let's try enabling login verifications on my (Android) twitter app. Go to Settings, your twitter username, then press Security:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image3.png" alt="">
+    
+</figure>
+
+<p>What! I am <em>still</em> being asked to add a phone number!</p>
+<p>This is the part where I initially gave up, but it turned out that clicking <strong>Add phone</strong> takes you to the mobile twitter page (in your phone's browser), where you can enter your phone number, and in my case <strong>twitter accepted it, and sent me a verification SMS</strong>!</p>
+<p>The UX is confusing at this point, after adding my number, I got an SMS with a 6 digit verification code (and short t.co URL to continue verification), but no place in the page to enter it! In fact, I was asked to <strong>remove</strong> the phone number at this point:</p>
+<p>
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;phone1.png" alt="">
+    
+</figure>
+
+
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;phone2.png" alt="">
+    
+</figure>
+
+</p>
+<p>Very odd. However, pressing the <strong>manage</strong> link above (in the yellow bar) took me to the actual verification page where I was asked to enter the code from the SMS message:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image5.png" alt="">
+    
+</figure>
+
+<p>And after pressing Verify, I got a message confirming that my phone number was successfully added!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image6.png" alt="">
+    
+</figure>
+
+<p>At this point, after going back to the Security and privacy settings on twitter, I saw that my phone number was now added, and could turn on login verifications!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;image7.png" alt="">
+    
+</figure>
+
+<p>Also, going to the Security settings on my Android twitter app were now also working!</p>
+<p>In conclusion, the steps above may work for you, even if you can't add your phone number on the twitter website. Did it work for you? Please leave a comment with your country/carrier, and any additional information!</p>
+<p>Good luck, stay secure!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-remap-calc-exe-to-scriptcs-exe&#x2F;" rel="next" title="How to remap calc.exe to scriptcs.exe">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How to remap calc.exe to scriptcs.exe</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;" rel="prev" title="When good permissions gone bad - a case of a failed build">
+        <span class="nav-title">When good permissions gone bad - a case of a failed build</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

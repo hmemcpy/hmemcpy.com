@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When good permissions gone bad - a case of a failed build | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="When good permissions gone bad - a case of a failed build">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">When good permissions gone bad - a case of a failed build</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-06-09T16:08:08Z">2014-06-09</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I was called over to see if I could help solve a strange issue - every time the build script (Ant) for the client's Android app ran - certain files that were modified by the build script (a <code>.properties</code> file, few others), were suddenly inaccessible to other people logging to the machine - only the user who initiated the build could still write to the files. Looking at the file permissions tab proved as much: only the current user and the Administrators group could access the file!</p>
+<span id="continue-reading"></span>
+<p>My initial investigation into Ant's build.xml led me to an interesting discovery - all the files that lost their permissions were modified using the <a rel="external" href="http://ant.apache.org/manual/Tasks/replaceregexp.html">ReplaceRegExp</a> task for Ant - a task that could replace text in a file using regular expressions. Quick Google search for <em>replaceregexp ant file permissions</em> led me to <a rel="external" href="https://issues.apache.org/bugzilla/show_bug.cgi?id=36440">this similar issue</a>, which was, unfortunately, closed as wontfix.</p>
+<p>I decided to investigate for myself. Using my go-to tool for this task, <a rel="external" href="http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx">Process Monitor</a>, I decided to trace all activity of <strong>java.exe</strong> (which runs the Ant tasks), looking for anything that has to do with setting permissions or writing the file, filtering just the file I was interested in (<strong>project.properties</strong>). After running the specific Ant task that did a simple regex replace in the file, it was indeed changed, and its permissions were changed as well.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;image1.png" alt="">
+    
+</figure>
+
+<p>However, looking at the File Summary window of Process Monitor (Tools - File Summary), I saw that not only there were no new ACL permissions set (Set ACL was called 0 times), no actual bytes were written!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;image2.png" alt="">
+    
+</figure>
+
+<p>So how was it possible that the file was modified, but nothing was written? Looking back at the events in Process Monitor I also could not see any calls to WriteFile.</p>
+<p>Feeling confused, I then started looking for anything that could appear relevant, until one entry in particular caught my eye: a call to <strong>SetDispositionInformationFile</strong> with a flag <strong>Delete: True</strong>.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;image3.png" alt="">
+    
+</figure>
+
+<p>I checked who was calling this API from the Stack tab of this event's properties, and saw that it was a call to <strong>deleteFile</strong>, originating in <strong>java.dll</strong>. This confirmed my suspicion that the file was not written directly at all - but <em>replaced</em> with another file, possibly from a temp directory.</p>
+<p>My suspicions proved to be correct - looking at the <a rel="external" href="http://svn.apache.org/repos/asf/ant/core/trunk/src/main/org/apache/tools/ant/taskdefs/optional/ReplaceRegExp.java">source code</a> for ReplaceRegExp task I saw that it was exactly how it did it: by using</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="java"><span class="giallo-l"><span>FILE_UTILS</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">createTempFile</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">replace</span><span style="color: #ECEFF4;">&quot;, &quot;</span><span style="color: #A3BE8C;">.txt</span><span style="color: #ECEFF4;">&quot;,</span><span style="color: #81A1C1;"> null</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> true</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> true</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span></code></pre>
+<p>to create a temporary file, and then later renaming that temporary file with the original file name!</p>
+<p><code>FILE_UTILS</code> turned out to be just a wrapper calling Java's <a rel="external" href="http://www.tutorialspoint.com/java/io/file_createtempfile_directory.htm"><code>File.createTempFile</code></a>. The 3<sup>rd</sup> argument, which was <code>null</code> in this case, tells <code>createTempFile</code> where to create the file. If <code>null</code> is passed, it will use the default <code>%TEMP%</code> environment variable.</p>
+<p>Which ended up explaining the problem exactly - by default, it uses the local user's <code>%TEMP%</code> directory to create the temp file that replaces the original one. The default per-user <code>%TEMP%</code> directory located in the <code>%LOCALAPPDATA%</code> directory of the user's profile - meaning only the current user (and local Administrators) can access it! This means, that any file created in this directory will inherit the same permissions! In our case, ReplaceRegExp's implementation caused the per-user temp file to overwrite the file that was in a public folder, causing it to lose all permissions!</p>
+<p>A quick workaround for the problem was to set the TEMP directory to <code>c:\temp</code>, temporarily, during the build.</p>
+<p>Next time your Ant script causes issues with file permissions - make sure your files are not replaced under your nose.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-enable-login-verifications-on-twitter-from-unsupported-countries&#x2F;" rel="next" title="How to enable login verifications on Twitter from &quot;unsuppored&quot; countries">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How to enable login verifications on Twitter from &quot;unsuppored&quot; countries</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide&#x2F;" rel="prev" title="Migrating from TFS to git to Visual Studio Online - the survival guide">
+        <span class="nav-title">Migrating from TFS to git to Visual Studio Online - the survival guide</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

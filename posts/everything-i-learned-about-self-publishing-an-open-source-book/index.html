@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Everything I learned about self-publishing an open-source book | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Everything I learned about self-publishing an open-source book">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;everything-i-learned-about-self-publishing-an-open-source-book&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Everything I learned about self-publishing an open-source book</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-02-17T12:03:11Z">2020-02-17</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;everything-i-learned-about-self-publishing-an-open-source-book.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Over the past two years, the PDF version of Bartosz Milewski's <a rel="external" href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/"><em>Category Theory for Programmers</em></a> became a highly-successful <a rel="external" href="https://github.com/hmemcpy/milewski-ctfp-pdf">open-source book</a>, which was adapted to other programming languages, such as Scala and OCaml. There was a high demand for a physical copy of the book, so I went exploring the vast options, which I summarize below.</p>
+<span id="continue-reading"></span>
+<p>The book is published under a <a rel="external" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike</a> (CC-BY-SA), a license that allows free sharing and modification of the book. For that reason, I wanted to minimize the cost of publishing the book, and choose a self-publishing route. Here are the things I learned along the way, in no particular order:</p>
+<h4 id="print-on-demand">Print-on-demand</h4>
+<p>There are several print-on-demand (POD) <a rel="external" href="https://blog.reedsy.com/print-on-demand-books/">services to choose from</a>: Lulu, Blurb, BookBaby, KDP (Kindle Direct Publishing), and IngramSpark. My requirements were: hardcover availability and a color print (because the book drawings are too adorable!), some services do not provide either or both of those options.</p>
+<p>Most POD services have a calculator that allows <em>guesstimating</em> the final cost, depending on the number of pages, choice of paper, whether it's a hard or softcover, book size, and other parameters. I ended up choosing Blurb because they offer a <a rel="external" href="https://www.blurb.com/trade-books">hardcover print in economy color</a> significantly cheaper than the alternatives. For black-and-white books, Lulu is also a very good option.</p>
+<p>I also did quite a bit of research regarding the final quality of the book. There are posts <a rel="external" href="https://medium.com/@mwichary/my-experiences-printing-a-small-batch-of-books-c04141b63dfe">comparing various samples</a>, as well as video reviews on YouTube. Depending on your requirements, you may want to experiment with a smaller-size manuscript to determine the quality of your book.</p>
+<p>Most POD services will handle everything, from uploading the manuscript to distribution, providing you (in most cases) a free ISBN (a number, required for listing your book in online and brick-and-mortar bookstores). However, the options for book dimensions and paper quality may be limited. One exception is <a rel="external" href="https://www.ingramspark.com/">IngramSpark</a>, a POD service that offers a high degree of customization, but at a more expensive cost.</p>
+<h4 id="book-sizes-and-dimensions">Book sizes and dimensions</h4>
+<p>Most POD services offer a standard size for trade books at 6×9" (15×23 cm) and 8×10" (20×25 cm). Most technical books in my bookshelf (with an occasional oddity) are sized 6×9", which is the size I chose. Blurb and others provide exact specifications for the paper and cover sizes needed for the print. Some provide a <a rel="external" href="https://www.blurb.com/make/pdf_to_book/booksize_calculator">specifications calculator</a>, allowing you to get the exact measurements for your book, including the <em>bleed</em> and <em>trim</em> lines. Others offer Adobe Publisher templates and custom tools. This step requires a lot of experimentation, as the final result may only be visible in the previewer of the particular service. And even then, the actual printed copy may contain slight variations.</p>
+<p>To set the dimensions in LaTeX, there are packages like <code>geometry</code>, if using a <code>\documentclass{book}</code>, and the <code>\documentclass{memoir}</code> allows additional arguments for specifying height, width, margins, bleed, and other parameters. Also, the <a rel="external" href="https://ctan.org/pkg/crop"><code>crop</code></a> package is a useful diagnostic tool, allowing cropping the pages at specified sizes for a better preview.</p>
+<p>The process of uploading a PDF and previewing it online before publishing varies between the POD services, but most offer a nice experience for it. However, the absolute final result can only be experienced by holding the physical copy in your hand. Some services, like Lulu, will send you a draft copy for free, before the final approval. Blurb does not offer this, and you will have to purchase a copy yourself. Other services may provide different terms.</p>
+<p>Some examples of specifying LaTeX dimensions for a 6×9" print can be found in online open-source books, like <a rel="external" href="https://github.com/HoTT/book/blob/29279f5d00f1fdb013d5c7fbe804b49cb25e61b1/opt-ustrade.tex">HoTT</a>, <a rel="external" href="https://github.com/rzach/forallx-yyc/blob/master/forallxyyc-print.tex">OpenLogic Project</a>, and, of course, the <a rel="external" href="https://github.com/hmemcpy/milewski-ctfp-pdf/blob/master/src/preamble.tex">book by yours truly</a>.</p>
+<h4 id="publishing-on-amazon">Publishing on Amazon</h4>
+<p>To have your book listed on Amazon (and other online and offline stores), it requires additional price markup on your book (Amazon requires a 15% markup on the price, as well as a $1.35 distribution fee for each book). Most POD services offer distribution on Amazon, allowing you to configure the list price in the book settings of your dashboard.</p>
+<p>One exception is KDP (Kindle Direct Publishing), which is an Amazon POD service (formerly CreateSpace). It allows publishing books directly on Amazon and even offers a wider range of available sizes and other options. Unfortunately, at the time of writing, Amazon KDP does not offer a hardcover print.</p>
+<p>As a data point, Fabien Sanglard, the author of <a rel="external" href="https://twitter.com/fabynou/status/1121093556720979969">Doom: Game Engine Black Book</a> breaks down the price of publishing his book <a rel="external" href="http://fabiensanglard.net/gebbdoom/">on his site</a>.</p>
+<p>In my case, I opted not to list the book on Amazon, and offer it directly via the publisher. The price remains just the cost of printing and orders and shipping are handled via the publisher.</p>
+<h4 id="publishing-and-updating">Publishing and updating</h4>
+<p>Some more details about the process of uploading and listing the book. On Blurb, the process starts by <a rel="external" href="https://www.blurb.com/pdf-to-book">uploading the PDF</a>, as well as an additional cover PDF (alternatively, the cover may be included in the same PDF on the first and last pages). The file will be uploaded and processed by Blurb, scanned for any issues with size and quality. In some cases, it can automatically fix issues it encounters.</p>
+<p>After uploading is done, it's possible to preview the book online. This step is crucial for finding any alignment issues and verifying exact dimensions.</p>
+<p>Finally, the book will appear in the dashboard, allowing you to configure metadata, such as author, description, category, etc., as well as setting a listing price of your choosing.</p>
+<p>A downside of this process is that each new upload generates a new entry, with a new permalink to the book. Blurb does not allow replacing existing book content with a new PDF. It does, however, offer a <a rel="external" href="https://www.blurb.com/bookwright">writing tool</a> that allows you to write the book, and submit as many revisions as needed.</p>
+<p>Other publishers, like Lulu, do allow you to modify the book after it was uploaded. This may be a better option if you need to keep the book information up-to-date.</p>
+<h4 id="using-a-publisher">Using a publisher</h4>
+<p>The self-publishing route is a good solution if you prefer to work at your own pace and control all aspects of the process. You are, however, responsible for editing, proofreading, cover design, distribution, and, in some cases, registering trademarks and ISBNs.</p>
+<p>These services may be provided to you by an established publisher, such as Manning or Apress. They take care of the entire process, from editing to wide distribution. Publishers such as No Starch Press are always looking for new authors, so it may be wise to check about the possibility of publishing your book with them.</p>
+<p>Happy writing!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;speeding-up-your-latex-builds-by-reusing-minted-caches&#x2F;" rel="next" title="Speeding up your LaTeX builds by reusing minted caches">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Speeding up your LaTeX builds by reusing minted caches</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;your-csharp-is-already-functional&#x2F;" rel="prev" title="Your C# is already functional, but only if you let it">
+        <span class="nav-title">Your C# is already functional, but only if you let it</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

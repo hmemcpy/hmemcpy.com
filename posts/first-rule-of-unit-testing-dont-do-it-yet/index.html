@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Rule of Unit Testing: Don&#x27;t do it! (yet) | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="First Rule of Unit Testing: Don&#x27;t do it! (yet)">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;first-rule-of-unit-testing-dont-do-it-yet&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">First Rule of Unit Testing: Don&#x27;t do it! (yet)</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2013-04-12T07:51:07Z">2013-04-12</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          6 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;first-rule-of-unit-testing-dont-do-it-yet.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I wasn't sure how I'd like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I'll just dump all that boiled inside me for quite a while. Sarcasm and bitterness ahead!</p>
+<span id="continue-reading"></span>
+<p>I'll start from the end: it wasn't until a former colleague of mine, <a rel="external" href="http://www.gilzilberfeld.com/">Gil Zilberfeld</a>, wrote <a rel="external" href="http://www.gilzilberfeld.com/2013/04/processes-and-tools-over-individuals.html">his post</a> about how in our industry we shifted from choosing <em>individuals and interactions</em> over <em>tools and processes</em> (or whatever the Church of Agile calls it) to having an almost a knee-jerk reaction to someone doing horrible things to our vision of a perfect code.</p>
+<p>Think about it, how many times have you started a new job or met a new client, and once you've managed to get their code onto your machine, you shrieked in horror and facepalmed over some things <em>you people wouldn't believe</em>? A SomethingManager class that takes in 12 dependencies?! No Unit Tests?! A solution with 180 projects?! Very-similar-but-with-slight-variations duplicated monster classes?! And you think to yourself: surely those people heard of the SOLID principles? Surely they've seen a <a rel="external" href="http://hmemcpy.com/webinars/">webinar or two</a> on Unit testing and TDD? They might even know what IoC and DI is, and the difference between them. How is it possible, then, that after more than a decade since we got all those wonderful acronyms people still write and maintain horrible mess?</p>
+<p>The sad truth is, writing the perfect code is hard. It takes practice, years of experience in doing EXACTLY that - writing good code, and getting better at it. But we are all guilty of writing bad code. Because we don't know any better. Sure, some are better than others, some have read a book or two on good software practices, some attend conferences and have open source projects - but they are the minority. Most of the time <em>you</em> will be the minority among your peers. Your colleagues don't have time for your <em>unit-testing</em> nonsense, they have bugs to fix and deadlines to miss. If you are in a position of power, you may force some practices on your team because <em>you</em> have seen the light. And you'll be lucky if they don't hate you for it.</p>
+<p>What does this have to do with unit testing? Well, it depends on who you ask. People who claim to have tried unit testing and found it too hard and a waste of time will generally roll their eyes in your general direction during yet another presentation on <em>The Benefits of Unit Testing</em>. People who have never heard about it before (or otherwise completely unfamiliar) will be intrigued - unit <strong>testing</strong>? Great! <em>We want something that tests that our distributed systems can communicate with each other under load!</em>, they exclaim. You politely smile and say: <em>Well, not so fast! Unit tests are not actually testing anything! If only we could go back in time and remove the word <strong>testing</strong> from this practice, maybe it would be less confusing</em>¦*.</p>
+<p>And having seen the presentation, or read a book, or even attending a 3 day course on unit testing, those developers go back to their code bases, trying to apply what they had learned, and suddenly realizing that it's too difficult! If only in the real world we were all building calculators and logging frameworks, surely the tests could be much simpler! But alas, we write distributed WCF systems, with transactions, states, workflows and proprietary protocols. How on earth are we going to unit test that?!</p>
+<p>We as developers often forget our own guidelines and <em>best practices</em>, just because doing something right would be too much work. The WCF service now needs to communicate with another external system? Not a problem, just inject that interface (of course an interface, what do you think we are, amateurs?!) in the constructor (it already takes 9, but surely we can fit one more in there)! Code code code, debug debug debug, fix fix fix, debug debug debug, run, done. What did we forget? Of course, the damn unit tests! Now they are all broken because the new interface needs to be mocked and its behavior stubbed. And hey, didn't we have that <em>unit testing guy</em> around? Let him fix it!</p>
+<p>This brings me to the actual point (if there is any) of this rant. It's not just about unit testing. It's about everything else too. I just tend to defend unit testing more because I am one of those who <em>had seen the light</em>, and I know exactly when to apply (or not) what I've learned. I had been practicing unit testing and TDD for years, but only recently had an epiphany. See, I always thought the problem with the term unit tests was the word <strong>test</strong> - people simply misunderstand the purpose of this - it's not really testing anything, it is supposed to expose all the problems with using your API. Unit testing novices almost always will attempt to write the tests for the code they just wrote and will beat it into submission, until it passes. By that time, they had spent 20 minutes sweating, swearing and writing a very long test method, which has no real benefit or value.</p>
+<p>I came to realize the <em>real</em> problem with the concept of unit testing. This realization came to me shortly after <a rel="external" href="http://stackoverflow.com/questions/14829818/refactoring-procedural-wcf-service">seeking help</a> (see? I am constantly learning!) on refactoring a mess of a WCF service. Steven (<a rel="external" href="https://twitter.com/dot_NET_Junkie">@dot_NET_Junkie</a>) posted an amazing, incredibly-detailed <a rel="external" href="http://stackoverflow.com/a/14832167/8205">answer</a> on how to approach this type of refactoring. By actually breaking responsibilities into smaller, self-contained components, or <em>units</em>, it suddenly became clear to me that the problem might actually be with the word <strong>unit</strong> itself - it is not a <em>unit of work</em> or a <em>method</em> or even a <em>class</em>, as it is often defined, but rather a <strong>level of abstraction</strong>. When all you have is a giant Manager class that takes 9 dependencies, and just one public method, the <em>only</em> possible way you can write a unit test for it is by directly invoking those dependencies - in essence, writing tests for the <em>implementation details</em> of the Manager class, and that's a big no-no in unit testing - you should not write tests for the implementation details. This is why by adding a 10th dependency to the Manager class, you suddenly have to modify all your other tests to wire this dependency in, and mock it until it fits. This is why tests break and they become hard to write and maintain - they are not testing at the right level of abstraction, not at a <strong>unit</strong> level.</p>
+<p>In this order: Better abstractions lead to better design. Better design leads to better unit tests. Better unit tests lead to quicker responsiveness to change. Quicker responsiveness to change leads to predictable release cycles of <strong>working</strong> software. And isn't it what it's all about?</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;even-more-resharper-annotations-hackery-marking-3rd-party-code-as-obsolete&#x2F;" rel="next" title="Even more ReSharper Annotations hackery: marking 3rd party code as obsolete">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Even more ReSharper Annotations hackery: marking 3rd party code as obsolete</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;fworking-in-githuba-slightly-better-workflow&#x2F;" rel="prev" title="[FW]orking in Github - a slightly better workflow?">
+        <span class="nav-title">[FW]orking in Github - a slightly better workflow?</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

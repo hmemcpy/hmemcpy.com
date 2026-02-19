@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10 | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2016-01-12T18:19:35Z">2016-01-12</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I'm writing this post mainly to myself, explaining how I figured out why this particular Windows Update package was failing to install on my Windows 10 (installation began, then rolled back). This can serve as a general troubleshooting step when google searches lead you nowhere.</p>
+<span id="continue-reading"></span><blockquote>
+    <p>in my particualr case, (temporary) enabling the Administrator user (after running <code>sfc /scannow</code> in an elevated prompt, followed by <code>net user administrator /active:yes</code>) allowed the update to install successfully! After installing and rebooting the machine, I disabled the built-in Administrator account using <code>net user administrator /active:no</code> from an elevated prompt.</p>
+
+    
+    <footer>— TL;DR</footer>
+    
+</blockquote>
+<p>After failing to install the update, from both Windows Update and manually downloading it, I turned to the web, trying to find solutions. Most of the forums describing the problem were either abandoned, or given the basic generic troubleshooting tips, which are rarely useful (all they tell you there's a problem, as if you didn't know).</p>
+<p>One of those <em>tips</em> is running <a rel="external" href="https://support.microsoft.com/en-us/kb/929833">sfc /scannow</a>. The result of running this check is a (sometimes huge) log file called CBS.log, located in</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>%WinDir%\Logs\CBS\CBS.log</span></span></code></pre>
+<p>This log file will also be created as part of the standard system file checking done by installing Windows Updates.</p>
+<p>What I did was, after my computer failed to install, and rolled back the installation again, was open this log file in Notepad++, then searching for entries with <strong>Error</strong>. Surprisingly, I saw a few lines that looked like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>2016-01-11 20:17:42, Info   CSI    00000046 Loading user account SID [l:92{46}]&quot;S-1-5-21-3692211415-2751783221-3488552363-1001&quot;</span></span>
+<span class="giallo-l"><span>2016-01-11 20:17:42, Info   CSI    00000046 Loading user account SID [l:92{46}]&quot;S-1-5-21-3692211415-2751783221-3488552363-500&quot;</span></span>
+<span class="giallo-l"><span>2016-01-11 20:17:42, Error  CSI    00000048@2016/1/11:20:17:42.338 (F) base\wcp\rtllib\inc\auto_hive.h(105): Error STATUS_OBJECT_PATH_NOT_FOUND originated in function Windows::Rtl::AutoHive::Load expression: (null) [gle=0x80004005]</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+<p>So it seems that it was trying to load a user account with SID ending in <code>-500</code>, and failed. Googling for the error text led me to <a rel="external" href="https://answers.microsoft.com/en-us/insider/forum/insider_wintp-insider_update/latest-kb3074665-update-fails-to-install/45f314d1-2ea8-452c-b59f-60440b9f4e46?page=3">this post</a> on the Microsoft forums, describing a similar problem. A little down on page 3, someone suggested running a PowerShell command, dumping all the user SIDs to the console:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>get-wmiobject -class &quot;win32_account&quot; -namespace &quot;root\cimv2&quot; | sort caption | format-table caption, FullName, SID</span></span></code></pre>
+<p>Which led me to see that the problematic SID belonged to the Administrator user! On Windows 10 machines, the Administrator account is disabled by default, and this is why I suspected the update was trying to install itself into the Administrator user's hive, but couldn't find it.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10&#x2F;powershell.png" alt="Listing output in PowerShell">
+    
+</figure>
+
+<p>I've enabled the Administrator account using a net user command:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>net user Administrator /active:yes</span></span></code></pre>
+<p>And tried installing the update again. To my surprise, it installed successfully and didn't roll back!</p>
+<p>After rebooting, I verified the update was listed in Windows Updates' history, and disabled the Administrator account again.</p>
+<p>If your updates failing to install:</p>
+<ul>
+<li>run <code>sfc /scannow</code></li>
+<li>check CBS.log</li>
+<li>hope for the best!</li>
+</ul>
+<p>Good luck!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;review-my-new-hp-spectre-x360-2-in-1-convertible-laptop&#x2F;" rel="next" title="Review: my new HP Spectre x360 2-in-1 convertible laptop">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Review: my new HP Spectre x360 2-in-1 convertible laptop</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo&#x2F;" rel="prev" title="Getting with the times: migrating from WordPress to GitHub Pages with Hexo">
+        <span class="nav-title">Getting with the times: migrating from WordPress to GitHub Pages with Hexo</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Nancy made .NET Web development fun! | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How Nancy made .NET Web development fun!">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-nancy-made-net-web-development-fun&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">How Nancy made .NET Web development fun!</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-03-17T15:35:48Z">2014-03-17</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          5 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;how-nancy-made-net-web-development-fun.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Let's get this out of the way first: this is <strong>not</strong> a post about how to use <a rel="external" href="http://nancyfx.org/">Nancy</a> - there are lots of blog posts out there, written by people far better at it than me!</p>
+<p>I am not a web developer. During my career I mostly worked on desktop applications (with occasional dab in the database land, typical CRUD stuff). Over the years my passion for development shifted towards building development tools (Visual Studio, ReSharper plugins), and my dayjob now having a blast building <a rel="external" href="http://www.oz-code.com/">OzCode</a>, a debugging productivity tool for Visual Studio.</p>
+<span id="continue-reading"></span>
+<p>So I never had the chance to <em>do</em> web development. Every time I tried to do it, I gave up quickly, because I could never get the hang of it! I don't know JavaScript, and ASP.NET (even MVC and even Web API) make a lot of assumptions about how to structure and build web apps. Same goes for other web frameworks and languages - they're all great(!), but just not for me. Anything I ever tried to build, I quickly gave up (due to being stuck, or otherwise losing interest).</p>
+<p>Enter Nancy.</p>
+<p>When I first heard about Nancy, I was intrigued - an entire web application that fits in a tweet! If, in a highly unlikely event, you're reading about Nancy for the first time in this blog post, here's the canonical <em>hello world</em> app:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public class</span><span style="color: #8FBCBB;"> SampleModule</span><span style="color: #ECEFF4;"> :</span><span> Nancy</span><span style="color: #ECEFF4;">.</span><span>NancyModule</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    public</span><span style="color: #88C0D0;"> SampleModule</span><span style="color: #ECEFF4;">()</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span>        Get</span><span style="color: #ECEFF4;">[&quot;</span><span style="color: #A3BE8C;">/</span><span style="color: #ECEFF4;">&quot;]</span><span style="color: #81A1C1;"> =</span><span> _</span><span style="color: #81A1C1;"> =&gt;</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Hello World!</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>And with <a rel="external" href="http://scriptcs.net/">ScriptCS</a> being the hot new thing, hosting Nancy apps <a rel="external" href="https://github.com/adamralph/scriptcs-nancy">does not even require Visual Studio</a>!</p>
+<p>So what makes Nancy so appealing to me, a non-web developer? First and foremost - the people behind it! Nancy is a perfect example of the Open Source spirit - with <a rel="external" href="http://nancyfx.org/contribs.html">more than 160 contributors</a>, making it a fun, well-documented, well-tested, accessible framework for everyone and everything!</p>
+<p>But what I like most about Nancy has nothing to do with its actual application - it has to do with the way it works under the covers. Demonstrated by one of Nancy's lead developers, Andreas Håkansson (<a rel="external" href="https://twitter.com/TheCodeJunkie">@TheCodeJunkie</a> on twitter), in the <a rel="external" href="https://www.youtube.com/watch?v=7jg0u-YaRxQ">Guerilla Framework Design</a> talk at DevDay, Nancy uses lots of cool C# language hacks to achieve simplicity and make using of the framework as simple as possible!</p>
+<p>Want examples? Let's start with the <em>hello world</em> app above: there are at least 3 cool things that don't require you to understand exactly how they work. For example, the funky <code>= _ =&gt;</code> <em>smiley face</em>. While aesthetically pleasing, this is a lambda expression, defining the body of the HTTP Get method, with the route <em>/</em>. This lambda passes a parameter which is a dynamic dictionary (specified by underscore in the above example). This dictionary contains, among other things, the URL parameters, so they can be used immediately inside the method body, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span>Get</span><span style="color: #ECEFF4;">[&quot;</span><span style="color: #A3BE8C;">/greet/{name}</span><span style="color: #ECEFF4;">&quot;]</span><span style="color: #81A1C1;"> =</span><span> parameters</span><span style="color: #81A1C1;"> =&gt;</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Hello </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> +</span><span> parameters</span><span style="color: #ECEFF4;">.</span><span>name</span><span style="color: #81A1C1;">;</span></span></code></pre>
+<p>Here, the underscore has been replaced with the named argument <code>parameters</code>, and now, everyone who issues an HTTP GET to the address /greet/Igal, for example, the value <em>Igal</em> will be captured in the parameter <code>name</code> in the dynamic dictionary, and will just be there, available to use!</p>
+<p>Another thing to note is that the lambda returns a string, but it somehow renders fine in the browser. The <code>Get</code> property (along with other HTTP verbs that Nancy provides) expects a <code>Func&lt;dynamic, dynamic&gt;</code> as a return result of the lambda, so it doesn't really matter. The conversion is taken care under the hood of Nancy, which defines a lot of <a rel="external" href="http://msdn.microsoft.com/en-us/library/z5z9kes2.aspx">implicit conversions</a> to covert strings to valid response content, and integers to valid HTTP codes! This means that you can simply <em><code>return 404;</code></em> from a body of a Nancy route, and it will auto-magically become <code>HttpStatusCode.NotFound</code> that Nancy understands.</p>
+<p>Everything in Nancy is expandable, configurable and overridable. Nancy is built with testability, extensibility and pluggability in mind, which means that almost everything you need it to do (support another View engine, hosting platform, custom IoC container, etc.) is just a NuGet package away. Which is just awesome, as there are <a rel="external" href="https://www.nuget.org/packages?q=nancy">tons of things</a> you can add to Nancy.</p>
+<p>Finally, no post of mine can be complete without mentioning tooling. I love productivity addins, and I believe there should be a tool for anything! This is why I created <a rel="external" href="https://github.com/hmemcpy/Nancy.ReSharper">a plugin for ReSharper</a>, bringing some of ReSharper's goodness to Nancy! It adds support to navigating and creating to Views, code completion and other validations. Everything that was until now available only in ASP.NET MVC (with ReSharper's help), is now also available for Nancy!</p>
+<p>In conclusion, if you're dabbling in web development, you should definitely give Nancy a try! It's the only framework that made someone like me, a complete web development noob, be productive and actually create something useful!</p>
+<p>Happy hacking!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;installing-vsix-extension-via-msi-without-devenv-setup&#x2F;" rel="next" title="Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;roslyn-its-got-electrolytes&#x2F;" rel="prev" title="Roslyn! It&#x27;s got Electrolytes!">
+        <span class="nav-title">Roslyn! It&#x27;s got Electrolytes!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

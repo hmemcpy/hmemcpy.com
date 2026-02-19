@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Modifying Windows Live Writer blog content in PublishNotificationHook plugins&#x27; OnPrePublish</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2011-04-23T18:51:49Z">2011-04-23</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          2 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I'm writing a <a href="http://msdn.microsoft.com/en-us/library/ff747355.aspx" target="_blank">PublishNotificationHook</a> plugin for Windows Live Writer (don't worry, I will soon reveal what it is), and I noticed that there doesn't seem to be a way to control the contents (text or HTML) of the blog post in this type of plugin.</p>
+<span id="continue-reading"></span>
+<p>Further digging led me to understand that there used to be a method modify the contents via Reflection, as described by <a href="http://scottisafooldev.wordpress.com" target="_blank">ScottIsAFool</a>, Live Writer MVP and author of many great plugins, using his <a href="http://scottisafooldev.wordpress.com/2008/06/03/new-writer-plugins-using-the-new-sdk/" target="_blank">WriterUtils</a>, however this doesn't seem to work anymore with the latest version of Live Writer 2011.</p>
+<p>I had discovered that on a Japanese blog called <a href="http://blog.sharplab.net/" target="_blank">SharpLab</a>, someone had posted <a href="http://blog.sharplab.net/computer/cprograming/windowslivewriter/433/" target="_blank">a way</a> to excavate an internal BlogManager object, which is used by Live Writer to edit the actual blog posts. The code needed a slight modification, but with the result I was able to modify the contents of my blog post!</p>
+<p>I extracted this into an extension method, use this at your own risk!</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #616E88;">// based on an old blog post in Japanese: http://blog.sharplab.net/computer/cprograming/windowslivewriter/433/</span></span>
+<span class="giallo-l"><span style="color: #616E88;">// The field was moved to a base type in the latest version of Live Writer</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">using</span><span> System</span><span style="color: #ECEFF4;">.</span><span>Reflection</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">using</span><span> WindowsLive</span><span style="color: #ECEFF4;">.</span><span>Writer</span><span style="color: #ECEFF4;">.</span><span>Api</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">using</span><span> WindowsLive</span><span style="color: #ECEFF4;">.</span><span>Writer</span><span style="color: #ECEFF4;">.</span><span>Extensibility</span><span style="color: #ECEFF4;">.</span><span>BlogClient</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">using</span><span> WindowsLive</span><span style="color: #ECEFF4;">.</span><span>Writer</span><span style="color: #ECEFF4;">.</span><span>PostEditor</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">namespace</span><span> WindowsLiveWriterPlugin</span><span style="color: #ECEFF4;">.</span><span>Extensions</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    public static class</span><span style="color: #8FBCBB;"> PublishingContextExtensions</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        public static void</span><span style="color: #88C0D0;"> ReplaceText</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">this</span><span> IPublishingContext publishingContext</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> string</span><span> newText</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        {</span></span>
+<span class="giallo-l"><span>            FieldInfo fieldInfo</span><span style="color: #81A1C1;"> =</span><span> publishingContext</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetType</span><span style="color: #ECEFF4;">().</span><span>BaseType</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetField</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">_editingContext</span><span style="color: #ECEFF4;">&quot;,</span><span> BindingFlags</span><span style="color: #ECEFF4;">.</span><span>NonPublic</span><span style="color: #81A1C1;"> |</span><span> BindingFlags</span><span style="color: #ECEFF4;">.</span><span>Instance</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>            BlogPostEditingManager manager</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> (</span><span>BlogPostEditingManager</span><span style="color: #ECEFF4;">)</span><span>fieldInfo</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetValue</span><span style="color: #ECEFF4;">(</span><span>publishingContext</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>            BlogPost blogPost</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> (</span><span>BlogPost</span><span style="color: #ECEFF4;">)</span><span>publishingContext</span><span style="color: #ECEFF4;">.</span><span>PostInfo</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>            blogPost</span><span style="color: #ECEFF4;">.</span><span>Contents</span><span style="color: #81A1C1;"> =</span><span> newText</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>            manager</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">EditPost</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">new</span><span> BlogPostEditingContext</span><span style="color: #ECEFF4;">(</span><span>manager</span><span style="color: #ECEFF4;">.</span><span>BlogId</span><span style="color: #ECEFF4;">,</span><span> blogPost</span><span style="color: #ECEFF4;">))</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;announcing-plain-text-offenders&#x2F;" rel="next" title="Announcing Plain Text Offenders">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Announcing Plain Text Offenders</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;supercharging-your-resharper-navigation-fu-with-camel-humps&#x2F;" rel="prev" title="Supercharging your ReSharper navigation-fu with Camel Humps">
+        <span class="nav-title">Supercharging your ReSharper navigation-fu with Camel Humps</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[FW]orking in Github - a slightly better workflow? | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[FW]orking in Github - a slightly better workflow?">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;fworking-in-githuba-slightly-better-workflow&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">[FW]orking in Github - a slightly better workflow?</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-01-06T11:53:06Z">2014-01-06</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          2 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;fworking-in-githuba-slightly-better-workflow.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p><em>If you don't understand the title, I tried to be clever and used <a rel="external" href="http://www.regular-expressions.info/charclass.html">regular expressions</a>. I now have 2 problems.</em></p>
+<span id="continue-reading"></span>
+<p>I've been using git and github for a while now, but only recently found out it's possible to define 2 separate URLs for fetching and pushing. Often times, when I wanted to contribute to an open source project, I had to go through the ceremony of a) forking the repository b) cloning the fork to my machine and c) define an <a rel="external" href="https://help.github.com/articles/syncing-a-fork">upstream remote</a> to keep the fork in sync with the changes from the original repository.</p>
+<p>Defining the upstream repository is my least favorite part of working with git/github - I always have to look up the steps how to do it. Instead of keeping the fork in sync, I just want to be able to <strong>fetch</strong> the changes from the original (upstream) repository, but <strong>push</strong> the changes into my own fork.</p>
+<p>Turns out, git supports this scenario! Normally, when you type <strong>git remote -v</strong>, you get the following output:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; git remote -v</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>origin git@github.com:username/MyForkedRepository.git (fetch) </span></span>
+<span class="giallo-l"><span>origin git@github.com:username/MyForkedRepository.git (push)</span></span></code></pre>
+<p>As you can see, the remote <code>origin</code> defines 2 URLs, one with label <em>fetch</em> and one with <em>push</em>. Let's set a different URL for the original, upstream repository (the one to fetch from):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git remote set-url origin git@github.com:NancyFx/Nancy.git</span></span></code></pre>
+<p>And another URL to my own fork (the one to <strong>push</strong> to):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git remote set-url --push origin git@github.com:hmemcpy/Nancy.git</span></span></code></pre>
+<p>And that's it, I can now fetch and push normally, without having to worry about which remote I'm using!</p>
+<p>You can also do this by directly modifying the <code>.git/config</code> file, and adding a separate <code>pushurl</code> value under <code>[remote "origin"]:</code></p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>...</span></span>
+<span class="giallo-l"><span>[remote &quot;origin&quot;]</span></span>
+<span class="giallo-l"><span> fetch = +refs/heads/*:refs/remotes/origin/*</span></span>
+<span class="giallo-l"><span> url = git@github.com:NancyFx/Nancy.git</span></span>
+<span class="giallo-l"><span> pushurl = git@github.com:hmemcpy/Nancy.git</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;first-rule-of-unit-testing-dont-do-it-yet&#x2F;" rel="next" title="First Rule of Unit Testing: Don&#x27;t do it! (yet)">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">First Rule of Unit Testing: Don&#x27;t do it! (yet)</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;installing-vsix-extension-via-msi-without-devenv-setup&#x2F;" rel="prev" title="Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;">
+        <span class="nav-title">Installing a .vsix Extension via MSI without &quot;devenv &#x2F;setup&quot;</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

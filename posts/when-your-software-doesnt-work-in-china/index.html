@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When your software doesn&#x27;t work in China | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="When your software doesn&#x27;t work in China">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-your-software-doesnt-work-in-china&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">When your software doesn&#x27;t work in China</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2011-03-17T13:57:31Z">2011-03-17</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;when-your-software-doesnt-work-in-china.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I had an interesting bug submitted by a user, he wrote that <a href="http://www.typemock.com" target="_blank">our product</a> was crashing in his Visual Studio 2010, which was a Traditional Chinese edition.</p>
+<p><a href="http://www.typemock.com/typemock-isolator-product3" target="_blank">Typemock Isolator</a>, being a Visual Studio add-in, adds a menu next to the Tools menu in Visual Studio. It does so by looking for an index of the <em>Tools</em> menu in the main menu bar, and simply adding the <em>Typemock</em> menu after it. However, the <em>Tools</em> menu is only called that in the English locale. In other languages, the menu might be called differently. In French, for instance, it's called <em>Outils</em>.</p>
+<span id="continue-reading"></span>
+<p>When creating a new Visual Studio 2008 Add-in (under Other Project Types - Extensibility), if selected the <em>Yes, create a Tools menu item</em> in page 4 of the wizard, the following code is generated in <code>OnConnect</code> method after completing the wizard:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">..</span><span>.</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">string</span><span> resourceName</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>ResourceManager resourceManager</span><span style="color: #81A1C1;"> = new</span><span> ResourceManager</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">MyAddin.CommandBar</span><span style="color: #ECEFF4;">&quot;,</span><span> Assembly</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetExecutingAssembly</span><span style="color: #ECEFF4;">())</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>CultureInfo cultureInfo</span><span style="color: #81A1C1;"> = new</span><span> CultureInfo</span><span style="color: #ECEFF4;">(</span><span>_applicationObject</span><span style="color: #ECEFF4;">.</span><span>LocaleID</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">if</span><span style="color: #ECEFF4;"> (</span><span>cultureInfo</span><span style="color: #ECEFF4;">.</span><span>TwoLetterISOLanguageName</span><span style="color: #81A1C1;"> ==</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">zh</span><span style="color: #ECEFF4;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span>    System</span><span style="color: #ECEFF4;">.</span><span>Globalization</span><span style="color: #ECEFF4;">.</span><span>CultureInfo parentCultureInfo</span><span style="color: #81A1C1;"> =</span><span> cultureInfo</span><span style="color: #ECEFF4;">.</span><span>Parent</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>    resourceName</span><span style="color: #81A1C1;"> =</span><span> String</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Concat</span><span style="color: #ECEFF4;">(</span><span>parentCultureInfo</span><span style="color: #ECEFF4;">.</span><span>Name</span><span style="color: #ECEFF4;">, &quot;</span><span style="color: #A3BE8C;">Tools</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">else</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span>    resourceName</span><span style="color: #81A1C1;"> =</span><span> String</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Concat</span><span style="color: #ECEFF4;">(</span><span>cultureInfo</span><span style="color: #ECEFF4;">.</span><span>TwoLetterISOLanguageName</span><span style="color: #ECEFF4;">, &quot;</span><span style="color: #A3BE8C;">Tools</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"><span>toolsMenuName</span><span style="color: #81A1C1;"> =</span><span> resourceManager</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetString</span><span style="color: #ECEFF4;">(</span><span>resourceName</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">..</span><span>.</span></span></code></pre>
+<p>Unfortunately, this auto-generated code violates almost every known good coding practice. In particular, it gives no clues as to why <em>zh</em> is different, and why it's handled separately.</p>
+<p>Visual Studio menus are localized in the following way: a resource file, CommandBar.resx, is added to the project. This resource file contains translations of all common menus in Visual Studio, and each entry is defined by appending the <a href="http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">two-letter ISO language code</a> to the menu name, so that the entry for <em>Debug</em> in Spanish, for example, is <strong>esDebug</strong>.</p>
+<p>There are two separate entries for both Traditional and Simplified Chinese in the resource file, and the entries are prefixed with zh-CHS and zh-CHT (zh is a short for <a href="http://en.wiktionary.org/wiki/Zh%C5%8Dngw%C3%A9n" target="_blank">Zhōngwén</a>). Those identifiers refer to the old culture names. Since Windows Vista, the <a href="http://blogs.msdn.com/b/shawnste/archive/2007/12/13/zh-hans-zh-hant-and-the-old-zh-chs-zh-cht.aspx" target="_blank">new <em>zh-Hans</em> and <em>zh-Hant</em></a> names are used, and the older names are kept for backwards compatibility. They can be found in the <a href="http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.parent.aspx" target="_blank">Parent property</a> of the CultureInfo, specifying the current Visual Studio <a href="http://msdn.microsoft.com/en-us/library/0h88fahh.aspx" target="_blank">Locale ID (LCID)</a>.</p>
+<p>Now that I had an understanding why <em>zh</em> was different, I was able to solve the bug by simply checking for the Chinese culture, and returning the correct identifier:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">private string</span><span style="color: #88C0D0;"> GetCurrentLocaleName</span><span style="color: #ECEFF4;">(</span><span>CultureInfo cultureInfo</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #616E88;">    // Chinese (Traditional and Simplified) use &quot;old&quot; locale code,</span></span>
+<span class="giallo-l"><span style="color: #616E88;">    // zh-CHT and zh-CHS, which is the name of the parent culture</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    if</span><span style="color: #ECEFF4;"> (</span><span>cultureInfo</span><span style="color: #ECEFF4;">.</span><span>TwoLetterISOLanguageName</span><span style="color: #81A1C1;"> ==</span><span> ChineseTwoLetterISOLanguageName</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        return</span><span> cultureInfo</span><span style="color: #ECEFF4;">.</span><span>Parent</span><span style="color: #ECEFF4;">.</span><span>Name</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    return</span><span> cultureInfo</span><span style="color: #ECEFF4;">.</span><span>TwoLetterISOLanguageName</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;upgrading-tortoisehg-to-v2-0&#x2F;" rel="next" title="Upgrading TortoiseHg to v2.0">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Upgrading TortoiseHg to v2.0</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;book-review-zero-day-a-novel-by-mark-russinovich&#x2F;" rel="prev" title="Book Review: Zero Day: A Novel by Mark Russinovich">
+        <span class="nav-title">Book Review: Zero Day: A Novel by Mark Russinovich</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

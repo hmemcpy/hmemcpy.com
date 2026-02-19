@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finding static fields in solution using ReSharper and Agent Smith plug-in | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Finding static fields in solution using ReSharper and Agent Smith plug-in">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Finding static fields in solution using ReSharper and Agent Smith plug-in</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2010-11-16T14:49:36Z">2010-11-16</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Today I came across a need to find all static fields in my entire solution I'm working on. Finding things usually is a no-brainer with <a rel="external" href="http://www.jetbrains.com/resharper/">ReSharper</a>, but this time I didn't find an option to do this easily.</p>
+<span id="continue-reading"></span>
+<p><a rel="external" href="http://code.google.com/p/agentsmithplugin/">Agent Smith plug-in</a> is an open-source code-style validation plug-in for ReSharper, which greatly complements ReSharper's own code-style validation, by adding additional (and custom) checks. There are many other useful features of this plug-in, such as the spell checker for just about everything (string literals, XML comments, method names, etc.). Another greatly useful feature is the XML comment validator.</p>
+<blockquote>
+<p><strong>Tip for fresh install of the plug-in:</strong> it comes with a bunch of default naming validation rules, which might conflict with those defined by ReSharper. It's best to turn them off by unchecking them in <strong>Languages - C# - Naming Convention Settings</strong> in ReSharper options dialog.</p>
+</blockquote>
+<p>There's a trick I learned some time ago - using Agent Smith's XML comment validation to find undocumented functions in a public API. The same trick can be applied to finding static fields, and here's how:</p>
+<p><strong>Option 1: using Code Issues Inspection</strong></p>
+<p>First, ensure that XML validation inspection is enabled; in ReSharper's options, under <strong>Code Inspection - Inspection Severity</strong>, look for <strong>Agent Smith</strong>, and make sure that <em>Members must have XML comment.</em> is set to at least <em>Show as suggestion</em>.</p>
+<p>Go to <strong>Languages - C# - Agent Smith Code Style Settings</strong>, optionally remove existing rules on the left hand side, then press <strong>Add</strong> to add the following rule:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<p>The dialog above will create the rule <em>Any static not readonly field</em>, which is exactly what I am looking for. Press OK, and close the Options dialog.</p>
+<p>We're done with Agent Smith, now it's time to run another hidden gem of ReSharper - Code Issues Inspector. Go to <strong>ReSharper - Inspect - Code Issues in Solution</strong>. Your solution will be analyzed for any code issues which you might have (all based on ReSharper's inspection severity levels). This might take a few minutes, depending on the size of your solution. After the analysis, the Inspection Results window will open, showing you (potentially thousands) of results.</p>
+<p>Press <em>Filter Issues</em> button (first button on the right), uncheck all inspections, keeping only Agent Smith's <em>Members must have XML comment.</em> You will end up with the following:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<p>And that's it - a list of static fields in the entire solution is presented.</p>
+<p><strong>Option 2: using Solution-wide analysis</strong></p>
+<p>If you have <strong>Solution-wide analysis</strong> enabled (the little circle at the bottom right corner of Visual Studio), mark <em>Members must have XML comment.</em> as <em>Show as error</em> in Inspection Severity settings. This will cause all matching static fields to appear as errors in the solution, and then you can navigate them using <strong>Shift-Alt-PgDown/PgUp</strong> (ReSharper keymap) or <strong>Alt-F12/Shift-Alt-F12</strong> (IntelliJ keymap).</p>
+<p>Happy hunting!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting&#x2F;" rel="next" title="Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;documenting-your-public-api-easily-with-resharper-and-ghostdoc&#x2F;" rel="prev" title="Documenting your public API easily with ReSharper and GhostDoc">
+        <span class="nav-title">Documenting your public API easily with ReSharper and GhostDoc</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

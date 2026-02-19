@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working with shared dependencies in ZIO Test | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Working with shared dependencies in ZIO Test">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;working-with-shared-dependencies-in-zio-test&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Working with shared dependencies in ZIO Test</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2021-11-20T10:08:54Z">2021-11-20</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          6 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;working-with-shared-dependencies-in-zio-test.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>ZIO Test is a <a rel="external" href="https://zio.dev/datatypes/test/">testing library</a> in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular-dependency management via the environment.</p>
+<p>In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let's understand how ZIO Test works under the hood.</p>
+<span id="continue-reading"></span>
+<p>If you're already familiar with ZIO Test and Test Aspects, feel free to <a href="https://hmemcpy.com/posts/working-with-shared-dependencies-in-zio-test/#Modifying-shared-dependencies-for-each-test">skip to the last section</a>.</p>
+<h1 id="introduction-to-zio-test">Introduction to ZIO Test</h1>
+<blockquote>
+<p><strong>Note</strong>: the following applies to ZIO 1.x. ZIO 2.0 introduces significant syntactic changes to the structure of the tests, though most details about the internals still apply.</p>
+</blockquote>
+<p>While ZIO Test (zio-test) is the library name, the tests themselves are broken into two categories: <em>Suites</em> and <em>Tests</em>. Suites are containers of tests; each suite may contain 0 or more tests inside of it.</p>
+<p>Here is the canonical "Hello world" ZIO Test. Let's break it down:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>console</span><span style="color: #ECEFF4;">.</span><span>_</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>test</span><span style="color: #ECEFF4;">.</span><span>_</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>test</span><span style="color: #ECEFF4;">.</span><span>environment</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">TestConsole</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MySpec</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> DefaultRunnableSpec</span><span style="color: #ECEFF4;"> {</span><span style="color: #616E88;">                 // (1)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> spec</span><span style="color: #81A1C1;"> =</span><span> suite(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">My spec</span><span style="color: #ECEFF4;">&quot;</span><span>)(</span><span style="color: #616E88;">                              // (2)</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Hello world</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span><span style="color: #616E88;">                                  // (3)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        _     </span><span style="color: #81A1C1;">&lt;-</span><span> putStrLn(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Hello world!</span><span style="color: #ECEFF4;">&quot;</span><span>)</span></span>
+<span class="giallo-l"><span>        lines </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> TestConsole</span><span>.output                         </span><span style="color: #616E88;">// (4)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assertTrue(lines.contains(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Hello world!</span><span style="color: #EBCB8B;">\n</span><span style="color: #ECEFF4;">&quot;</span><span>))</span><span style="color: #616E88;">  // (5)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span>,</span></span>
+<span class="giallo-l"><span>    ...                                                     </span><span style="color: #616E88;">// (6)</span></span>
+<span class="giallo-l"><span>  )</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<ol>
+<li>In ZIO Test, it's common to refer to suites of tests as Specs, here we extend <code>DefaultRunnableSpec</code> which is responsible for several things. More on that later.</li>
+<li>The abstract value <code>spec</code> must be implemented here by providing it with a <code>suite</code> containing tests or additional (nested) suites.</li>
+<li>The <code>test</code>/<code>testM</code> definition describes tests that perform or don't any ZIO effects, respectively.</li>
+<li>Part of ZIO Test's in-memory implementations of base services, here-a test console allowing to capture the output as a <code>Vector[String]</code></li>
+<li>The assertion syntax of <a rel="external" href="https://zio.dev/reference/test/assertions/smart-assertions/">Smart Assertions</a>, which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.</li>
+<li>Additional tests or suites, separated by commas.</li>
+</ol>
+<h1 id="anatomy-of-a-zio-test">Anatomy of a ZIO Test</h1>
+<p>Most specs will typically extend <a rel="external" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/DefaultRunnableSpec.scala#L28"><code>DefaultRunnableSpec</code></a>, a base class provided by the ZIO Test library, which is, in fact, a <em>standalone application</em>, implementing a <code>main()</code> method, which means it can be executed on the command line from <code>java -jar</code>. <code>DefaultRunnableSpec</code> extends a base trait <code>RunnableSpec[R, E]</code>, providing it with a common <code>TestEnvironment</code> in <code>R</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">type</span><span> TestEnvironment</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">  Annotations</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> Live</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> Sized</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> TestClock</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> TestConfig</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> TestConsole</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> TestRandom</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> TestSystem</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    with</span><span style="color: #8FBCBB;"> ZEnv</span></span></code></pre>
+<p>The <code>TestEnvironment</code> consists of test implementations for all services required by <code>ZEnv</code>, in addition to test-specific services such as a <code>TestConsole</code> for capturing and manipulating console output, <code>TestClock</code> for setting and controlling the passage of time, and others.</p>
+<p>Under the hood, the <code>RunnableSpec</code> implementation calls the actual <a rel="external" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestRunner.scala#L42"><code>TestRunner</code></a> instance associated with it, which runs the tests in the spec <em>in parallel</em> (with up to 4 tests by default), and each test is executed by a <a rel="external" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestExecutor.scala#L34-L36"><code>TestExecutor</code></a>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">def</span><span style="color: #88C0D0;"> run</span><span>(spec:</span><span style="color: #8FBCBB;"> ZSpec</span><span>[</span><span style="color: #8FBCBB;">R</span><span>, </span><span style="color: #8FBCBB;">E</span><span>], defExec:</span><span style="color: #8FBCBB;"> ExecutionStrategy</span><span>)</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> UIO</span><span>[</span><span style="color: #8FBCBB;">ExecutedSpec</span><span>[</span><span style="color: #8FBCBB;">E</span><span>]]</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span>  spec.annotated</span></span>
+<span class="giallo-l"><span>    .provideLayer(environment)</span></span>
+<span class="giallo-l"><span>    .foreachExec(defExec) ...</span></span>
+<span class="giallo-l"><span>  ... </span></span></code></pre>
+<p>Here, the <code>environment</code> is the "live" instance of our <code>TestEnvironment</code>, and it is provided to the spec using <code>provideLayer</code> (non-shared), which means that each test <em>gets a fresh copy</em> of the environment! It makes sense since we don't want to re-use the <code>Random</code> instance, for example, between two tests, so each test gets a fresh copy of Random.</p>
+<p>If we want to share a (stateful) value/service between the tests in the suite (for integration purposes, for instance), we need to provide it as <em>shared</em>, using one of the <code>provide*Shared</code> variants.</p>
+<h1 id="using-shared-dependencies-in-zio-test">Using shared dependencies in ZIO Test</h1>
+<p>For illustration, here's what using a shared value between tests looks like:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MySharedService</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> live</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ULayer</span><span>[</span><span style="color: #8FBCBB;">Has</span><span>[</span><span style="color: #8FBCBB;">UUID</span><span>]]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> UIO</span><span>(</span><span style="color: #8FBCBB;">UUID</span><span>.randomUUID()).toLayer    </span><span style="color: #616E88;">// (1)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MySpec</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> DefaultRunnableSpec</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> spec</span><span style="color: #81A1C1;"> =</span><span> suite(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">My suite</span><span style="color: #ECEFF4;">&quot;</span><span>)(</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">test1</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        uuid </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> ZIO</span><span>.service[</span><span style="color: #8FBCBB;">UUID</span><span>]</span><span style="color: #616E88;">                                 // (2)</span></span>
+<span class="giallo-l"><span>        _    </span><span style="color: #81A1C1;">&lt;-</span><span> putStrLn(uuid.toString)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assertCompletes</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span>,</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">test2</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        uuid </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> ZIO</span><span>.service[</span><span style="color: #8FBCBB;">UUID</span><span>]</span><span style="color: #616E88;">                                 // (2)</span></span>
+<span class="giallo-l"><span>        _    </span><span style="color: #81A1C1;">&lt;-</span><span> putStrLn(uuid.toString)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assertCompletes</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span>  ).provideSomeLayerShared[</span><span style="color: #8FBCBB;">TestEnvironment</span><span>](</span><span style="color: #8FBCBB;">MySharedService</span><span>.live)</span><span style="color: #616E88;"> // (3)</span></span></code></pre>
+<p>Here we're doing the following:</p>
+<ol>
+<li>A service layer definition. Here we're using <code>UUID</code> as the service for illustration</li>
+<li>Get the UUID service (causing the test to require <code>Has[UUID]</code> in addition to <code>TestEnvironment</code>) and print it out to the console</li>
+<li>Provide the UUID service layer as a partial <em>shared</em> layer, satisfying/eliminating the requirement for <code>Has[UUID]</code></li>
+</ol>
+<p>The last point is often a source of confusion, so let's expand on it:</p>
+<p>In ZIO, the <code>provide*Some*</code> variants are used to satisfy/eliminate partial requirements and specify the <em>remainder</em> to be satisfied by the caller, higher up. In our example above, our tests have the type</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #8FBCBB;">ZIO</span><span>[</span><span style="color: #8FBCBB;">TestEnvironment</span><span>, </span><span style="color: #8FBCBB;">E</span><span>, zio.test.</span><span style="color: #8FBCBB;">TestResult</span><span>]</span></span></code></pre>
+<p>but requiring <code>Has[UUID]</code> (due to the use of <code>ZIO.service</code>) caused it to be typed as:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #8FBCBB;">ZIO</span><span>[</span><span style="color: #8FBCBB;">TestEnvironment</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> Has</span><span>[</span><span style="color: #8FBCBB;">UUID</span><span>], </span><span style="color: #8FBCBB;">E</span><span> ,zio.test.</span><span style="color: #8FBCBB;">TestResult</span><span>]</span></span></code></pre>
+<p>To (partially) satisfy this requirement, we can provide the <code>Has[UUID]</code> part ourselves, and the remaining <code>TestEnvironment</code> will be provided by the <code>DefaultRunnableSpec</code> itself.</p>
+<p>Finally, by using the <code>provideSomeLayerShared</code> variant on the <em>suite</em> level, we're providing a layer that is <em>shared</em> between all the tests in that suite, and if we run this spec, we will see that the output is as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Testing started at 15:20 ...</span></span>
+<span class="giallo-l"><span>fc71c273-3824-46b2-8929-409544a19fa5</span></span>
+<span class="giallo-l"><span>fc71c273-3824-46b2-8929-409544a19fa5</span></span></code></pre>
+<p>This means that the service layer was created just once (creating a single UUID value), and all tests now accessing this value get the same one! What actually happens is that each test in the suite gets a <em>copy</em> of the suite's environment, along with any shared values in it.</p>
+<h1 id="modifying-shared-dependencies-for-each-test">Modifying shared dependencies for each test</h1>
+<p>Now that we know how to provide shared dependencies to tests, sometimes there's a need to modify a value/service in the test before it's executed (think of creating a fresh database per-test for Postgres Testcontiner integration tests, which is the subject of an upcoming post!).</p>
+<p>This is done with <a rel="external" href="https://zio.dev/version-1.x/howto/test-effects/#test-aspects">Test Aspects</a>. You can think of aspects as functions <code>ZIO =&gt; ZIO</code>, applying some transformation to the effect before/after its execution. Test Aspects cannot be used to <em>provide</em> or <em>eliminate</em> requirements from tests, but they can be used to <em>modify</em> the environment contained within the test!</p>
+<p>Taking inspiration from the <a rel="external" href="https://github.com/zio/zio/blob/06259b1bc79ddf548943486aed20d2b455e162be/test/shared/src/main/scala/zio/test/TestAspect.scala">existing aspects</a>, we can create the following <em>per-test</em> aspect called <code>newUuid</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">def</span><span style="color: #88C0D0;"> newUuid</span><span style="color: #81A1C1;"> = new</span><span style="color: #8FBCBB;"> PerTest</span><span>.</span><span style="color: #8FBCBB;">AtLeastR</span><span>[</span><span style="color: #8FBCBB;">Has</span><span>[</span><span style="color: #8FBCBB;">UUID</span><span>]]</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  override def</span><span style="color: #88C0D0;"> perTest</span><span>[</span><span style="color: #8FBCBB;">R</span><span style="color: #81A1C1;"> &lt;:</span><span style="color: #8FBCBB;"> Has</span><span>[</span><span style="color: #8FBCBB;">UUID</span><span>], </span><span style="color: #8FBCBB;">E</span><span>](test:</span><span style="color: #8FBCBB;"> ZIO</span><span>[</span><span style="color: #8FBCBB;">R</span><span>, </span><span style="color: #8FBCBB;">TestFailure</span><span>[</span><span style="color: #8FBCBB;">E</span><span>], </span><span style="color: #8FBCBB;">TestSuccess</span><span>])</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>      randomUuid </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> UIO</span><span>(</span><span style="color: #8FBCBB;">UUID</span><span>.randomUUID())</span></span>
+<span class="giallo-l"><span>      updated    </span><span style="color: #81A1C1;">&lt;-</span><span> test.updateService[</span><span style="color: #8FBCBB;">UUID</span><span>](_ </span><span style="color: #81A1C1;">=&gt;</span><span> randomUuid)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span style="color: #81A1C1;"> yield</span><span> updated</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>This aspect states that an environment containing <em>at least</em> <code>Has[UUID]</code> is required (and recall that by using <code>ZIO.service[UUID]</code> in our tests, we now require it). In the <code>perTest</code> method of the aspect, we are given the test as a ZIO effect and can perform any operation on it!</p>
+<p>In particular, we can call <code>updateService</code> on it, <em>replacing</em> the existing UUID service value with the one we created in the line above! This means that the original (shared) uuid is replaced with this fresh one, and because this is a per-test aspect, it will be applied to each test individually, resulting in:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Testing started at 15:23 ...</span></span>
+<span class="giallo-l"><span>dc723d70-83c1-4c6c-9478-7a2087533bb4</span></span>
+<span class="giallo-l"><span>728ed277-7d49-4b22-a5a3-6db3d32ff7b0</span></span></code></pre>
+<p>Meaning that each test got a fresh value for UUID, despite it being provided as shared initially.</p>
+<p>Finally, putting it all together looks like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MySharedService</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> live</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ULayer</span><span>[</span><span style="color: #8FBCBB;">Has</span><span>[</span><span style="color: #8FBCBB;">UUID</span><span>]]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> UIO</span><span>(</span><span style="color: #8FBCBB;">UUID</span><span>.randomUUID()).toLayer</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MySpec</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> DefaultRunnableSpec</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> spec</span><span style="color: #81A1C1;"> =</span><span> (suite(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">My suite</span><span style="color: #ECEFF4;">&quot;</span><span>)(</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">test1</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        uuid </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> ZIO</span><span>.service[</span><span style="color: #8FBCBB;">UUID</span><span>]</span></span>
+<span class="giallo-l"><span>        _    </span><span style="color: #81A1C1;">&lt;-</span><span> putStrLn(uuid.toString)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assertCompletes</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span>,</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">test2</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        uuid </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> ZIO</span><span>.service[</span><span style="color: #8FBCBB;">UUID</span><span>]</span></span>
+<span class="giallo-l"><span>        _    </span><span style="color: #81A1C1;">&lt;-</span><span> putStrLn(uuid.toString)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assertCompletes</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span>  )</span><span style="color: #81A1C1;"> @@</span><span> newUuid).provideSomeLayerShared[</span><span style="color: #8FBCBB;">TestEnvironment</span><span>](</span><span style="color: #8FBCBB;">MySharedService</span><span>.live)</span></span></code></pre><h1 id="summary">Summary</h1>
+<p>This post's goal was to provide the background and motivation to using and modifying shared dependencies in ZIO Tests. In my upcoming post, I will explain how to take advantage of this technique to improve upon <a href="/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/">integration testing with Postgres Testcontainers</a> by over <strong>70%</strong>, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;parsing-encoding-dependent-protocols-with-scodec&#x2F;" rel="next" title="Parsing character encoding-dependent protocols with scodec in Scala">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Parsing character encoding-dependent protocols with scodec in Scala</span>
+      </a>
+    </div>
+  
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

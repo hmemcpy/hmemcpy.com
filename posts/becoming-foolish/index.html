@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Becoming Foolish | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Becoming Foolish">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;becoming-foolish&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Becoming Foolish</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2017-10-20T08:00:39Z">2017-10-20</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;becoming-foolish.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>The book <a rel="external" href="https://pragprog.com/book/tpp/the-pragmatic-programmer"><em>The Pragmatic Programmer: From Journeyman to Master</em></a> by Andy Hunt and Dave Thomas suggests that as developers, we should "learn at least one new language every year." (pg. 14)</p>
+<p>When I recently asked a roomful of developers, if there's anyone who had learned a new language this year, only very few hands went up. A year ago today, that would have been me in the audience, keeping my hands down.</p>
+<span id="continue-reading"></span>
+<p>I had been a happy C# developer for over a decade, starting professionally sometime before .NET 2.0 was released. During my career I had the privilege of working in a very specialized field - building tools for other developers, mainly in the form of extensions to Visual Studio itself. My job often required me to understand the code better than the compiler. I often had to take a peek under the hood to understand what the compiler, MSIL, JIT, and sometimes native code were doing. All this happened long before tools like <a rel="external" href="https://github.com/dotnet/roslyn">Roslyn</a> even existed. I knew implementation details of the runtime that were not documented anywhere. I knew most of the corner cases and language gotchas. But overall, my language, C#, was a very powerful hammer, capable of handling any kind of nail.</p>
+<p>This caused me to pretty much ignore any other languages out there - ones that weren't relevant to my day job. Whenever people from the F# camp were boasting their lack of nulls, pattern matching, or not needing semicolons or braces, I would typically shrug it away. I had spent years of my career learning to use productivity tools, such as ReSharper and IntelliJ IDEA, to the point where every bit of boilerplate was one keystroke away. I simply didn't care! Having a few nice features was never a good enough reason for me to switch a programming language -- why would I even bother, when the language I'm an expert in could kinda-sorta do that too? Why would a different <em>syntax</em> make a difference in how I write software? After all, doesn't it all compile down to the same thing?</p>
+<p>Because when you really get down to it, (almost) all programming languages are, essentially, this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="java"><span class="giallo-l"><span style="color: #81A1C1;">public static void</span><span style="color: #88C0D0;"> main</span><span style="color: #ECEFF4;">(</span><span style="color: #8FBCBB;">String</span><span style="color: #ECEFF4;">[]</span><span> args</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    ...</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>In most programming languages that we've ever experienced, the world as we know it <em>lives and dies</em> between the opening and closing braces of the <code>main</code> function. This function is the entry point to our application. Everything that happens in our program, the universe our program interacts with, happens between those two braces. By its very definition, our program returns an <em>exit code</em>, specifying whether it succeeded or not, and everything else happens as a side-effect.</p>
+<p>The implication - that all work happens between the two braces of <code>main</code> - drives <strong>everything</strong> we know. Every design pattern, every practice, every discipline, every tool, library, and framework was created to manage this model. It exists to help us handle the world between those two braces. We have decades of knowledge in how to do this properly in almost any language.</p>
+<p>For me, this was the core, the very foundation on which all the software is built! It was the one thing that was the ultimate truth, regardless of the programming language.</p>
+<p>And it was like this, until <strong>Haskell ruined it for me</strong>!</p>
+<p>I will not go into details -- I inadvertently did that in my <a href="/posts/from-net-to-scala-and-beyond-a-journey-to-functional-programming/">previous post</a>. But during watching a talk on seemingly unrelated topic, the speaker managed to sneak some Haskell in there! Until that moment, I haven't really seen any Haskell code before - I'd always dismissed it as irrelevant - and there it was, staring me in the face.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">main</span><span style="color: #81A1C1;"> :: IO</span><span style="color: #ECEFF4;"> ()</span><span style="color: #616E88;"> -- reads as &#39;main, having the return type of IO ()&#39;</span></span></code></pre>
+<p>What I saw being explained is that Haskell doesn't actually do any work inside of its <code>main</code> function. Instead, the program "describes" in a declarative way what is going to happen when your program executes. This "description" will be returned into the Haskell runtime. Exactly what was described will happen - with no possible <em>side-effects</em> or surprises. It flips the entire idea of execution on its head - the work, the actual execution of effects is not being done <em>inside</em> of <code>main</code> - it's done on the <em>outside</em>!</p>
+<p>Seeing this for the first time, trying to wrap my head around it, had created a <em>bug</em> inside my head. It had conflicted with what I knew - that all languages worked the same, and the difference was merely syntax! But here, I was seeing something that just worked differently, and did not fit my world view! I struggled with trying to understand it, and it took me a couple of more re-watches, until one day, it finally clicked!</p>
+<p>In one single moment, I suddenly understood the <em>idea</em> of Haskell, of why it works the way it does. Everything just clicked into place and I finally "understood monads"! To me, it felt like Neo finally coming to terms with the fact that <a rel="external" href="https://www.youtube.com/watch?v=uAXtO5dMqEI">there is no spoon</a>, and only then he's able to bend it.</p>
+<p>I am thankful for <a rel="external" href="https://twitter.com/silverSpoon">Andrea Magnorsky</a>'s excellent keynote talk, <a rel="external" href="https://www.youtube.com/watch?v=WBu43Tj0zOY">Inviting Everyone to the Party</a>, which helped me realize that not only what I had experienced had a name, it was, in fact, a textbook definition of the phenomenon: what I had experienced is called a <strong>paradigm shift</strong>.</p>
+<p>The term "paradigm shift", coined by <a rel="external" href="https://en.wikipedia.org/wiki/Thomas_Kuhn">Thomas Kuhn</a> in his 1962 book <a rel="external" href="https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions">The Structure of Scientific Revolutions</a>, describes a process where if an established model no longer fits the world view, it is rejected and simultaneously replaced by another. Kuhn says:
+<blockquote>
+    <p>The decision to reject one paradigm is always simultaneously the decision to accept another, and the judgment leading to that decision involves the comparison of both paradigms with nature and with each other.</p>
+
+    
+    <footer>— Thomas Kuhn, The Structure of Scientific Revolutions: 50th Anniversary Edition (pg. 78)</footer>
+    
+</blockquote>
+</p>
+<p>I had two conflicting ideas, and when finally that other idea started making sense, my mind accepted it, and immediately switched to that new idea - the switch was instantaneous! I was able to see things from a different perspective, understanding a whole new world model, which is precisely the definition of Kuhn's "paradigm shift".</p>
+<p>But something else happened -- I realized just how little I knew about software, there was an entire world out there that was unknown to me! What I knew until that moment, all my expertise in a narrow field was just a tip of the iceberg. And this realization removed a barrier I had that prevented me from trying to learn new languages and experimenting with new things. Where previously I would dismiss these things as irrelevant, I suddenly gained interest in things that I never had interest in before. In the past year alone I've used Haskell, Clojure, and Rust. I've looked at Erlang, Elm and PureScript. I am working my way through <a rel="external" href="https://mitpress.mit.edu/sicp/full-text/book/book.html">SICP</a> (see <a rel="external" href="https://github.com/sarabander/sicp-pdf">modern PDF compilation</a>) and learning <a rel="external" href="https://github.com/hmemcpy/milewski-ctfp-pdf">Category Theory</a>. I've done all that because for the first time in a long time, I am genuinely curious about what these languages/paradigms can <em>teach</em> me! I really don't remember the last time I was this excited about learning. Being genuinely proud to say "I don't know everything!" is incredibly liberating!</p>
+<p>This exact sentiment is also echoed in Bret Victor's fantastic, and highly entertaining keynote talk, <a rel="external" href="https://vimeo.com/71278954">The Future of Programming</a>, where he pretended he was a software developer in 1973, and speculated about the next 40 years of programming. The last 5 minutes of that talk has some of the best advice I ever heard, and I wish I understood it sooner. He said,
+<blockquote>
+    <p>...you have to say to yourself -- "I don't know what I'm doing. We, as a field, don't know what we're doing. We don't know what programming is, we don't know what computing is, we don't even know what a computer is." And once you truly understand that, once you truly believe that -- then you're free, and you can think anything.</p>
+
+    
+    <footer>— Bret Victor https:&#x2F;&#x2F;vimeo.com&#x2F;71278954 The Future of Programming</footer>
+    
+</blockquote>
+</p>
+<p><em>Stay hungry. Stay foolish.</em> Be free!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;from-net-to-scala-and-beyond-a-journey-to-functional-programming&#x2F;" rel="next" title="From .NET to Scala and beyond: a journey to Functional Programming">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">From .NET to Scala and beyond: a journey to Functional Programming</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;right-fold-superpowers&#x2F;" rel="prev" title="Right fold superpowers!">
+        <span class="nav-title">Right fold superpowers!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

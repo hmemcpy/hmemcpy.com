@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where unit testing fails | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Where unit testing fails">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;where-unit-testing-fails&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Where unit testing fails</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2011-06-24T20:34:42Z">2011-06-24</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          5 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;where-unit-testing-fails.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p><em><strong>Note:</strong> I wrote this post before watching Uncle Bob's excellent NDC 2011 talk called <a rel="external" href="http://cleancoder.posterous.com/the-transformation-priority-premise">Transformation Priority Premise</a>, which talks exactly about the subject below, however I am still not convinced. I will write a follow-up to this post.</em></p>
+<p>I remembered a story from a few years ago about <em>some guy</em> who tried to build a Sudoku solver using TDD (Test Driven Development) five times, failing and giving up, while <em>another guy</em> simply wrote a solver that worked.</p>
+<span id="continue-reading"></span>
+<p>A search led me to a thread on reddit, leading to <a href="http://ravimohan.blogspot.com/2007/04/learning-from-sudoku-solvers.html" target="_blank">this post</a> by Ravi Mohan. As it happens, <em>some guy</em> who tried the TDD approach was <a href="http://en.wikipedia.org/wiki/Ron_Jeffries" target="_blank">Ron Jeffries</a>, one of the fathers of Extreme Programming (XP), while the <em>other guy</em> was an algorithm and AI expert <a href="http://en.wikipedia.org/wiki/Peter_Norvig" target="_blank">Peter Norvig</a>. I highly recommend reading the original post and the updates, it makes for very thought provoking read (the original links to Ron Jeffries' articles are broken, but you can find them by searching for <a href="http://xprogramming.com/index.php?s=sudoku" target="_blank">sudoku</a> on his site).</p>
+<p>So what happened? How is it that the very people who preach TDD fail to implement it themselves? I believe the problem lies with grasping one of the most fundamental principles of unit testing, and that is - what <em>not</em> to test.</p>
+<p>In one of the Software Craftsmanship Israel group meetings, our programming task for the evening was to implement a program that detects whether a given number was a <a href="http://en.wikipedia.org/wiki/Lychrel_number" target="_blank">Lychrel number</a>. On the projector screen a summary of what a Lychrel number was, and some samples. We decided to split into pairs of people who knew how to write code using TDD (myself included), and people who were less experienced in writing tests. And so we began*¦</p>
+<blockquote>
+<p>A Lychrel number is a number that does not form a <a href="http://en.wikipedia.org/wiki/Palindrome" target="_blank">palindrome</a> when digits are reversed and then added together iteratively. For example: 56 + 65 = 121, 125 + 521 = 646, therefore both not Lychrel numbers. The smallest suspected Lychrel number is 196, failing to form a palindrome after more than 2 million iterations. This is also known as 196-algorithm.</p>
+</blockquote>
+<p>Some 30 minutes passed before I realized that something didn't feel right. We had written almost 10 test cases, all of which just asserted against known inputs and outputs we used from the projector screen. Several of us started arguing whether or not we should test the method <code>IsPalindrome</code>, since it was an implementation detail, and not a part of the interface.</p>
+<p>I then remembered the story about the Sudoku solver and it made sense to me, just as it made sense to Vlad Levin - <a href="http://vladimirlevin.blogspot.com/2007/04/tdd-is-not-algorithm-generator.html" target="_blank">TDD is not an algorithm generator</a>! The solution to the Lychrel number had just one solution - implementing the algorithm. There was no design that was needed, therefore TDD did not help in this case. All it had given us was a convenient way to input values to a function and getting a result.</p>
+<p>At <a href="http://www.typemock.com/" target="_blank">Typemock</a> where I work I am sometimes asked via support how to test the DataSet or the DataReader, and whether our product can be used to mock the database. Yes, Typemock Isolator can be used to mock just about any object, the question is asking the wrong thing. You <em>could</em> create a fake DataReader filled with test data, but that would be too much work and very hard to maintain, and in the end will give you no benefit over using a real database. If you want to test whether your data access code works correctly - make it an <em>integration test</em> instead.</p>
+<p>When I write unit tests today I try abstract my problem space. I no longer start at the very bottom, but rather I focus on the business requirement. A <em>unit</em> in unit test is not necessarily a method or even a class - it could be several classes collaborating together to achieve a business requirement. If your specification says <em>given a country, get an <em>alphabetized</em> list of cities</em>, don't write tests for the sorting algorithm - it's an implementation detail that you shouldn't bother testing. Your assert should verify is that the list was indeed alphabetized, not which algorithm was used to sort it.</p>
+<p>Many people very new to unit testing sometimes give up. They find it hard to know what to test, and end up spending many hours testing the wrong thing. When it later breaks, they find it too much of a hassle to maintain both the code and the tests, so they give up the later. The road to successful unit testing begins with understanding what unit testing is, but most importantly - what it isn't.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;making-the-internet-better-one-site-at-a-time&#x2F;" rel="next" title="Making the Internet better, one site at a time">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Making the Internet better, one site at a time</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;type-in-russian-or-any-other-language-with-google-ime&#x2F;" rel="prev" title="Type in Russian (or any other language) with Google IME">
+        <span class="nav-title">Type in Russian (or any other language) with Google IME</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt; | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2013-01-30T22:38:36Z">2013-01-30</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>While working with a client to create a new version of their software, one of the tasks was creating a service that talked to a hardware laser tracker, a device which allows tracking certain points (<em>targets</em>) over a large distance.</p>
+<span id="continue-reading"></span>
+<p>The API provided by the manufacturer was not ideal, to say the least. The API consisted of a managed wrapper over two classes, we'll call them Request and Response, providing asynchronous request and callback operations. For each operation on the Request object, a corresponding Answer operation would arrive asynchronously on the Response object, e.g. if a <code>GetPosition</code> method was called on Request, sometime later an <code>OnGetPositionAnswer</code> method would arrive on the Response object, containing the relevant information.</p>
+<p>One of the requirements was to be able to wait for several of such callbacks to arrive, before doing another operation. Several options were considered, among them <a rel="external" href="http://www.introtorx.com/">Reactive Extensions (Rx)</a> and <a rel="external" href="http://msdn.microsoft.com/en-us/devlabs/gg585582.aspx">TPL Dataflow</a>. In the end, I chose an approach based on the <a rel="external" href="http://msdn.microsoft.com/en-us/library/dd449174.aspx"><code>TaskCompletionSource&lt;T&gt;</code></a> class (part of the TPL), which I describe below.</p>
+<p>Having exposed a .NET event in the Response object for each of the callbacks we were interested in, I defined a following method, returning a <code>Task&lt;T&gt;</code>, where <code>T</code> was the object that contained the data I required:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public</span><span> Task</span><span style="color: #ECEFF4;">&lt;</span><span>PositionData</span><span style="color: #ECEFF4;">&gt;</span><span style="color: #88C0D0;"> GetPositionAsync</span><span style="color: #ECEFF4;">()</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    var</span><span> tcs</span><span style="color: #81A1C1;"> =</span><span style="color: #88C0D0;"> TaskCompletionSourc</span><span style="color: #ECEFF4;">&lt;</span><span>PositionData</span><span style="color: #ECEFF4;">&gt;()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #616E88;">    // subscribe to the callback before firing the request</span></span>
+<span class="giallo-l"><span>    _response</span><span style="color: #ECEFF4;">.</span><span>GetPositionAnswer</span><span style="color: #81A1C1;"> +=</span><span style="color: #ECEFF4;"> (</span><span>sender</span><span style="color: #ECEFF4;">,</span><span> args</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span>        PositionData data</span><span style="color: #81A1C1;"> = ..</span><span>. </span><span style="color: #616E88;">// translate position data from the event&#39;s arguments</span></span>
+<span class="giallo-l"><span>	</span></span>
+<span class="giallo-l"><span>        tcs</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">SetResult</span><span style="color: #ECEFF4;">(</span><span>data</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #616E88;">    // perform the actual operation (method is asynchronous, returns immediately)</span></span>
+<span class="giallo-l"><span>    _request</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetPosition</span><span style="color: #ECEFF4;">()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    return</span><span> tcs</span><span style="color: #ECEFF4;">.</span><span>Task</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>And it worked great! The caller of <code>GetPositionAsync</code> now had a task which he can either <code>await</code> (if using .NET 4.5, or in .NET 4.0 using Async Targeting Pack (now known as <a rel="external" href="http://nuget.org/packages/Microsoft.Bcl.Async">Microsoft.Bcl.Async</a>), but only if running in Visual Studio 2012), or using plain old methods, available on the Task object.</p>
+<p>However, upon calling this method a second time, an <code>InvalidOperationException</code> <em><strong>An attempt was made to transition a task to a final state when it had already completed.</strong></em> was thrown on the <code>tcs.SetResult(data)</code> line. It took me a second to realize the bug, can you see it?</p>
+<p>The problem occurred because the event handler was not unsubscribed from, after the task had completed! Since the handler is a lambda expression, it captured the variable <code>tcs</code> when it was created. When we called <code>GetPositionAsync()</code> the second time, we made another subscription to the event handler, but when it fired, the first subscription was handled first, attempting to set the result of the <strong>first</strong> <code>TaskCompletionSource</code> instance, which had, of course, already finished.</p>
+<p>Unsubscribing from an anonymous method (or a lambda expression) is possible, but not very pretty. It requires a small abuse of the C# syntax, to have the handler stored in a local variable, then subscribed and unsubscribed from. After a bit of tweaking, this was the end result, solving the problem:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public</span><span> Task</span><span style="color: #ECEFF4;">&lt;</span><span>PositionData</span><span style="color: #ECEFF4;">&gt;</span><span style="color: #88C0D0;"> GetPositionAsync</span><span style="color: #ECEFF4;">()</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    var</span><span> tcs</span><span style="color: #81A1C1;"> = new</span><span> TaskCompletionSource</span><span style="color: #ECEFF4;">&lt;</span><span>PositionData</span><span style="color: #ECEFF4;">&gt;()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>   </span></span>
+<span class="giallo-l"><span style="color: #616E88;">    // Declare and initialize a local variable of type EventHandler to null</span></span>
+<span class="giallo-l"><span style="color: #616E88;">    // This is needed to use the variable inside the lambda expression body</span></span>
+<span class="giallo-l"><span>    EventHandler handler</span><span style="color: #81A1C1;"> = null;</span></span>
+<span class="giallo-l"><span>    handler</span><span style="color: #81A1C1;"> +=</span><span style="color: #ECEFF4;"> (</span><span>sender</span><span style="color: #ECEFF4;">,</span><span> args</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span>        PositionData data</span><span style="color: #81A1C1;"> = ..</span><span>. </span><span style="color: #616E88;">// get the data from event args</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span>        tcs</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">SetResult</span><span style="color: #ECEFF4;">(</span><span>data</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>        </span></span>
+<span class="giallo-l"><span style="color: #616E88;">        // unsubscribe from the event handler when task is complete</span></span>
+<span class="giallo-l"><span>        _response</span><span style="color: #ECEFF4;">.</span><span>GetPositionAnswer</span><span style="color: #81A1C1;"> -=</span><span> handler</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #616E88;">    // subscribe to the event handler before executing the operation</span></span>
+<span class="giallo-l"><span>    _response</span><span style="color: #ECEFF4;">.</span><span>GetPositionAnswer</span><span style="color: #81A1C1;"> +=</span><span> handler</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    _request</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetPosition</span><span style="color: #ECEFF4;">()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    return</span><span> tcs</span><span style="color: #ECEFF4;">.</span><span>Task</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>It's not very pretty, but it does the job. If anyone has a better suggestion, please leave a comment!</p>
+<p>Until next time, happy asyncing!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;running-multithreaded-unit-tests-with-fakeiteasy&#x2F;" rel="next" title="Running multithreaded unit tests with FakeItEasy">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Running multithreaded unit tests with FakeItEasy</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests&#x2F;" rel="prev" title="Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests">
+        <span class="nav-title">Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

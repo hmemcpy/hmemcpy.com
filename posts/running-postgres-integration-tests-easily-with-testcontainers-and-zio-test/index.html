@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Postgres integration tests easily with TestContainers and ZIO Test | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Running Postgres integration tests easily with TestContainers and ZIO Test">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;running-postgres-integration-tests-easily-with-testcontainers-and-zio-test&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Running Postgres integration tests easily with TestContainers and ZIO Test</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-08-04T09:36:33Z">2020-08-04</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          5 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;running-postgres-integration-tests-easily-with-testcontainers-and-zio-test.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Integration/end-to-end testing is considered one of the best indicators that your code functions correctly, and everything is wired up as it should. <a rel="external" href="https://www.testcontainers.org/">Testcontainers</a> is a wonderful library for creating and running embeddable Docker containers that can run alongside your tests, so you can have real implementations of your third-party dependencies, instead of relying on fragile mocks. Testcontainers is a mature Java library that comes out of the box with integrations for Postgres, Kafka, RabbitMQ, and <a rel="external" href="https://www.testcontainers.org/modules/databases/">many more</a>, as well as support for many test runners and even ports to <a rel="external" href="https://github.com/testcontainers">other languages</a>.</p>
+<p>In this short post, I'll explain how to integrate Testcontainers (the <a rel="external" href="https://github.com/testcontainers/testcontainers-scala">Scala flavor</a>) to play nicely with ZIO Test, showcasing some of the great composability features ZIO provides.</p>
+<span id="continue-reading"></span>
+<p>I will use a Postgres Testcontainer and <a rel="external" href="https://flywaydb.org/">Flyway</a> to perform migrations, intializing the databse schemas.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>To play nicely with ZIO Test, we need to expose the Testcontainer as a <a rel="external" href="https://zio.dev/docs/howto/use-modules-and-layers">ZLayer</a>, so it can be added to ZIO's <a rel="external" href="https://zio.dev/docs/howto/test-effects#using-test-environment">Test Environment</a>.</p>
+<p>We'll need to add the following dependencies to our <code>build.sbt</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">org.flywaydb</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">   %</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">flyway-core</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">                      %</span><span> flywayVersion,</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">ch.qos.logback</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> %</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">logback-classic</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">                  %</span><span> logbackVersion,</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">com.dimafeng</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">   %%</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">testcontainers-scala-postgresql</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> %</span><span> testContainersVersion </span><span style="color: #81A1C1;">%</span><span style="color: #8FBCBB;"> Test</span></span></code></pre>
+<p>This adds Flyway to perform the actual migrations, Logback to print useful output messages from the container, and the Scala wrapper of the Postgres Test container. Replace the <code>*Version</code> values with the actual latest versions available for these dependencies.</p>
+<p>Next, let's add introduce Testcontainers to ZIO:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> com</span><span style="color: #ECEFF4;">.</span><span>dimafeng</span><span style="color: #ECEFF4;">.</span><span>testcontainers</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">PostgreSQLContainer</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>blocking</span><span style="color: #ECEFF4;">.</span><span>{effectBlocking, </span><span style="color: #8FBCBB;">Blocking</span><span>}</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>_</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> TestContainer</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  type</span><span> Postgres</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Has</span><span>[</span><span style="color: #8FBCBB;">PostgreSQLContainer</span><span>]</span></span>
+<span class="giallo-l"><span>  </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> postgres</span><span>(imageName:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Some</span><span>(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">postgres</span><span style="color: #ECEFF4;">&quot;</span><span>))</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ZLayer</span><span>[</span><span style="color: #8FBCBB;">Blocking</span><span>, </span><span style="color: #8FBCBB;">Nothing</span><span>, </span><span style="color: #8FBCBB;">Postgres</span><span>]</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">    ZManaged</span><span>.make </span><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span>      effectBlocking </span><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        val</span><span> container</span><span style="color: #81A1C1;"> = new</span><span style="color: #8FBCBB;"> PostgreSQLContainer</span><span>(</span></span>
+<span class="giallo-l"><span>          dockerImageNameOverride </span><span style="color: #81A1C1;">=</span><span> imageName,</span></span>
+<span class="giallo-l"><span>        )</span></span>
+<span class="giallo-l"><span>        container.start()</span></span>
+<span class="giallo-l"><span>        container</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span>.orDie</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span>(container </span><span style="color: #81A1C1;">=&gt;</span><span> effectBlocking(container.stop()).orDie).toLayer</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>By default, the Scala Postgres container wrapper will fetch version 9 of PostgreSQL, you can get a specific version by specifying the <code>imageName</code> parameter with a specific tag, e.g. <code>postgres:12.3</code>, or leaving <code>postgres</code> to fetch the <code>latest</code>.</p>
+<p>We use ZIO's <a rel="external" href="https://zio.dev/docs/datatypes/resource/zmanaged">ZManaged</a> to wrap the creation and disposal of the container, wrapping the actual creation and shutdown in <code>effectBlocking</code> to signal to ZIO that this should be done on the blocking thread pool. This makes our ZLayer require the <code>Blocking</code> service. On shutdown, we stop the container. If creating or stopping fails for any reason, we'd like our test to terminate, which we do with <code>.orDie</code>, making any potential failures to be treated as defects, causing ZIO to shut down. Finally, we turn the ZManaged into a ZLayer by calling <code>toLayer</code> on it.</p>
+<p>And that's it! We now have a Postgres layer to plug into the ZIO tests.</p>
+<h2 id="performing-migrations">Performing migrations</h2>
+<p>Once our container has started, we want to populate the database with our schema, before the tests are run. For this, ZIO Tests provides a mechanism called <a rel="external" href="https://zio.dev/docs/howto/test-effects#test-aspects">Test Aspects</a>, which allows, among other things, to execute an action <em>before</em> executing the tests. We can create a Test Aspect that runs the migration:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> com</span><span style="color: #ECEFF4;">.</span><span>dimafeng</span><span style="color: #ECEFF4;">.</span><span>testcontainers</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">PostgreSQLContainer</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> org</span><span style="color: #ECEFF4;">.</span><span>flywaydb</span><span style="color: #ECEFF4;">.</span><span>core</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">Flyway</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">ZIO</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>blocking</span><span style="color: #ECEFF4;">.</span><span>effectBlocking</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> zio</span><span style="color: #ECEFF4;">.</span><span>test</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">TestAspect</span><span style="color: #ECEFF4;">.</span><span>before</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MigrationAspects</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> migrate</span><span>(schema:</span><span style="color: #8FBCBB;"> String</span><span>, paths:</span><span style="color: #8FBCBB;"> String</span><span style="color: #81A1C1;">*</span><span>)</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    val</span><span> migration</span><span style="color: #81A1C1;"> = for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>      pg </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> ZIO</span><span>.service[</span><span style="color: #8FBCBB;">PostgreSQLContainer</span><span>]</span></span>
+<span class="giallo-l"><span>      _  </span><span style="color: #81A1C1;">&lt;-</span><span> runMigration(pg.jdbcUrl, pg.username, pg.password, schema, paths:</span><span style="color: #81A1C1;"> _*</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span style="color: #81A1C1;"> yield</span><span> ()</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>    before(migration.orDie)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  private def</span><span style="color: #88C0D0;"> runMigration</span><span>(</span></span>
+<span class="giallo-l"><span>    url:</span><span style="color: #8FBCBB;"> String</span><span>,</span></span>
+<span class="giallo-l"><span>    username:</span><span style="color: #8FBCBB;"> String</span><span>,</span></span>
+<span class="giallo-l"><span>    password:</span><span style="color: #8FBCBB;"> String</span><span>,</span></span>
+<span class="giallo-l"><span>    schema:</span><span style="color: #8FBCBB;"> String</span><span>,</span></span>
+<span class="giallo-l"><span>    locations:</span><span style="color: #8FBCBB;"> String</span><span style="color: #81A1C1;">*</span></span>
+<span class="giallo-l"><span>  )</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span>    effectBlocking </span><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">      Flyway</span></span>
+<span class="giallo-l"><span>        .configure()</span></span>
+<span class="giallo-l"><span>        .dataSource(url, username, password)</span></span>
+<span class="giallo-l"><span>        .schemas(schema)</span></span>
+<span class="giallo-l"><span>        .locations(locations:</span><span style="color: #81A1C1;"> _*</span><span>)</span></span>
+<span class="giallo-l"><span>        .load()</span></span>
+<span class="giallo-l"><span>        .migrate()</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Here we define a function <code>migrate</code> that takes in the name of the <code>schema</code> for the migration, as well as the paths where the migration scripts are located. Because the container assigns a random port each time it starts, we fetch the container service and perform the migration using its parameters (such as the <code>jdbcUrl</code>). Again, because <code>Flyway</code> is a Java API, we wrap it with <code>effectBlocking</code> to ensure ZIO runs it on the blocking thread pool.</p>
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<p>Finally, we can put it all together into a test that looks like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MyPostgresIntegrationSpec</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> DefaultRunnableSpec</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> postgresLayer</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Blocking</span><span>.live </span><span style="color: #81A1C1;">&gt;&gt;&gt;</span><span style="color: #8FBCBB;"> TestContainer</span><span>.postgres()</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> testEnv</span><span style="color: #81A1C1;"> =</span><span> zio.test.environment.testEnvironment </span><span style="color: #81A1C1;">++</span><span> postgresLayer</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> spec</span><span style="color: #81A1C1;"> =</span><span> suite(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Postgres integration</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Can create and fetch a customer</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      for</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span>        userId </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> CustomerService</span><span>.create(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">testUser</span><span style="color: #ECEFF4;">&quot;</span><span>, </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">testPassword</span><span style="color: #ECEFF4;">&quot;</span><span>)</span></span>
+<span class="giallo-l"><span>        result </span><span style="color: #81A1C1;">&lt;-</span><span style="color: #8FBCBB;"> CustomerService</span><span>.find(userId)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span style="color: #81A1C1;"> yield</span><span> assert(result.id)(equalTo(userId))</span><span style="color: #81A1C1;"> &amp;&amp;</span></span>
+<span class="giallo-l"><span>              assert(result.username)(equalTo(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">testUser</span><span style="color: #ECEFF4;">&quot;</span><span>))</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span><span>.provideCustomLayer(testEnv)</span><span style="color: #81A1C1;"> @@</span><span> migrate(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">customers</span><span style="color: #ECEFF4;">&quot;</span><span>, </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">filesystem:src/customers/resources/db/migration</span><span style="color: #ECEFF4;">&quot;</span><span>)</span></span></code></pre>
+<p>We create a test environment <code>testEnv</code> by combining the default ZIO Test environment layer with the Postgres layer, and passing it to the test suite using <code>provideCustomLayer</code>. In addition, we perform the migration at the start of each test by applying <code>migrate</code> using the <code>@@</code> operator. Finally, depending on the organization of your modules, you can specify custom paths to your migration scripts, as well as the schema name.</p>
+<p>And that's it, we now have an integration test that starts Postgres, performs the migration, and runs your test. When it's finished, ZIO gracefully shuts down the container!</p>
+<h2 id="bonus-making-it-nicer">Bonus: making it nicer</h2>
+<p>Here are a few tweaks you can do to the above setup:</p>
+<h3 id="specifying-a-default-schema">Specifying a default schema</h3>
+<p>By default, the Postgres Testcontainer does not provide a way to specify a <code>currentSchema</code> parameter on the JDBC URL. We can fix this with some good, old-fashioned inheritance:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">final class</span><span style="color: #8FBCBB;"> SchemaAwarePostgresContainer</span><span>(</span></span>
+<span class="giallo-l"><span>  dockerImageNameOverride:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>,</span></span>
+<span class="giallo-l"><span>  databaseName:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>,</span></span>
+<span class="giallo-l"><span>  pgUsername:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>,</span></span>
+<span class="giallo-l"><span>  pgPassword:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>,</span></span>
+<span class="giallo-l"><span>  mountPostgresDataToTmpfs:</span><span style="color: #8FBCBB;"> Boolean</span><span style="color: #81A1C1;"> = false</span><span>,</span></span>
+<span class="giallo-l"><span>  currentSchema:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span></span>
+<span class="giallo-l"><span>)</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> PostgreSQLContainer</span><span>(</span></span>
+<span class="giallo-l"><span>      dockerImageNameOverride,</span></span>
+<span class="giallo-l"><span>      databaseName,</span></span>
+<span class="giallo-l"><span>      pgUsername,</span></span>
+<span class="giallo-l"><span>      pgPassword,</span></span>
+<span class="giallo-l"><span>      mountPostgresDataToTmpfs</span></span>
+<span class="giallo-l"><span>    )</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  override def</span><span style="color: #88C0D0;"> jdbcUrl</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> String</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span>    currentSchema.fold(</span><span style="color: #81A1C1;">super</span><span>.jdbcUrl)(schema </span><span style="color: #81A1C1;">=&gt; s</span><span style="color: #ECEFF4;">&quot;${</span><span style="color: #81A1C1;">super</span><span>.jdbcUrl</span><span style="color: #ECEFF4;">}</span><span style="color: #A3BE8C;">&amp;currentSchema=</span><span style="color: #ECEFF4;">$</span><span>schema</span><span style="color: #ECEFF4;">&quot;</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span></span></code></pre>
+<p>We'll extend <code>PostgreSQLContainer</code> to allow specifying the <code>currentSchema</code> as a constructor argument (in addition to all the others), and will override <code>jdbcUrl</code> to append it to the URL (if was specified). Now, let's replace our ZLayer creation function with the new class:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">  type</span><span> Postgres</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Has</span><span>[</span><span style="color: #8FBCBB;">SchemaAwarePostgresContainer</span><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  def</span><span style="color: #88C0D0;"> postgres</span><span>(currentSchema:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>)</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ZLayer</span><span>[</span><span style="color: #8FBCBB;">Blocking</span><span>, </span><span style="color: #8FBCBB;">Nothing</span><span>, </span><span style="color: #8FBCBB;">Postgres</span><span>]</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">    ZManaged</span><span>.make </span><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span>      effectBlocking </span><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        val</span><span> container</span><span style="color: #81A1C1;"> = new</span><span style="color: #8FBCBB;"> SchemaAwarePostgresContainer</span><span>(</span></span>
+<span class="giallo-l"><span>          dockerImageNameOverride </span><span style="color: #81A1C1;">=</span><span style="color: #8FBCBB;"> Some</span><span>(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">postgres</span><span style="color: #ECEFF4;">&quot;</span><span>),</span></span>
+<span class="giallo-l"><span>          currentSchema </span><span style="color: #81A1C1;">=</span><span> currentSchema</span></span>
+<span class="giallo-l"><span>        )</span></span>
+<span class="giallo-l"><span>        container.start()</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">        DockerLoggerFactory</span><span>.getLogger(container.container.getDockerImageName).info(</span><span style="color: #81A1C1;">s</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">⚡</span><span style="color: #ECEFF4;"> ${</span><span>container.jdbcUrl</span><span style="color: #ECEFF4;">}&quot;</span><span>)</span></span>
+<span class="giallo-l"><span>        container</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">      }</span><span>.orDie</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span><span>(container </span><span style="color: #81A1C1;">=&gt;</span><span> effectBlocking(container.stop()).orDie).toLayer</span></span></code></pre>
+<p>Note that the parameter to <code>postgres()</code> now accepts the schema name instead of the docker image name, the container will fetch the latest available PostgresSQL image. Tweak this according to your needs.</p>
+<p>In addition, I've added an log output line using the Testcontainer's Docker logger to print out the JDBC URL for easier debugging.</p>
+<h3 id="creating-an-itspec-for-easier-integration-tests">Creating an <code>ITSpec</code> for easier integration tests</h3>
+<p>Last thing we can do is to create a base class to hide all this work, allowing us to write integration tests without adding any of the boilerplate. This was adapted from an excellent library called <a rel="external" href="https://github.com/gaelrenoux/tranzactio">tranzactio</a> by Gaël Renoux, which helps Doobie (and Anorm) play nice with ZIO:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> ITSpec</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  type</span><span> ITEnv</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> TestEnvironment</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> Logging</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> Postgres</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">abstract class</span><span style="color: #8FBCBB;"> ITSpec</span><span>(schema:</span><span style="color: #8FBCBB;"> Option</span><span>[</span><span style="color: #8FBCBB;">String</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> None</span><span>)</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> RunnableSpec</span><span>[</span><span style="color: #8FBCBB;">ITEnv</span><span>, </span><span style="color: #8FBCBB;">Any</span><span>]</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  type</span><span> ITSpec</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> ZSpec</span><span>[</span><span style="color: #8FBCBB;">ITEnv</span><span>, </span><span style="color: #8FBCBB;">Any</span><span>]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  override def</span><span style="color: #88C0D0;"> aspects</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> List</span><span>[</span><span style="color: #8FBCBB;">TestAspect</span><span>[</span><span style="color: #8FBCBB;">Nothing</span><span>, </span><span style="color: #8FBCBB;">ITEnv</span><span>, </span><span style="color: #8FBCBB;">Nothing</span><span>, </span><span style="color: #8FBCBB;">Any</span><span>]]</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">    List</span><span>(</span><span style="color: #8FBCBB;">TestAspect</span><span>.timeout(</span><span style="color: #B48EAD;">60</span><span>.seconds))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  override def</span><span style="color: #88C0D0;"> runner</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> TestRunner</span><span>[</span><span style="color: #8FBCBB;">ITEnv</span><span>, </span><span style="color: #8FBCBB;">Any</span><span>]</span><span style="color: #81A1C1;"> =</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">    TestRunner</span><span>(</span><span style="color: #8FBCBB;">TestExecutor</span><span>.default(itLayer))</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> itLayer</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ULayer</span><span>[</span><span style="color: #8FBCBB;">ITEnv</span><span>]</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    val</span><span> postgres</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Blocking</span><span>.live </span><span style="color: #81A1C1;">&gt;&gt;&gt;</span><span style="color: #8FBCBB;"> TestContainer</span><span>.postgres(schema)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    val</span><span> logging</span><span style="color: #81A1C1;"> =</span><span style="color: #8FBCBB;"> Slf4jLogger</span><span>.make(</span><span style="color: #8FBCBB;">LogFmtRenderer</span><span>())</span></span>
+<span class="giallo-l"><span>    ... </span><span style="color: #616E88;">// other services you might want to create for testing</span></span>
+<span class="giallo-l"><span>    testEnvironment </span><span style="color: #81A1C1;">++</span><span> logging </span><span style="color: #81A1C1;">++</span><span> postgres</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span><span>.orDie</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Which allows us to create Postgres-powered integration specs like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">object</span><span style="color: #8FBCBB;"> MyITSpec</span><span style="color: #81A1C1;"> extends</span><span style="color: #8FBCBB;"> ITSpec</span><span>(</span><span style="color: #8FBCBB;">Some</span><span>(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">schemaName</span><span style="color: #ECEFF4;">&quot;</span><span>))</span><span style="color: #ECEFF4;"> {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  val</span><span> spec</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> ITSpec</span><span style="color: #81A1C1;"> =</span><span> suite(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Integration suite</span><span style="color: #ECEFF4;">&quot;</span><span>)(</span></span>
+<span class="giallo-l"><span>    testM(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">...</span><span style="color: #ECEFF4;">&quot;</span><span>)</span><span style="color: #ECEFF4;"> { }</span></span>
+<span class="giallo-l"><span>  )</span><span style="color: #81A1C1;"> @@</span><span> migrate(</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">schemaName</span><span style="color: #ECEFF4;">&quot;</span><span>, </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">filesystem:path/to/resources/for/migration</span><span style="color: #ECEFF4;">&quot;</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>And the <code>ITSpec</code> base suite will provide all the necessery environments for us! Note that <code>val spec: ITSpec</code> must have <code>ITSpec</code> type ascription, otherwise Scala will not be able to correctly infer all the requirements.</p>
+<p>Happy testing!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;talks-i-liked&#x2F;" rel="next" title="Talks I liked">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Talks I liked</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;scala-3-goodies-for-scala-2-developers&#x2F;" rel="prev" title="Scala 3 goodies for Scala 2 developers">
+        <span class="nav-title">Scala 3 goodies for Scala 2 developers</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
