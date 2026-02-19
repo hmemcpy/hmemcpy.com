@@ -249,18 +249,28 @@
 .post-nav {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 1em;
   margin-top: 1em;
 
   .post-nav-item {
+    min-width: 0;
     max-width: 48%;
 
     a {
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
       color: $text-muted;
       font-size: $font-size-smaller;
       text-decoration: none;
       &:hover { color: $orange; }
+    }
+
+    .nav-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
     }
 
     &.post-nav-prev { text-align: right; margin-left: auto; }

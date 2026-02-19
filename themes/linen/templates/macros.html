@@ -104,14 +104,14 @@
   {% if page.higher %}
     <div class="post-nav-item post-nav-next">
       <a href="{{ page.higher.permalink }}" rel="next" title="{{ page.higher.title }}">
-        <i class="fa fa-angle-left"></i> {{ page.higher.title }}
+        <i class="fa fa-angle-left"></i> <span class="nav-title">{{ page.higher.title }}</span>
       </a>
     </div>
   {% endif %}
   {% if page.lower %}
     <div class="post-nav-item post-nav-prev">
       <a href="{{ page.lower.permalink }}" rel="prev" title="{{ page.lower.title }}">
-        {{ page.lower.title }} <i class="fa fa-angle-right"></i>
+        <span class="nav-title">{{ page.lower.title }}</span> <i class="fa fa-angle-right"></i>
       </a>
     </div>
   {% endif %}
