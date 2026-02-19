@@ -73,19 +73,30 @@
   color: $text-muted;
   font-family: $font-family-mono;
   line-height: 1.8;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 1.25em;
 
   .post-meta-item {
-    margin-right: 1.25em;
-    display: inline-block;
-  }
-
-  .post-meta-item-icon {
-    margin-right: 0.3em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
   }
 
   a {
     color: $text-muted;
     border-bottom: 1px dashed $grey-light;
+    &:hover { color: $orange; }
+  }
+
+  .edit-link {
+    margin-left: auto;
+    border: none;
+    color: $border;
+    font-size: 0.9em;
+    transition: color 0.15s;
+
     &:hover { color: $orange; }
   }
 }

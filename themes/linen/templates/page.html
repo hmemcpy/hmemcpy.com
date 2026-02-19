@@ -41,6 +41,12 @@
           {% endfor %}
         </span>
       {% endif %}
+
+      {% if config.extra.github_repo %}
+        <a class="edit-link" href="{{ config.extra.github_repo }}/edit/main/content/{{ page.relative_path }}" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      {% endif %}
     </div>
     {% endif %}
   </header>

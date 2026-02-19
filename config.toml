@@ -23,6 +23,8 @@ author = "Igal Tabachnik"
 email = "hmemcpy@gmail.com"
 avatar = "https://avatars2.githubusercontent.com/u/601206?v=3&s=460"
 
+github_repo = "https://github.com/hmemcpy/hmemcpy.com"
+
 og_site_name = "In Absentia"
 keywords = "programming, software, scala, haskell, functional programming"
 copyright_since = "2009"
