@@ -37,10 +37,12 @@
   flex: 1;
   min-width: 0;
   background: $body-bg-color;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-inner {
-  padding: $sidebar-offset;
+  padding: 20px;
 }
 
 // Gemini: content-wrap has no card styling itself; each post-block is its own card

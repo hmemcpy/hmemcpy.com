@@ -27,7 +27,7 @@ $content-mobile-padding:  8px;
 
 // Headband
 $headband-height: 3px;
-$headband-bg:     $black-deep;
+$headband-bg:     $orange;
 
 // Sidebar
 $sidebar-highlight: $orange;
@@ -37,8 +37,9 @@ $site-author-image-width: 120px;
 $site-author-image-border-color: $gainsboro;
 
 // Typography
-$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
-$font-family-mono: Consolas, "Liberation Mono", Menlo, monospace;
+$font-family-base: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-family-title: "Gloria Hallelujah", cursive;
+$font-family-mono: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, monospace;
 $font-size-base:   16px;
 $line-height-base: 1.6;
 

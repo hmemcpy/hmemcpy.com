@@ -1,6 +1,11 @@
 .site-overview-wrap {
   padding: $sidebar-padding;
   flex: 1;
+  background: $content-bg-color;
+}
+
+.site-overview {
+  text-align: center;
 }
 
 .site-author {
@@ -8,12 +13,23 @@
   padding: 10px 0;
 }
 
+.site-author-image-wrap {
+  margin: 0 auto 8px;
+  width: $site-author-image-width;
+}
+
 .site-author-image {
   width: $site-author-image-width;
   height: $site-author-image-width;
   border-radius: 50%;
-  border: 1px solid $site-author-image-border-color;
+  border: 2px solid $grey-lighter;
   object-fit: cover;
+  display: block;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $grey-light;
+  }
 }
 
 .site-author-name {
@@ -26,29 +42,33 @@
 .site-description {
   font-size: $font-size-smaller;
   color: $grey-dark;
+  margin-bottom: 8px;
 }
 
 .links-of-author {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
+  justify-content: center;
+  margin-top: 12px;
+  gap: 6px;
 
   .links-of-author-item {
-    width: 50%;
-    text-align: center;
-    margin-bottom: 4px;
-
     a {
-      display: block;
-      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
       color: $grey-dim;
-      font-size: $font-size-smaller;
-      border-radius: $border-radius;
-      transition: background 0.2s, color 0.2s;
+      font-size: 1.1em;
+      border-radius: 50%;
+      border: 1px solid $grey-lighter;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
 
       &:hover {
         background: $body-bg-color;
         color: $orange;
+        border-color: $orange;
       }
     }
   }

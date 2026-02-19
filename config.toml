@@ -21,21 +21,37 @@ theme = "nord"
 [extra]
 author = "Igal Tabachnik"
 email = "hmemcpy@gmail.com"
-avatar = ""
+avatar = "https://avatars2.githubusercontent.com/u/601206?v=3&s=460"
 
 og_site_name = "In Absentia"
 keywords = "programming, software, scala, haskell, functional programming"
+copyright_since = "2009"
 copyright_year = "2026"
 twitter_username = "@hmemcpy"
 
 menu = [
-    {name = "Home",       url = "/"},
-    {name = "Archives",   url = "/posts/"},
-    {name = "Tags",       url = "/tags/"},
-    {name = "Categories", url = "/categories/"},
-    {name = "Talks",      url = "/talks-i-liked/"},
+    {name = "Home",          url = "/"},
+    {name = "Archives",      url = "/posts/"},
+    {name = "Talks I liked", url = "/talks-i-liked/"},
+    {name = "CV",            url = "/cv.pdf"},
 ]
 
-[extra.social]
-GitHub  = "https://github.com/hmemcpy"
-Twitter = "https://twitter.com/hmemcpy"
+[[extra.social]]
+name = "GitHub"
+url  = "https://github.com/hmemcpy"
+icon = "fab fa-github"
+
+[[extra.social]]
+name = "X"
+url  = "https://x.com/hmemcpy"
+icon = "fab fa-x-twitter"
+
+[[extra.social]]
+name = "Stack Overflow"
+url  = "https://stackoverflow.com/users/8205/igal-tabachnik"
+icon = "fab fa-stack-overflow"
+
+[[extra.social]]
+name = "LinkedIn"
+url  = "https://il.linkedin.com/in/igaltabachnik"
+icon = "fab fa-linkedin"

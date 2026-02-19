@@ -1,14 +1,13 @@
 .footer {
   background: $body-bg-color;
-  padding: 1em $sidebar-offset;
+  padding: 1em 20px;
   margin-top: auto;
+  border-top: 1px solid $gainsboro;
 
   .footer-inner {
-    max-width: 960px;
     text-align: center;
     color: $grey-dark;
     font-size: $font-size-smaller;
-    padding-left: $sidebar-width + $sidebar-offset;
   }
 
   .author { font-weight: 600; }

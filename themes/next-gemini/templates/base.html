@@ -29,6 +29,10 @@
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{ get_url(path='atom.xml') }}">
   {% endif %}
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lato:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="{{ get_url(path='next-gemini.css', cachebust=true) }}">
 </head>
 
@@ -74,14 +78,16 @@
             {% if config.extra.author %}
               <p class="site-author-name">{{ config.extra.author }}</p>
             {% endif %}
-            {% if config.description %}
-              <div class="site-description">{{ config.description }}</div>
+            {% if config.extra.bio %}
+              <div class="site-description">{{ config.extra.bio }}</div>
             {% endif %}
             {% if config.extra.social %}
               <div class="links-of-author">
-                {% for name, url in config.extra.social %}
+                {% for item in config.extra.social %}
                   <span class="links-of-author-item">
-                    <a href="{{ url }}" title="{{ name }}" target="_blank" rel="noopener">{{ name }}</a>
+                    <a href="{{ item.url }}" title="{{ item.name }}" target="_blank" rel="noopener">
+                      {% if item.icon %}<i class="{{ item.icon }}"></i>{% else %}{{ item.name }}{% endif %}
+                    </a>
                   </span>
                 {% endfor %}
               </div>
@@ -101,14 +107,15 @@
         </div>
         {% block sidebar %}{% endblock sidebar %}
       </div>
+      <footer class="footer">
+        <div class="footer-inner">
+          &copy;
+          {% if config.extra.copyright_since %}{{ config.extra.copyright_since }} &ndash; {% endif %}
+          {% if config.extra.copyright_year %}{{ config.extra.copyright_year }}{% endif %}
+          {% if config.extra.author %}<span class="author">{{ config.extra.author }}</span>{% endif %}
+        </div>
+      </footer>
     </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        &copy; {% if config.extra.copyright_year %}{{ config.extra.copyright_year }}{% endif %}
-        {% if config.extra.author %}<span class="author">{{ config.extra.author }}</span>{% endif %}
-      </div>
-    </footer>
   </div>
 </body>
 </html>
