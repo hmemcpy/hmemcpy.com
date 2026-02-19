@@ -1,7 +1,7 @@
 base_url = "https://hmemcpy.com"
 title = "In Absentia"
 description = "by Igal Tabachnik"
-theme = "dinkleberg"
+theme = "next-gemini"
 
 compile_sass = true
 build_search_index = false
@@ -21,31 +21,21 @@ theme = "nord"
 [extra]
 author = "Igal Tabachnik"
 email = "hmemcpy@gmail.com"
-
-blog_title = "In Absentia"
-
-label_tags = "Tags"
-label_tag = "Tag"
-label_categories = "Categories"
-label_category = "Category"
-label_relative_posts = "Related Posts"
-label_next = "Next"
-label_previous = "Previous"
-label_page = "Page"
-label_of = "of"
+avatar = ""
 
 og_site_name = "In Absentia"
-og_image = ""
-og_alt_image = ""
 keywords = "programming, software, scala, haskell, functional programming"
-
 copyright_year = "2026"
-
 twitter_username = "@hmemcpy"
 
-sidebar = [
-    {name = "Links", urls = [
-        {name = "GitHub", url = "https://github.com/hmemcpy"},
-        {name = "Twitter", url = "https://twitter.com/hmemcpy"},
-    ]}
+menu = [
+    {name = "Home",       url = "/"},
+    {name = "Archives",   url = "/posts/"},
+    {name = "Tags",       url = "/tags/"},
+    {name = "Categories", url = "/categories/"},
+    {name = "Talks",      url = "/talks-i-liked/"},
 ]
+
+[extra.social]
+GitHub  = "https://github.com/hmemcpy"
+Twitter = "https://twitter.com/hmemcpy"

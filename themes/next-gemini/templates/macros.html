@@ -1,0 +1,119 @@
+{% macro post_card(page, is_index) %}
+<article class="post-block">
+  <header class="post-header">
+    {% if is_index %}
+      <h2 class="post-title">
+        <a class="post-title-link" href="{{ page.permalink }}">{{ page.title }}</a>
+      </h2>
+    {% else %}
+      <h1 class="post-title">{{ page.title }}</h1>
+    {% endif %}
+
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+      </span>
+
+      {% if page.reading_time %}
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          {{ page.reading_time }} min read
+        </span>
+      {% endif %}
+
+      {% if page.taxonomies.categories %}
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-folder"></i></span>
+          {% for cat in page.taxonomies.categories %}
+            <a href="{{ get_taxonomy_url(kind='categories', name=cat) }}">{{ cat }}</a>
+            {%- if not loop.last %}, {% endif %}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-body">
+    {% if is_index and page.summary %}
+      {{ page.summary | safe }}
+    {% elif is_index %}
+      {{ page.content | safe }}
+    {% else %}
+      {{ page.content | safe }}
+    {% endif %}
+  </div>
+
+  {% if is_index and page.summary %}
+    <div class="post-button">
+      <a class="btn" href="{{ page.permalink }}">
+        Read More &raquo;
+      </a>
+    </div>
+  {% endif %}
+
+  {% if is_index %}
+    <footer class="post-footer">
+      <div class="post-eof"></div>
+    </footer>
+  {% endif %}
+</article>
+{% endmacro post_card %}
+
+
+{% macro post_collapse_item(page) %}
+<article class="post-item">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ page.date }}">{{ page.date | date(format="%m-%d") }}</time>
+    </div>
+    <div class="post-title">
+      <a class="post-title-link" href="{{ page.permalink }}">{{ page.title }}</a>
+    </div>
+  </header>
+</article>
+{% endmacro post_collapse_item %}
+
+
+{% macro pagination(paginator) %}
+<nav class="pagination">
+  {% if paginator.previous %}
+    <a class="extend prev" rel="prev" href="{{ paginator.previous }}"><i class="fa fa-angle-left"></i></a>
+  {% endif %}
+
+  {% for i in range(end=paginator.number_pagers) %}
+    {% set page_num = i + 1 %}
+    {% if page_num == paginator.current_index %}
+      <span class="page-number current">{{ page_num }}</span>
+    {% elif page_num == 1 %}
+      <a class="page-number" href="{{ paginator.base_url }}">{{ page_num }}</a>
+    {% else %}
+      <a class="page-number" href="{{ paginator.base_url }}{{ page_num }}">{{ page_num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next %}
+    <a class="extend next" rel="next" href="{{ paginator.next }}"><i class="fa fa-angle-right"></i></a>
+  {% endif %}
+</nav>
+{% endmacro pagination %}
+
+
+{% macro post_nav(page) %}
+<div class="post-nav">
+  {% if page.higher %}
+    <div class="post-nav-item post-nav-next">
+      <a href="{{ page.higher.permalink }}" rel="next" title="{{ page.higher.title }}">
+        <i class="fa fa-angle-left"></i> {{ page.higher.title }}
+      </a>
+    </div>
+  {% endif %}
+  {% if page.lower %}
+    <div class="post-nav-item post-nav-prev">
+      <a href="{{ page.lower.permalink }}" rel="prev" title="{{ page.lower.title }}">
+        {{ page.lower.title }} <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% endmacro post_nav %}

@@ -1,0 +1,49 @@
+.headband {
+  height: $headband-height;
+  background: $headband-bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  padding-top: $headband-height;
+}
+
+// Left sidebar column
+.header {
+  width: $sidebar-width;
+  flex-shrink: 0;
+}
+
+.header-inner {
+  background: $content-bg-color;
+  box-shadow: $box-shadow-inner;
+  position: fixed;
+  top: $headband-height;
+  bottom: 0;
+  width: $sidebar-width;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+// Right main area
+.main {
+  flex: 1;
+  min-width: 0;
+  background: $body-bg-color;
+}
+
+.main-inner {
+  padding: $sidebar-offset;
+}
+
+// Gemini: content-wrap has no card styling itself; each post-block is its own card
+.content-wrap {
+  // No background, no shadow — that's Pisces. Gemini = per-card.
+}

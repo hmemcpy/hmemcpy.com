@@ -1,0 +1,34 @@
+.site-nav {
+  background: $black-deep;
+  padding: 0 0 10px;
+}
+
+.main-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  a {
+    display: block;
+    padding: 6px 20px;
+    color: $grey-lighter;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 0.9375em;
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .1);
+      border-left-color: $orange;
+    }
+  }
+
+  &.menu-item-active a {
+    color: #fff;
+    background: rgba(255, 255, 255, .08);
+    border-left-color: $orange;
+  }
+}

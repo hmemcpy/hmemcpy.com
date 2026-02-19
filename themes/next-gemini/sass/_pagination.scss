@@ -1,0 +1,33 @@
+.pagination {
+  background: $content-bg-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 1em $content-desktop-padding;
+  margin-top: $sidebar-offset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  a, span {
+    display: inline-block;
+    padding: 0.3em 0.7em;
+    border-radius: $border-radius;
+    color: $text-color;
+    text-decoration: none;
+    border: none;
+    font-size: $font-size-smaller;
+    transition: background 0.2s;
+  }
+
+  a:hover {
+    background: $body-bg-color;
+    color: $orange;
+  }
+
+  .pagination-current {
+    background: $black-deep;
+    color: #fff;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content_class %}archive{% endblock content_class %}
+
+{% block content %}
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <span class="collection-header">{{ section.title | default(value="Archives") }}</span>
+      </div>
+
+      {% set_global current_year = "" %}
+
+      {% if paginator is defined %}
+        {% set pages = paginator.pages %}
+      {% else %}
+        {% set pages = section.pages %}
+      {% endif %}
+
+      {% for page in pages %}
+        {% set year = page.date | date(format="%Y") %}
+        {% if year != current_year %}
+          {% set_global current_year = year %}
+          <div class="collection-year">
+            <span class="collection-header">{{ current_year }}</span>
+          </div>
+        {% endif %}
+
+        {{ macros::post_collapse_item(page=page) }}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if paginator is defined %}
+    {{ macros::pagination(paginator=paginator) }}
+  {% endif %}
+{% endblock content %}

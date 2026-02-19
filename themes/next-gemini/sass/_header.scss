@@ -1,0 +1,52 @@
+.site-brand-container {
+  background: $black-deep;
+  flex-shrink: 0;
+}
+
+.site-meta {
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.brand {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  .logo-line-before i,
+  .logo-line-after i {
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, .2);
+    margin: 8px 20px;
+  }
+}
+
+.site-title {
+  color: #fff;
+  font-size: 1.375em;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+.site-subtitle {
+  color: $grey-lighter;
+  font-size: $font-size-smaller;
+  margin: 8px 10px 0;
+}
+
+.site-nav-toggle {
+  display: none; // shown on mobile via _responsive.scss
+  cursor: pointer;
+  padding: 10px 15px;
+
+  .toggle-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    margin: 4px 0;
+    transition: 0.3s;
+  }
+}

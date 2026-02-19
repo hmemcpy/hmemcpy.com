@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ term.name }} | {{ config.title }}{% endblock title %}
+
+{% block content_class %}archive{% endblock content_class %}
+
+{% block content %}
+<div class="post-block">
+  <div class="posts-collapse">
+    <div class="collection-title">
+      <span class="collection-header">{{ term.name }}</span>
+    </div>
+
+    {% for page in term.pages %}
+      {{ macros::post_collapse_item(page=page) }}
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

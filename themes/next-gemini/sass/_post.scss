@@ -1,0 +1,257 @@
+// Individual post card (Gemini's key visual distinction)
+.post-block {
+  background: $content-bg-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $content-desktop-padding;
+  margin-bottom: $sidebar-offset;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Post header
+.post-header {
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid $gainsboro;
+}
+
+// Index: h2 title (link)
+.post-title {
+  font-size: 1.5em;
+  margin: 0 0 0.4em;
+
+  a {
+    color: $black-dim;
+    text-decoration: none;
+    border: none;
+
+    &:hover { color: $black-deep; }
+  }
+
+  // Single post: h1, no link
+  &.post-title-single {
+    font-size: 1.75em;
+    margin-bottom: 0.5em;
+  }
+}
+
+// Post metadata row
+.post-meta {
+  font-size: $font-size-smaller;
+  color: $grey-dark;
+  line-height: 1.8;
+
+  .post-meta-item {
+    margin-right: 1em;
+    display: inline-block;
+  }
+
+  a {
+    color: $grey-dark;
+    border-bottom: 1px dashed $grey-dark;
+
+    &:hover { color: $black-light; }
+  }
+}
+
+// Post body content
+.post-body {
+  h1, h2 {
+    border-bottom: 1px solid $body-bg-color;
+    padding-bottom: 0.3em;
+  }
+
+  h3 {
+    border-bottom: 1px dotted $body-bg-color;
+    padding-bottom: 0.2em;
+  }
+
+  a {
+    color: $link-color;
+    border-bottom: 1px solid $link-color;
+
+    &:hover {
+      color: $link-hover-color;
+      border-color: $link-hover-color;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin: 1em auto;
+  }
+
+  figure {
+    text-align: center;
+    margin: 1em 0;
+
+    figcaption {
+      font-size: $font-size-smaller;
+      color: $grey-dark;
+      margin-top: 0.5em;
+    }
+  }
+}
+
+// "Read More" button
+.post-button {
+  margin-top: 1.5em;
+  text-align: right;
+
+  .btn {
+    display: inline-block;
+    padding: 0.35em 1em;
+    border: 1px solid $black-dim;
+    border-radius: $btn-radius;
+    color: $black-dim;
+    font-size: $font-size-smaller;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: $black-dim;
+      color: #fff;
+    }
+  }
+}
+
+// Post footer (tags, prev/next)
+.post-footer {
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid $gainsboro;
+}
+
+.post-tags {
+  margin-bottom: 1em;
+
+  a {
+    display: inline-block;
+    margin-right: 0.5em;
+    color: $grey-dim;
+    font-size: $font-size-smaller;
+    text-decoration: none;
+    border: none;
+
+    &::before { content: '#'; }
+    &:hover { color: $orange; }
+  }
+}
+
+// Prev/next navigation on single post
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+
+  .post-nav-item {
+    max-width: 48%;
+
+    a {
+      color: $link-color;
+      font-size: $font-size-smaller;
+      border: none;
+
+      &:hover { color: $link-hover-color; }
+    }
+
+    &.next-post { text-align: right; }
+  }
+}
+
+// Archive list (section.html)
+.posts-collapse {
+  .collection-title {
+    margin-bottom: 1em;
+
+    h2 {
+      font-size: 1.25em;
+      color: $black-dim;
+      border: none;
+    }
+  }
+
+  .collection-year {
+    font-size: 1em;
+    color: $grey-dark;
+    font-weight: 600;
+    margin: 1.5em 0 0.5em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid $gainsboro;
+  }
+}
+
+.post-collapse-item {
+  display: flex;
+  align-items: baseline;
+  padding: 0.35em 0;
+  border-bottom: 1px dashed $grey-lighter;
+
+  .post-collapse-date {
+    color: $grey-dark;
+    font-size: $font-size-smaller;
+    min-width: 4.5em;
+    flex-shrink: 0;
+  }
+
+  .post-collapse-title a {
+    color: $text-color;
+    text-decoration: none;
+    border: none;
+
+    &:hover { color: $orange; }
+  }
+}
+
+// Tag cloud
+.tag-cloud {
+  .tag-cloud-title {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: $black-dim;
+    margin-bottom: 1em;
+  }
+
+  .tag-cloud-tags {
+    a {
+      display: inline-block;
+      margin: 0.3em;
+      color: $grey-dim;
+      text-decoration: none;
+      border: none;
+
+      &:hover { color: $orange; }
+    }
+  }
+}
+
+// TOC sidebar (on single post, if enabled)
+.post-toc-wrap {
+  padding: 1em;
+
+  .post-toc {
+    ol, ul {
+      list-style: none;
+      padding-left: 1em;
+      margin: 0;
+    }
+
+    li {
+      margin: 0.3em 0;
+    }
+
+    a {
+      color: $grey-dim;
+      font-size: $font-size-smaller;
+      text-decoration: none;
+      border: none;
+
+      &:hover { color: $orange; }
+    }
+  }
+}

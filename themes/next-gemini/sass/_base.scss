@@ -1,0 +1,90 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background: $body-bg-color;
+  margin: 0;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $black-dim;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 1em 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+code {
+  font-family: $font-family-mono;
+  background: $gainsboro;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+  font-size: 0.875em;
+}
+
+pre {
+  background: $black-dim;
+  color: $whitesmoke;
+  padding: 1em;
+  border-radius: $border-radius;
+  overflow-x: auto;
+
+  code {
+    background: none;
+    padding: 0;
+    font-size: 0.875em;
+  }
+}
+
+blockquote {
+  border-left: 4px solid $grey-lighter;
+  color: $grey-dim;
+  margin: 0 0 1em 0;
+  padding: 0.5em 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+th, td {
+  border: 1px solid $grey-lighter;
+  padding: 0.5em 0.75em;
+}
+
+th {
+  background: $whitesmoke;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $gainsboro;
+  margin: 1.5em 0;
+}

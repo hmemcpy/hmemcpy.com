@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}Categories | {{ config.title }}{% endblock title %}
+
+{% block content_class %}tag-cloud{% endblock content_class %}
+
+{% block content %}
+<div class="post-block">
+  <div class="tag-cloud">
+    {% for term in terms %}
+      {% set count = term.pages | length %}
+      {% set font_size = 12 + count * 2 %}
+      {% if font_size > 32 %}{% set font_size = 32 %}{% endif %}
+      <a href="{{ term.permalink }}" style="font-size: {{ font_size }}px;">
+        {{ term.name }} ({{ count }})
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

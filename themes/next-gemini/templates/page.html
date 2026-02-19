@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+
+{% block og_title %}{{ page.title }}{% endblock og_title %}
+{% block og_description %}{{ page.description | default(value=config.description) }}{% endblock og_description %}
+{% block og_url %}{{ page.permalink }}{% endblock og_url %}
+
+{% block content %}
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+      </span>
+
+      {% if page.updated and page.updated != page.date %}
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-calendar-check"></i></span>
+          Updated: <time datetime="{{ page.updated }}">{{ page.updated | date(format="%Y-%m-%d") }}</time>
+        </span>
+      {% endif %}
+
+      {% if page.reading_time %}
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          {{ page.reading_time }} min read
+        </span>
+      {% endif %}
+
+      {% if page.taxonomies.categories %}
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-folder"></i></span>
+          {% for cat in page.taxonomies.categories %}
+            <a href="{{ get_taxonomy_url(kind='categories', name=cat) }}">{{ cat }}</a>
+            {%- if not loop.last %}, {% endif %}
+          {% endfor %}
+        </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-body">
+    {{ page.content | safe }}
+  </div>
+
+  <footer class="post-footer">
+    {% if page.taxonomies.tags %}
+      <div class="post-tags">
+        {% for tag in page.taxonomies.tags %}
+          <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}" rel="tag"># {{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {{ macros::post_nav(page=page) }}
+  </footer>
+</article>
+{% endblock content %}
+
+{% block sidebar %}
+  {% if page.toc %}
+    <div class="sidebar">
+      <div class="sidebar-inner">
+        <div class="post-toc-wrap">
+          <div class="post-toc">
+            <ol class="nav">
+              {% for h1 in page.toc %}
+                <li class="nav-item nav-level-1">
+                  <a class="nav-link" href="#{{ h1.id }}">{{ h1.title }}</a>
+                  {% if h1.children %}
+                    <ol class="nav-child">
+                      {% for h2 in h1.children %}
+                        <li class="nav-item nav-level-2">
+                          <a class="nav-link" href="#{{ h2.id }}">{{ h2.title }}</a>
+                        </li>
+                      {% endfor %}
+                    </ol>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock sidebar %}

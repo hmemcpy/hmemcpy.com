@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content_class %}index posts-expand{% endblock content_class %}
+
+{% block content %}
+  {% for page in paginator.pages %}
+    {{ macros::post_card(page=page, is_index=true) }}
+  {% endfor %}
+
+  {{ macros::pagination(paginator=paginator) }}
+{% endblock content %}

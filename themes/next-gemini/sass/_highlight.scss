@@ -1,0 +1,29 @@
+// Zola outputs highlighted code inside <pre class="z-code"><code> or similar
+// The nord theme is configured in config.toml, Zola handles colors
+// We just need to style the wrapper
+
+pre {
+  border-radius: $border-radius;
+  overflow-x: auto;
+  margin: 1em 0;
+
+  code {
+    display: block;
+    padding: 1em;
+    font-family: $font-family-mono;
+    font-size: 0.875em;
+    line-height: 1.5;
+    background: none;
+    border-radius: 0;
+  }
+}
+
+// Inline code (not in pre)
+:not(pre) > code {
+  background: $gainsboro;
+  border-radius: 2px;
+  padding: 0.1em 0.3em;
+  font-size: 0.875em;
+  font-family: $font-family-mono;
+  color: $black-dim;
+}

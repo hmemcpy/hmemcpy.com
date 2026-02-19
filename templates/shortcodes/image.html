@@ -1,6 +1,6 @@
 {% if path %}
 <figure>
-    <img src="{{ get_url(path=path) }}" alt="{{ alt | default(value='') }}">
+    <img src="{{ page.permalink ~ path }}" alt="{{ alt | default(value='') }}">
     {% if caption %}
     <figcaption>{{ caption }}</figcaption>
     {% endif %}

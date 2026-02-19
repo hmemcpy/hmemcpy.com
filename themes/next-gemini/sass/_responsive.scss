@@ -1,0 +1,64 @@
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .header-inner {
+    position: relative;
+    top: 0;
+    width: 100%;
+    overflow: visible;
+    box-shadow: $box-shadow;
+  }
+
+  .site-nav-toggle {
+    display: block;
+  }
+
+  // Collapse nav on mobile (JS toggle adds .open class)
+  .site-nav {
+    display: none;
+
+    &.open { display: block; }
+  }
+
+  .site-overview-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $content-mobile-padding;
+  }
+
+  .site-author {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+
+    .site-author-image {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+  }
+
+  .main-inner {
+    padding: $content-mobile-padding;
+  }
+
+  .post-block {
+    padding: $content-mobile-padding * 2;
+  }
+
+  .post-nav .post-nav-item {
+    max-width: 100%;
+  }
+
+  .footer .footer-inner {
+    padding-left: 0;
+  }
+}

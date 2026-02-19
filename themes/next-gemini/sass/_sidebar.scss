@@ -1,0 +1,55 @@
+.site-overview-wrap {
+  padding: $sidebar-padding;
+  flex: 1;
+}
+
+.site-author {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.site-author-image {
+  width: $site-author-image-width;
+  height: $site-author-image-width;
+  border-radius: 50%;
+  border: 1px solid $site-author-image-border-color;
+  object-fit: cover;
+}
+
+.site-author-name {
+  font-weight: 600;
+  margin: 8px 0 4px;
+  color: $black-dim;
+  font-size: 1em;
+}
+
+.site-description {
+  font-size: $font-size-smaller;
+  color: $grey-dark;
+}
+
+.links-of-author {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+
+  .links-of-author-item {
+    width: 50%;
+    text-align: center;
+    margin-bottom: 4px;
+
+    a {
+      display: block;
+      padding: 4px;
+      color: $grey-dim;
+      font-size: $font-size-smaller;
+      border-radius: $border-radius;
+      transition: background 0.2s, color 0.2s;
+
+      &:hover {
+        background: $body-bg-color;
+        color: $orange;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}404 | {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">404</h1>
+  </header>
+  <div class="post-body">
+    <p>Page not found. <a href="{{ config.base_url }}">Return to the homepage</a>.</p>
+  </div>
+</article>
+{% endblock content %}

@@ -1,0 +1,114 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+  <meta name="description" content="{{ config.description }}">
+  <meta name="keywords" content="{{ config.extra.keywords | default(value='') }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
+  <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
+  <meta property="og:url" content="{% block og_url %}{{ config.base_url }}{% endblock og_url %}">
+  {% if config.extra.og_site_name %}
+    <meta property="og:site_name" content="{{ config.extra.og_site_name }}">
+  {% endif %}
+  {% if config.extra.og_image %}
+    <meta property="og:image" content="{{ config.extra.og_image }}">
+  {% endif %}
+
+  {% if config.extra.twitter_username %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="{{ config.extra.twitter_username }}">
+  {% endif %}
+
+  {% if config.generate_feeds %}
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{ get_url(path='atom.xml') }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ get_url(path='next-gemini.css', cachebust=true) }}">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <div class="container">
+    <header class="header">
+      <div class="header-inner">
+
+        <div class="site-brand-container">
+          <div class="site-meta">
+            <a href="{{ config.base_url }}" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">{{ config.title }}</h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+            {% if config.description %}
+              <p class="site-subtitle">{{ config.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if config.extra.menu %}
+          <nav class="site-nav">
+            <ul class="main-menu menu">
+              {% for item in config.extra.menu %}
+                <li class="menu-item{% if current_path is defined and current_path == item.url %} menu-item-active{% endif %}">
+                  <a href="{{ item.url }}">{{ item.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}
+
+        <div class="site-overview-wrap">
+          <div class="site-overview">
+            {% if config.extra.avatar %}
+              <div class="site-author-image-wrap">
+                <img class="site-author-image" src="{{ config.extra.avatar }}" alt="{{ config.extra.author }}">
+              </div>
+            {% endif %}
+            {% if config.extra.author %}
+              <p class="site-author-name">{{ config.extra.author }}</p>
+            {% endif %}
+            {% if config.description %}
+              <div class="site-description">{{ config.description }}</div>
+            {% endif %}
+            {% if config.extra.social %}
+              <div class="links-of-author">
+                {% for name, url in config.extra.social %}
+                  <span class="links-of-author-item">
+                    <a href="{{ url }}" title="{{ name }}" target="_blank" rel="noopener">{{ name }}</a>
+                  </span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content {% block content_class %}{% endblock content_class %}">
+            {% block content %}{% endblock content %}
+          </div>
+        </div>
+        {% block sidebar %}{% endblock sidebar %}
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        &copy; {% if config.extra.copyright_year %}{{ config.extra.copyright_year }}{% endif %}
+        {% if config.extra.author %}<span class="author">{{ config.extra.author }}</span>{% endif %}
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
