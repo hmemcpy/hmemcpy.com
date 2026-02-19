@@ -2,7 +2,7 @@
 title = "Supercharging your ReSharper navigation-fu with Camel Humps"
 date = 2011-05-09T01:30:34Z
 +++
-I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a *lot*, mostly due to it's being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given - use the keyboard shortcuts. A lot. Some even go completely mouseless!
+I blog about <a href="http://www.jetbrains.com/resharper/" target="_blank">ReSharper</a> a *lot*, mostly due to its being an awesome product which greatly improves my productivity. One of the major tips any ReSharper user is given - use the keyboard shortcuts. A lot. Some even go completely mouseless!
 
 <!-- more -->
 
