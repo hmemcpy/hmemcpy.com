@@ -185,20 +185,14 @@
     }
   }
 
-  code {
+  // Inline code only — pre code is handled by _highlight.scss
+  :not(pre) > code {
     background: $border-light;
     color: darken($orange, 8%);
     padding: 0.15em 0.4em;
     border-radius: 3px;
     font-size: 0.875em;
     font-family: $font-family-mono;
-  }
-
-  pre code {
-    background: none;
-    color: inherit;
-    padding: 0;
-    font-size: inherit;
   }
 
   hr {

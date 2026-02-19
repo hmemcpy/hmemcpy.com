@@ -41,12 +41,7 @@ code {
 pre {
   border-radius: $border-radius;
   overflow-x: auto;
-
-  code {
-    background: none;
-    padding: 0;
-    font-size: 0.875em;
-  }
+  // pre code styling handled in _highlight.scss
 }
 
 blockquote {
