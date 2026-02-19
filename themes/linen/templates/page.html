@@ -32,6 +32,12 @@
         </span>
       {% endif %}
 
+      {% if config.extra.github_repo %}
+        <a class="edit-link" href="{{ config.extra.github_repo }}/edit/main/content/{{ page.relative_path }}" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      {% endif %}
+
       {% if page.taxonomies.categories %}
         <span class="post-meta-item">
           <span class="post-meta-item-icon"><i class="far fa-folder"></i></span>
@@ -40,12 +46,6 @@
             {%- if not loop.last %}, {% endif %}
           {% endfor %}
         </span>
-      {% endif %}
-
-      {% if config.extra.github_repo %}
-        <a class="edit-link" href="{{ config.extra.github_repo }}/edit/main/content/{{ page.relative_path }}" target="_blank" rel="noopener" title="Edit on GitHub">
-          <i class="fa-solid fa-pencil"></i>
-        </a>
       {% endif %}
     </div>
     {% endif %}
