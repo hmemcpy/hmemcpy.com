@@ -16,7 +16,7 @@ It has been over 4 years since I last wrote C#, and being exposed to functional 
 
 Depending on who you ask, the word *functional* means different things to different people. But rather than debating semantics, I'd like to offer an explanation of *why* this tiny FizzBuzz snippet *feels* functional.
 
-But first, let's unpack the snippet (with few tweaks to the above image):
+But first, let's unpack the snippet (with a few tweaks to the above image):
 
 ```csharp
 public static void Main(string[] args)
