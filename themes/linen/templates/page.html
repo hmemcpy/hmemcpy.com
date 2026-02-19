@@ -11,6 +11,7 @@
 <article class="post-block">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
+    {% if not page.extra.skip_in_feed %}
     <div class="post-meta">
       <span class="post-meta-item">
         <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
@@ -41,12 +42,14 @@
         </span>
       {% endif %}
     </div>
+    {% endif %}
   </header>
 
   <div class="post-body">
     {{ page.content | safe }}
   </div>
 
+  {% if not page.extra.skip_in_feed %}
   <footer class="post-footer">
     {% if page.taxonomies.tags %}
       <div class="post-tags">
@@ -58,6 +61,7 @@
 
     {{ macros::post_nav(page=page) }}
   </footer>
+  {% endif %}
 </article>
 {% endblock content %}
 
