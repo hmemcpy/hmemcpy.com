@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title | default(value="Posts") }}{% endblock title %}
+
+{% block content %}
+<section class="posts">
+    {% for page in section.pages %}
+    <article class="post-listing">
+        <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %e, %Y") }}</time>
+        {% if page.summary %}
+        <div class="summary">{{ page.summary | safe }}</div>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock content %}

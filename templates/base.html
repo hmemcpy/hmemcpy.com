@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %} — {{ config.title }}</title>
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path='atom.xml') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="site-title">{{ config.title }}</a>
+            <span class="subtitle">{{ config.description }}</span>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+    
+    <footer>
+        <p>© {{ now() | date(format='%Y') }} {{ config.extra.author }}</p>
+    </footer>
+</body>
+</html>

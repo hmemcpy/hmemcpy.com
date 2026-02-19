@@ -1,0 +1,6 @@
+<blockquote{% if source %} cite="{{ source }}"{% endif %}>
+    {{ body | markdown | safe }}
+    {% if author %}
+    <footer>— {{ author }}{% if source %}, <cite>{{ source }}</cite>{% endif %}</footer>
+    {% endif %}
+</blockquote>
