@@ -1,7 +1,7 @@
 base_url = "https://hmemcpy.com"
 title = "In Absentia"
 description = "by Igal Tabachnik"
-theme = "next-gemini"
+theme = "linen"
 
 compile_sass = true
 build_search_index = false

@@ -1,0 +1,5 @@
+name = "linen"
+description = "Minimal single-column reading theme for Zola. Warm off-white palette, serif body font, clean post list."
+license = "MIT"
+homepage = "https://hmemcpy.com"
+min_version = "0.19.0"

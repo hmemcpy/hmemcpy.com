@@ -4,9 +4,9 @@ Source for my blog at [hmemcpy.com](https://hmemcpy.com) — a professional blog
 
 ## Stack
 
-- **[Zola](https://www.getzola.org/)** (v0.22+) — static site generator
-- **next-gemini** — custom theme (see `themes/next-gemini/`) inspired by the [NexT](https://theme-next.js.org/) Hexo theme's Gemini layout
-- **GitHub Pages** — hosting, deployed via GitHub Actions on every push to `master`
+- **[Zola](https://www.getzola.org/)** (v0.19.2+) — static site generator
+- **linen** — custom theme (see `themes/linen/`)
+- **GitHub Pages** — hosting, deployed via GitHub Actions on every push to `main`
 
 ## Local development
 
@@ -24,44 +24,44 @@ zola serve
 
 The site is available at `http://127.0.0.1:1111`.
 
-## Theme — next-gemini
+## Theme — linen
 
-A custom Zola theme in `themes/next-gemini/` built from scratch to replicate the NexT Gemini layout:
+A minimal, single-column reading theme in `themes/linen/`. Named for its warm off-white background (`#faf9f7`).
 
 | Feature | Details |
 |---|---|
-| Layout | Fixed dark sidebar (240px) + full-height scrollable content area |
-| Fonts | [Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah) (title), [Lato](https://fonts.google.com/specimen/Lato) (body), [JetBrains Mono](https://www.jetbrains.com/lp/mono/) (code) |
+| Layout | Sticky top nav bar + centered single column (860px max) |
+| Fonts | [Gloria Hallelujah](https://fonts.google.com/specimen/Gloria+Hallelujah) (site title), [Lora](https://fonts.google.com/specimen/Lora) (body serif), [JetBrains Mono](https://www.jetbrains.com/lp/mono/) (code) |
 | Icons | [Font Awesome 6](https://fontawesome.com/) |
-| Syntax highlighting | Nord theme (built into Zola) |
-| Content width | Capped at 860px for comfortable line lengths |
-| Prose width | 72ch max on single post pages |
-| Mobile | Responsive with hamburger nav toggle |
+| Palette | Warm off-white `#faf9f7` bg · near-black `#1a1a1a` text · orange `#fc6423` for links/accents |
+| Syntax highlighting | Nord theme (built into Zola), with language label header |
+| Post list | Clean date-prefixed list (no cards) |
+| Mobile | Responsive with hamburger nav dropdown |
 
 ### Theme structure
 
 ```
-themes/next-gemini/
+themes/linen/
 ├── sass/
-│   ├── next-gemini.scss   # entry point (imports all partials)
+│   ├── linen.scss         # entry point (imports all partials)
 │   ├── _variables.scss    # colours, fonts, spacing tokens
 │   ├── _base.scss         # reset and global element styles
-│   ├── _layout.scss       # two-column flex layout
-│   ├── _header.scss       # sidebar brand area
-│   ├── _menu.scss         # nav items with orange active indicator
-│   ├── _sidebar.scss      # author, avatar, social icon buttons
-│   ├── _post.scss         # post cards, body typography, blockquote
-│   ├── _pagination.scss   # prev/next and page links
-│   ├── _highlight.scss    # code block chrome
-│   ├── _footer.scss       # footer bar
+│   ├── _layout.scss       # single-column layout, headband
+│   ├── _header.scss       # sticky top nav bar
+│   ├── _menu.scss         # horizontal nav items
+│   ├── _sidebar.scss      # (stub — sidebar removed in redesign)
+│   ├── _post.scss         # post list, single post typography
+│   ├── _pagination.scss   # page number links
+│   ├── _highlight.scss    # code block chrome and language label
+│   ├── _footer.scss       # footer with social icons
 │   ├── _responsive.scss   # mobile + tablet breakpoints
 │   └── _custom.scss       # site-specific overrides
 └── templates/
-    ├── base.html           # master layout (head, sidebar, main, footer)
+    ├── base.html           # master layout (head, top nav, main, footer)
     ├── index.html          # paginated post list
     ├── page.html           # single post
     ├── section.html        # archive page
-    ├── macros.html         # post_card, pagination, post_nav macros
+    ├── macros.html         # pagination, post_nav macros
     ├── 404.html
     ├── tags/               # tag list + single-tag pages
     └── categories/         # category list + single-category pages
