@@ -2,7 +2,7 @@
 title = "Working with shared dependencies in ZIO Test"
 date = 2021-11-20T10:08:54Z
 +++
-ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular-dependency management via the environment.
+ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular, dependency management via the environment.
 
 In this post, I will explain how dependencies are used in ZIO Test, how to provide shared dependencies between tests, and how to modify them using Test Aspects. But first, let's understand how ZIO Test works under the hood.
 
@@ -36,10 +36,10 @@ object MySpec extends DefaultRunnableSpec {                 // (1)
 }
 ```
 
-1. In ZIO Test, it's common to refer to suites of tests as Specs, here we extend `DefaultRunnableSpec` which is responsible for several things. More on that later.
+1. In ZIO Test, it's common to refer to suites of tests as Specs. Here we extend `DefaultRunnableSpec`, which is responsible for several things. More on that later.
 2. The abstract value `spec` must be implemented here by providing it with a `suite` containing tests or additional (nested) suites.
-3. The `test`/`testM` definition describes tests that perform or don't any ZIO effects, respectively.
-4. Part of ZIO Test's in-memory implementations of base services, here-a test console allowing to capture the output as a `Vector[String]`
+3. The `test`/`testM` definitions describe tests that do not perform, or do perform, ZIO effects, respectively.
+4. Part of ZIO Test's in-memory implementations of base services, here, a test console allowing us to capture the output as a `Vector[String]`
 5. The assertion syntax of [Smart Assertions](https://zio.dev/reference/test/assertions/smart-assertions/), which are technically a part of ZIO 2.0, but were backported to ZIO 1.x due to their extreme usefulness.
 6. Additional tests or suites, separated by commas.
 
@@ -134,7 +134,7 @@ This means that the service layer was created just once (creating a single UUID 
 
 # Modifying shared dependencies for each test
 
-Now that we know how to provide shared dependencies to tests, sometimes there's a need to modify a value/service in the test before it's executed (think of creating a fresh database per-test for Postgres Testcontiner integration tests, which is the subject of an upcoming post!).
+Now that we know how to provide shared dependencies to tests, sometimes there's a need to modify a value/service in the test before it's executed (think of creating a fresh database per test for Postgres Testcontainer integration tests, which is the subject of an upcoming post!).
 
 This is done with [Test Aspects](https://zio.dev/version-1.x/howto/test-effects/#test-aspects). You can think of aspects as functions `ZIO => ZIO`, applying some transformation to the effect before/after its execution. Test Aspects cannot be used to *provide* or *eliminate* requirements from tests, but they can be used to *modify* the environment contained within the test!
 
@@ -152,7 +152,7 @@ def newUuid = new PerTest.AtLeastR[Has[UUID]] {
 
 This aspect states that an environment containing *at least* `Has[UUID]` is required (and recall that by using `ZIO.service[UUID]` in our tests, we now require it). In the `perTest` method of the aspect, we are given the test as a ZIO effect and can perform any operation on it!
 
-In particular, we can call `updateService` on it, *replacing* the existing UUID service value with the one we created in the line above! This means that the original (shared) uuid is replaced with this fresh one, and because this is a per-test aspect, it will be applied to each test individually, resulting in:
+In particular, we can call `updateService` on it, *replacing* the existing UUID service value with the one we created in the line above! This means that the original (shared) UUID is replaced with this fresh one, and because this is a per-test aspect, it will be applied to each test individually, resulting in:
 
 ```
 Testing started at 15:23 ...
@@ -160,7 +160,7 @@ dc723d70-83c1-4c6c-9478-7a2087533bb4
 728ed277-7d49-4b22-a5a3-6db3d32ff7b0
 ```
 
-Meaning that each test got a fresh value for UUID, despite it being provided as shared initially.
+Meaning that each test got a fresh UUID value, despite it being provided as shared initially.
 
 Finally, putting it all together looks like this:
 
@@ -188,4 +188,4 @@ object MySpec extends DefaultRunnableSpec {
 
 # Summary
 
-This post's goal was to provide the background and motivation to using and modifying shared dependencies in ZIO Tests. In my upcoming post, I will explain how to take advantage of this technique to improve upon [integration testing with Postgres Testcontainers](/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/) by over **70%**, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!
+This post's goal was to provide the background and motivation for using and modifying shared dependencies in ZIO Test. In my upcoming post, I will explain how to take advantage of this technique to improve upon [integration testing with Postgres Testcontainers](/posts/running-postgres-integration-tests-easily-with-testcontainers-and-zio-test/) by over **70%**, by re-using a single Testcontainer instance for all the tests, giving each a fresh copy of the database for complete isolation!

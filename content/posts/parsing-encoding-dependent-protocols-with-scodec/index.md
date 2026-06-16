@@ -4,7 +4,7 @@ date = 2021-11-19T13:29:31Z
 +++
 At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or checks, for the US folks) are transmitted electronically between financial institutions.
 
-X9.37 is one such archaic binary protocol still in use today. The specification allows this file to be encoded either in the 8-bit IBM [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC) encoding or ASCII, and it contains both plain-text characters as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called [scodec](https://github.com/scodec/scodec), a combinator library for creating codecs for binary data. I recommend reading about the library and getting familiarized with the syntax before reading further.
+X9.37 is one such archaic binary protocol still in use today. The specification allows this file to be encoded either in the 8-bit IBM [EBCDIC](https://en.wikipedia.org/wiki/EBCDIC) encoding or ASCII, and it contains both plain-text characters as well as TIFF image data. In Scala, one of the best ways to parse such protocols is to use a wonderful library called [scodec](https://github.com/scodec/scodec), a combinator library for creating codecs for binary data. I recommend reading about the library and getting familiar with the syntax before reading further.
 
 <!-- more -->
 
@@ -76,9 +76,9 @@ In the most simplified form, the X9.37 protocol contains record sections, and ea
                           └───────┘
 ```
 
-Unfortunately, the protocol specifies neither in the Header nor Control records the actual number of these Cash Letter records, and all scodec combinators I found that deal with lists expect to take a number specifying the number of items to decode.
+Unfortunately, neither the Header nor Control records specify the actual number of these Cash Letter records, and all scodec combinators I found that deal with lists expect a number specifying the number of items to decode.
 
-After a few iterations, I came up with the following function that tries to read a list of unknown size, and when it fails - returns the number of items it read so far:
+After a few iterations, I came up with the following function that tries to read a list of unknown size, and when it fails, returns the number of items it read so far:
 
 ```scala
 /**
