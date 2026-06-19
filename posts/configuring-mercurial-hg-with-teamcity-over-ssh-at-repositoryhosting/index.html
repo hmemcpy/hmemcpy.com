@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2010-09-19T11:30:00Z">2010-09-19</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>At <a rel="external" href="http://site.typemock.com/">Typemock</a>, we're making the change of moving our source control from SVN to Mercurial (Hg). Side note: <strong>Hg</strong> is a symbol for [Mercury](http://en.wikipedia.org/wiki/Mercury_(element) in the periodic table.</p>
+<p>We use <a rel="external" href="http://www.jetbrains.com/teamcity/">TeamCity</a> as our continuous integration server, and it took some trickery to configure it to recognize the repository. For this, I will use a repository hosted at <a rel="external" href="http://repositoryhosting.com/">RepositoryHosting</a>.</p>
+<p>Here are the steps required for configuring Mercurial with SSH in TeamCity:</p>
+<span id="continue-reading"></span>
+<p><strong>Part 1:</strong> Installing TortoiseHg and generating a cryptographic key-pair for secure authentication</p>
+<ul>
+<li>Download and install <a rel="external" href="http://tortoisehg.bitbucket.org/">TortoiseHg</a>. Make sure to install the correct version (32-bit or 64-bit).</li>
+<li>Download and run <a rel="external" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTYGen</a> to generate a key for authentication.</li>
+<li>Move the mouse over the panel to generate random seed used for key generation.</li>
+<li>Copy the public key to clipboard, then go to your profile page e.g. <code>http://yournickname.repositoryhosting.com/users/my_profile</code>.</li>
+<li>Go to <strong>Public Keys</strong>, click <strong>New Key</strong></li>
+<li>Paste the public key into the <strong>Value</strong> text field, then press <strong>Add Key</strong>, and afterwards <strong>Save Changes</strong>.</li>
+<li>In PuTTYGen, click <strong>Save Private Key</strong>. You will be warned that your key is not passphrase protected. Press <strong>Yes</strong> to save the key <em>without a passphrase</em>.</li>
+</ul>
+<p><strong>Part 2:</strong> Configutre TeamCity to use Mercurial</p>
+<ul>
+<li>Go to your Project and press <strong>Edit Project Settings</strong>.</li>
+<li>Press <strong>Create build configuration</strong> and give it a name. Press <strong>VCS settings</strong> next.</li>
+<li>Press <strong>Create and attach new VCS root</strong>, and give it a name as well (such as MyProject Mercurial).</li>
+<li>Under <strong>Type of VCS</strong> choose <strong>Mercurial</strong>.</li>
+<li>Under <strong>HG command path</strong> specify the full path to where TortoiseHg is located (e.g. <code>C:\Program Files (x86)\TortoiseHg</code>).</li>
+<li>Under <strong>Pull changes from</strong> type in the URL of your hosting <strong>without the username</strong>, so that if your URL looks like this:</li>
+</ul>
+  <pre>ssh://hg@mercirual.yourdomain.com/myproject/</pre>
+<ul>
+<li>omit the <strong>hg@</strong> from the URL, and only specify:</li>
+</ul>
+  <pre>ssh://mercirual.yourdomain.com/myproject/</pre> 
+<ul>
+<li>Under <strong>User name</strong> type in <strong>hg</strong>. Leave the password blank.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting&#x2F;image1.png" alt="">
+    
+</figure>
+
+</li>
+</ul>
+<p><strong>Part 3</strong>: Modifying <code>Mercurial.ini</code></p>
+<ol>
+<li>Go to where TortoiseHg is installed (e.g. C:Program Files (x86)TortoiseHg)</li>
+<li>Open the file <strong>Mercurial.ini</strong> in a text editor, and locate the <strong>[ui]</strong> section</li>
+<li>Add (or modify) the following line:</li>
+</ol>
+  <pre>ssh = "C:\Program Files (x86)\TortoiseHg\TortoisePlink.exe" -ssh -2 -i "c:\&lt;path to your key&gt;\privateKey.ppk"</pre>
+<p>Press <strong>Test Connection</strong>. If TeamCity seems to hang at this point, and there are no message boxes appear on your screen (from a process called TortoisePlink.exe),</p>
+<ol>
+<li>Assuming TeamCity runs as a service, go to <strong>services.msc</strong>, find <strong>TeamCity Web Server</strong> and stop it.</li>
+<li>Go to <strong>Properties</strong>, then the <strong>Log On</strong> tab. and check the <em>Allow service to interact with desktop</em> checkbox.</li>
+<li>Restart the service.</li>
+</ol>
+<p>When you've done that, the service will run as a console application, and you'll be able to see the output. Try testing the connection again. This time, if there were any errors, you'll be able to see them. Reverse this once you're done troubleshooting, or when you see the Test Successful message in TeamCity.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;summary-the-2nd-software-craftsmanship-group-meeting-in-israel&#x2F;" rel="next" title="Summary: the 2nd Software Craftsmanship group meeting in Israel">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Summary: the 2nd Software Craftsmanship group meeting in Israel</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in&#x2F;" rel="prev" title="Finding static fields in solution using ReSharper and Agent Smith plug-in">
+        <span class="nav-title">Finding static fields in solution using ReSharper and Agent Smith plug-in</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

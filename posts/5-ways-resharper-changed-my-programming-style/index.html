@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 ways ReSharper changed my programming style | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="5 ways ReSharper changed my programming style">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">5 ways ReSharper changed my programming style</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2009-02-05T12:35:38Z">2009-02-05</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          5 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I love <a rel="external" href="http://www.jetbrains.com/resharper/">ReSharper</a>. It has completely changed the way I think about code. When I have to use Visual Studio without ReSharper installed, I feel like I'm writing the code in Notepad. As my first actual post on this blog I'd like to present a <em>few</em> features of ReSharper 4.1 that help me code faster, better, (stronger) and with much higher accuracy.</p>
+<span id="continue-reading"></span>
+<p>Here are a few things I <em>don't</em> do anymore:</p>
+<p><strong>1. Look for files in Solution Explorer</strong></p>
+<p>Gone are the days when I have to take my hands off the keyboard to use the mouse to find a file deep in the Solution Explorer. If I have to find a type, I use <strong>Go To Type</strong> (Ctrl-<strong>T</strong> [Visual Studio] or Ctrl-<strong>N</strong> [IntelliJ]):
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image.png" alt="">
+    
+</figure>
+
+</p>
+<p>Usually that's enough, since I almost always know the type name I'm looking for, otherwise I'd look for the file itself using <strong>Go To File</strong> (Ctrl-Shift-<strong>T</strong> [Visual Studio] or Ctrl-Shift-<strong>N</strong> [IntelliJ]):
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<p>Another great feature of those options is acronym support. For example, I can quickly navigate to <strong>WebDavMethodLogger</strong> class by typing <strong>WDML</strong> (if the type name is Pascal Cased), or <strong>wdml</strong> in lowercase:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<p>More interesting Go To navigations: <strong>Go To Symbol</strong> (Alt-Shift-T [Visual Studio] or Ctrl-Alt-Shift-<strong>N</strong> [IntelliJ]), <strong>Go To Member</strong> (Alt- [Visual Studio] or Ctrl-<strong>F12</strong> [IntelliJ]).</p>
+<p><strong>2. Manually create constructors, fields, properties</strong></p>
+<p>Meet one of my best friends - <strong>Generate</strong> (Alt-Insert). Pressing this shortcut anywhere in the file will popup this menu:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image3.png" alt="">
+    
+</figure>
+
+</p>
+<p>If I select <strong>Constructor</strong> from the menu, I'll get a dialog in which I'll be able to specify constructor parameters, and automatically map them into local fields.</p>
+<p>Let's say you've made an empty class <em>Person</em>, and manually typed out the following:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image4.png" alt="">
+    
+</figure>
+
+</p>
+<p>Notice two things here: the parameter names <strong>name</strong> and <strong>lastName</strong> are grayed out. It means that they are not (yet) used anywhere in our class. Also, notice the red bulb on the left side? That is my other best friend: the <strong>Action</strong> (Alt-Enter) key. Pressing Alt-Enter when will give this menu:</p>
+<p>
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image5.png" alt="">
+    
+</figure>
+
+
+Few keystrokes later, and I have the following code:</p>
+<p>
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image6.png" alt="">
+    
+</figure>
+
+
+The Action key presents contextual actions, such as removing unused methods, split/join variable declarations, turn string concatenations into **string.Format, **where they are applicable, and many more.</p>
+<p><strong>3. Rebuild the solution to find errors/making sure the code compiles</strong></p>
+<p>I wonder how many years have been spent watching the code trying to compile, only to get a nice list of errors with different reasons why it can't. ReSharper provides visual cues to things that are wrong with your code:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image7.png" alt="">
+    
+</figure>
+
+</p>
+<p>Notice the little red lines on the scroll bar (on the left). These are compilation errors in the code. ReSharper analyzes the code as you type, and displays errors immediately. You can hover above them with the mouse, and the hint will show what's wrong. To navigate to the error, click with the mouse, or better use the <strong>Go To Next Error</strong> (Shift-Alt-PgUp/PgDown [Visual Studio] or Alt-<strong>F12</strong>/Shift-Alt-<strong>F12</strong> [IntelliJ]) key.</p>
+<p>The red circle in the status bar shows total files with errors in the entire solution. If this is turned on (disabled by default in new solutions), the same shortcut will navigate to the errors in the entire solution.</p>
+<p>Other visual clues are Word-like squiggly lines under the used to describe other miscellaneous errors, warnings and suggestions.</p>
+<p><strong>4. Use text search/find references to navigate interfaces and abstract class implementations</strong></p>
+<p>One of the most useful features that ReSharper provides is navigation to implementers from base classes, and vice-versa. By using <strong>Navigate from Here to</strong> (Alt-`) I get a popup which allows to quickly navigate to all implementations:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;5-ways-resharper-changed-my-programming-style&#x2F;image8.png" alt="">
+    
+</figure>
+
+</p>
+<p>I can also go to the definition of the type by performing <strong>Ctrl-Left click</strong>, or pressing <strong>F12</strong> [Visual Studio] or Ctrl-<strong>B</strong> [IntelliJ] on the type name in the code.</p>
+<p><strong>5. Move code around by select/drag-drop or copy/paste</strong></p>
+<p>Sometimes I need to re-arrange methods within the class. Instead of selecting the code with the mouse and then cut/paste it, I use <strong>Move code Up/Down</strong> (Ctrl-Shift-Alt-Up/Down) when my caret is on on the method name. Same shortcut works when trying to move code lines within the method. If I need to select some portions of my method, I use <strong>Extend selection</strong> (Ctrl-W) which selects just the parts of the code I need. If I select too much, I can use <strong>Shrink selection</strong> (Ctrl-Shift-W).</p>
+<p>This is a very small subset of features that make ReSharper. It's a wonderful addition that makes my job much easier. Sure, it takes time to get used to and configure properly, but once it's configured to suit all your need, you'll never want to continue writing code without it.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;console-writeline-hello-world&#x2F;" rel="next" title="Console.WriteLine(&quot;Hello World!&quot;);">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Console.WriteLine(&quot;Hello World!&quot;);</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;awesome-tip-copy-text-from-any-messagebox-to-clipboard&#x2F;" rel="prev" title="Awesome tip: Copy text from any Message Box to Clipboard">
+        <span class="nav-title">Awesome tip: Copy text from any Message Box to Clipboard</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

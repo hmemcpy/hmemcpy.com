@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your C# is already functional, but only if you let it | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your C# is already functional, but only if you let it">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;your-csharp-is-already-functional&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Your C# is already functional, but only if you let it</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-03-06T00:00:27Z">2020-03-06</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          5 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;your-csharp-is-already-functional&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>A few days ago I <a rel="external" href="https://twitter.com/hmemcpy/status/1235287026364276737">tweeted</a> a C# code snippet, showing a <a rel="external" href="https://en.wikipedia.org/wiki/Fizz_buzz">FizzBuzz</a> implementation using some of the <a rel="external" href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8">new features in C# 8.0</a>. The tweet "went viral", as the kids say, with several people admiring the terse and <em>functional</em> aspect of it, while others asked me why I wasn't writing it in F# in the first place?</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">First time writing C# in 4 years :P <a href="https://t.co/m7kM9j9skN">pic.twitter.com/m7kM9j9skN</a></p>&mdash; Igal Tabachnik (@hmemcpy) <a href="https://twitter.com/hmemcpy/status/1235287026364276737?ref_src=twsrc%5Etfw">March 4, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<span id="continue-reading"></span>
+<p>It has been over 4 years since I last wrote C#, and being exposed to functional programming clearly affected how I write code today. The snippet I wrote seems very neat and natural, however, some people expressed concerns that it doesn't <em>feel</em> like C# code --- "<em>It looks too functional.</em>"</p>
+<p><strong>You keep using that word...</strong></p>
+<p>Depending on who you ask, the word <em>functional</em> means different things to different people. But rather than debating semantics, I'd like to offer an explanation of <em>why</em> this tiny FizzBuzz snippet <em>feels</em> functional.</p>
+<p>But first, let's unpack the snippet (with a few tweaks to the above image):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public static void</span><span style="color: #88C0D0;"> Main</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">string</span><span style="color: #ECEFF4;">[]</span><span> args</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    string</span><span style="color: #88C0D0;"> FizzBuzz</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">int</span><span> x</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt;</span><span style="color: #616E88;">                // Local function, defined as an expression-bodied method</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">,</span><span> x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> switch</span><span style="color: #ECEFF4;"> {</span><span style="color: #616E88;">    // Tuple definition  </span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">            (</span><span style="color: #81A1C1;">true</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> true</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt;</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">FizzBuzz</span><span style="color: #ECEFF4;">&quot;,</span><span style="color: #616E88;">      // Pattern-matching on the tuple values</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">            (</span><span style="color: #81A1C1;">true</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> _</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">    =&gt;</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Fizz</span><span style="color: #ECEFF4;">&quot;,</span><span style="color: #616E88;">          // Discard (_) is used to omit</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">            (</span><span style="color: #81A1C1;">_</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> true</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">    =&gt;</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Buzz</span><span style="color: #ECEFF4;">&quot;,</span><span style="color: #616E88;">          // the values we don&#39;t care about</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">            _            =&gt;</span><span> x</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">ToString</span><span style="color: #ECEFF4;">()</span><span>     </span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        }</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span>    </span></span>
+<span class="giallo-l"><span>    Enumerable</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Range</span><span style="color: #ECEFF4;">(</span><span style="color: #B48EAD;">1</span><span style="color: #ECEFF4;">,</span><span style="color: #B48EAD;"> 100</span><span style="color: #ECEFF4;">)</span><span style="color: #616E88;">                 // Make a range of numbers from 1 to 100</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        .</span><span style="color: #88C0D0;">Select</span><span style="color: #ECEFF4;">(</span><span>FizzBuzz</span><span style="color: #ECEFF4;">).</span><span style="color: #88C0D0;">ToList</span><span style="color: #ECEFF4;">()</span><span style="color: #616E88;">           // Map each number to a corresponding FizzBuzz value</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">        .</span><span style="color: #88C0D0;">ForEach</span><span style="color: #ECEFF4;">(</span><span>Console</span><span style="color: #ECEFF4;">.</span><span>WriteLine</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span><span style="color: #616E88;">         // Print the result to the console  </span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>The novelty here lies in using a tuple (pair) to capture the result of both equations together (<code>x % 3 == 0</code> and <code>x % 5 == 0</code>). This allows using pattern matching to deconstruct the tuple and examine both values together. If none of the cases match, a default (<code>_</code>) case will always match, returning the string value of the number.</p>
+<p>However, none of the many "functional" features used in the snippet (including LINQ-style <code>foreach</code> loops) are what makes this approach in itself <em>functional</em>. What makes it functional is the fact that except for the final printing to the console, all of the methods used in this program are <em><strong>expressions</strong></em>.</p>
+<p><strong>Expression-oriented programming</strong></p>
+<p>Simply put, an <em>expression</em> is a question that always has an answer. In programming terms, an expression is a combination of constants, variables, operators, and functions, evaluated by the runtime to compute ("return") a value. To illustrate the difference with <em>statements</em>, let's write a more common C# solution to FizzBuzz:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public static void</span><span style="color: #88C0D0;"> Main</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">string</span><span style="color: #ECEFF4;">[]</span><span> args</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    foreach</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">int</span><span> x</span><span style="color: #81A1C1;"> in</span><span> Enumerable</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Range</span><span style="color: #ECEFF4;">(</span><span style="color: #B48EAD;">1</span><span style="color: #ECEFF4;">,</span><span style="color: #B48EAD;"> 100</span><span style="color: #ECEFF4;">)) {</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">        FizzBuzz</span><span style="color: #ECEFF4;">(</span><span>x</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">public static void</span><span style="color: #88C0D0;"> FizzBuzz</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">int</span><span> x</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> &amp;&amp;</span><span> x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>        Console</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">WriteLine</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">FizzBuzz</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>        Console</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">WriteLine</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">Fizz</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>        Console</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">WriteLine</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">Buzz</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else</span></span>
+<span class="giallo-l"><span>        Console</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">WriteLine</span><span style="color: #ECEFF4;">(</span><span>x</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Obviously, this snippet could be tweaked to remove duplication, but I doubt anyone would argue this does not look like C#. And yet, upon closer inspection of the <code>FizzBuzz</code> method, it reveals several design issues (even in a program as simple as FizzBuzz).</p>
+<p>First of all, this program violates the Single Responsibility principle. It mixes both "business logic" of calculating the output value based on the number with the act of printing this value to the console. As a consequence, it violates the Dependency Inversion principle by tightly-coupling to the console output. Finally, we cannot reuse and test this program in isolation without introducing a few indirections. For such a trivial program like FizzBuzz we would never do this, but taken to the extreme, it's easy to end up with <a rel="external" href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition">Enterprise FizzBuzz</a>.</p>
+<p>All of the problems stated above can be solved by separating the act of producing a FizzBuzz value and printing it to the console. Even without using fancy language features, the simplest act of <em>returning a value to the caller</em> frees us from the responsibility of doing something with that value:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public static string</span><span style="color: #88C0D0;"> FizzBuzz</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">int</span><span> x</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> &amp;&amp;</span><span> x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">       return</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">FizzBuzz</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        return</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Fizz</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else if</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #81A1C1;"> %</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> ==</span><span style="color: #B48EAD;"> 0</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        return</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">Buzz</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    else</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        return</span><span> x</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">ToString</span><span style="color: #ECEFF4;">()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>This might not look like a dramatic change (and it could be implemented in various ways, here using the most naive way for illustration), but few things happened here:</p>
+<ol>
+<li>The <code>FizzBuzz</code> method is now an <em>expression</em>, given some numeric input produces a string output</li>
+<li>It has no other responsibilities or side-effects, making it a <em>pure function</em></li>
+<li>It can be tested and reused on its own, without any additional dependencies or setup</li>
+<li>The caller of this function is free to do whatever it wants with the result -- not our responsibility</li>
+</ol>
+<p>And here lies the <em>essence</em> of functional programming - all functional code is made up of expressions, producing some value and returning it to their callers. These expressions are usually stand-alone, completely specified by their input parameters. At the very top, the entry point (or, sometimes known as "the end of the world") these values are gathered and interacted upon with the rest of the world. In object-oriented jargon, this is sometimes called the "Onion architecture" (or "Ports and Adapters") - a pure core consisting of business logic and the imperative outer shell that is responsible for interactions with the external world.</p>
+<img src="onion.png" width="400" style="display: block; margin: 0 auto;" />
+<p><strong>C# (and Java and Python and ...) can be functional</strong></p>
+<p>Using expressions instead of statements in the small is at the core of nearly all programming languages today. C# evolved over time to introduce features to make it easier to work with expressions: LINQ, expression-bodied methods, pattern matching and more. These features are oftentimes called "functional" because they are --- in languages such as F# these features are used <em>all the time</em>, allowing the data to flow from the inside-out. Other functional languages, such as Haskell, make it nearly impossible to have anything other than expressions.</p>
+<p>In fact, this style of programming is now encouraged by the C# team. In a recent talk given at NDC London, Bill Wagner urges you to change your (imperative) habits and embrace <em>modern</em> techniques:</p>
+<div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/aUbXGs7YTGo" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
+<p>C# (and other imperative languages, like Java) can be used functionally, but it requires a high level of diligence. These languages make the functional style the exception, not the norm. I urge you to explore other languages, where expression-oriented programming is the default, making it a first-class citizen.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;everything-i-learned-about-self-publishing-an-open-source-book&#x2F;" rel="next" title="Everything I learned about self-publishing an open-source book">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Everything I learned about self-publishing an open-source book</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;talks-i-liked&#x2F;" rel="prev" title="Talks I liked">
+        <span class="nav-title">Talks I liked</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting up a Haskell development environment in minutes in Visual Studio Code | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Setting up a Haskell development environment in minutes in Visual Studio Code">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;setting-up-a-haskell-development-environment-in-minutes-in-vscode&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Setting up a Haskell development environment in minutes in Visual Studio Code</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-02-01T13:58:22Z">2020-02-01</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;setting-up-a-haskell-development-environment-in-minutes-in-vscode&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>This was initially a long post, detailing all the manual steps required to set up a complete Haskell development environment, however, thanks to a <a rel="external" href="https://twitter.com/k_cieslak/status/1222115319881310210">hint</a> by <a rel="external" href="https://twitter.com/k_cieslak">Krzysztof Cieślak</a>, this process is now fully automated, allowing you to get started in <em>minutes</em>. All thanks to a Visual Studio Code feature called <em>devcontainers</em>, supporting running the <a rel="external" href="https://code.visualstudio.com/docs/remote/containers">development environment in a Docker container</a>.</p>
+<span id="continue-reading"></span><h4 id="prerequisites">Prerequisites</h4>
+<ol>
+<li>Visual Studio Code with <a rel="external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development extension pack</a></li>
+<li>Docker Desktop v2.0+ (requires Windows 10 Pro/Enterprise)</li>
+<li>Initial Docker setup, detailed here: https://code.visualstudio.com/docs/remote/containers</li>
+<li>The <a rel="external" href="https://github.com/hmemcpy/haskell-hie-devcontainer"><code>haskell-hie-devcontainer</code></a>, by yours truly!</li>
+</ol>
+<h4 id="docker-configuration">Docker configuration</h4>
+<p>Install <a rel="external" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>, and configure it according to the steps detailed in <a rel="external" href="https://code.visualstudio.com/docs/remote/containers">the documentation</a> for remote development. This requires sharing the directory containing your source code with Docker, and this feature is only available via the Docker Desktop UI. Once you're done, install the <a rel="external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development extension pack</a> in Visual Studio Code.</p>
+<h4 id="preparing-your-project">Preparing your project</h4>
+<p>To set up your project, download the contents of <a rel="external" href="https://github.com/hmemcpy/haskell-hie-devcontainer">this repository</a>, and place the <code>.devcontainer</code> directory in the root of your project, and restart Visual Studio Code.</p>
+<p>Provided you've set it up correctly, the next time Visual Studio Code starts, it will prompt you to reload your project in the container:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;setting-up-a-haskell-development-environment-in-minutes-in-vscode&#x2F;devcontainer.png" alt="">
+    
+</figure>
+
+<p>Pressing the <strong>Reopen in Container</strong> button will reload your project, and perform the automated steps to download and configure the Docker image for Haskell development.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;setting-up-a-haskell-development-environment-in-minutes-in-vscode&#x2F;haskell-ide.png" alt="">
+    
+</figure>
+
+<p>Note that the initial download might take a few moments.</p>
+<h4 id="technical-details">Technical details</h4>
+<p>The <code>.devcontainer</code> directory contains two files: the <code>Dockerfile</code> describing the image, and a <code>devcontainer.json</code> file which has some additional settings for Visual Studio Code.</p>
+<p>The <code>Dockerfile</code> is an image based on <a rel="external" href="https://hub.docker.com/r/hmemcpy/hie"><code>hmemcpy/hie</code></a> (which in turn is based on <code>nixos/hie</code>), an Alpine image which contains the following:</p>
+<ul>
+<li>The <a rel="external" href="https://nixos.org/nix/">Nix package manager</a></li>
+<li>Configuration for <a rel="external" href="https://cachix.org/">Cachix</a> - a binary cache for Nix</li>
+<li>Glasgow Haskell Compiler (GHC) version 8.6.5</li>
+<li>HIE (<a rel="external" href="https://github.com/haskell/haskell-ide-engine">haskell-ide-engine</a>) for GHC 8.6.5</li>
+</ul>
+<p>The <code>devcontainer.json</code> has some additional configuration, in particular, the required extensions that have to be installed, and the name of the remote user (must match the one in the <code>Dockerfile</code>).</p>
+<p>Please feel free to contribute improvements to this devcontainer!</p>
+<p><strong>Note</strong>: it is quite possible that the process will be entirely automated if the <code>.devcontainer</code> configuration will be accepted to the Microsoft repository, allowing it to be configured straight from Visual Studio Code, without any additional downloads. This is currently tracked in an issue <a rel="external" href="https://github.com/microsoft/vscode-dev-containers/issues/202">microsoft/vscode-dev-containers#202</a>. Stay tuned for updates!</p>
+<h4 id="addendum-manual-installation-without-docker">Addendum: manual installation without Docker</h4>
+<p>If you don't want to install Docker or use devcontainers, the following steps will allow you to manually install the <a rel="external" href="https://github.com/haskell/haskell-ide-engine">haskell-ide-engine</a> (HIE) components, which power the IDE features in Visual Studio Code:</p>
+<ol>
+<li>Install the <a rel="external" href="https://nixos.org/nix/">Nix package manager</a>
+<ul>
+<li>on Windows 10, Nix can be installed in WSL2 (requires Insiders Build 18917 or higher), or WSL after applying <a rel="external" href="https://nathan.gs/2019/04/12/nix-on-windows/">these changes</a></li>
+</ul>
+</li>
+<li>Download the <a rel="external" href="https://www.haskell.org/platform/">Haskell Platform</a> (GHC), or install with Nix:
+<ul>
+<li><code>nix-env -i ghc-8.6.5</code></li>
+</ul>
+</li>
+<li>Install <a rel="external" href="https://cachix.org/">Cachix</a> (binary cache for Nix)
+<ul>
+<li><code>nix-env -iA cachix -f https://cachix.org/api/v1/install</code></li>
+</ul>
+</li>
+<li>Configure to use <code>all-hies</code> (cached repository of all HIE builds)
+<ul>
+<li><code>cachix use all-hies</code></li>
+</ul>
+</li>
+<li>Install the matching HIE version for your GHC (e.g. 8.6.5):
+<ul>
+<li><code>nix-env -iA selection --arg selector 'p: { inherit (p) ghc865; }' -f https://github.com/infinisil/all-hies/tarball/master</code></li>
+</ul>
+</li>
+<li>Install the <a rel="external" href="https://marketplace.visualstudio.com/items?itemName=alanz.vscode-hie-server">Haskell Language Server</a> extension in Visual Studio Code</li>
+</ol>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-2&#x2F;" rel="next" title="Functional Programming in Haskell (Stepik course notes) - module 2">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Functional Programming in Haskell (Stepik course notes) - module 2</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;speeding-up-your-latex-builds-by-reusing-minted-caches&#x2F;" rel="prev" title="Speeding up your LaTeX builds by reusing minted caches">
+        <span class="nav-title">Speeding up your LaTeX builds by reusing minted caches</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

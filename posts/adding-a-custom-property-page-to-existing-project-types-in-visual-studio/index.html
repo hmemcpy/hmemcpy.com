@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adding a custom property page to existing project types in Visual Studio | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adding a custom property page to existing project types in Visual Studio">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;adding-a-custom-property-page-to-existing-project-types-in-visual-studio&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Adding a custom property page to existing project types in Visual Studio</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2015-03-27T22:53:18Z">2015-03-27</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;adding-a-custom-property-page-to-existing-project-types-in-visual-studio&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p><em>Note: this post assumes some knowledge developing Visual Studio Extensions (VSIX).</em></p>
+<p>Suppose you're developing custom tooling that enhances (or otherwise modifies) current project types (for example, C# class libraries or Web applications). This is most commonly done by specifying custom MSBuild properties, typically by adding a <code>.targets</code> file to the project file itself (possibly via NuGet, which can <a rel="external" href="http://docs.nuget.org/Release-Notes/NuGet-2.5#automatic-import-of-msbuild-targets-and-props-files">import <code>.targets</code> files automatically</a>).</p>
+<p>One common way to interact with those custom properties is by adding a page in the project properties, however, most documentation about extending project properties refers to creating your own project systems. Any documentation about extending existing projects is either out of date, or nonexistent.</p>
+<span id="continue-reading"></span>
+<p>But, when there's a will - there's a way. TL;DR: Here's how to add a custom property page to a regular C# console application:</p>
+<ol>
+<li>Create an (empty) VSIX project</li>
+<li>Add a reference to the following assemblies: <code>Microsoft.VisualStudio.AppDesigner.dll</code> (located in the GAC), and <code>Microsoft.VisualStudio.ManagedInterfaces.dll</code> (from the Visual Studio SDK)</li>
+<li>Create a new class that derives from <code>Microsoft.VisualStudio.Editors.PropertyPages.PropPageBase</code></li>
+<li>Implement the class as follows:</li>
+</ol>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #ECEFF4;">[</span><span>ComVisible</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">true</span><span style="color: #ECEFF4;">)]</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">[</span><span>Guid</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">some-guid</span><span style="color: #ECEFF4;">&quot;)]</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">[</span><span>ProvideObject</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">typeof</span><span style="color: #ECEFF4;">(</span><span>MyPropertyPageProvider</span><span style="color: #ECEFF4;">))]</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">public class</span><span style="color: #8FBCBB;"> MyPropertyPageProvider</span><span style="color: #ECEFF4;"> :</span><span> PropPageBase</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    protected override</span><span> Type ControlType</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        get</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;"> return typeof</span><span style="color: #ECEFF4;">(</span><span>MyPropertyPageControl</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span><span style="color: #ECEFF4;"> }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    protected override string</span><span> Title</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span><span> </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        get</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;"> return</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">My Property Page</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">;</span><span style="color: #ECEFF4;"> }</span><span> </span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    protected override</span><span> Control</span><span style="color: #88C0D0;"> CreateControl</span><span style="color: #ECEFF4;">()</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        return new</span><span> MyPropertyPageControl</span><span style="color: #ECEFF4;">()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Make sure to provide a new GUID in the <code>GuidAttribute</code> (tip: if you use ReSharper, you can create new GUIDs on the fly by typing <code>nguid</code> and pressing Tab), we will need this GUID again soon. Specify the title of your property page, and provide an instance of a UserControl-derived (WinForms, baby!) page that will be the UI. Visual Studio provides an abstract <code>Microsoft.VisualStudio.Editors.PropertyPages.PropPageUserControlBase</code> class you can derive from.</p>
+<p><strong>Important:</strong> Visual Studio will try reading the size of the control from the assembly's compiled resources - this requires a .resx file for the user control. Best to create a new User Control using the Add - User Control context menu (so it can have a .Designer and a .resx files), and change the base type to <code>PropPageUserControlBase</code> afterwards.</p>
+<p>One last piece of the puzzle is hooking it up - this is where a bit of MSBuild magic comes in. After running your extension (in the Experimental Instance), create a new, say, C# Console application. When the project is created, open its .csproj file in Notepad (or your favorite editor), and add the following property into one of the <code>PropertyGroup</code>s (or create your own <code>PropertyGroup</code>, e.g.):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&lt;PropertyGroup&gt;</span></span>
+<span class="giallo-l"><span>  &lt;CfgPropertyPagesGuidsAddCSharp&gt;{some-guid}&lt;/CfgPropertyPagesGuidsAddCSharp&gt;</span></span>
+<span class="giallo-l"><span>&lt;/PropertyGroup&gt;</span></span></code></pre>
+<p>Using the GUID from before. Save the .csproj file, and when you reload it in Visual Studio, you will now have a brand new (albeit empty) property page in the project's properties!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;adding-a-custom-property-page-to-existing-project-types-in-visual-studio&#x2F;prop.png" alt="Hello Property Page!">
+    
+</figure>
+
+<p>(You can probably add this property dynamically with DTE from your extension, instead of modifying existing projects, but I haven't tried it.)</p>
+<p>So what happened? Where did <code>CfgPropertyPagesGuidsAddCSharp</code> come from, and what makes it so special? Turns out, after a long investigation, it's an <em>undocumented</em> property, which is a part of the legacy C# and VB project systems. When Visual Studio processes C# or VB projects, it will look for this property, and attempt to instantiate the COM class at a given GUID. If successful, it will add it as a property page.</p>
+<p>I was able to confirm this works in Visual Studio 2013 and 2015, not sure about the earlier editions.</p>
+<p>So there you have it, a bit of undocumented functionality makes the impossible possible :)</p>
+<p>Happy hacking!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;disabling-certain-invisibles-in-the-atom-editor&#x2F;" rel="next" title="Disabling certain &quot;invisibles&quot; in the Atom Editor">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Disabling certain &quot;invisibles&quot; in the Atom Editor</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-a-certain-windows-update-from-installing-on-windows-10&#x2F;" rel="prev" title="Preventing a certain Windows Update from installing on Windows 10">
+        <span class="nav-title">Preventing a certain Windows Update from installing on Windows 10</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

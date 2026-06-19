@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preventing a certain Windows Update from installing on Windows 10 | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Preventing a certain Windows Update from installing on Windows 10">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-a-certain-windows-update-from-installing-on-windows-10&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Preventing a certain Windows Update from installing on Windows 10</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2015-04-15T15:30:26Z">2015-04-15</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          3 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;preventing-a-certain-windows-update-from-installing-on-windows-10&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>This post explains how to prevent a certain update from installing on a Windows 10 machine (at the time of writing, build 10049). The information below might not be accurate/relevant for future updates.</p>
+<span id="continue-reading"></span>
+<p><strong>UPDATE:</strong> Microsoft has released a <a rel="external" href="https://support.microsoft.com/en-us/kb/3073930">tool to hide unwanted updates</a>, which makes the process described below much simpler:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-a-certain-windows-update-from-installing-on-windows-10&#x2F;image.png" alt="Show or hide updates">
+    
+</figure>
+
+<hr/>
+During its preview, Windows 10 does not allow (by default), changing how updates are installed. It was possible to modify this using various [Group Policy settings and a bit of registry tweaking](http://www.askvg.com/how-to-change-windows-update-settings-when-managed-or-disabled-by-system-administrator/), but since build 10049 it no longer works - it's not possible to restore the *old* Windows Update applet in Control Panel.
+<p>On my machine (HP EliteBook 8570w), an update for the Synaptics TouchPad drivers took away my middle button, it simply did not appear anymore on the TouchPad properties. Uninstalling the update, and installing the Windows 8.1 Synaptics driver from the HP website helped, but within a day it was automatically updated again.</p>
+<p>An answer on SuperUser suggested <a rel="external" href="http://superuser.com/a/665163/101">disabling all automatic driver updates</a>, but I didn't want to do that. Luckily, I found a way to disable this particular update despite Windows Update settings were not changeable with a wonderful set of PowerShell tools called <a rel="external" href="https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc">Windows Update PowerShell Module</a>.</p>
+<p>Here's how to install the PowerShell module and disable unwanted Windows Updates:</p>
+<ul>
+<li>Download the <a rel="external" href="https://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc">Windows Update PowerShell Module</a>, and extract it to either</li>
+</ul>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>%USERPROFILE%\Documents\WindowsPowerShell\Modules</span></span></code></pre>
+<p>or</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>%WINDIR%\System32\WindowsPowerShell\v1.0\Modules</span></span></code></pre>
+<p>(the former does not require elevation)</p>
+<ul>
+<li>Temporary disable Execution Policy, to allow importing unsigned scripts. From an elevated PowerShell console type:</li>
+</ul>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Set-ExecutionPolicy Unrestricted</span></span></code></pre>
+<p>followed by:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Import-Module PSWindowsUpdate</span></span></code></pre>
+<p>After the module had been imported, restore the Execution Policy to a reasonable setting, such as <code>RemoteSigned</code>.</p>
+<ul>
+<li>Uninstall the unwanted update (if installed), then run the following command to get a list of all available windows updates:</li>
+</ul>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>PS&gt; Get-WUList</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>ComputerName Status KB          Size Title</span></span>
+<span class="giallo-l"><span>------------ ------ --          ---- -----</span></span>
+<span class="giallo-l"><span>LAMBDACORE   D-----            65 MB Synaptics driver update for Synaptics SMBus TouchPad</span></span>
+<span class="giallo-l"><span>LAMBDACORE   D----- KB2956185  68 MB Update for Microsoft OneDrive for Business (KB2956185) 64-Bit Edition</span></span>
+<span class="giallo-l"><span>LAMBDACORE   D----- KB2965255  11 MB Update for Microsoft Office 2013 (KB2965255) 64-Bit Edition</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+<ul>
+<li>Hide the <em>Synaptics driver update</em> by issuing the following command:</li>
+</ul>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>PS&gt; Hide-WUUpdate -Title &quot;Synaptics driver*&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>ComputerName Status KB          Size Title</span></span>
+<span class="giallo-l"><span>------------ ------ --          ---- -----</span></span>
+<span class="giallo-l"><span>LAMBDACORE   D--H--            65 MB Synaptics driver update for Synaptics SMBus TouchPad</span></span></code></pre>
+<p>The letter H now signifying that the update is hidden! That's it, the update will now be hidden from Windows Updates, and won't be installed. To unhide, run:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>PS&gt; Hide-WUUpdate -Title &quot;Synaptics driver*&quot; -HideStatus:$false</span></span></code></pre>
+<p>Now, all I have to do is <a href="/2013/12/how-to-change-two-finger-scroll-direction-in-synaptics-touchpad/">change the two-finger scroll direction</a>, and I can get back to work!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;adding-a-custom-property-page-to-existing-project-types-in-visual-studio&#x2F;" rel="next" title="Adding a custom property page to existing project types in Visual Studio">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Adding a custom property page to existing project types in Visual Studio</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;" rel="prev" title="7 open-source Visual Studio Extensions to make your life easier">
+        <span class="nav-title">7 open-source Visual Studio Extensions to make your life easier</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

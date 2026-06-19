@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mac survival guide for the Windows lifer | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mac survival guide for the Windows lifer">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;mac-survival-guide-for-the-windows-lifer&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Mac survival guide for the Windows lifer</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2016-06-22T11:45:51Z">2016-06-22</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;mac-survival-guide-for-the-windows-lifer&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I recently started a <a rel="external" href="http://wix.engineering/">shiny new job</a>, and got a shiny new Macbook Pro to go with it. Having spent most of my personal and professional life on Windows, I knew that an adjustment period would have to follow. Below are my impressions, the good, bad, and the ugly side of adjusting to One Cupertino Way after a lifetime on Windows.</p>
+<span id="continue-reading"></span>
+<p>One of my biggest concerns before the big switch were actually keyboard-related. I'm a Windows Power User™ (don't laugh!), and do most of the things with keyboard shortcuts. I have my favorite Windows <a href="/posts/my-top-3-favorite-windows-productivity-tools/">productivity tools</a> and <a rel="external" href="https://conemu.github.io/">terminal replacements</a> bound to specific shortcuts, which I use every day. I would have to re-learn many shortcuts, which I consider to be the worst part of the whole experience. I made it a special effort not to remap any of the default Mac keys, so I could learn to use any Mac (of which there are plenty here).</p>
+<p>Before embarking on my new adventure, I had <a rel="external" href="https://twitter.com/hmemcpy/status/739831978359463937">asked on twitter</a> for survival tips, and am very thankful to everyone who contributed!</p>
+<p>Here are the tips in no particular order, which made my initial experience much more "familiar":</p>
+<h3 id="brew">Brew</h3>
+<p><a rel="external" href="http://brew.sh/">Brew</a> (short for Homebrew) is like <a rel="external" href="https://chocolatey.org/">Chocolatey</a> for Mac! Brew is a package manager which lets you install things from the command line. A more correct comparison would be: <code>brew cask</code> is to Mac what <code>choco</code> is to Windows: <a rel="external" href="https://caskroom.github.io/">Cask</a> is an extension of Brew that lets you install applications, while plain <code>brew</code> is for installing from source.</p>
+<h3 id="shell">Shell</h3>
+<p><img style="float: left; padding: 5px;" width="250" src="image1.png" />Speaking of command line, I knew from before that Macs have a vastly superior shell experience, but I had to enable it first, by installing a few things: <a rel="external" href="https://www.iterm2.com/">iTerm2</a>, a terminal replacement for OS X, and using <code>zsh</code> instead of <code>Bash</code>, by way of <a rel="external" href="https://github.com/robbyrussell/oh-my-zsh">Oh My Zsh</a> setup. Not having any specific preference, that's what I've done, and I've very happy for it!</p>
+<p>Specific tips: Solarized Dark theme for iTerm2, and <a rel="external" href="https://gist.github.com/agnoster/3712874">agnoster</a> theme for Oh My Zsh, and a patched font to go with it, if you don't see the status icons.</p>
+<p>In addition, I have installed <a rel="external" href="https://github.com/wting/autojump">Autojump</a> via brew, (which was the inspiration for my favorite PowerShell tool <a rel="external" href="https://github.com/tkellogg/Jump-Location">Jump-Location</a>), and enabled it in Oh my Zsh using the <code>autojump</code> plugin (edit <code>~/.zshrc</code> to add it to the <code>plugins</code> entry, e.g.:)</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>plugins=(git zsh-autosuggestions autojump)</span></span></code></pre><h3 id="productivity">Productivity</h3>
+<p><img style="float: right; padding: 5px;" width="250" src="image2.jpg" />Right off the bat, I was advised to buy <a rel="external" href="https://www.alfredapp.com/">Alfred</a> a productivity tool for the Mac, which combines a launcher with a powerful search. I ended up buying it within the first 20 minutes because of the Clipboard History feature (which is a paid "Powerpack" addon). On Windows, I cannot live without my beloved <a rel="external" href="http://ditto-cp.sourceforge.net/">Ditto</a> clipboard manager, and Alfred offered a great alternative. Buying Alfred opens up additional possibilities via Workflows, which I'll mention later.</p>
+<h3 id="keyboard">Keyboard</h3>
+<p><img style="float: left; padding: 5px;" width="250" src="image3.jpg" />I love my ergonomic Microsoft Natural 4000 keyboard, and I refuse to type on anything else (which includes the keyboard on the Mac itself). Between the choice of the very thin and very painful-looking Apple Keyboard and Magic Mouse and a Microsoft Sculpt keyboard (with a Sculpt Ergonomic mouse), choosing my setup was a no-brainer.</p>
+<p>The problem, of course, is that Mac uses a different keyboard layout than Windows, specifically it has the ⌘ (Command/Cmd) key, which is used for most things Ctrl is used in Windows. To overcome this mismatch (and remain consistent with the default keyboard layout on the Mac), I used an excellent util called <a rel="external" href="https://github.com/tekezo/Karabiner">Karabiner</a>, which is a keyboard remapping on steroids.</p>
+<p>On the Mac, the rightmost control keys are: <code>Control</code>, <code>Option</code> and <code>Command</code>. To match the Mac layout, I mapped the <code>Windows</code> key to <code>Option</code>, and <code>Alt</code> to <code>Command</code> using the following Karabiner settings file:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="xml"><span class="giallo-l"><span>...</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;item&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;name&gt;</span><span>Left ALT to COMMAND_L and vice versa</span><span style="color: #81A1C1;">&lt;/name&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;identifier&gt;</span><span>private.left_alt_to_command_l</span><span style="color: #81A1C1;">&lt;/identifier&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;autogen&gt;</span><span>__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L</span><span style="color: #81A1C1;">&lt;/autogen&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;autogen&gt;</span><span>__KeyToKey__ KeyCode::COMMAND_L, KeyCode::OPTION_L</span><span style="color: #81A1C1;">&lt;/autogen&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;/item&gt;</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+<p>And some other tweaks. For the full listing, see <a rel="external" href="https://gist.github.com/hmemcpy/4e8e3eb73e3a5bf49939a457786f8a7e">this gist</a>. To import it, go to Karabiner preferences, to the <strong>Misc &amp; Uninstall</strong> tab, then in the <strong>Custom Settings</strong> press <strong>Open private.xml</strong>, and save the XML in that file. Finally, go to the <strong>Change Key</strong> tab and select the new custom settings you want to enable.</p>
+<p><strong>Update:</strong> looks like this is also possible to do without Karabiner, by adjusting the Modifier Keys in the Keyboard settings. In addition, this lets you select the specific keyboard you want to adjust (instead of having two separate profiles for Karabiner). Big thanks to Michael Martz for his comment below!
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;mac-survival-guide-for-the-windows-lifer&#x2F;image5.png" alt="">
+    
+</figure>
+
+</p>
+<h3 id="screenshots">Screenshots</h3>
+<p>There are a few ways to <a rel="external" href="https://support.apple.com/en-us/HT201361">take a screenshot</a> on a Mac, most involve pressing several keys together. I found a nicer way to do this using an <a rel="external" href="http://www.alfredforum.com/topic/902-take-quick-screenshots-using-the-screencapture-workflow/">Alfred Workflow</a>, which allows quickly launchig the screen capture tool from Alfred:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;mac-survival-guide-for-the-windows-lifer&#x2F;image4.png" alt="">
+    
+</figure>
+
+</p>
+<h3 id="misc">Misc</h3>
+<p>Other things I found useful/annoying when working on a Mac:</p>
+<ul>
+<li>
+<p><strong>Installing Applications</strong> is the #1 difference between Windows and Mac - other than Brew mentioned earlier, the "standard" way to install applications on a Mac is simply dragging its icon to the Applications folder in Finder (Mac's "Explorer"). To remove the application, drag it to the trash can! Applications on the Mac are self-contained, no installers/uninstallers required.</p>
+</li>
+<li>
+<p><strong>Minimizing</strong> does not work the same as Windows: if you minimize the active window, it will shrink itself with a "Genie effect" next to the trash can, and won't be restored with <code>Command+Tab</code>! (equivalent of Alt+Tab on Windows). To make tabbing work like Windows, <strong>Hide</strong> (<code>Command+H</code>) the active windows instead. <code>Command+Q</code> quits the application. (thanks to <a rel="external" href="https://twitter.com/JasonImison/status/739835159659307010">Jason Imison</a> for the tips!)</p>
+</li>
+<li>
+<p><strong>Selecting text</strong> behaves differently on a Mac: pressing <code>Command+Left/Right</code> jumps to the beginning/end of the line (holding <code>Shift</code> will select the text). To jump to the next/previous word, use <code>Option+Left/Right</code> instead (note: this doesn't seem to work in iTerm2 by default, it has to be <a rel="external" href="https://coderwall.com/p/h6yfda/use-and-to-jump-forwards-backwards-words-in-iterm-2-on-os-x">configured to enable it</a>.)</p>
+</li>
+<li>
+<p><strong>Other shortcut keys</strong> which are different between Windows and Mac, in no particular order:</p>
+<ul>
+<li>In <strong>Chrome</strong>, selecting the address bar is <code>Command+L</code> and not Command+D (muscle memory for Alt+D on Windows)</li>
+<li><strong>Switching between languages</strong> is <code>Command+Space</code>. It's not possible to bind language switching to Command+Shift (like Alt+Shift on Windows)</li>
+</ul>
+</li>
+</ul>
+<p>The shortcuts found in all menus are represented by symbols, which can sometimes be annoying to remember (e.g. ⌘ for the Command Key, ⌥ for the Option Key). I have installed <a rel="external" href="https://github.com/keycastr/keycastr">KeyCastr</a> - a small keystroke visualization utility to help me remember which is which.</p>
+<hr/>
+<p>I'm sure I forgot a bunch of things, but the hardest thing to adjust to, I found, is the Command/Ctrl switch: things like copy and paste on a Mac are Command+C/Command+V, which require a thumb press on the Command, which is very uncomfortable at first (think pressing Alt+C instead of Ctrl+C on Windows.)</p>
+<p>Overall, I'm happy with the experience. Things work a bit differently here, but it's not all bad. Most importantly, I finally have the <a rel="external" href="https://github.com/nvbn/thefuck">best command line utility</a> working on my Mac!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo&#x2F;" rel="next" title="Getting with the times: migrating from WordPress to GitHub Pages with Hexo">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Getting with the times: migrating from WordPress to GitHub Pages with Hexo</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;enough&#x2F;" rel="prev" title="Enough!">
+        <span class="nav-title">Enough!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

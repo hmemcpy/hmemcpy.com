@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running multithreaded unit tests with FakeItEasy | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Running multithreaded unit tests with FakeItEasy">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;running-multithreaded-unit-tests-with-fakeiteasy&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Running multithreaded unit tests with FakeItEasy</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2012-12-11T21:39:08Z">2012-12-11</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          2 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;running-multithreaded-unit-tests-with-fakeiteasy.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>While running some of my tests today, I suddenly got an <code>IndexOutOfRangeException</code>, with the following stack trace:</p>
+<span id="continue-reading"></span><pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>   at System.Collections.Generic.List`1.Add(T item)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Core.FakeScope.AddInterceptedCall(FakeManager fakeManager, ICompletedFakeObjectCall call)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Core.FakeManager.RecordInterceptedCall(InterceptedCallAdapter interceptedCall)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Core.FakeManager.Intercept(IWritableFakeObjectCall fakeObjectCall)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Core.FakeManager.Proxy_CallWasIntercepted(Object sender, CallInterceptedEventArgs e)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Creation.CastleDynamicProxy.CastleDynamicProxyGenerator.ProxyInterceptor.RaiseCallWasIntercepted(IInvocation invocation)</span></span>
+<span class="giallo-l"><span>   at FakeItEasy.Creation.CastleDynamicProxy.CastleDynamicProxyGenerator.ProxyInterceptor.Intercept(IInvocation invocation)</span></span>
+<span class="giallo-l"><span>   at Castle.DynamicProxy.AbstractInvocation.Proceed()</span></span>
+<span class="giallo-l"><span>   at Castle.Proxies.ObjectProxy_3.Info(String format, Object[] args)&lt;/pre&gt;</span></span></code></pre>
+<p>The code under test was using Tasks to do some work in the background, and was using a fake instance of an <code>ILogger</code>, which was created with <a rel="external" href="https://github.com/FakeItEasy/FakeItEasy">FakeItEasy</a> and passed to the code under test.</p>
+<p>The above stack trace shows a classic symptom of a thread-safety issue. Searching for this issue led me to <a rel="external" href="http://code.google.com/p/fakeiteasy/issues/detail?id=31">this bug report</a>, where a similar problem was described. Patrik HÃ¤gne, the creator of FakeItEasy, argues that using threading in tests is always problematic, however provides a nice and elegant solution to work around the problem.</p>
+<p>The problem, of course, that the fake instance of the logger was not thread-safe, causing the underlying interceptor to incorrectly record the calls made to the fake logger object. However, when creating fake objects with FakeItEasy, it's possible to specify build options for the fake instance. This is where Patrik's solution comes in: wrap the fake instance with a syncronization interceptor, which can be applied in the following way:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span>    A</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Fake</span><span style="color: #ECEFF4;">&lt;</span><span>ILogger</span><span style="color: #ECEFF4;">&gt;(</span><span>x</span><span style="color: #81A1C1;"> =&gt;</span><span> x</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Synchronized</span><span style="color: #ECEFF4;">())</span><span style="color: #81A1C1;">;</span></span></code></pre>
+<p>Where <code>Synchronized()</code> is an extension method you can define in your tests:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public static class</span><span style="color: #8FBCBB;"> MyPersonalFakeExtensions</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  public static</span><span> IFakeOptionsBuilder</span><span style="color: #88C0D0;"> Synchronized</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">this</span><span> IFakeOptionsBuilder builder</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    return</span><span> builder</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">OnFakeCreated</span><span style="color: #ECEFF4;">(</span><span>fake</span><span style="color: #81A1C1;"> =&gt;</span><span> </span></span>
+<span class="giallo-l"><span>	Fake</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">GetFakeManager</span><span style="color: #ECEFF4;">(</span><span>fake</span><span style="color: #ECEFF4;">).</span><span style="color: #88C0D0;">AddInterceptionListener</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">new</span><span> CallSynchronizer</span><span style="color: #ECEFF4;">()))</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>And <code>CallSynchronizer</code> is an implementation of <code>IInterceptionListener</code>, which simply adds locking around method execution:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #81A1C1;">public class</span><span style="color: #8FBCBB;"> CallSynchronizer</span><span style="color: #ECEFF4;"> :</span><span> IInterceptionListener</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  private static readonly object</span><span> synchronizationLock</span><span style="color: #81A1C1;"> = new object</span><span style="color: #ECEFF4;">()</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  public void</span><span style="color: #88C0D0;"> OnBeforeCallIntercepted</span><span style="color: #ECEFF4;">(</span><span>IWritableFakeObjectCall call</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  {</span></span>
+<span class="giallo-l"><span>    Monitor</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Enter</span><span style="color: #ECEFF4;">(</span><span>synchronizationLock</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  public void</span><span style="color: #88C0D0;"> OnAfterCallIntercepted</span><span style="color: #ECEFF4;">(</span><span>IWritableFakeObjectCall call</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  {</span></span>
+<span class="giallo-l"><span>    Monitor</span><span style="color: #ECEFF4;">.</span><span style="color: #88C0D0;">Exit</span><span style="color: #ECEFF4;">(</span><span>synchronizationLock</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  }</span><span>	</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>And that's it - using this code you can create a thread-safe fake objects to use in your tests, if you require.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-disable-windows-narrator-appearing-on-win-enter-in-windows-8&#x2F;" rel="next" title="How to disable Windows Narrator appearing on Win-Enter in Windows 8">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How to disable Windows Narrator appearing on Win-Enter in Windows 8</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet&#x2F;" rel="prev" title="Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;">
+        <span class="nav-title">Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

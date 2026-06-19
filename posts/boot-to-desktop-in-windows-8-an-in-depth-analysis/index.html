@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boot to desktop in Windows 8: An in-depth analysis | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Boot to desktop in Windows 8: An in-depth analysis">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;boot-to-desktop-in-windows-8-an-in-depth-analysis&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Boot to desktop in Windows 8: An in-depth analysis</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2012-09-08T20:40:30Z">2012-09-08</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;boot-to-desktop-in-windows-8-an-in-depth-analysis&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the <em>classic</em> Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 - it must be done via the new Start screen too.</p>
+<span id="continue-reading"></span>
+<p>I was told on twitter that the new Windows Server 2012 does boot into desktop by default. This made me very curious, and I decided to try and figure out the differences in the two operating systems myself. Below are my findings:</p>
+<p>(Here's the <strong>TL;DR</strong> version: Windows Server 2012 indeed boots into desktop by default. Upon installing the <em>Desktop Experience</em> feature in Windows Server 2012, and after the subsequent reboot, it will no longer boot into desktop, but rather into the Start screen, just like Windows 8. However, there exists a registry key, which allows changing this behavior, and booting into desktop even with the Desktop Experience enabled.</p>
+<p>On Windows 8, however, this registry key is not being read, so there is currently no way to <em>natively</em> boot into desktop, without using some 3<sup>rd</sup> party software)</p>
+<p><code>/output:verbose</code></p>
+<p>Longer version: I decided to try and find out what happens during logon into Windows Server 2012, after a new install. I installed the trial version on a virtual machine, set a password for the Administrator account during setup. After the first login, I found myself in the desktop, and the Server Manager was launched automatically. I decided to turn off the automatic start in the settings.</p>
+<p>My next step was to take a <em>snapshot</em> of all the file and registry activity that happens during the boot and logon. Armed with the perfect tool for the job - <a rel="external" href="http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx">Process Monitor</a> by Sysinternals, I turned on <strong>Enable Boot Logging</strong>, located under Options, then rebooted Windows Server.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;boot-to-desktop-in-windows-8-an-in-depth-analysis&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<p>After the reboot, I launched Process Monitor again, and was prompted to save the results of the boot logging into a PML file. I closed Process Monitor, and proceeded <a rel="external" href="http://www.win2012workstation.com/desktop-experience/">installing the Desktop Experience</a> in the Server Manager, but not before I took a VM snapshot of the current system state. The system needed to reboot, and once everything had finished installing, upon login I was presented with the new Start screen (having some new icons in it, mainly the Windows Store, and other <em>client</em> utilities.</p>
+<p>Turning on boot logging again in Process Monitor I rebooted the system again, and after login saved the new results into another PML file. The new file was significantly larger than the previous, probably having to do with new files added to the system. I saved another system snapshot, and reverted to pre-Desktop Experience. What I wanted to do is to see the new files that were added/changed in the system. In order to do that, used the good *˜ol <strong>dir /s</strong> command to list all files in the Windows directory, and its subdirectories, piping the output to a text file. I did the same after reverting to the post-Desktop Experience snapshot. I then loaded the two text files into my favorite diff tool, <a rel="external" href="http://www.scootersoftware.com/moreinfo.php">Beyond Compare</a>, and proceeded to carefully look at the differences.</p>
+<p>Many files, having to do with <em>client</em> applications, were added to miscellaneous directories under Windows. There were additional references to something that is called <strong>Immersive.UI</strong>. I knew that sounded familiar, so I opened the two PML files side by side, and started looking for <em>Immersive</em>. After several identical results, I found a single difference between the two snapshots: a call by <strong>explorer.exe</strong> to a registry key called <strong>ClientExperienceEnabled</strong>, located at</p>
+<pre>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Server</pre>
+<p>On the Desktop Experience snapshot it had the value 1, and on the pre-Desktop Experience it was 0. Using Process Monitor, I <strong>Jumped To</strong> the registry key, and tried setting it to 0. I was prompted that I did not have permission to change that value, even though I was an administrator on the system. I right-clicked on the parent key in Registry Editor, and selected <strong>Permissions</strong>. It turns out that the key's permissions were set to TrustedInstaller, meaning that the key can be only set by the operating system. I clicked <strong>Advanced</strong>, and changed the ownership to the Administrators group. Surprisingly, the system accepted the change, and I was then able to set the key's value to 0.</p>
+<p><strong>After rebooting, when I logged in, I was back in the desktop, even with the Desktop Expreience enabled!</strong></p>
+<p>Unfortunately, this trick does not work on Windows 8. Having done the same boot logging for Windows 8, I did not see any calls to the <code>ClientExperienceEnabled</code> key. Back in Windows Server, I wanted to know exactly who is responsible for calling that key. In Process Monitor, I double clicked on the line to bring up the <strong>Event Properties</strong> dialog, then went to the <strong>Stack</strong> tab.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;boot-to-desktop-in-windows-8-an-in-depth-analysis&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<p>The Stack tab shows the call stack for the particular event, the pink <span style="color: #ff00ff;"><strong>K</strong></span> specifies a kernel-mode calls, and the blue <span style="color: #0000ff;"><strong>U</strong></span> specifies user-mode calls, which what I was looking for. It showed, that the calls to the registry were made by <strong>twinui.dll</strong>, a file that, turns out, exists in both Windows Server 2012 and Windows 8, however it's not being called in Windows 8.</p>
+<p>At this point I'll skip the gory details and give you the bottom line: <strong>twinui.dll</strong> (and several others) checks for several things:</p>
+<ul>
+<li>that we're running in a Windows Server (by calling the <a rel="external" href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms724385.aspx">GetSystemMetrics</a> API)</li>
+<li>that we are licensed for a feature called <strong>explorer-ClientLoginExperienceAllowed</strong> (by using the <a rel="external" href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa965835.aspx">SLGetWindowsInformationDWORD</a> API, which is a part of the Windows <a rel="external" href="http://msdn.microsoft.com/en-us/library/windows/desktop/cc296101.aspx">Software Licensing API</a>, responsible for querying the licensed system features<sup>[1]</sup></li>
+<li>that the registry key mentioned above exists, if the two conditions above are true</li>
+</ul>
+<p>In conclusion, without modifying protected system files, or otherwise modifying the system to trick <strong>twinui.dll</strong> into thinking we're running on Windows Server, it's currently not possible to have Windows 8 boot into desktop. There are several <a rel="external" href="http://www.howtogeek.com/118106/go-directly-to-desktop-mode-in-windows-8-on-login-without-installing-extra-software/">tricks</a> and <a rel="external" href="http://retroui.com/">utilities</a> that force Windows 8 into desktop after login, but a <em>native</em> way is currently not possible.</p>
+<hr />
+<p><sup>[1]</sup> A few words on the Windows Licensing model: Windows stores system features in a registry key called <a rel="external" href="http://technet.microsoft.com/en-us/library/cc727898.aspx"><strong>ProductOptions</strong></a>, located in</p>
+<pre>HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions</pre>
+<p>This key is protected by the operating system, and attempting to change its contents not only results in a Stop Error (<a rel="external" href="http://msdn.microsoft.com/en-us/library/windows/hardware/ff559317(v=vs.85).aspx">bug check code 0x9A</a>), it violates the Windows license agreement, disqualifying you from receiving Microsoft Support.</p>
+<p>Some information about how to <strong><em>read</em></strong> the Product Options is available <a rel="external" href="http://www.remkoweijnen.nl/blog/2010/06/15/having-fun-with-windows-licensing/">here</a>.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;jetbrains-nemerle-limitless-potential&#x2F;" rel="next" title="JetBrains + Nemerle = Limitless Potential!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">JetBrains + Nemerle = Limitless Potential!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;installing-windows-8-on-hp-elitebook-8570w&#x2F;" rel="prev" title="Installing Windows 8 on HP EliteBook 8570w">
+        <span class="nav-title">Installing Windows 8 on HP EliteBook 8570w</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

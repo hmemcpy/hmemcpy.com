@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migrating from TFS to git to Visual Studio Online - the survival guide | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Migrating from TFS to git to Visual Studio Online - the survival guide">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Migrating from TFS to git to Visual Studio Online - the survival guide</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-06-29T23:28:16Z">2014-06-29</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          6 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>This is a step-by-step recount of my attempt to migrate an existing 3-year old TFS (TFVC) repository to git, while <em>keeping all the history</em>, and then moving it to <a rel="external" href="http://www.visualstudio.com/">Visual Studio Online</a>, a TFS in the cloud. This wasn't an easy task, as there is no direct export-import built into either tools. I also ran into some problems during this lengthy process, and I describe the steps to solve them. Set aside a few hours of your time, brew some coffee (or tea), and let's get started!</p>
+<span id="continue-reading"></span><h1 id="step-1-tfs-to-git">Step 1: TFS to git</h1>
+<p>We first need to export the entire TFS repository to git. This is achieved by <em>cloning</em> the entire TFS repository with <a rel="external" href="https://github.com/git-tfs/git-tfs">git-tfs</a> or <a rel="external" href="https://gittf.codeplex.com/">git-TF</a>, both open source tools. While designed to do the same, mainly, providing a bridge between git and TFS, the former is an older, more mature project, and the latter is a tool created by Microsoft for the same purpose. I initially tried to use Microsoft's git-TF, but after more than <strong>24 hours</strong> of waiting for the clone to end, it <strong>died with a Java exception</strong> (the tool by Microsoft is written in Java).</p>
+<p>First, install git-tfs. It's best installed with <a rel="external" href="https://chocolatey.org/">Chocolatey</a> by using <code>cinst gittfs</code>. Next, we need to get the exact name of the project we want to clone. Assuming your TFS server is https://tfs.contoso.com, first, run the following command to list all the branches:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git tfs list-remote-branches https://tfs.contoso.com/tfs/DefaultCollection</span></span></code></pre>
+<p>This will output all the branches that exist in the DefaultCollection. Branches marked with <code>[*]</code> are the root branches, and these are what we want to clone. Run the following command to clone the required branch, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git tfs clone https://tfs.contoso.com/tfs/DefaultCollection $/Project/MyApp/Dev [&lt;directory&gt;]</span></span></code></pre>
+<p>This will clone the Dev branch (in this case) to a new directory specified in <code>[&lt;directory&gt;]</code>. If <code>[&lt;directory&gt;]</code> is not specified, a new directory called Dev will be created.</p>
+<p><strong>The clone operation might take up to several hours</strong>, depending on the size of your TFS repository. The cloning operation with git-tfs will pull each individual check-in, and will apply it as a series of git operations, <em>recreating the history</em> exactly as it happened! Git-tfs will also run a git-gc operation every 100 commits, so the new repository size will be kept in check, and obsolete files will be removed.</p>
+<p>After the clone operation is complete, you will have a git representation of the TFS repository on your local disk.</p>
+<h1 id="step-2-git-to-visual-studio-online">Step 2: git to Visual Studio Online</h1>
+<p>After <a rel="external" href="http://go.microsoft.com/fwlink/?LinkId=307137&amp;clcid=0x409">setting up a free account</a> in Visual Studio Online (VSO), we first need to create a new project, and make sure Git is selected as the source control. After the project had been created, we can go to the CODE tab, and be presented with instructions to either clone an empty repository, or push an existing one. We want to use the second option, so first, set the remote URL in our cloned git repository to point to VSO.</p>
+<p>In a command prompt (or use any one of the 3<sup>rd</sup>-party visual Git clients), go to the cloned git directory and paste the first command, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git remote add origin https://contoso.visualstudio.com/DefaultCollection/_git/MyProj</span></span></code></pre>
+<p>This will set the origin (the remote repository address) to point to our git repository in VSO.</p>
+<p>The most important step is next: unfortunately VSO has a timeout limit of 1 hour for any connection, meaning that an attempt to push the entire repository might fail, if the repository is too big! What's worse, pushing is an atomic operation, it cannot be resumed in case of a timeout, you will have to start from the beginning.</p>
+<p>Luckily, there's a workaround I was managed to find at the bottom of a <a rel="external" href="http://social.msdn.microsoft.com/Forums/vstudio/en-US/bf7d7f99-ba50-48eb-bf0e-4fda818cf992/unable-to-push-a-git-repository">similar issue</a> in MSDN forums. Basically, we can push our repository in smaller chunks, thus minimizing the chance of a timeout. This is not the ultimate solution, but it worked for me. Our problem is currently being able to push, subsequent cloning should be much faster, since download bandwidth is almost always faster than the upload.</p>
+<p>Disclaimer: This is a somewhat advanced git usage, and I must admit, I don't quite understand it myself fully. Below is a series of commands I ran, based on the mentioned issue, and it worked in my case. YMMV. If you can explain this, please leave a comment below!</p>
+<p>First, the issue tells us, we need to get an idea of the number of commits we have, by running the following:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git rev-list --all --count</span></span></code></pre>
+<p>In my case, the number was 4012, which I assume is the total number of commits.</p>
+<p>Next, however, the issue says to run this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git rev-list master --first-parent --count</span></span></code></pre>
+<p>Which is the *depth of the <em>˜first-parent' lineage of master</em>, according to the post author. Not quite sure what this meant (the documentation wasn't very helpful, either), running this command produced a number which was about half the previous one: 2512.</p>
+<p>Not knowing exactly what the numbers meant, I decided to try and follow the post's advice, and split that number into 5 sections, of 500 commits each, and I pushed them in the following order:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git push origin master~2500:refs/heads/master</span></span>
+<span class="giallo-l"><span>git push origin master~2000:refs/heads/master</span></span>
+<span class="giallo-l"><span>git push origin master~1500:refs/heads/master</span></span>
+<span class="giallo-l"><span>git push origin master~1000:refs/heads/master</span></span>
+<span class="giallo-l"><span>git push origin master~500:refs/heads/master</span></span></code></pre>
+<p>And finally:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>git push -u origin master</span></span></code></pre>
+<p>To push the remaining commits, and create a remote tracking branch for master. To make extra sure, I ran this last command again, and got <em>Everything up-to date</em> message.</p>
+<p>Refreshing the CODE tab in VSO revealed that all my source code was uploaded successfully! I cloned the repository locally, and ran a diff between the two directories in Beyond Compare, just to make absolutely certain that everything was copied properly. It was!</p>
+<h1 id="step-3-vso-to-fogbugz">Step 3: VSO to FogBugz</h1>
+<p>Few more things left to migrate, and those are all the issues on FogBugz to VSO. In the meantime, though, we need to keep our source control integration with FogBugz. Turns out this is also not a simple task. But, this is a blog post for another day. Stay tuned!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;when-good-permissions-gone-bada-case-of-a-failed-build&#x2F;" rel="next" title="When good permissions gone bad - a case of a failed build">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">When good permissions gone bad - a case of a failed build</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2&#x2F;" rel="prev" title="How to debug anything with Visual Studio and JetBrains dotPeek v1.2!">
+        <span class="nav-title">How to debug anything with Visual Studio and JetBrains dotPeek v1.2!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

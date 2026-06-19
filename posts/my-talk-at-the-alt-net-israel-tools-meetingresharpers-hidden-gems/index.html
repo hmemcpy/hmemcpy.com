@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My talk at the ALT.NET Israel Tools meeting - ReSharper&#x27;s Hidden Gems | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="My talk at the ALT.NET Israel Tools meeting - ReSharper&#x27;s Hidden Gems">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">My talk at the ALT.NET Israel Tools meeting - ReSharper&#x27;s Hidden Gems</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2010-12-19T12:13:11Z">2010-12-19</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          7 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I was delighted to talk about <a rel="external" href="http://www.jetbrains.com/resharper/">ReSharper</a> at the recent meeting of the <a rel="external" href="http://groups.google.com/group/altnetisrael">ALT.NET Israel</a> group. I chose ReSharper for the reason that I use it every day, and I can't imagine myself programming without it. I wanted to share with the rest some tips, tricks and general hidden features of this wonderful tool that I've learned over the years using it.</p>
+<span id="continue-reading"></span>
+<p>ALT.NET Tools meetings are series of short demos (about 20 minutes per speaker). It was my first time speaking to a large group of people, and I wasn't sure if I could keep their attention. I ended up giving a good 40 minute talk, and managed to wow everyone in the room during the process!</p>
+<p>For the demo I used the following: ReSharper 5.1 (I used the latest <a rel="external" href="http://confluence.jetbrains.net/display/ReSharper/ReSharper+5.1.2+Bugfix+Builds">nightly build</a>, however the official release is recommended), <a rel="external" href="http://code.google.com/p/agentsmithplugin/">Agent Smith Plugin</a> (an open-source code style validation plugin for ReSharper) and Philip Laureano's <a rel="external" href="http://www.codeproject.com/KB/cs/LinFuPart1.aspx">LinFu</a> as the demo project.</p>
+<ul>
+<li><h3 id="nguid">nguid</h3>
+</li>
+</ul>
+<p>The first feature that I demonstrated was a <a rel="external" href="http://www.jetbrains.com/resharper/features/code_templates.html#Live_Templates">live template</a> that comes out of the box, called <strong>nguid</strong>. This allows you to instantly create a new GUID anywhere: in source files, XML/Config files or any text file that is opened within Visual Studio, just by typing <strong>nguid</strong> and pressing the <strong>Tab</strong> key. If you require lots of GUIDs (when working with <a rel="external" href="http://wix.sourceforge.net/">WiX Installer</a>, for instance), this will save a lot of time by generating new GUIDs on the fly.</p>
+<ul>
+<li><h3 id="recently-edited">Recently edited</h3>
+</li>
+</ul>
+<p>One of my most used features of ReSharper is the ability to navigate to the recent place an edit occurred. By pressing <strong>Ctrl-Shift-Backspace</strong>, you will be immediately taken back to the last place you changed code. Repeat to go back to all places an edit took place. To view a list of all recent files, press <strong>Ctrl-,</strong> (Visual Studio) or <strong>Ctrl-E</strong> (IDEA).
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<ul>
+<li><h3 id="navigating-to-constructors">Navigating to constructors</h3>
+</li>
+</ul>
+<p>I learned this neat trick fairly recently from JetBrains' own <a rel="external" href="http://hadihariri.com/">Hadi Hariri</a>, while looking for interesting topics to discuss at the meeting. In any code file, type <strong>new</strong> into the <em>Go To File Member</em> navigation (<strong>Alt-/</strong> [Visual Studio] or <strong>Ctrl-F12</strong> [IDEA]), and it will list all constructor first!
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<ul>
+<li><h3 id="working-with-solution-wide-analysis">Working with Solution-wide analysis</h3>
+</li>
+</ul>
+<p>I wrote about the benefits of turning Solution-wide analysis back when I <a href="/posts/resharper-4-5-beta-released/">reviewed ReSharper 4.5 Beta</a>. Several things happen when Solution-wide analysis is enabled - all public and protected methods are now analyzed for usage and visibility. This allows, for instance, making public methods private (if they are unused outside the class), or removing them completely, if they aren't used at all.</p>
+<blockquote>
+    <p>A word of caution when changing visibility (or even removing) unused public classes - make sure that your code is not being called dynamically (i.e. via MEF, or reflection). ReSharper will not detect such usage, and you might end up with broken references.</p>
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image12.png" alt="">
+</figure>
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image13.png" alt="">
+</figure>
+    
+</blockquote>
+<p>Another important benefit of working with Solution-wide analysis enabled is the ability to immediately detect errors in the entire solution, rather than just the current file. The Next/Previous error navigation (<strong>Shift-Alt-PgDn/PgUp</strong> [Visual Studio] or <strong>Alt-F12/Shift-Alt-F12</strong> [IDEA]) will now take you to all errors in your solution.</p>
+<ul>
+<li><h3 id="code-issues-inspection">Code issues inspection</h3>
+</li>
+</ul>
+<p>At this point I was asked if there was a way to list all ReSharper hints, suggestions and warnings - indeed there is, and it's called <em>Code Issues</em>. It's available from ReSharper's <em>ReSharper → Inspect</em> menu, in the form of <em>Code Issues in Current Project</em> or <em>Code Issues in Solution</em>. Depending on the size of your solution, the initial analysis of all your files might take a few minutes (this is reduced greatly if Solution-wide analysis is enabled). After the wait, all ReSharper's suggestions are presented in a tool window:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image3.png" alt="">
+    
+</figure>
+
+</p>
+<ul>
+<li><h3 id="ssr-structural-search-and-replace-and-patterns-catalog">SSR (Structural Search and Replace) and Patterns Catalog</h3>
+</li>
+</ul>
+<p>The next thing I talked about is the SSR. I wrote about SSR <a href="/posts/resharper-5-hidden-gem-patterns-catalogue/">previously in greater detail</a>, and I demonstrated how to convert <a rel="external" href="http://www.nunit.org/">NUnit's</a> Assert syntax to its fluent API. I also demonstrated how to <a href="/posts/documenting-your-public-api-easily-with-resharper-and-ghostdoc/">use Agent Smith Plugin to document the public API</a>.</p>
+<ul>
+<li><h3 id="resharper-internal"><strong>ReSharper.Internal</strong></h3>
+</li>
+</ul>
+<p><span style="color: red;"><strong>THE FOLLOWING IS AN UNDOCUMENTED, UNSUPPORTED FEATURE OF RESHARPER. USE THIS AT YOUR OWN RISK!</strong></span></p>
+<p>Before I even started my talk, I asked the audience who used ReSharper to raise hands. Of almost 40 people, I think 90% raised their hands. I guaranteed them that the feature I was about to show was something they never heard of before, and I was pleased to have been right!</p>
+<p>ReSharper's <em>Internal Mode</em> (or <em>God-mode</em> or <em><a href="http://doom.wikia.com/wiki/Doom_cheat_codes">iddqd</a></em>, as it was referred to around the room) is an internal set of tools and commands, used mostly by ReSharper developers at JetBrains. To enable it, start Visual Studio with the following command line switch:</p>
+<p><code>devenv.exe /ReSharper.Internal</code></p>
+<p>You will now have a new menu in ReSharper's menu called <em>Internal</em>. There are many things available here, some of which are of no use to anyone outside JetBrains. I am going to show two most useful ones.</p>
+<h4 id="psi-browser-and-psi-viewer">PSI Browser and PSI Viewer</h4>
+<p>PSI (Program Structure Interface) is JetBrains implementation of Visual Studio's AST (Abstract Syntax Tree). It allows representing every single construct of a source file in a syntactic tree. These tools are an indispensible aid for plugin developers, for instance, when trying to understand the structure of the source code.</p>
+<p>PSI Browser (located under <em>Windows</em>) displays the entire structure of the currently opened file. By double clicking any element, it will jump to the corresponding place in the source code.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image4.png" alt="">
+    
+</figure>
+
+</p>
+<p>PSI Viewer is a great utility to create code snippets on the fly, and view their PSI representation.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image5.png" alt="">
+    
+</figure>
+
+</p>
+<h4 id="concurrent-building-with-msbuild">Concurrent building with MSBuild</h4>
+<p>After turning on Internal mode, upon trying to build the solution for the first time, you will be presented with the following dialog:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image6.png" alt="">
+    
+</figure>
+
+</p>
+<p>By selecting MSBuild, ReSharper will build the solution using MSBuild, rather than the Visual Studio builder. One advantage MSBuild has over Visual Studio is the ability to utilize multiple cores of the CPU to build the solution concurrently. This is disabled by default, to enable it, go to <em>ReSharper - Options</em>. The options dialog will look slightly different when Internal mode is enabled. Menu items having a green circle on their right are only available in Internal mode. Scroll all the way down, under <em>Tools</em>, and select the <em>Internal</em> menu. On the right side make sure that the highlighted items are checked:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image7.png" alt="">
+    
+</figure>
+
+</p>
+<p>Since MSBuild is not integrated into Visual Studio, when building you will not be able to see the build progress in the output window. The project status view is a tool window which shows all the projects in solution (abbreviated), and displays their build progress by using colors.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems&#x2F;image8.png" alt="">
+    
+</figure>
+
+</p>
+<p>Please note that this is an experimental build technique, and it might not work correctly for your solution. Like all other features above, use this at your own risk.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-convert-subversion-repository-to-mercurial-hgits-easier-than-you-think&#x2F;" rel="next" title="How to convert Subversion repository to Mercurial (Hg) - it&#x27;s easier than you think!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How to convert Subversion repository to Mercurial (Hg) - it&#x27;s easier than you think!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-debug-a-process-that-is-crashing-on-startup&#x2F;" rel="prev" title="How to debug a process that is crashing on startup">
+        <span class="nav-title">How to debug a process that is crashing on startup</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

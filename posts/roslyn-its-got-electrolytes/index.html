@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roslyn! It&#x27;s got Electrolytes! | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Roslyn! It&#x27;s got Electrolytes!">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;roslyn-its-got-electrolytes&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Roslyn! It&#x27;s got Electrolytes!</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-04-11T00:10:59Z">2014-04-11</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          6 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;roslyn-its-got-electrolytes.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already started predicting the demise of ReSharper. It's been a week or so, and JetBrains finally <a rel="external" href="http://blog.jetbrains.com/dotnet/2014/04/10/resharper-and-roslyn-qa/">posted a Q&amp;A</a> where they explain their reasons for <strong>not</strong> moving to Roslyn as predicted, at least not in the foreseeable future. Which, in turn, caused yet another sea of comments, both supporting and condemning the decision.</p>
+<span id="continue-reading"></span>
+<p>Now, why do I care?</p>
+<p>I've been a developer for Visual Studio tooling for a while now. Anyone who has ever attempted to build a Visual Studio extension knows very well the limitations of certain APIs. In particular, the Visual Studio automation model (called DTE) and the code model are both very old and sometimes unpredictable APIs. Other than MSDN and associated forums, the only sources of information are a handful of people with years of painful experience developing on top of those APIs. Asking a Visual Studio Extensibility question on StackOverflow will almost always yield an answer from the same handful of people. You get to know their names, avatars, and positions at various divisions at Microsoft, where they work or worked at some point.</p>
+<p>Needless to say, developing Visual Studio extensions is hard. It's made harder because each Visual Studio version is different, has different features, and has little quirks. To maintain the same, consistent experience throughout all Visual Studio versions requires painstakingly maintain different versions of the same code base, using #if directives, partial classes, linked source files, duplicated files -- the list goes on. It's a <em>dark art</em>, known only to a few dozen people, and it's been this way for a long time, until now.</p>
+<p>Enter Roslyn.</p>
+<p>When Roslyn was publicly announced in 2011, it promised to change that. Initially described as a <em>compiler-as-a-service</em>, Roslyn became a promise of a better way developers could interact with what is traditionally a <em>black box</em>. This vast process happens behind the scenes in Visual Studio. Developers now have a chance to use a modern, clean API to do things previously considered impossible on the .NET platform - from <a rel="external" href="http://scriptcs.net/">turning C# into a scripting language</a> and <a rel="external" href="https://twitter.com/csainty/status/452119982411743232">compiling C# in Swedish</a> to creating <em>quick-fixes</em> and refactorings easily. It's so easy, in fact, that Dustin Campbell did it <a rel="external" href="https://channel9.msdn.com/Events/Build/2014/2-577">live on stage</a> at Build in about 15 minutes, which was previously unheard of!</p>
+<p>The possibilities now open to .NET developers are endless, but so are the realities, which is this post's point (if any). First, let's peek into the Roslyn box. Roslyn, officially known as the .NET Compiler Platform, consists of several parts, mainly the compiler model (syntax tree and semantic model, code parsers, and generators) and a set of diagnostic APIs for building analysis tools, refactorings, and quick-fixes. These APIs are open-source and are available for everyone.</p>
+<p>However, a second part of the Roslyn story is the Visual Studio integration and features, currently in the Preview stages. Those are <strong>not</strong> currently open source, and it's unknown whether they will be at some later stage (<strong>Update</strong>: the Visual Studio integration APIs were <a rel="external" href="https://github.com/dotnet/roslyn/tree/master/src/VisualStudio">open-sourced</a> as well). Those include base types and internal implementations of refactorings and quick-fixes that ship with the Preview, as well as numerous services tied directly to core services such as debugger, code editor, and other Visual Studio internals. You can read a great overview of what's in the Roslyn box in <a rel="external" href="http://blog.slaks.net/2014-04-07/exploring-roslyn-part-1-introduction/">this post</a> by Schabse Laks (another name in the <em>dark art</em> crowd).</p>
+<p>So, what does this have to do with ReSharper? Well, simply put, for almost a decade ReSharper provided Visual Studio users with features that were only available on other platforms other IDEs. Over the years, as new Visual Studio versions got some of ReSharper's features built into it, ReSharper relentlessly continued to innovate with better static analyses and code fixes, while ensuring all those innovations were all supported in older versions of Visual Studio. The latest version of ReSharper (v8.2 at the time of writing) supports almost all the same features on Visual Studio 2005 throughout 2013.</p>
+<p>As someone who understands the intricacies of supporting different versions and architectures of Visual Studio I am <em>dumbfounded</em> by the amount engineering effort that went into this. Years of abstracting, refining and stabilizing the layers that make Visual Studio disappear completely, from ReSharper's point of view, allowing creating plugins for ReSharper that will <em>just work</em> on all supported Visual Studio versions. And if you need to find out how something works? Decompile it! They <em>want</em> you to do it, and even give you a tool for this.</p>
+<p>So, should ReSharper switch to Roslyn? JetBrains don't think so. I don't think so; why would they? ReSharper's <a rel="external" href="https://www.youtube.com/watch?v=vnXOAWoNADw&amp;t=1m17s">already got a George</a> - the entire ecosystem has been there for a decade and constantly improved. You don't just replace it. As developers, we tend to jump on the new shiny, but honestly, how often do you switch out your database? Architecturally, Roslyn and ReSharper differ enough to make this change infeasible, not to mention dangerous - it would require almost a <em>complete rewrite</em> of ReSharper, and as Joel once said, this is something <a rel="external" href="http://www.joelonsoftware.com/articles/fog0000000069.html">you should never do</a>.</p>
+<p>In conclusion, if imitation is the best form of flattery, the guys over at JetBrains are plenty adulated. The internet is abuzz with talks of Roslyn and ReSharper, which must also be good for SEO. However, ReSharper isn't going anywhere. They will continue to do what they do best. And Roslyn? Roslyn will allow developers previously afraid of <em>black boxes</em> to develop great tools for their fellow developers. Out of thin air, I predict that within two years, there will be an explosion of productivity tooling in Visual Studio galaxy, and we're witnessing its birth. But time will tell.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-nancy-made-net-web-development-fun&#x2F;" rel="next" title="How Nancy made .NET Web development fun!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">How Nancy made .NET Web development fun!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-remap-calc-exe-to-scriptcs-exe&#x2F;" rel="prev" title="How to remap calc.exe to scriptcs.exe">
+        <span class="nav-title">How to remap calc.exe to scriptcs.exe</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

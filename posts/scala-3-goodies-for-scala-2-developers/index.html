@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scala 3 goodies for Scala 2 developers | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scala 3 goodies for Scala 2 developers">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;scala-3-goodies-for-scala-2-developers&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Scala 3 goodies for Scala 2 developers</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2021-06-22T10:45:02Z">2021-06-22</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;scala-3-goodies-for-scala-2-developers&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2's infamous warts, many of which have been fixed (or made obsolete) by the new compiler. While some of the Scala 2 syntax still supported in Scala 3.0, it will be removed in Scala 3.1, so it's best to migrate as early as possible.</p>
+<p>To make the process easier for Scala 2 users, the Scala compiler team have been <a rel="external" href="https://github.com/scala/scala/pull/9589">backporting</a> some of the new features to the Scala 2.x compiler, enabling them with the <code>-Xsource:3</code> compiler flag. In addition, users of the latest IntelliJ IDEA 2021.2 (in Early Access, at the time of writing) will get automatic refactoring suggestions, converting the old syntax to the new one.</p>
+<span id="continue-reading"></span>
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;scala-3-goodies-for-scala-2-developers&#x2F;intellij-refactor.gif" alt="">
+    
+</figure>
+
+<p>Here are the top features, enabled in Scala 2 by turning on the <code>-Xsource:3</code> compiler flag:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span>scalacOptions </span><span style="color: #81A1C1;">++=</span><span style="color: #8FBCBB;"> Seq</span><span>(</span></span>
+<span class="giallo-l"><span>  ...</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  &quot;</span><span style="color: #A3BE8C;">-Xsource:3</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span>)</span></span></code></pre>
+<p>After enabling this option, you might get lots of compiler warnings (or errors, depending on your configuration), explaining the deprecated features and suggesting ways to fix them.</p>
+<p><strong>Note</strong>: although some Scala 3 features have been ported to the earlier versions of the Scala 2 compiler, the new syntax changes were added in the recently-released (at the time of writing) <strong>2.13.6</strong>. Please upgrade your Scala versions to get the latest available features.</p>
+<p>Here are some of my favorites:</p>
+<h3 id="case-classes-with-a-private-constructor"><code>case class</code>es with a private constructor</h3>
+<p>If you're following the <a rel="external" href="https://tuleism.github.io/blog/2020/scala-smart-constructors/">Smart Constructor</a> pattern in Scala 2, you'll discover that making the constructor of a case class <code>private</code> is not enough - the companion <code>apply</code>, and the <code>copy</code> methods of the case class will still be public. There are ways to <a rel="external" href="https://gist.github.com/tpolecat/a5cb0dc9adeacc93f846835ed21c92d2">work around it</a> - but they are no longer needed with the <code>-Xsource:3</code> flag! Enabling it makes case classes behave <em>correctly</em>, like they do in Scala 3, disabling the companion <code>apply</code> and <code>copy</code> on any case class with a private constructor.</p>
+<h3 id="tuple-destructuring-in-for-comprehensions"><del>Tuple destructuring in for-comprehensions</del></h3>
+<p><strong>Update</strong>: Looks like I got this one wrong. Guillaume Martres of the Scala 3 compiler team <a rel="external" href="https://www.reddit.com/r/scala/comments/o5j1nt/scala_3_goodies_for_scala_2_developers/h2nsr7x/">comments</a> about the purpose of this change:</p>
+<blockquote>
+    <p>Adding the <code>case</code> keyword in for-comprehensions will only be needed in Scala 3 for non-exhaustive matches (see https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html#pattern-bindings-in-for-expressions), you don't need it to avoid having to use <code>withFilter</code> (in fact, not using <code>case</code> guarantees that <code>withFilter</code> will not be used in Scala 3). And in Scala 2 under <code>-Xsource:3</code>, <code>case</code> does nothing and is only supported to ease cross-compilation: https://github.com/scala/scala/pull/9558</p>
+
+    
+</blockquote>
+<p>So it seems the <code>case</code> keyword support was added to make cross-compilation between Scala 2 and Scala 3 easier, it does not change the behavior of pattern matching. In fact, the suggested refactoring in the image above is actually not needed, and I reported it as a bug to the IntelliJ tracker.</p>
+<h3 id="miscellaneous-syntax-changes">Miscellaneous syntax changes</h3>
+<p>Some other syntactic changes/improvements were backported in the latest Scala 2 versions:</p>
+<h4 id="instead-of-for-wildcard-imports"><code>*</code> instead of <code>_</code> for wildcard imports</h4>
+<p>Scala 3 imports now use the <code>*</code> character for imports (and the use of <code>_</code> for imports will be removed in Scala 3.1), allowing you to write:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> scala</span><span style="color: #ECEFF4;">.</span><span>util</span><span style="color: #ECEFF4;">.</span><span>*</span></span></code></pre>
+<p><strong>Note</strong>: Unfortunately, this change does not work for wildcards inside braces due to an issue that <a rel="external" href="https://github.com/scala/scala/pull/9639">was already fixed</a>, but did not make it to the release as part of 2.13.6. It will be fixed in the next compiler release (2.13.7), when available. The following syntax:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> scala</span><span style="color: #ECEFF4;">.</span><span>util</span><span style="color: #ECEFF4;">.</span><span>{</span><span style="color: #8FBCBB;">Try</span><span>, *}</span></span></code></pre>
+<p>does not compile with Scala 2.13.6, failing with the error: <code>object * is not a member of package util</code>.</p>
+<h4 id="as-instead-of-in-import-aliases"><code>as</code> instead of <code>=&gt;</code> in import aliases</h4>
+<p>Additional change to how imports are handled is the use of the keyword <code>as</code> instead of <code>=&gt;</code> when aliasing imported types.</p>
+<p>Instead of:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> java</span><span style="color: #ECEFF4;">.</span><span>util</span><span style="color: #ECEFF4;">.</span><span>{</span><span style="color: #8FBCBB;">List</span><span style="color: #81A1C1;"> =&gt;</span><span style="color: #8FBCBB;"> JList</span><span>}</span></span></code></pre>
+<p>Use:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> java</span><span style="color: #ECEFF4;">.</span><span>util</span><span style="color: #ECEFF4;">.</span><span style="color: #8FBCBB;">List</span><span style="color: #81A1C1;"> as </span><span style="color: #8FBCBB;">JList</span><span style="color: #616E88;"> // braces not required for a single import alias</span></span></code></pre><h4 id="instead-of-for-wildcard-types"><code>?</code> instead of <code>_</code> for wildcard types</h4>
+<p>A less-used feature, but a notable change is the use of <code>?</code> in the following syntax:</p>
+<p>Instead of:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span> x</span><span style="color: #81A1C1;">:</span><span> _ </span><span style="color: #81A1C1;">&lt;:</span><span style="color: #8FBCBB;"> Any</span><span style="color: #81A1C1;"> = ???</span></span></code></pre>
+<p>Use:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span> x</span><span style="color: #81A1C1;">: ? &lt;:</span><span style="color: #8FBCBB;"> Any</span><span style="color: #81A1C1;"> = ???</span></span></code></pre><h4 id="instead-of-with-in-compound-type-declarations"><code>&amp;</code> instead of <code>with</code> in compound type declarations:</h4>
+<p>Instead of:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span> x</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> A</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> B</span><span style="color: #81A1C1;"> = new</span><span style="color: #8FBCBB;"> A</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> B</span><span style="color: #ECEFF4;"> {}</span></span></code></pre>
+<p>we can now write:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span> x</span><span style="color: #81A1C1;">:</span><span style="color: #8FBCBB;"> A</span><span style="color: #81A1C1;"> &amp;</span><span style="color: #8FBCBB;"> B</span><span style="color: #81A1C1;"> = new</span><span style="color: #8FBCBB;"> A</span><span style="color: #81A1C1;"> with</span><span style="color: #8FBCBB;"> B</span><span style="color: #ECEFF4;"> {}</span></span></code></pre><h4 id="vararg-splice-syntax-instead-of-and">vararg splice syntax (<code>*</code> instead of <code>:_*</code> and <code>@_*</code>)</h4>
+<p>One more simplification to the various ways of passing values into functions expecting variable arguments:</p>
+<p>Instead of:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span>foo(s:</span><span style="color: #81A1C1;"> _*</span><span>)</span></span></code></pre>
+<p>Use:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span>foo(s</span><span style="color: #81A1C1;">*</span><span>)</span></span></code></pre>
+<p>And instead of:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span style="color: #8FBCBB;"> Seq</span><span>(a </span><span style="color: #81A1C1;">@_*</span><span>)</span><span style="color: #81A1C1;"> = ???</span></span></code></pre>
+<p>Use:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="scala"><span class="giallo-l"><span style="color: #81A1C1;">val</span><span style="color: #8FBCBB;"> Seq</span><span>(a</span><span style="color: #81A1C1;">*</span><span>)</span><span style="color: #81A1C1;"> = ???</span><span style="color: #616E88;"> // RIP, 🐌 operator</span></span></code></pre>
+<p>More changes are being backported to Scala 2, I suggest keeping an eye on the release notes, and upgrading to the latest versions as soon as possible!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;running-postgres-integration-tests-easily-with-testcontainers-and-zio-test&#x2F;" rel="next" title="Running Postgres integration tests easily with TestContainers and ZIO Test">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Running Postgres integration tests easily with TestContainers and ZIO Test</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;bsp-and-intellij&#x2F;" rel="prev" title="Using BSP effectively in IntelliJ and Scala">
+        <span class="nav-title">Using BSP effectively in IntelliJ and Scala</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

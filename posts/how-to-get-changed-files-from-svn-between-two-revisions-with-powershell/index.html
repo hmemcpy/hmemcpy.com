@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to get changed files from SVN between two revisions with PowerShell | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How to get changed files from SVN between two revisions with PowerShell">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-get-changed-files-from-svn-between-two-revisions-with-powershell&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">How to get changed files from SVN between two revisions with PowerShell</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-12-16T13:38:07Z">2014-12-16</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          2 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;how-to-get-changed-files-from-svn-between-two-revisions-with-powershell.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>As part of <a href="/posts/the-2-minute-powershell-intro-for-someone-who-hates-powershell/">teaching myself PowerShell</a> (and converting a legacy mess of perl scripts into something more manageable), I needed a way to export the files that were added or modified between two SVN revisions. After some searching, I came up with this PowerShell script: it takes a repository URL, a <em>from</em> and <em>to</em> revision numbers, and an output directory into which to export the files.</p>
+<span id="continue-reading"></span><pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="powershell"><span class="giallo-l"><span style="color: #81A1C1;">function</span><span style="color: #88C0D0;"> Export-SvnDiff</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">$</span><span>repo</span><span style="color: #81A1C1;">, $</span><span>fromRevision</span><span style="color: #81A1C1;">, $</span><span>toRevision</span><span style="color: #81A1C1;">, $</span><span>outputDirectory</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    $</span><span>xpath</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">/diff/paths/path[@kind=&#39;file&#39; and (@item=&#39;added&#39; or @item=&#39;modified&#39;)]</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    [</span><span style="color: #81A1C1;">xml</span><span style="color: #ECEFF4;">]</span><span style="color: #81A1C1;">$</span><span>output</span><span style="color: #81A1C1;"> = &amp;</span><span> svn diff </span><span style="color: #81A1C1;">-</span><span>r </span><span style="color: #ECEFF4;">$(&quot;</span><span style="color: #A3BE8C;">{0}:{1}</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> -f $</span><span>fromRevision</span><span style="color: #81A1C1;">, $</span><span>toRevision</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> $</span><span>repo</span><span style="color: #81A1C1;"> --</span><span>summarize </span><span style="color: #81A1C1;">--</span><span>xml</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    $</span><span>output</span><span style="color: #81A1C1;"> |</span><span style="color: #88C0D0;"> Select-Xml</span><span style="color: #81A1C1;"> -</span><span>XPath </span><span style="color: #81A1C1;">$</span><span>xpath</span><span style="color: #81A1C1;"> | %</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;"> $</span><span>_.node.</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">#text</span><span style="color: #ECEFF4;">&quot; }</span><span style="color: #81A1C1;"> | %</span><span style="color: #ECEFF4;"> {</span><span> </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        $</span><span>targetFile</span><span style="color: #81A1C1;"> =</span><span style="color: #88C0D0;"> Resolve-FullPath</span><span style="color: #ECEFF4;"> (</span><span style="color: #88C0D0;">Join-Path</span><span style="color: #81A1C1;"> $</span><span>outputDirectory</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">$</span><span>_</span><span style="color: #81A1C1;"> -replace $</span><span>repo</span><span style="color: #ECEFF4;">))</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        $</span><span>targetDir</span><span style="color: #81A1C1;"> = $</span><span>targetFile</span><span style="color: #81A1C1;"> |</span><span style="color: #88C0D0;"> Split-Path</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">        New-Item</span><span style="color: #81A1C1;"> -</span><span>Force </span><span style="color: #81A1C1;">-</span><span>ItemType directory </span><span style="color: #81A1C1;">-</span><span>Path </span><span style="color: #81A1C1;">$</span><span>targetDir</span><span style="color: #81A1C1;"> |</span><span style="color: #88C0D0;"> Out-Null</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">        &amp;</span><span> svn export </span><span style="color: #81A1C1;">-</span><span>r </span><span style="color: #81A1C1;">$</span><span>toRevision</span><span style="color: #81A1C1;"> -</span><span>q </span><span style="color: #81A1C1;">--</span><span>force </span><span style="color: #81A1C1;">$</span><span>_</span><span style="color: #81A1C1;"> $</span><span>targetFile</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">        Write-Host</span><span style="color: #ECEFF4;"> (&quot;</span><span style="color: #81A1C1;">$</span><span style="color: #A3BE8C;">_ -&gt; </span><span style="color: #81A1C1;">$</span><span>targetFile</span><span style="color: #ECEFF4;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    }</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>This script uses <a rel="external" href="https://github.com/michael-wolfenden/CodeCampServer/blob/master/scripts/Carbon/Path/Resolve-FullPath.ps1"><code>Resolve-FullPath</code></a> cmdlet from the Carbon project. Turns out, PowerShell's own <code>Resolve-Path</code> doesn't work on files/paths that do not exist.</p>
+<p>Here's how it works:</p>
+<ol>
+<li>It executes <strong><a rel="external" href="http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html">svn diff</a></strong> command with -<strong>r</strong> switch, which takes a range of revisions, e.g. 1000:1050. The <strong>summarize</strong> argument shows only the high-level information, and <strong>xml</strong> outputs the data as XML.</li>
+<li>This XML is being queried with an XPath, extracting only the names of the items of kind *˜file' which were *˜added' or *˜modified'.</li>
+<li>For every such file, its relative path is being taken by subtracting the repository path from the full filename.</li>
+<li>The target (sub)directory for that file is being created, if it doesn't exist.</li>
+<li>It then executes <a rel="external" href="http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.export.html"><strong>svn export</strong></a> command on the current filename, limiting it to the <em>to</em> revision, so that  the changes are taken only until that revision. The file is written in the relative target directory.</li>
+</ol>
+<p>This is probably far from <em>idiomatic</em> PowerShell, but it gets the job done! Your improvements are welcome, feel free to comment on the Gist!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;the-2-minute-powershell-intro-for-someone-who-hates-powershell&#x2F;" rel="next" title="The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot;">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot;</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;a-case-of-mysterious-spam-links-injection-by-block&#x2F;" rel="prev" title="A case of mysterious spam links!">
+        <span class="nav-title">A case of mysterious spam links!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

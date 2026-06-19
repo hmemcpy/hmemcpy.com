@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot; | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot;">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;the-2-minute-powershell-intro-for-someone-who-hates-powershell&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">The 2-minute PowerShell intro for someone who &quot;hates PowerShell&quot;</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2014-12-10T14:06:25Z">2014-12-10</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;the-2-minute-powershell-intro-for-someone-who-hates-powershell&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>Hi, I'm a developer, and I hate PowerShell<sup>*</sup>. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax - all those dollar signs reminded me of PHP.</p>
+<span id="continue-reading"></span>
+<p>This recently changed, however. A client had a set of legacy perl scripts which nobody could maintain anymore - and I was tasked with rewriting them. Having recently spent some time writing a script for <a rel="external" href="http://boxstarter.org/">Boxstarter</a> - an amazing tool that allows you to automate software and environment installations of new machines, powered by <a rel="external" href="https://chocolatey.org/">Chocolatey</a>, in PowerShell, I thought that it could be a good fit for the task. I knew the language is powerful enough to allow the creation of those very useful tools, so I decided to give it a shot. I was not disappointed!</p>
+<p>Luckily, you already have all the tools you need to get started! Every Windows machine comes with both PowerShell and PowerShell ISE (Integrated Scripting Environment) already installed.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;the-2-minute-powershell-intro-for-someone-who-hates-powershell&#x2F;image.png" alt="Figure 1: PowerShell ISE - an IDE for PowerShell with code completion (IntelliSense) and an integrated debugger.">
+    
+</figure>
+
+<p>Here's what you need to know about PowerShell:</p>
+<p>You can do most of your development and debugging in the ISE - no need to type individual instructions in the PowerShell console. It's great as a REPL, but nothing beats an IDE. Tip: select a few lines in the ISE and press F8 - only those lines will be executed!</p>
+<h2 id="what-s-so-great-about-powershell">What's so great about PowerShell?</h2>
+<p><strong>It's dynamic</strong> - every variable can be treated as anything, but also support explicit typing (which are checked at runtime). Variables are prefixed with the <code>$</code> sign.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="powershell"><span class="giallo-l"><span style="color: #81A1C1;">$</span><span>my</span><span style="color: #81A1C1;"> =</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">some string</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">$</span><span>my</span><span style="color: #81A1C1;"> =</span><span style="color: #B48EAD;"> 23</span></span>
+<span class="giallo-l"><span style="color: #616E88;"># Runtime error: Cannot convert value &quot;23&quot; to type &quot;System.Xml.XmlDocument&quot;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">[</span><span style="color: #81A1C1;">xml</span><span style="color: #ECEFF4;">]</span><span style="color: #81A1C1;">$</span><span>myXml</span><span style="color: #81A1C1;"> = $</span><span>my </span></span></code></pre>
+<p><strong>It's pipelined</strong> - every variable or the output of every function can be piped as an input to another function using the pipe (<code>|</code>) operator. It's extremely useful when dealing with collections and other enumerable objects - allowing you to filter the elements and transform the result into whatever you need.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="powershell"><span class="giallo-l"><span style="color: #616E88;"># a LINQ-like querying with pipelining. </span></span>
+<span class="giallo-l"><span style="color: #616E88;"># The $_ is similar to C#&#39;s lambda argument &quot;x&quot;, e.g. Where(x =&gt; x.Name == &quot;chrome&quot;) </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">$</span><span>ids</span><span style="color: #81A1C1;"> =</span><span style="color: #88C0D0;"> Get-Process</span><span style="color: #81A1C1;"> |</span><span style="color: #88C0D0;"> Where-Object</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;">$</span><span>_.Name</span><span style="color: #81A1C1;"> -eq</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">chrome</span><span style="color: #ECEFF4;">&quot; }</span><span style="color: #81A1C1;"> |</span><span style="color: #88C0D0;"> Select-Object</span><span style="color: #81A1C1;"> -</span><span>Property ID </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #616E88;"># Where-Object and Select-Object can also be written &quot;where&quot; and &quot;select&quot;: </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">$</span><span>ids</span><span style="color: #81A1C1;"> =</span><span style="color: #88C0D0;"> Get-Process</span><span style="color: #81A1C1;"> | where</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;">$</span><span>_.Name</span><span style="color: #81A1C1;"> -like</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">chrome</span><span style="color: #ECEFF4;">&quot; }</span><span style="color: #81A1C1;"> |</span><span> select </span><span style="color: #81A1C1;">-</span><span>Property ID </span></span>
+<span class="giallo-l"><span style="color: #616E88;"># &quot;where&quot; and &quot;select&quot; are aliases. Use Get-Alias to see all aliases in PowerShell.</span></span></code></pre>
+<p><strong>It supports everything you know from .NET -</strong> although PowerShell defines its own idioms with regards to common operations, such as formatting strings for joining paths, you can use all objects from .NET to do the same thing.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="powershell"><span class="giallo-l"><span style="color: #81A1C1;">$</span><span>combined</span><span style="color: #81A1C1;"> =</span><span style="color: #88C0D0;"> Join-Path</span><span style="color: #81A1C1;"> $</span><span>rootDirectory</span><span style="color: #ECEFF4;"> &quot;</span><span style="color: #A3BE8C;">mySubdirectory</span><span style="color: #ECEFF4;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #616E88;"># can be written as: $combined = [System.IO.Path]::Combine($rootDirectory, &quot;mySubdirectory&quot;)</span></span></code></pre>
+<p><strong>It's concise</strong> - everything in PowerShell can be verbose or very concise. By leveraging aliases there are many ways to say what you mean. Here's an example: the following function gets a list of changed files between two SVN revisions, by executing the <a rel="external" href="http://svnbook.red-bean.com/en/1.7/svn.ref.svn.c.diff.html">svn diff</a> command, outputting the result as XML which looks like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="xml"><span class="giallo-l"><span style="color: #81A1C1;">&lt;?</span><span style="color: #5E81AC;">xml</span><span style="color: #8FBCBB;"> version</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">1.0</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #8FBCBB;"> encoding</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">UTF-8</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">?&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;diff&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;paths&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;path</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   item</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">added</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   props</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">none</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   kind</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">file</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span><span>hello.txt</span><span style="color: #81A1C1;">&lt;/path&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;path</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   item</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">modified</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   props</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">none</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #8FBCBB;">   kind</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">file</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span><span>other.txt</span><span style="color: #81A1C1;">&lt;/path&gt;</span><span>   </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;/paths&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;/diff&gt;</span></span></code></pre>
+<p>This XML is stored into an <code>$output</code> object, which is defined as a .NET <code>XmlDocument</code>. The object is than being queried via XPath to get only items of kind *˜file' which are *˜modified'. Finally, only the text of the node is selected.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="powershell"><span class="giallo-l"><span style="color: #81A1C1;">function</span><span style="color: #88C0D0;"> Get-SvnDiff</span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">$</span><span>fromRevision</span><span style="color: #81A1C1;">, $</span><span>toRevision</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">{</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  [</span><span style="color: #81A1C1;">xml</span><span style="color: #ECEFF4;">]</span><span style="color: #81A1C1;">$</span><span>output</span><span style="color: #81A1C1;"> = &amp;</span><span> svn diff </span><span style="color: #81A1C1;">-</span><span>r </span><span style="color: #ECEFF4;">$(&quot;</span><span style="color: #A3BE8C;">{0}:{1}</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> -f $</span><span>fromRevision</span><span style="color: #81A1C1;">, $</span><span>toRevision</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> --</span><span>summarize </span><span style="color: #81A1C1;">--</span><span>xml</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  $</span><span>output.SelectNodes</span><span style="color: #ECEFF4;">(&quot;</span><span style="color: #A3BE8C;">/diff/paths/path[@item=&#39;modified&#39; and @kind=&#39;file&#39;]</span><span style="color: #ECEFF4;">&quot;)</span><span style="color: #81A1C1;"> | %</span><span style="color: #ECEFF4;"> {</span><span style="color: #81A1C1;"> $</span><span>_.</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">#text</span><span style="color: #ECEFF4;">&quot;}</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Quite a lot is going on in this example, which demonstrate the Power of PowerShell:</p>
+<ul>
+<li>A process is started with the <code>&amp;</code> symbol. Can also be started with <a rel="external" href="http://technet.microsoft.com/en-us/library/hh849848.aspx">Start-Process</a> for more options.</li>
+<li>Strings can be formatted with <code>-f</code>, however in this case they are a part of an expression, and have to be escaped into their own expression by using <code>$()</code>.</li>
+<li>The <code>%</code> symbol is an alias of <code>foreach</code>, which is an alias of <code>ForEach-Object</code>. Use <code>Get-Alias -Definition ForEach-Object</code> to see all the alias definitions, or <code>Get-Alias %</code>, for example.</li>
+<li>The last line in a function (or selection) is what gets returned (or printed out). In this case, the result of the last line is a single string, containing the value *˜other.txt' (it's the only modified file). If there was more than one result, the return would be an array.</li>
+<li>Finally, to call this method, we use <code>Get-SvnDiff 1000 2000</code>, and we can use the pipe operator (<code>|</code>) to continue modifying the returned values.</li>
+</ul>
+<p>And that's it! Sure, there is way more to know about PowerShell, but this should be more than enough to get started, or at least, not to get lost when reading and writing simple scripts.</p>
+<p>Happy scripting!</p>
+<hr/>
+<p><sup>*</sup>Well, slightly less now.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;my-top-3-favorite-windows-productivity-tools&#x2F;" rel="next" title="My top 3 favorite Windows productivity tools!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">My top 3 favorite Windows productivity tools!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;how-to-get-changed-files-from-svn-between-two-revisions-with-powershell&#x2F;" rel="prev" title="How to get changed files from SVN between two revisions with PowerShell">
+        <span class="nav-title">How to get changed files from SVN between two revisions with PowerShell</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

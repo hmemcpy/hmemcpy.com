@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Preventing ReSharper&#x27;s &#x27;implicitly captured closure&#x27; warning in FakeItEasy unit tests</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2013-02-21T14:08:51Z">2013-02-21</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          2 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;preventing-resharpers-implicitly-captured-closure-warning-in-fakeiteasy-unit-tests.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>I noticed that some of my unit tests have a <a rel="external" href="http://www.jetbrains.com/resharper/">ReSharper</a> warning on the <code>A.CallTo()</code> methods of <a rel="external" href="https://github.com/FakeItEasy/FakeItEasy">FakeItEasy</a>, suggesting that some local variables are captured implicitly by the lambda expression.</p>
+<span id="continue-reading"></span><img title="" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="" src="http://i0.wp.com/hmemcpy.com/wp-content/uploads/2013/02/image.png?resize=504%2C65" data-recalc-dims="1" />
+<p>This warning appears since ReSharper doesn't know that the lambda expression is executed immediately when the <code>A.CallTo</code> method is invoked. Fortunately, with the help of <a rel="external" href="http://www.jetbrains.com/resharper/webhelp/Code_Analysis__External_Annotations.html">External Annotations</a>, in particular, the <strong>InstantHandle</strong> annotation, we can teach ReSharper about it!</p>
+<p>The InstantHandle annotation tells ReSharper that the method parameter is completely handled when the invoked method is on the stack. If the parameter is a delegate (which in our case, it is), it indicates that the delegate is executed when the method is executed.</p>
+<p>To add this information about FakeItEasy's <code>A.CallTo()</code> overloads that accept delegates, we can create an external XML file, which looks like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="xml"><span class="giallo-l"><span style="color: #81A1C1;">&lt;?</span><span style="color: #5E81AC;">xml</span><span style="color: #8FBCBB;"> version</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">1.0</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #8FBCBB;"> encoding</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">utf-8</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">?&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;assembly</span><span style="color: #8FBCBB;"> name</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">FakeItEasy</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;member</span><span style="color: #8FBCBB;"> name</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">M:FakeItEasy.A.CallTo(System.Linq.Expressions.Expression{System.Action})</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;parameter</span><span style="color: #8FBCBB;"> name</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">callSpecification</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      &lt;attribute</span><span style="color: #8FBCBB;"> ctor</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">M:JetBrains.Annotations.InstantHandleAttribute.#ctor</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> /&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;/parameter&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;/member&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;member</span><span style="color: #8FBCBB;"> name</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">M:FakeItEasy.A.CallTo1(System.Linq.Expressions.Expression{System.Func{0}})</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;parameter</span><span style="color: #8FBCBB;"> name</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">callSpecification</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      &lt;attribute</span><span style="color: #8FBCBB;"> ctor</span><span>=</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">M:JetBrains.Annotations.InstantHandleAttribute.#ctor</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> /&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    &lt;/parameter&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  &lt;/member&gt;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">&lt;/assembly&gt;</span></span></code></pre>
+<p>Download the XML via <a rel="external" href="https://gist.github.com/hmemcpy/5003775">GitHub Gist</a>,</p>
+<p>This instructs ReSharper to add an instance of the InstantHandleAttribute to a parameter called callSpecification of two CallTo method overloads, once which takes an <code>Expression&lt;Action&gt;</code>, the other, which takes an <code>Expression&lt;Func&lt;T&gt;&gt;</code>. Save this file as <strong>FakeItEasy.ExternalAnnotations.xml</strong> and place it **<em>alongside</em> **FakeItEasy.dll (inside libNET40 of your NuGet package, for example). Reload your solution, and the warnings will now disappear!</p>
+<p>Stay tuned, as I explain in the next blog post how to create those XML annotations easily with a little known ReSharper trick!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet&#x2F;" rel="next" title="Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Turning old and busted asynchronous code into new async&#x2F;await-enabled hotness with TaskCompletionSource&lt;T&gt;</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;more-fun-with-resharper-annotations-in-asp-net-mvc&#x2F;" rel="prev" title="More fun with ReSharper annotations in ASP.NET MVC!">
+        <span class="nav-title">More fun with ReSharper annotations in ASP.NET MVC!</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

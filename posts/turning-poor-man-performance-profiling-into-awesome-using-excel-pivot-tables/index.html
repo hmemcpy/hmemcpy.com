@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turning poor man&#x27;s performance profiling into awesome using Excel and Pivot Tables | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Turning poor man&#x27;s performance profiling into awesome using Excel and Pivot Tables">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Turning poor man&#x27;s performance profiling into awesome using Excel and Pivot Tables</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2010-06-07T12:44:04Z">2010-06-07</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>As I'm writing this, <a rel="external" href="http://blogs.microsoft.co.il/blogs/dhelper/">Dror Helper</a> blogged about using a <a rel="external" href="http://blogs.microsoft.co.il/blogs/dhelper/archive/2010/06/02/poor-c-developer-s-performance-profiler.aspx">poor man's performance profiler</a>. This profiling technique is useful when the tools are lacking, and we need to measure a performance of method(s) within our code. This information is usually logged, and after a run we're left with a huge file containing hundreds (and sometimes thousands of lines). How do we make sense of this mess? How do we filter out and understand the relevant performance information?</p>
+<span id="continue-reading"></span>
+<p>As it happens, Microsoft Excel is a great tool to assist with this task! Excel is this part of Microsoft Office, which everyone has, but very few know how to use. I was watching as a colleague of mine, Doron, worked his magic with Excel, and now I'd like to share this information with the rest of the class:</p>
+<p><em>Note: I used Excel 2010 to perform this. I believe that this is possible with earlier versions, but I can't tell for sure.</em></p>
+<p>We start by opening the log file, selecting all text, and pasting it into a new Excel worksheet.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image1.png" alt="">
+    
+</figure>
+
+</p>
+<p>Now we need to filter out anything not starting with the word *PERFORMANCE*.</p>
+<p>With the first column selected, go to <strong>Data</strong>, and press <strong>Filter.</strong>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image2.png" alt="">
+    
+</figure>
+
+</p>
+<p>This will add a dropdown arrow on the first cell, click it, go to <strong>Text Filters</strong>, then <strong>Begins With.</strong> In the dialog type *PERFORMANCE*, and press OK. This will leave only the lines starting with *PERFORMANCE*, however, Excel will still show the original row numbers. Select the first column excluding the first line (by clicking on the 1st *PERFORMANCE* cell, then pressing <strong>Ctrl-Shift-Down Arrow</strong>), copy then paste the selected lines into a new sheet. This will reduce the number of displayed rows dramatically.</p>
+<p><strong>3. Split the text into columns using the Text-to-Columns feature</strong></p>
+<p>Tip: you can <strike>skip this step</strike> reduce the number of steps here, if you output your performance text comma-separated.</p>
+<p>With the first column selected, in the <strong>Data</strong> pane, click <strong>Text to Columns</strong>. First, we're going to split the string by *PERFORMANCE*, so select <strong>Fixed Width</strong>, then <strong>Next</strong>. Click and drag the arrow head one character to the right, then press <strong>Finish</strong>.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image3.png" alt="">
+    
+</figure>
+
+</p>
+<p>Now the first column only contains the word *PERFORMANCE*, so we can safely delete the entire first column.</p>
+<p>Let's repeat this step once more, this time selecting <strong>Delimited</strong> in the first page of the wizard, then <strong>Next</strong>. We want to split by the equals sign <code>=</code> so let's type <code>=</code> into the text box next to <strong>Other</strong>. We can see in the preview how it will look like. Close the wizard by pressing <strong>Finish</strong>.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image4.png" alt="">
+    
+</figure>
+
+</p>
+<p><strong>4. Adding the numbers together using PivotTables</strong></p>
+<p>Now that we have two columns, one containing the method name, and the other the time it took the method to execute, we can summarize it using a PivotTable. But first, we need to give the columns some meaning in the pivot table, so insert a new row before the fist row, and above the first column type <strong>Method</strong>, and above the second row type <strong>Time</strong>.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image5.png" alt="">
+    
+</figure>
+
+</p>
+<p>Select both columns except the first row (you can select just the two cells in row 2, then pressing <strong>Ctrl-Shift-Down Arrow</strong>). Go to <strong>Insert</strong>, then <strong>PivotTable</strong>, and press OK in the new dialog.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image6.png" alt="">
+    
+</figure>
+
+</p>
+<p>Drag the <strong>Time</strong> field down to where it says <strong>Values</strong>. This should create a field called <strong>Sum of Time</strong>. Drag the <strong>Method</strong> field into the <strong>Row Labels</strong>.
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image7.png" alt="">
+    
+</figure>
+
+</p>
+<p>On the left we should now see all the methods with the time it took to run them nicely formatted:
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;turning-poor-man-performance-profiling-into-awesome-using-excel-pivot-tables&#x2F;image8.png" alt="">
+    
+</figure>
+
+</p>
+<p>And that's it! We can now apply Excel's sorting to the columns and perform other analytical data with our <em>poor man's performance profiling</em> data.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;resharper-5-hidden-gem-patterns-catalogue&#x2F;" rel="next" title="ReSharper 5.0 Hidden Gem - Patterns Catalogue">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">ReSharper 5.0 Hidden Gem - Patterns Catalogue</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;visual-studio-2010-bug-when-opening-any-file-caused-by-docked-addin-tool-window&#x2F;" rel="prev" title="Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window">
+        <span class="nav-title">Visual Studio 2010 bug: NullReferenceException when opening any file, caused by a docked add-in tool window</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

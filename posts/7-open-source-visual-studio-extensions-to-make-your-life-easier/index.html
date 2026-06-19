@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 open-source Visual Studio Extensions to make your life easier | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="7 open-source Visual Studio Extensions to make your life easier">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">7 open-source Visual Studio Extensions to make your life easier</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2015-10-28T22:15:19Z">2015-10-28</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          4 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;index.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>It's time to upgrade your <em>favorite</em> IDE! In this post I will list some of my favorite "off-the-beaten-path" extensions for Visual Studio that make my daily tasks much easier. I will not list the obvious ones, such as <a rel="external" href="https://www.jetbrains.com/resharper/">ReSharper</a> and <a rel="external" href="http://www.oz-code.com/">OzCode</a> (or even <a rel="external" href="http://vswebessentials.com/">Web Essentials</a>), but rather few relatively unknown ones that do some very cool things.</p>
+<p>Are you ready? Let's begin!</p>
+<span id="continue-reading"></span><h1 id="buildvision">BuildVision</h1>
+<p><a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/23d3c821-ca2d-4e1a-a005-4f70f12f77ba">BuildVision</a> (<a rel="external" href="https://github.com/nagits/BuildVision">source</a>) is an extension that visualizes your build process:</p>
+<p><img src="https://raw.githubusercontent.com/nagits/BuildVision/master/Screenshots/screenshot1.png" alt="" /></p>
+<p>This little extension shows you the status of your build process, how long it took, and most importantly, errors (if any), that occurred during the build. What's nice about this, is the errors are grouped under each project, so it's much easier to navigate than going through a flat list in the Errors output:</p>
+<p><img src="https://raw.githubusercontent.com/nagits/BuildVision/master/Screenshots/screenshot4.png" alt="" /></p>
+<h1 id="git-diff-margin">Git Diff Margin</h1>
+<p><a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/cf49cf30-2ca6-4ea0-b7cc-6a8e0dadc1a8">GitDiffMargin</a> (<a rel="external" href="https://github.com/laurentkempe/GitDiffMargin">source</a>) adds a margin on the left column (or the scroll bar, if you prefer) of the Visual Studio editor, and shows you the diffs between your changed/deleted lines, allowing you to navigate and revert quickly to the previous change!</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;git_diff_margin.png" alt="Git Diff Margin">
+    
+</figure>
+
+<p>It's a perfect companion to git projects (so, all of them!), and it works very nicely with the Visual Studio Git Provider, if you use it.</p>
+<p>Which brings me to:</p>
+<h1 id="nogit">NoGit</h1>
+<p><a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/146b404a-3c91-46ff-932a-fb0f8b826f94">NoGit</a> (<a rel="external" href="https://github.com/markrendle/nogit">source</a>) does one thing and one thing only - it <strong>disables</strong> the built-in Visual Studio Git source-control provider, which has a habit of re-enabling itself whenever you open a solution that uses git. NoGit will turn off this provider always, whenever a solution is opened.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;no_git.png" alt="NoGit">
+    
+</figure>
+
+<h1 id="reopen-start-page">Reopen Start Page</h1>
+<p>Another time saver is <a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/e64380ab-e3aa-4ac7-aa11-95719c5c91e9">Reopen Start Page</a> (<a rel="external" href="https://github.com/jlattimer/VSReopenStartPage">source</a>), which does exactly what it says - reopens the Visual Studio Start page when you close a solution. Personally, I make use of the recent solutions list on the Start page, which makes it really convenient to open recent solutions!</p>
+<h1 id="saveallthetime">SaveAllTheTime</h1>
+<p><a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/ee676c7f-83e8-4ef8-87ab-22a95ae8f1d4">SaveAllTheTime</a> (<a rel="external" href="https://github.com/paulcbetts/SaveAllTheTime">source</a>) is another gem that makes Visual Studio to save changed files and projects ALL THE TIME. Visual Studio sometimes doesn't save project files when you rename or move files around. SaveAllTheTime makes sure everything is saved before you commit your changes!</p>
+<p>In addition, SaveAllTheTime contains a small widget, reminding you to commit often. If you're a git power user, or don't use git(ಠ_ಠ), you can disable this widget.</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;no_git.png" alt="Save All The Time">
+    
+</figure>
+
+<h1 id="tabsanity">TabSanity</h1>
+<p>I discovered <a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/ac4d4d6b-b017-4a42-8f72-55f0ffe850d7">TabSanity</a> (<a rel="external" href="https://github.com/jedmao/tabsanity-vs">source</a>) fairly recently, and it was one of those <em>where has this been all my life!!1</em> moments. This extension makes tabs-as-spaces behaves like actual tabs! The backspace and delete keys, arrow key navigation will not allow the caret to land within the spaces that form a tab, and it will skip to the next <em>tab</em>, saving you keystrokes!</p>
+<h1 id="emojivs">EmojiVS</h1>
+<p>Finally, let's add some fun to our code with <a rel="external" href="https://visualstudiogallery.msdn.microsoft.com/88575465-8486-4c5a-8406-05e8d1d5b09d">EmojiVS</a> (<a rel="external" href="https://github.com/jbevain/EmojiVS">source</a>) - an extension that adds github emojis to your code (more specifically, code comments). Because, why not?</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;emojivs1.png" alt="EmojiVS">
+    
+</figure>
+
+<p>And it even gives you IntelliSense:</p>
+
+
+  
+
+<figure>
+    <img src="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;7-open-source-visual-studio-extensions-to-make-your-life-easier&#x2F;emojivs2.png" alt="EmojiVS in Action">
+    
+</figure>
+
+<p>Note: if you're a ReSharper user, you need to install the <a rel="external" href="https://github.com/hmemcpy/ReSharper.ReMoji">ReMoji</a> extension <em>in addition to</em> EmojiVS to get code completion.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;preventing-a-certain-windows-update-from-installing-on-windows-10&#x2F;" rel="next" title="Preventing a certain Windows Update from installing on Windows 10">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Preventing a certain Windows Update from installing on Windows 10</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;review-my-new-hp-spectre-x360-2-in-1-convertible-laptop&#x2F;" rel="prev" title="Review: my new HP Spectre x360 2-in-1 convertible laptop">
+        <span class="nav-title">Review: my new HP Spectre x360 2-in-1 convertible laptop</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

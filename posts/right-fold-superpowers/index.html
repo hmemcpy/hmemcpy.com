@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Right fold superpowers! | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Right fold superpowers!">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;right-fold-superpowers&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Right fold superpowers!</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2019-07-31T09:25:58Z">2019-07-31</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          6 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;right-fold-superpowers.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>It's amazing how sometimes just having a different framing of the problem helps with developing a much deeper understanding of the problem. I was working through the exercises of the <a rel="external" href="https://github.com/data61/fp-course">Data61 Functional Programming course</a>, assisted by Brian McKenna's <a rel="external" href="https://www.youtube.com/watch?v=NzIZzvbplSM&amp;list=PLly9WMAVMrayYo2c-1E_rIRwBXG_FbLBW">video streams</a>, and I came accross a definition of a <em>right fold</em> that can be thought of as "constructor replacement":</p>
+<blockquote>
+    <p>The expression <code>foldr f z list</code> replaces in <code>list</code>:</p>
+<ol>
+<li>Every occurence of the cons constructor <code>(:)</code> with <code>f</code></li>
+<li>Any occurrence of the nil constructor <code>[]</code> with <code>z</code></li>
+</ol>
+
+    
+    <footer>— Tony Morris https:&#x2F;&#x2F;vimeo.com&#x2F;64673035 Explain List Folds to Yourself</footer>
+    
+</blockquote>
+<span id="continue-reading"></span>
+<p><br/>Or, to put it in a tweet:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Intuition for `foldr` as &quot;constructor replacement&quot; is very helpful! <br><br>Given a list:<br><br>1 : 2 : 3 : []<br><br>foldr &quot;replaces&quot; the cons constructor (:) with a function:<br><br>1 `f` 2 `f` 3 `f` []<br><br>e.g.<br>foldr (*) 1 (1 : 2 : 3 : [])<br>replaces : with *, and [] with 1<br>== 1 * 2 * 3 * 1<br>== 6</p>&mdash; Igal Tabachnik (@hmemcpy) <a href="https://twitter.com/hmemcpy/status/1156061465532653568?ref_src=twsrc%5Etfw">July 30, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>So let's use this new intuition to solve some course exercises using right folds only!</p>
+<p><strong>Note</strong>: you should attempt solving them yourself first! Spoilers ahead!</p>
+<p>Let's start with <a rel="external" href="https://github.com/data61/fp-course/blob/master/src/Course/List.hs"><strong>List.hs</strong></a>:</p>
+<p>We get a definition of a list as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">data List</span><span> t</span><span style="color: #81A1C1;"> =</span><span> Nil</span><span style="color: #81A1C1;"> |</span><span> t :.</span><span style="color: #81A1C1;"> List</span><span> t</span></span></code></pre>
+<p>Like the builtin Haskell list type <code>[]</code>, this custom <code>List</code> consists of nil and cons data constructors, <code>Nil</code> and <code>:.</code>. The List module also defines a <code>foldRight</code> function that operates on this <code>List</code>. We will use all this information to implement the functions for <code>List</code> using <code>foldRight</code> only.</p>
+<p>Let's start with a couple of easy ones: <code>product</code> and <code>sum</code>. Given the following list:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #B48EAD;">1</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> :.</span><span> Nil</span></span></code></pre>
+<p>to get the product of all values, we replace:</p>
+<ol>
+<li><code>:.</code> with <code>(*)</code></li>
+<li><code>Nil</code> with the neutral value <code>1</code>.</li>
+</ol>
+<p>Using <code>foldRight</code>, we can now implement the <code>product</code> function like so:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">product</span><span style="color: #81A1C1;"> :: List Int -&gt; Int</span></span>
+<span class="giallo-l"><span>product xs </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">*</span><span style="color: #ECEFF4;">)</span><span style="color: #B48EAD;"> 1</span><span> xs</span></span></code></pre>
+<p>Thanks to <a rel="external" href="https://sookocheff.com/post/fp/eta-conversion/">Eta reduction</a>, we can drop <code>xs</code> from both sides of the equals sign, leaving us with:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">product</span><span style="color: #81A1C1;"> :: List Int -&gt; Int</span></span>
+<span class="giallo-l"><span>product </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">*</span><span style="color: #ECEFF4;">)</span><span style="color: #B48EAD;"> 1</span></span></code></pre>
+<p>The <code>sum</code> function is implemented similarly, replacing <code>:.</code> with <code>(+)</code> and <code>Nil</code> with <code>0</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">sum</span><span style="color: #81A1C1;"> :: List Int -&gt; Int</span></span>
+<span class="giallo-l"><span>sum </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">+</span><span style="color: #ECEFF4;">)</span><span style="color: #B48EAD;"> 0</span></span></code></pre>
+<p>Let's look at some more interesting functions in the List module.</p>
+<h2 id="heador">headOr</h2>
+<p>The <code>headOr</code> function has the following signature:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Returns the head of the list or the given default.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; headOr 3 (1 :. 2 :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- 1</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; headOr 3 Nil</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- 3</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">headOr</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span>headOr n list </span><span style="color: #81A1C1;">=</span><span> foldRight _cons _nil list</span></span></code></pre>
+<p>The <code>_cons</code> and <code>_nil</code> arguments are placeholders, also called "typed holes". This is a great Haskell feature, forcing the compiler to provide enough information about what types and values "fit" into those holes. We'll use this information a bit later.</p>
+<p>Let's start from the end: the last argument to <code>foldRight</code> is our list. Since it appears on both sides of the equation, we can omit it, simplifying to:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">headOr</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span>headOr n </span><span style="color: #81A1C1;">=</span><span> foldRight _cons _nil</span></span></code></pre>
+<p>Next is the replacements of the cons constructor <code>:.</code> and <code>Nil</code>. Let's write down what we want our list to look like, using examples in the function signatures as guides. Here's what our list looks after being "replaced" by <code>foldRight</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #B48EAD;">1</span><span style="color: #ECEFF4;"> `</span><span style="color: #81A1C1;">f</span><span style="color: #ECEFF4;">`</span><span style="color: #B48EAD;"> 2</span><span style="color: #ECEFF4;"> `</span><span style="color: #81A1C1;">f</span><span style="color: #ECEFF4;">`</span><span style="color: #B48EAD;"> 3</span><span style="color: #ECEFF4;"> `</span><span style="color: #81A1C1;">f</span><span style="color: #ECEFF4;">`</span><span> n</span></span></code></pre>
+<p>Where <code>Nil</code> was replaced by the value <code>n</code>. What should the function <code>f</code> be?</p>
+<p>The <code>foldRight</code> function expects the <code>f</code> to be a function with two arguments. In our case, we want to take just the first argument, ignoring everything else.</p>
+<p>If we write down our list in a prefix notation, it becomes a bit more apparent:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>f </span><span style="color: #B48EAD;">1</span><span style="color: #ECEFF4;"> (</span><span>f </span><span style="color: #B48EAD;">2</span><span style="color: #ECEFF4;"> (</span><span>f </span><span style="color: #B48EAD;">3</span><span> n</span><span style="color: #ECEFF4;">))</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  ^ ^^^^^^^^^^^^^</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  | |</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  | +----</span><span> second argument</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  +------</span><span> first argument</span></span></code></pre>
+<p>To satisfy the requirement of a binary function that ignores its second argument, we can write a lambda function <code>\a _ -&gt; a</code>, which takes two arguments and returns the first one:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">headOr</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span>headOr n </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">\</span><span>a _ </span><span style="color: #81A1C1;">-&gt;</span><span> a</span><span style="color: #ECEFF4;">)</span><span> n</span></span></code></pre>
+<p>To go one step further, there exists a function called <code>const</code>, which ignores its second argument, returning the first. This allows us to replace the lambda with <code>const</code> and simplify the call even further, dropping the <code>n</code> thanks to Eta reduction:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">headOr</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span>headOr </span><span style="color: #81A1C1;">=</span><span> foldRight const</span></span></code></pre><h2 id="length">length</h2>
+<p>Following the steps above, the <code>length</code> function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Return the length of the list.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; length (1 :. 2 :. 3 :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- 3</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">length</span><span style="color: #81A1C1;"> :: List</span><span> a</span><span style="color: #81A1C1;"> -&gt; Int</span></span></code></pre>
+<p>Similarly to <code>headOr</code>, we want replace the <code>:.</code> constructor with a function. Looking again at our list in its prefix form:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>f </span><span style="color: #B48EAD;">1</span><span style="color: #ECEFF4;"> (</span><span>f </span><span style="color: #B48EAD;">2</span><span style="color: #ECEFF4;"> (</span><span>f </span><span style="color: #B48EAD;">3</span><span> n</span><span style="color: #ECEFF4;">))</span></span></code></pre>
+<p>In this case, we want to add <code>+1</code> for every <code>f</code> that we encounter, completely igoring the first argument. We can do this with a lambda that looks like this: <code>\_ b -&gt; 1 + b</code>, which we can further simplify to <code>\_ -&gt; (1 +)</code>, dropping the <code>b</code> on both sides. Finally, we replace <code>Nil</code> with <code>0</code>, and our result is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">length</span><span style="color: #81A1C1;"> :: List</span><span> a</span><span style="color: #81A1C1;"> -&gt; Int</span></span>
+<span class="giallo-l"><span>length </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">\</span><span>_ </span><span style="color: #81A1C1;">-&gt;</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">1</span><span style="color: #81A1C1;"> +</span><span style="color: #ECEFF4;">))</span><span style="color: #B48EAD;"> 0</span></span></code></pre><h2 id="map">map</h2>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Map the given function on each element of the list.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; map (+10) (1 :. 2 :. 3 :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- [11,12,13]</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">map</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> b</span></span>
+<span class="giallo-l"><span>map f </span><span style="color: #81A1C1;">=</span><span> foldRight _cons _nil</span></span></code></pre>
+<p>With <code>map</code> we want to preserve the data constructors, applying the mapping function <code>f</code> to every element of the list. The typed hole suggests our first argument to <code>foldRight</code> needs to have the type <code>a -&gt; List b -&gt; List b</code>. We can satisfy it with the function <code>\a bs -&gt; f a :. bs</code>. The <code>Nil</code> remains unchanged, and our final result is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">map</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> b</span></span>
+<span class="giallo-l"><span>map f </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">\</span><span>a bs </span><span style="color: #81A1C1;">-&gt;</span><span> f a </span><span style="color: #81A1C1;">:.</span><span> bs</span><span style="color: #ECEFF4;">)</span><span> Nil</span></span></code></pre><h2 id="filter">filter</h2>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Return elements satisfying the given predicate.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; filter even (1 :. 2 :. 3 :. 4 :. 5 :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- [2,4]</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">filter</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #81A1C1;"> -&gt; Bool</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span></span>
+<span class="giallo-l"><span>filter p </span><span style="color: #81A1C1;">=</span><span> foldRight _cons _nil</span></span></code></pre>
+<p>Very similar to <code>map</code>, except we use the predicate <code>p</code> to decide whether to take the element or drop it from our resulting list. The typed hole for <code>_cons</code> is <code>a -&gt; List a -&gt; List a</code>, satisfied with:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">\</span><span>x xs </span><span style="color: #81A1C1;">-&gt; if</span><span> p x </span><span style="color: #81A1C1;">then</span><span> x </span><span style="color: #81A1C1;">:.</span><span> xs </span><span style="color: #81A1C1;">else</span><span> xs</span></span></code></pre>
+<p>(I'm not using the names <code>a</code> and <code>as</code> because it screws up the syntax highlighter)</p>
+<p>If the element <code>x</code> matches the predicate <code>p</code>, cons it to our result, otherwise just return the result. Final version:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">filter</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #81A1C1;"> -&gt; Bool</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span></span>
+<span class="giallo-l"><span>filter f </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #81A1C1;">\</span><span>x xs </span><span style="color: #81A1C1;">-&gt; if</span><span> f x </span><span style="color: #81A1C1;">then</span><span> x </span><span style="color: #81A1C1;">:.</span><span> xs </span><span style="color: #81A1C1;">else</span><span> xs</span><span style="color: #ECEFF4;">)</span><span> Nil</span></span></code></pre><h2 id="aka-append">(++) aka append</h2>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Append two lists to a new list.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; (1 :. 2 :. 3 :. Nil) ++ (4 :. 5 :. 6 :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- [1,2,3,4,5,6]</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">++</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> :: List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span></span></code></pre>
+<p>Here is where it gets mindblowing. The <code>(++)</code> function takes two lists and appends them. Let's visualize the two lists like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #B48EAD;">1</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 3</span><span style="color: #81A1C1;"> :.</span><span> Nil</span></span>
+<span class="giallo-l"><span style="color: #B48EAD;">                4</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 5</span><span style="color: #81A1C1;"> :.</span><span style="color: #B48EAD;"> 6</span><span style="color: #81A1C1;"> :.</span><span> Nil</span></span></code></pre>
+<p>This makes it very easy to see how we can use "constructor replacement" to append two lists: the <code>:.</code> remains unchanged, and we replace <code>Nil</code> with the second list! The result is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">++</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> :: List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span><span style="color: #81A1C1;"> -&gt; List</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">++</span><span style="color: #ECEFF4;">)</span><span> list1 list2 </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">:.</span><span style="color: #ECEFF4;">)</span><span> list2 list1</span></span></code></pre><h2 id="flatten">flatten</h2>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">-- |</span><span style="color: #616E88;"> Flatten a list of lists to a list.</span></span>
+<span class="giallo-l"><span style="color: #616E88;">--</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- &gt;&gt;&gt; flatten ((1 :. 2 :. 3 :. Nil) :. (4 :. 5 :. 6 :. Nil) :. (7 :. 8 :. 9 :. Nil) :. Nil)</span></span>
+<span class="giallo-l"><span style="color: #616E88;">-- [1,2,3,4,5,6,7,8,9]</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">flatten</span><span style="color: #81A1C1;"> :: List</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">List</span><span> a</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a </span></span></code></pre>
+<p>Here is again the intuition for constructor replacement helps us find the answer - the <code>flatten</code> functions takes a list of lists and <em>appends</em> them together into a single list! This should sound very familiar, as we <em>just</em> implemented a function that does that! We can use the <code>(++)</code> function to append two lists together, so all we need to do is replace the <code>:.</code> between the lists with <code>(++)</code>! The result is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">flatten</span><span style="color: #81A1C1;"> :: List</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">List</span><span> a</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; List</span><span> a </span></span>
+<span class="giallo-l"><span>flatten </span><span style="color: #81A1C1;">=</span><span> foldRight </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">++</span><span style="color: #ECEFF4;">)</span><span> Nil</span></span></code></pre>
+<hr />
+<p>Hopefully, by now, it became clear how thinking of the right fold as "constructor replacement" can help visualize and guide towards the correct implementation. I recommend finishing the rest of the <code>List</code> module, then implement the <code>Optional</code> module using only <code>foldRight</code>.</p>
+<p>I will continue the <a rel="external" href="https://github.com/data61/fp-course">Data61 FP course</a>, and will share more gems as I learn them! Stay tuned!</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;becoming-foolish&#x2F;" rel="next" title="Becoming Foolish">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Becoming Foolish</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-1&#x2F;" rel="prev" title="Functional Programming in Haskell (Stepik course notes) - module 1">
+        <span class="nav-title">Functional Programming in Haskell (Stepik course notes) - module 1</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

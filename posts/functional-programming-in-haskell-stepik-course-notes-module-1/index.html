@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functional Programming in Haskell (Stepik course notes) - module 1 | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Functional Programming in Haskell (Stepik course notes) - module 1">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-1&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Functional Programming in Haskell (Stepik course notes) - module 1</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-01-18T02:01:20Z">2020-01-18</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          27 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-1.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>There's a fantastic free online course (MOOC) for the Russian-speaking developer community on <a rel="external" href="https://stepik.org/">Stepik</a> for learning Haskell - a two-part course titled <a rel="external" href="https://stepik.org/course/75">Functional Programming in Haskell</a> by Denis Moskvin, (then) associate professor at the St. Petersburg Academic University. I recently re-watched the course (having completed it previously) and decided to take notes and summarize the course content in English for your enjoyment.</p>
+<p>I would like to thank Denis Moskvin for providing this amazing resource for free. I urge you, if you speak Russian and want to learn Haskell, to work through the course material and exercises!</p>
+<p>Below is the summary of the first module, <strong>Introduction</strong>, out of 5.</p>
+<span id="continue-reading"></span>
+<ol>
+<li><strong>Introduction</strong> (this page)</li>
+<li><a href="/posts/functional-programming-in-haskell-stepik-course-notes-module-2/">Programming fundamentals</a></li>
+<li>Lists</li>
+<li>Data types</li>
+<li>Monads</li>
+</ol>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<p><em>Note:</em> The original Stepik course was recorded using GHC version 7.6.3. At the time of writing this series, the latest available GHC version is 8.8.2, which may include some differences. Mainly, since version 8 of the GHC, using the keyword <code>let</code> inside GHCi is no longer required when defining functions.</p>
+<h3 id="installing-and-configuring-ghc">Installing and configuring GHC</h3>
+<p>Download and install the <a rel="external" href="https://www.haskell.org/platform/">Haskell Platform</a> for your operating system.</p>
+<p>The Haskell Platform contains the Glasgow Haskell Compiler (GHC), the interpreter environment (GHCi, also known as "REPL"), as well as other tools.</p>
+<p>Haskell source code is written in text files having the <code>.hs</code> extension. Most text editors support the Haskell syntax in the form of syntax highlighting and code completion. Haskell uses significant indentation for scoping. Use spaces to indent your code to prevent compilation errors.</p>
+<h4 id="using-the-interpreter-ghci">Using the interpreter (GHCi)</h4>
+<p>To start the interpreter, type <code>ghci</code> in your command shell:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span> $ ghci</span></span>
+<span class="giallo-l"><span>GHCi, version 8.6.5: http://www.haskell.org/ghc/  :? for help</span></span>
+<span class="giallo-l"><span>Prelude&gt; _</span></span></code></pre>
+<p>The standard module <code>Prelude</code> gets loaded automatically, it contains many standard types and useful functions.</p>
+<p>We can start typing expressions into the interpreter:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; 33 + 3 * 3</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>The interpreter will compute the expression and will display the result in the next line.</p>
+<p>We can type other kinds of expressions, such as the function <code>pi</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; pi</span></span>
+<span class="giallo-l"><span>3.141592653589793</span></span>
+<span class="giallo-l"><span>Prelude&gt; &quot;ABC&quot; ++ &quot;DE&quot;</span></span>
+<span class="giallo-l"><span>&quot;ABCDE&quot;</span></span></code></pre>
+<p>The default prompt can be changed using the command <code>:set prompt</code>, followed by the new prompt name:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; :set prompt &quot;GHCi&gt; &quot;</span></span>
+<span class="giallo-l"><span>GHCi&gt; _</span></span></code></pre>
+<p>Note that changing the default prompt hides the name of the currently loaded module. As such, this is not recommended.</p>
+<h4 id="working-with-modules">Working with modules</h4>
+<p>Create a new text file with the following definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Test</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>sayHello </span><span style="color: #81A1C1;">=</span><span> putStrLn </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">Hello from module Test!</span><span style="color: #ECEFF4;">&quot;</span></span></code></pre>
+<p>Save the file with the name <code>test.hs</code> (in the same directory where GHCi was started), then load the file using the <code>:load</code> command:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; :load Test</span></span>
+<span class="giallo-l"><span>[1 of 1] Compiling Test             ( Test.hs, interpreted )</span></span>
+<span class="giallo-l"><span>Ok, one module loaded.</span></span>
+<span class="giallo-l"><span>*Test&gt; sayHello</span></span>
+<span class="giallo-l"><span>Hello from module Test!</span></span>
+<span class="giallo-l"><span>*Test&gt; _</span></span></code></pre>
+<p>Another handy command is <code>:reload</code>, allowing you to reload the module after changing it in the text editor. Changing <strong>Hello from module Test!</strong> to <strong>Hello World from module Test!</strong>, saving the file, and typing <code>:reload</code> in GHCi:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>*Test&gt; :reload</span></span>
+<span class="giallo-l"><span>[1 of 1] Compiling Test             ( Test.hs, interpreted )</span></span>
+<span class="giallo-l"><span>Ok, one module loaded.</span></span>
+<span class="giallo-l"><span>*Test&gt; sayHello</span></span>
+<span class="giallo-l"><span>Hello World from module Test!</span></span>
+<span class="giallo-l"><span>*Test&gt; _</span></span></code></pre>
+<p>Most commands can be shortened to the first letter (unless ambiguous) - instead of <code>:load</code> and <code>:reload</code> we can type <code>:l</code> and <code>:r</code>, respectively.</p>
+<h3 id="functions">Functions</h3>
+<p>In imperative languages, programs are sequences of instructions that are executed. Their result is stored in memory locations of the runtime, called variables. Subsequent instructions can refer to previous results stored in those variables. In most imperative languages, variables can be modified during the execution of the program.</p>
+<p>In functional languages, programs are expressions, and executing the program means <em>reducing</em> those expressions until it's no longer possible to reduce it further. Reduced expressions are the result of the program execution.</p>
+<p>Here's an example of a mathematical expression, and its reduction steps:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>(5 + 4 * 3) ^ 2</span></span>
+<span class="giallo-l"><span> ~&gt; (5 + 12) ^ 2</span></span>
+<span class="giallo-l"><span> ~&gt; 17 ^ 2</span></span>
+<span class="giallo-l"><span> ~&gt; 289</span></span></code></pre>
+<p>The first line contains the body of the expression, and each subsequent line is the reduction step. The resulting expression which cannot be further reduced is the final result 289. In future modules we'll use the squiggly-arrow ~&gt; to describe reduction steps of an expression.</p>
+<h4 id="function-application">Function application</h4>
+<p>Let's talk about applying functions and the role of parentheses.</p>
+<p>We'll start by writing two identifiers, <code>foo</code> and <code>bar</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; foo bar</span></span></code></pre>
+<p>Those identifiers are not defined anywhere, but syntactically they mean "apply the function <code>foo</code> to the argument <code>bar</code>". In other languages, we usually place the argument in parentheses, e.g. <code>foo(bar)</code> in the C language. In Haskell, calling a function does not require placing its arguments in parentheses, but rather they are used to group sequences of functions together.</p>
+<p>In the following expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; acos (cos pi)</span></span>
+<span class="giallo-l"><span>3.141592653589793</span></span></code></pre>
+<p>we first calculate the result of applying <code>cos</code> to <code>pi</code> followed by applying <code>acos</code> to the result.</p>
+<p>If a function takes multiple parameters, they are applied in order, separated by a space:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; max 5 42</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>Here we're applying the function <code>max</code>, which takes two arguments, to the values <code>5</code> and <code>42</code>. This function returns the larger of the two arguments, resulting in 42.</p>
+<p>Another, equivalent form of writing the previous expression is as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (max 5) 52</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>This equivalence is called left-associativity. It is said that function application associates to the left, causing the two-argument function <code>max</code> to be applied first to the value 5, resulting in a one-argument function, which is further applied to 42.</p>
+<p>Applying functions to just some of its arguments is called <em>partial application</em>. In this form, <code>(max 5)</code> is a partially-applied function that expects an additional argument to produce a result. Suppose the expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 + sin 42</span></span>
+<span class="giallo-l"><span>2.0834784520843663</span></span></code></pre>
+<p>In this expression, <code>sin</code> is a function that expects one argument. We can replace it with our partially applied <code>(max 5)</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 + (max 5) 42</span></span>
+<span class="giallo-l"><span>45</span></span></code></pre>
+<p>Here, the result of <code>(max 5)</code> applied to 42 will be 42, which will be added with 3 to result in the value 45.</p>
+<p>Partial application is a very powerful tool. In Haskell we can formalize it as follows: a function of <em>n</em> arguments can be viewed as a function of <em>one</em> argument, returning a function of <em>n - 1</em> arguments.</p>
+<h4 id="declaring-functions">Declaring functions</h4>
+<p>To define a function we need to give it a name, followed by its parameters, followed by the <code>=</code> sign, after which we specify the function body. Let's define a function that sums the squares of its two arguments:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumSquares x y = x ^ 2 + y ^ 2</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>     ^     ^ ^   ^^^^^^^^^^^^^</span></span>
+<span class="giallo-l"><span>     |     | |   |</span></span>
+<span class="giallo-l"><span>     |     | |   +-- function body</span></span>
+<span class="giallo-l"><span>     |     | +------ second argument</span></span>
+<span class="giallo-l"><span>     |     +-------- first argument </span></span>
+<span class="giallo-l"><span>     +-------------- function name</span></span></code></pre>
+<p>After defining this function, we can now call it:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sumSquares 1 2</span></span>
+<span class="giallo-l"><span>5</span></span></code></pre>
+<p>Haskell requires all functions and formal parameter names to start with a lowercase letter. Names starting with an uppercase letter are used to define data types. Haskell function names can contain numbers (as long as they're not the first letter), as well as underscores, and a single quote (<code>'</code>) is often used. The name <code>rock'n'roll</code> is a valid Haskell identifier.</p>
+<h4 id="pure-functions">Pure functions</h4>
+<p>What sets Haskell apart from many other programming languages if the fact that Haskell functions are <em>pure</em> - the meaning of a Haskell function is completely specified by its input arguments. No other inputs can influence the result of a pure function. It is said that a pure function has no <em>side-effects</em>. As a result, a function that does not take any arguments is a <em>constant</em> - it will always yield the same result.</p>
+<p>The following function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; fortyTwo = 39 + 3</span></span>
+<span class="giallo-l"><span>&gt; fortyTwo</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>Will always produce the value 42, regardless of when and where it is executed. It is not possible in Haskell to define a function of no arguments that returns different results on different calls. To create functions that produce random values we will need to use a special <em>container</em> called <code>IO</code>, which will be introduced in later modules.</p>
+<h4 id="conditions">Conditions</h4>
+<p>Many programming languages contain a conditional operator <code>if</code>, that is used to branch program execution, depending on some condition. In imperative languages, the <code>if</code> condition may or may not be followed by an <code>else</code> branch. Haskell also contains a conditional <code>if</code> operator that is syntactically similar to the imperative one.</p>
+<p>Let's define a function <code>f</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; f x = if x &gt; 0 then 1 else (-1)</span></span>
+<span class="giallo-l"><span>&gt; f 5</span></span>
+<span class="giallo-l"><span>1</span></span>
+<span class="giallo-l"><span>&gt; f (-5)</span></span>
+<span class="giallo-l"><span>-1</span></span></code></pre>
+<p>This function takes a numeric value <code>x</code> and returns 1 if <code>x</code> is greater than 0, otherwise -1. When used as arguments, negative numbers in Haskell must be enclosed in parentheses, e.g. (-5) means the argument -5.</p>
+<p>Functional languages like Haskell require both branches <code>then</code> and <code>else</code> to be defined. Both branches must contain expressions of the same type, otherwise, it will be a compilation error. The other major difference between functional and imperative languages is the fact that conditionals are expressions too. It means that conditional expressions could be used in building other, larger expressions:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; g x = (if x &gt; 0 then 1 else (-1)) + 3</span></span>
+<span class="giallo-l"><span>&gt; g 5</span></span>
+<span class="giallo-l"><span>4</span></span>
+<span class="giallo-l"><span>&gt; g (-7)</span></span>
+<span class="giallo-l"><span>2</span></span></code></pre>
+<p>Here in function <code>g</code>, we add 3 to the result of the conditional expression.</p>
+<h4 id="partial-application">Partial application</h4>
+<p>Let's suppose we want to define a function <code>max5</code> which takes a single argument. It will return this argument if it's greater than 5, otherwise 5. We can use the existing <code>max</code> function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; max5 x = max 5 x</span></span>
+<span class="giallo-l"><span>&gt; max5 4</span></span>
+<span class="giallo-l"><span>5</span></span>
+<span class="giallo-l"><span>&gt; max5 42</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>In Haskell, we can write a shorter version of this function, by dropping the argument <code>x</code> on both sides of the equals sign. Let's call it <code>max5'</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; max5&#39; = max 5</span></span>
+<span class="giallo-l"><span>&gt; max5&#39; 4</span></span>
+<span class="giallo-l"><span>5</span></span>
+<span class="giallo-l"><span>&gt; max5&#39; 42</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>It behaves exactly as <code>max5</code>, but here the partial application is more obvious: the function <code>max</code> is partially applied to the value 5, resulting in a function of a single argument. This style of defining a function without specifying all of the parameters is quite pervasive in Haskell, and it's called the <em>point-free</em> style.</p>
+<p>Let's look at another example, a function <code>discount</code> that calculates a discount given some percentage if the sum is greater than some limit:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; discount limit pct sum = if sum &gt;= limit then sum * (100 - pct) / 100 else sum</span></span></code></pre>
+<p>The order of parameters in this definition is a little weird. In Haskell, oftentimes functions are designed to prioritize making partial application convenient. In the case of our <code>discount</code> function, we suppose that the arguments <code>limit</code> and <code>pct</code> would rarely change, while the <code>sum</code> argument may be different each time. We can introduce another function, <code>standardDiscount</code>, which offers a standard discount of 5% for sums over 1000:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; discount limit pct sum = if sum &gt;= limit then sum * (100 - pct) / 100 else sum</span></span>
+<span class="giallo-l"><span>&gt; standardDiscount = discount 1000 5</span></span></code></pre>
+<p>This is a partially-applied function, the parameter <code>sum</code> is not specified on either side (although it could have been). We can now call the <code>standardDiscount</code> function with just one parameter:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; standardDiscount 2000</span></span>
+<span class="giallo-l"><span>1900.0</span></span>
+<span class="giallo-l"><span>&gt; standardDiscount 900</span></span>
+<span class="giallo-l"><span>900</span></span></code></pre><h3 id="operators">Operators</h3>
+<p>Operators exist in Haskell just like functions but are called in a slightly different style. Suppose the expression <code>max 6 7</code>. It is written in a so-called <em>prefix</em> style, where the function name <code>max</code> is prefixing the arguments. In contrast, operators are usually written in an <em>infix</em> style, e.g. <code>6 + 7</code> - the operator <code>+</code> is infixed between its two arguments.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; max 6 7</span></span>
+<span class="giallo-l"><span>7</span></span>
+<span class="giallo-l"><span>&gt; 6 + 7</span></span>
+<span class="giallo-l"><span>13</span></span></code></pre>
+<p>However, in Haskell, this distinction can be removed by writing functions in an infix ("operator") style, and operators in a prefix ("functional") style. Functions surrounded by backticks (<code>`</code>) and written between the arguments can be used as operators:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 6 `max` 7</span></span>
+<span class="giallo-l"><span>7</span></span></code></pre>
+<p>To use operators in a functional style, they have to be placed in parentheses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (+) 6 7</span></span>
+<span class="giallo-l"><span>13</span></span></code></pre>
+<p>Nearly all operators in Haskell are binary, meaning they accept two arguments. In the example above we turned the binary operator <code>+</code> to a binary function <code>(+)</code> applied to two arguments. The only exception is the unary <code>-</code> operator which negates numeric values. To avoid collisions between binary and unary <code>-</code> we enclose negative numbers in argument positions in parentheses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; - 7</span></span>
+<span class="giallo-l"><span>-7</span></span>
+<span class="giallo-l"><span>&gt; (-) 5 3</span></span>
+<span class="giallo-l"><span>2</span></span>
+<span class="giallo-l"><span>&gt; max (-5) 5</span></span>
+<span class="giallo-l"><span>5</span></span></code></pre><h4 id="operator-precedence-and-associativity">Operator precedence and associativity</h4>
+<p>Suppose the following expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 + 5 * 8</span></span>
+<span class="giallo-l"><span>43</span></span></code></pre>
+<p>From mathematics, we know that multiplication precedes addition. Haskell also knows about this, because the addition and multiplication operators have a certain <em>precedence</em>. The multiplication operator has a higher precedence than addition, and Haskell uses this information when evaluating the expression.</p>
+<p>A precedence level is a number from 0 to 9, bigger means higher. Function application in Haskell is considered having a precedence level 10 - highest possible, which is why the expression <code>sin 5 + 4</code> is first evaluated by calculating <code>sin 5</code> and then adding 4 to the result. All operators have lower precedence than function application.</p>
+<p>Associativity is taken into account when operators lack associativity rules. The expression <code>3 - 9 - 5</code> could be viewed in two ways:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (3 - 9) - 5</span></span>
+<span class="giallo-l"><span>-11</span></span></code></pre>
+<p>also known as <em>left-associative</em>, or</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 - (9 - 5)</span></span>
+<span class="giallo-l"><span>-1</span></span></code></pre>
+<p>known as <em>right-associative</em>.</p>
+<p>From mathematics, subtraction is a left-associative operation, and Haskell will give us the correct result without using any parentheses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 - 9 - 5</span></span>
+<span class="giallo-l"><span>-11</span></span></code></pre>
+<p>To define operator associativity, Haskell uses the keywords <code>infixl</code> and <code>infixr</code> for left and right associativity, respectively, or <code>infix</code> for operators without associativity rules. The keyword is followed by the precedence level and the operator name.</p>
+<p>Here are some operators defined in the standard library:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">infixr</span><span style="color: #B48EAD;"> 8</span><span style="color: #81A1C1;"> ^</span><span>, </span><span style="color: #ECEFF4;">`</span><span style="color: #81A1C1;">logBase</span><span style="color: #ECEFF4;">`</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">infixl</span><span style="color: #B48EAD;"> 7</span><span style="color: #81A1C1;"> *</span><span>, </span><span style="color: #ECEFF4;">`</span><span style="color: #81A1C1;">div</span><span style="color: #ECEFF4;">`</span><span>, </span><span style="color: #ECEFF4;">`</span><span style="color: #81A1C1;">mod</span><span style="color: #ECEFF4;">`</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">infixl</span><span style="color: #B48EAD;"> 6</span><span style="color: #81A1C1;"> +</span><span>, </span><span style="color: #81A1C1;">-</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">infix</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> ==</span><span>, </span><span style="color: #81A1C1;">/=</span><span>, </span><span style="color: #81A1C1;">&gt;</span><span>, </span><span style="color: #81A1C1;">&gt;=</span><span>, </span><span style="color: #81A1C1;">&lt;</span><span>, </span><span style="color: #81A1C1;">&lt;=</span></span></code></pre>
+<p>Using functions in operator (infix) style, such as <code>logBase</code> will have defined associativity and precedence levels. In this case, <code>logBase</code> in operator mode is right-associative, having precedence level 8.</p>
+<p>Any operator lacking a fixity declaration is assumed to be <code>infixl 9</code>.</p>
+<h4 id="operator-definition">Operator definition</h4>
+<p>Haskell does not have built-in operators. All operators used until now (<code>+</code>, <code>*</code>, etc.) are defined in the standard library. Haskell allows users to define custom operators, using a combination of any of the following symbols:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>! # $ % &amp; * + . / &lt; = &gt; ? @ \ ^ | - ~</span></span></code></pre>
+<p>The symbol <code>:</code> can also be used, but it has special meaning in various Haskell constructs, so it's best to avoid using it as an operator.</p>
+<p>Let's create a custom operator <code>*+*</code> for the sum of squares function. To define it, we first declare its associativity and precedence, say left-associative and 6, followed by the definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">infixl</span><span style="color: #B48EAD;"> 6</span><span style="color: #81A1C1;"> *+*</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>a </span><span style="color: #81A1C1;">*+*</span><span> b </span><span style="color: #81A1C1;">=</span><span> a </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> +</span><span> b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span></span></code></pre>
+<p>Let's load it in the REPL, and indeed it works:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 3 *+* 4</span></span>
+<span class="giallo-l"><span>&gt; 25</span></span></code></pre>
+<p>It can also be used in the functional style by enclosing it in parentheses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (*+*) 3 4</span></span>
+<span class="giallo-l"><span>25</span></span></code></pre>
+<p>We could also define the operator in the prefix style:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">infixl</span><span style="color: #B48EAD;"> 6</span><span style="color: #81A1C1;"> *+*</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">*+*</span><span style="color: #ECEFF4;">)</span><span> a b </span><span style="color: #81A1C1;">=</span><span> a </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> +</span><span> b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span></span></code></pre><h4 id="operator-section">Operator section</h4>
+<p>In Haskell, there's a special syntax for partially applying infix operators, called <em>section</em>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (2 /)</span></span></code></pre>
+<p>Here we bind the first (left) argument of the division operator with the value 2. Applying it to another number will give us:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (2 /) 4</span></span>
+<span class="giallo-l"><span>0.5</span></span></code></pre>
+<p>We can also bind the right argument, giving us a division by 2:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (/ 2) 4</span></span>
+<span class="giallo-l"><span>2</span></span></code></pre>
+<p>This is called <em>left section</em> and <em>right section</em>, respectively. To use the section, the operator and the value must be enclosed in parentheses. The only exception to this is the <code>-</code> operator, which will negate the number instead:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (- 2)</span></span>
+<span class="giallo-l"><span>-2</span></span></code></pre><h4 id="the-operator">The <code>$</code> operator</h4>
+<p>Function application in Haskell is written with a space between the function name and its arguments, e.g. <code>f x</code>. We can instead think a custom operator <code>$</code> for function application:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>f </span><span style="color: #81A1C1;">$</span><span> x </span><span style="color: #81A1C1;">=</span><span> f x</span></span></code></pre>
+<p>Such an operator already exists in the Haskell standard library, and it is used in the following manner:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sin $ 0</span></span>
+<span class="giallo-l"><span>0.0</span></span></code></pre>
+<p>This is equivalent to calling <code>sin 0</code>, so why do we need another operator? It turns out the <code>$</code> operator has the lowest possible precedence level (0), and it allows removing excess parentheses when using expressions with multiple functions. Suppose an expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sin (pi / 2)</span></span>
+<span class="giallo-l"><span>1.0</span></span></code></pre>
+<p>Without grouping <code>pi / 2</code> in parentheses, Haskell would first evaluate <code>sin pi</code> (due to the highest precedence of function application) and then apply <code>/ 2</code> to the result. Using the <code>$</code> operator we can <em>lower</em> the precedence level of function application, allowing first to calculate <code>pi / 2</code> and only then apply <code>sin</code> to the result:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sin $ pi / 2</span></span>
+<span class="giallo-l"><span>1.0</span></span></code></pre>
+<p>Moreover, the <code>$</code> operator is right-associative, which allows in most cases to remove parentheses from expressions on the right side. The following expressions are equivalent:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>f (g x (h y)) == f $ g x (h y) == f $ g x $ h y</span></span></code></pre>
+<p>The <code>$</code> operator is used pervasively in Haskell code bases due to its usefulness.</p>
+<h3 id="base-types">Base types</h3>
+<p>Haskell is a strong, statically-typed programming language. The term <em>strong</em> means that Haskell lacks implicit conversion between types, and <em>static</em> means that type checking is done during compilation, rather than the run time.</p>
+<p>Haskell has strong <em>type inference</em>, allowing it to deduce (infer) the correct type of almost all expressions unless there's an error in the expression, in which case Haskell will report a type-checking error.</p>
+<p>To learn the type of any expression in Haskell there exists the command <code>:type</code> (<code>:t</code> for short). Typing it, followed by an expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :type &#39;c&#39;</span></span>
+<span class="giallo-l"><span>&#39;c&#39; :: Char</span></span></code></pre>
+<p>gives us the information that <code>'c'</code> is of type <code>Char</code>. The <code>::</code>, which can be read as "has type" or "is of type", is a typing operator, which binds the expressions ("terms") on the left with their type on the right. In most cases, type names in Haskell start with a capital letter.</p>
+<p>The <code>Char</code> type includes all symbols of the alphabet, including Unicode symbols and control symbols, such as new line:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :type &#39;\n&#39;</span></span>
+<span class="giallo-l"><span>&#39;\n&#39; :: Char</span></span></code></pre>
+<p>However, if we enter in single quotes a non-char value, GHCi will report an error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :type &#39;zz&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:1: error:</span></span>
+<span class="giallo-l"><span>    • Syntax error on &#39;zz&#39;</span></span>
+<span class="giallo-l"><span>      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes</span></span>
+<span class="giallo-l"><span>    • In the Template Haskell quotation &#39;zz&#39;</span></span></code></pre>
+<p>Another common type is <code>Bool</code>, which is inhabited by two values, <code>True</code> and <code>False</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t True</span></span>
+<span class="giallo-l"><span>True :: Bool</span></span>
+<span class="giallo-l"><span>&gt; :t False</span></span>
+<span class="giallo-l"><span>False :: Bool</span></span></code></pre><h4 id="numeric-types">Numeric types</h4>
+<p>Haskell has a variety of numeric types, like <code>Int</code> (for 32/64 bit integers), <code>Integer</code> (arbitrary precision type, up to the limit of machine memory), as well as floating-point types like <code>Float</code> and <code>Double</code>.</p>
+<p>All of these numeric types are members of the <em>type class</em> <code>Num</code> (we'll learn more about type classes in future modules). The type class mechanism in Haskell is used to provide a common "interface" for all numeric values, for example, the ability to add numbers using the same operator <code>+</code>.</p>
+<p>Let's look at the type of some number literals in GHCi:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t 3</span></span>
+<span class="giallo-l"><span>3 :: Num a =&gt; a</span></span></code></pre>
+<p>We can see that Haskell numbers are strangely defined: the type of the literal 3 is an arbitrary type <code>a</code>, which is prefixed with a certain <em>context</em> called <code>Num a</code>. We say that <code>a</code> is <em>constrained</em> by the <code>Num</code> type class.</p>
+<p>However, we can also specify a concrete type when using literals. In this definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; x = 3 :: Int</span></span>
+<span class="giallo-l"><span>&gt; x</span></span>
+<span class="giallo-l"><span>3</span></span>
+<span class="giallo-l"><span>&gt; :t x</span></span>
+<span class="giallo-l"><span>x :: Int</span></span></code></pre>
+<p>We bind the identifier <code>x</code> with the <code>Int</code> value 3. We can also specify another type:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; y = 3 :: Double</span></span>
+<span class="giallo-l"><span>&gt; y</span></span>
+<span class="giallo-l"><span>3.0</span></span>
+<span class="giallo-l"><span>&gt; :t y</span></span>
+<span class="giallo-l"><span>y :: Double</span></span></code></pre>
+<p>This works because <code>Double</code> is also a member of the type class <code>Num</code>, allowing us to satisfy the constraint of the literal 3 in the context of <code>Double</code>.</p>
+<p>Creating another value <code>z</code>, to which we add <code>Double</code> and <code>Int</code> values:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; z = y + 17</span></span>
+<span class="giallo-l"><span>&gt; :t z</span></span>
+<span class="giallo-l"><span>z :: Double</span></span></code></pre>
+<p>This results in <code>Double</code> since the literal 17 is <em>polymorphic</em> in its return type, and since the <code>+</code> operator must return the same type as its arguments, we use the existing <code>Double</code> constraint of <code>y</code>, and the resulting type is <code>Double</code>.</p>
+<p>As we've seen, whole numbers belong to the type class <code>Num</code>, while floating-point numbers belong to another type class, <code>Fractional</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t 3.5</span></span>
+<span class="giallo-l"><span>3.5 :: Fractional a =&gt; a</span></span></code></pre>
+<p>The <code>Float</code> and <code>Double</code> types belong to the <code>Fractional</code> type class, while <code>Int</code> and <code>Integer</code> do not.</p>
+<p>The <code>Integer</code> type can inhabit any arbitrary-length integer value, limited only by the computer's memory. The <code>Int</code> type can be either 32- or 64-bit, depending on the architecture:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 123456789012345678901234567890 :: Integer</span></span>
+<span class="giallo-l"><span>123456789012345678901234567890</span></span>
+<span class="giallo-l"><span>&gt; 123456789012345678901234567890 :: Int</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:20:1: warning: [-Woverflowed-literals]</span></span>
+<span class="giallo-l"><span>    Literal 123456789012345678901234567890 is out of the Int range -9223372036854775808..9223372036854775807</span></span></code></pre><h4 id="function-types">Function types</h4>
+<p>Function type signatures in Haskell are written with an infix arrow <code>-&gt;</code>, with the argument type on the left of the arrow, and the result type is on the right.</p>
+<p>Haskell has a boolean <code>not</code> function, taking a boolean value and negates it. Let's see what it looks like in the REPL:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; not False</span></span>
+<span class="giallo-l"><span>True</span></span></code></pre>
+<p>Since <code>not</code> is a function that takes a <code>Bool</code> type and returns a <code>Bool</code> type, its type signature is written as <code>Bool -&gt; Bool</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t not</span></span>
+<span class="giallo-l"><span>not :: Bool -&gt; Bool</span></span></code></pre>
+<p>In the case of two (or more) arguments, the type signature looks like this (using the binary <code>&amp;&amp;</code> (logical AND) function):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (&amp;&amp;) False True</span></span>
+<span class="giallo-l"><span>False</span></span>
+<span class="giallo-l"><span>&gt; :t (&amp;&amp;)</span></span>
+<span class="giallo-l"><span>(&amp;&amp;) :: Bool -&gt; Bool -&gt; Bool</span></span></code></pre>
+<p>Recall that every function of <em>n</em> arguments in Haskell can be viewed as a function of 1 argument, returning another function of <em>n - 1</em> arguments. In this case, the function <code>&amp;&amp;</code> can be viewed as:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; ((&amp;&amp;) False) True</span></span>
+<span class="giallo-l"><span>False</span></span></code></pre>
+<p>where <code>((&amp;&amp;) False)</code> is a partially applied function that expects one more <code>Bool</code> argument, making its return type a <code>Bool -&gt; Bool</code> function. The complete expression can thus be written as <code>Bool -&gt; (Bool -&gt; Bool)</code>. The <code>-&gt;</code> operator is right-associative, so the parentheses can be removed, resulting in a type <code>Bool -&gt; Bool -&gt; Bool</code>.</p>
+<p>We can view the rightmost parameter in the type signature as the return type, making all preceding parameters the argument types. Thus, <code>Bool -&gt; Bool -&gt; Bool</code> is read "a function of two <code>Bool</code> arguments, returning a <code>Bool</code>".</p>
+<h4 id="importing-functions">Importing functions</h4>
+<p>The standard Prelude contains many often-used functions, but not all. To gain access to other functions, defined in other modules, those modules first have to be <em>imported</em>.</p>
+<p>Importing modules is done by using the keyword <code>import</code>, followed by the module name:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Demo</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Char</span></span></code></pre>
+<p>This gives us access to all functions exported by the module <code>Data.Char</code>, such as <code>isDigit</code>. Modules can also be imported directly in GHCi:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; import Data.Char</span></span>
+<span class="giallo-l"><span>Prelude Data.Char&gt; isDigit &#39;7&#39;</span></span>
+<span class="giallo-l"><span>True</span></span></code></pre>
+<p>To find the module and name of specific functions, we can use <a rel="external" href="https://hoogle.haskell.org/">Hoogle</a> to look them up by name or type signature.</p>
+<h4 id="tuples">Tuples</h4>
+<p>Tuples are fixed-length couplings of arbitrary values, written in parentheses and separated by commas. The following syntax creates a tuple:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (2,True) -- two-element tuple (also known as a pair)</span></span>
+<span class="giallo-l"><span>(2,True)</span></span>
+<span class="giallo-l"><span>&gt; (2,True,&#39;c&#39;) -- three-element tuple</span></span>
+<span class="giallo-l"><span>(2,True,&#39;c&#39;)</span></span></code></pre>
+<p>For pairs, there exist several helpful functions:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; fst (2,True) -- returns the first element of a pair</span></span>
+<span class="giallo-l"><span>2</span></span>
+<span class="giallo-l"><span>&gt; snd (2,True) -- returns the second element</span></span>
+<span class="giallo-l"><span>True</span></span></code></pre>
+<p>The type of a tuple consists of all types contained within the tuple:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (&#39;x&#39;,True)</span></span>
+<span class="giallo-l"><span>(&#39;x&#39;,True) :: (Char, Bool)</span></span></code></pre>
+<p>Haskell does not have a single-value tuple, writing e.g. <code>(3)</code> is the same as writing the literal <code>3</code>. However, there's an "empty tuple" <code>()</code>, whose type is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t ()</span></span>
+<span class="giallo-l"><span>() :: ()</span></span></code></pre>
+<p>Here the value <code>()</code> and the type <code>()</code> are the same, but it is allowed since values and types exist in different namespaces.</p>
+<h4 id="lists">Lists</h4>
+<p>Lists, like tuples, are containers of values. Unlike tuples, however, lists can only contain values of the same type (lists are so-called "homogenous", meaning all values must belong to the same type, versus "heterogeneous" tuples). Another difference is that the length of the list is not fixed and not known in compilation time. A list may also be empty.</p>
+<p>Lists in Haskell are written in square brackets <code>[]</code>. Here's the syntax to create a list:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; [1,2,3]</span></span>
+<span class="giallo-l"><span>[1,2,3]</span></span>
+<span class="giallo-l"><span>&gt; [False,True]</span></span>
+<span class="giallo-l"><span>[False,True]</span></span></code></pre>
+<p>Since lists are homogenous, their type does not depend on their length. A type of a list of booleans is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t [False,True]</span></span>
+<span class="giallo-l"><span>[False,True] :: [Bool]</span></span></code></pre>
+<p>Here, the square brackets on the left specify the value of the list, and on the right is the type of the list, also placed in squared brackets. Here, <code>[Bool]</code> a list of <code>Bool</code> values.</p>
+<p>For lists of type <code>[Char]</code> there exists a special syntax. A list of characters:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; [&#39;H&#39;,&#39;i&#39;]</span></span>
+<span class="giallo-l"><span>&quot;Hi&quot;</span></span></code></pre>
+<p>will be displayed as a String. The type of a list of characters is the same as the type of <code>String</code>. Haskell defines a <code>String</code> as a type alias of <code>[Char]</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t [&#39;H&#39;,&#39;i&#39;]</span></span>
+<span class="giallo-l"><span>[&#39;H&#39;,&#39;i&#39;] :: [Char]</span></span>
+<span class="giallo-l"><span>&gt; :t &quot;Hi&quot;</span></span>
+<span class="giallo-l"><span>&quot;Hi&quot; :: [Char]</span></span></code></pre>
+<p>Lists are one of the most fundamental data types in Haskell and functional programming in general. We'll discuss operations on lists in future modules, but for now, we'll mention two of the most common operations: adding an element to the head of the list and concatenating two lists together.</p>
+<p>To add (prepend) an element to the head of the list we use the <code>:</code> operator:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; str = &#39;H&#39; : &quot;ello&quot;</span></span>
+<span class="giallo-l"><span>&gt; str</span></span>
+<span class="giallo-l"><span>&quot;Hello&quot;</span></span></code></pre>
+<p>To append (concatenate) two lists together we use the <code>++</code> operator:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; str ++ &quot; world&quot;</span></span>
+<span class="giallo-l"><span>&quot;Hello world&quot;</span></span></code></pre><h3 id="recursion">Recursion</h3>
+<p>In imperative languages, the main tool for performing repetitive operations is a loop. In functional languages, loops are not meaningful, since those languages often lack the concept of a mutable variable, so it cannot be used to distinguish one loop iteration from the next.</p>
+<p>In functional languages, repetition is done using recursion. The function is considered recursive if it contains in its right-hand side a call to the same function. Let's look at such a definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial n </span><span style="color: #81A1C1;">= if</span><span> n </span><span style="color: #81A1C1;">==</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> then</span><span style="color: #B48EAD;"> 1</span><span style="color: #81A1C1;"> else</span><span> n </span><span style="color: #81A1C1;">*</span><span> factorial </span><span style="color: #ECEFF4;">(</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Recursive functions must obey two rules in order not to get stuck in an infinite cycle:</p>
+<ol>
+<li>calling a function recursively must be done on a value that differs from the input value of its formal parameter</li>
+<li>there must exist a terminating condition to break the recursion</li>
+</ol>
+<p>In our case we obey both rules: the recursive call to <code>factorial</code> is done on a value that's less than the input value <code>n</code>, and we have a conditional branch that does not result in a recursive call, allowing the function to terminate.</p>
+<p>To visualize the way Haskell evaluates this expression we can use substitution to replace formal parameters with the actual values:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span> factorial 2</span></span>
+<span class="giallo-l"><span>  ~&gt; if 2 == 0 then 1 else 2 * factorial 1</span></span>
+<span class="giallo-l"><span>  ~&gt; 2 * factorial 1</span></span>
+<span class="giallo-l"><span>  ~&gt; 2 * (if 1 == 0 then 1 else 1 * factorial 0)</span></span>
+<span class="giallo-l"><span>  ~&gt; 2 * factorial 0</span></span>
+<span class="giallo-l"><span>  ~&gt; 2 * (if 0 == 0 then 1 else 0 * factorial (-1))</span></span>
+<span class="giallo-l"><span>  ~&gt; 2 * 1</span></span>
+<span class="giallo-l"><span>  ~&gt; 2</span></span></code></pre>
+<p>Each reduction step consists of replacing any formal parameter with the result of this parameter. In this case, <code>n</code> has the value 2, initially, and each recursive call reduces the value by 1. Finally, we reach the condition where <code>n</code> is 0, and the recursion terminates, returning the value 1. It is multiplied by the initial value 2, resulting in 2 as the final result of this function.</p>
+<h4 id="pattern-matching">Pattern matching</h4>
+<p>Using conditional expressions in Haskell is not always convenient. Haskell has a much more powerful mechanism for this purpose called <em>pattern matching</em>. The main idea is that the function is defined using not just one equation, but several, each describing a possible branch.</p>
+<p>Rewriting <code>factorial</code> to use the pattern matching style:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial&#39; </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span style="color: #B48EAD;"> 1</span></span>
+<span class="giallo-l"><span>factorial&#39; n </span><span style="color: #81A1C1;">=</span><span> n </span><span style="color: #81A1C1;">*</span><span> factorial&#39; </span><span style="color: #ECEFF4;">(</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>The new definition <code>factorial'</code> is written using two definitions. The difference between the two is how we describe function parameters. In the first definition, we bind the parameter not with a variable, but with a <em>possible</em> constant value. Here, 0 serves as a <em>pattern</em>, against which the value of <code>n</code> will be <em>matched</em>. If the match is successful, the function returns its value, otherwise, the next pattern will be tried. The second definition is called an <em>irrefutable</em> pattern - it can always be used to bind the parameter <code>n</code> with any value that is passed to it.</p>
+<h4 id="errors-and-early-termination">Errors and early termination</h4>
+<p>If a negative value is given to our <code>factorial</code> function, it will never reach the terminating condition (it will never <em>converge</em>) and will enter an endless loop (the program <em>diverges</em>). In the general case, this is unavoidable, since there are functions that are not defined for all arguments. However, hanging in an endless loop is the worst possible thing for the function to do. It would be better for the function to terminate and report an error to the diagnostic stream. There are two functions in the standard library to help deal with such errors - <code>error</code> and <code>undefined</code>.</p>
+<p>The <code>error</code> function takes a <code>String</code> of text as an argument and prints an error with this text:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; error &quot;ABC&quot;</span></span>
+<span class="giallo-l"><span>*** Exception: ABC</span></span></code></pre>
+<p>The <code>undefined</code> function does not take any arguments, it always terminates with an error message:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; undefined</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.undefined</span></span></code></pre>
+<p>We can now augment the <code>factorial</code> function using one of these functions:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial&#39;&#39; </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span style="color: #B48EAD;"> 1</span></span>
+<span class="giallo-l"><span>factorial&#39;&#39; n </span><span style="color: #81A1C1;">= if</span><span> n </span><span style="color: #81A1C1;">&lt;</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> then</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span><span style="color: #81A1C1;"> else</span><span> n </span><span style="color: #81A1C1;">*</span><span> factorial&#39;&#39; </span><span style="color: #ECEFF4;">(</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Now calling this function with a negative number will terminate the program immediately with a helpful message.</p>
+<p>Both <code>error</code> and <code>undefined</code> are useful when writing programs in Haskell. In Haskell's type semantics, both non-terminating recursion and early termination with an error are indistinguishable. In this case, it is considered that the return type of such programs is a special term called <em>bottom</em> (denoted by the mathematical symbol ⊥), which signifies a computation that never completes successfully.</p>
+<p>The bottom value is an element of all Haskell types, and the and <code>undefined</code> function provides a way to use this value. The <code>undefined</code> function can be substituted in place of any other expression in the program, and it is often used to mark yet unimplemented segments of code, but that the type checker accepts.</p>
+<h4 id="guards">Guards</h4>
+<p>Sometimes, pattern matching is not a suitable syntax for dealing with complex conditions. Haskell contains another mechanism called <em>guards</em>, which allows better specifying conditions for handling specific cases. Let's rewrite <code>factorial</code> yet again, using the new syntax:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial&#39;&#39;&#39; </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span style="color: #B48EAD;"> 1</span></span>
+<span class="giallo-l"><span>factorial&#39;&#39;&#39; n </span><span style="color: #81A1C1;">|</span><span> n </span><span style="color: #81A1C1;">&lt;</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> =</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">               |</span><span> n </span><span style="color: #81A1C1;">&gt;</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> =</span><span> n </span><span style="color: #81A1C1;">*</span><span> factorial&#39;&#39;&#39; </span><span style="color: #ECEFF4;">(</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Here, the guard expressions allow specifying boolean conditions. If the guard condition is <code>True</code>, the right-hand expression is returned, otherwise, we continue to the next guard condition. If no guard conditions were satisfied, and there are no more conditions, the pattern matching fails with an error.</p>
+<p>We can rewrite <code>factorial</code> using only guards in the following manner:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>factorial4 n | n == 0    = 1</span></span>
+<span class="giallo-l"><span>             | n &gt; 0     = n * factorial4 (n - 1)</span></span>
+<span class="giallo-l"><span>             | otherwise = error &quot;arg must be &gt;= 0&quot;</span></span></code></pre>
+<p>The function <code>otherwise</code> will always resolve to <code>True</code>, and we'll always reach it in case all other guard conditions were not satisfied.</p>
+<h4 id="recursion-with-accumulation">Recursion with accumulation</h4>
+<p>If we wrote our factorial in C, we'd declare an accumulating variable holding an initial value, and would modify this variable in a loop, returning the accumulated value:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="c"><span class="giallo-l"><span style="color: #81A1C1;">long</span><span style="color: #88C0D0;"> factorial</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">int</span><span> n</span><span style="color: #ECEFF4;">) {</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  long</span><span> acc </span><span style="color: #81A1C1;">=</span><span style="color: #B48EAD;"> 1</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  while</span><span style="color: #ECEFF4;"> (</span><span>n </span><span style="color: #81A1C1;">&gt;</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>    acc </span><span style="color: #81A1C1;">*=</span><span> n</span><span style="color: #81A1C1;">--;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  return</span><span> acc</span><span style="color: #81A1C1;">;</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">}</span></span></code></pre>
+<p>Haskell has no loops and no mutable variables, however, we can implement the same idea using an additional parameter:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial5 n </span><span style="color: #81A1C1;">|</span><span> n </span><span style="color: #81A1C1;">&gt;=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;">    =</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">             |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Our new definition is split into two parts: the definition of <code>factorial5</code>, which does argument checking, calling the helper function, and the <code>helper</code> function which has two parameters: an accumulator <code>acc</code> and the initial value <code>n</code>.</p>
+<p>The <code>helper</code> function will on each recursive call decrease the value <code>n</code>, but also multiply its current value with the accumulator. Both conditions for recursion termination still hold: we're calling <code>helper</code> recursively with a different value <code>n</code>, and we have a terminating condition in the pattern match where <code>n</code> is 0.</p>
+<p>In the case of the factorial function above, using the additional accumulator does not provide any extra benefits in Haskell, however, it is very often used to increase recursion efficiency and performance.</p>
+<h3 id="local-bindings">Local Bindings</h3>
+<h4 id="significant-whitespace">Significant whitespace</h4>
+<p>Haskell uses indentation for scoping. Haskell defines tabs to use 8 spaces, regardless of the configuration of your editor, and the use of spaces is encouraged.</p>
+<p>Let's look at the function <code>roots</code> defined below:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">roots</span><span style="color: #81A1C1;"> :: Double -&gt; Double -&gt; Double</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">          -&gt;</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Double</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> Double</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>roots a b c </span><span style="color: #81A1C1;">=</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">-</span><span> sqrt </span><span style="color: #ECEFF4;">(</span><span>b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span><span style="color: #ECEFF4;">))</span><span style="color: #81A1C1;"> /</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>  ,</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">    (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">+</span><span> sqrt </span><span style="color: #ECEFF4;">(</span><span>b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span><span style="color: #ECEFF4;">)</span><span>) </span><span style="color: #81A1C1;">/</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>  )</span></span></code></pre>
+<p>The function definition here begins at indentation 0. On the first and 3<sup>rd</sup> lines we have a declaration of the type signature and the definition itself. The type signature is spread on two lines. The signature continues on the second line, and we could have broken it down further, as long as there's a non-zero indentation. Here is another example of a valid definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">roots</span><span style="color: #81A1C1;"> :: Double</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      -&gt; Double</span><span> </span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      -&gt; Double</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">      -&gt;</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Double -&gt; Double</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Any line starting at indentation 0 means we are starting a new global definition. Inside the function body, any indentation can be arbitrarily used so long as the indentation remains above 0.</p>
+<h4 id="removing-duplication-using-let-in">Removing duplication using <code>let .. in</code></h4>
+<p>In the <code>roots</code> function above we repeat a sub-expression, namely <code>sqrt (b ^ 2) - 4 * a * c</code>, twice. To remove this duplication, we'd like to bind this sub-expression with a name and use this named expression instead.</p>
+<p>Haskell includes a construct for such local bindings called <code>let .. in</code>. Here's another version of <code>roots</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>roots&#39; a b c </span><span style="color: #81A1C1;">=</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  let</span><span> d </span><span style="color: #81A1C1;">=</span><span> sqrt </span><span style="color: #ECEFF4;">(</span><span>b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> in</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  ((</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">-</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">), (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">+</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">))</span></span></code></pre>
+<p>The <code>let .. in</code> construct has two parts: the first part after the keyword <code>let</code> defines the local binding - an expression is bound to a value. In this case, the expression <code>sqrt (b ^ 2) - 4 * a * c</code> is bound to the name <code>d</code>. This name can now be used inside the <code>in</code> block, and indeed it is used twice. In this way, the <code>let .. in</code> construct helps to remove excess duplication.</p>
+<p>Here's a simpler example in the REPL:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; let x = True in (True,x)</span></span>
+<span class="giallo-l"><span>(True,True)</span></span></code></pre>
+<p>Here, we bound the value <code>True</code> to a local name <code>x</code> and used it inside the <code>in</code> block as a parameter to a tuple.</p>
+<p>We can use more than one binding in the <code>let</code> block. Here's yet another version of <code>roots</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>roots&#39;&#39; a b c </span><span style="color: #81A1C1;">=</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  let</span><span> d </span><span style="color: #81A1C1;">=</span><span> sqrt </span><span style="color: #ECEFF4;">(</span><span>b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>      x1 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">-</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>      x2 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">+</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span style="color: #ECEFF4;"> (</span><span style="color: #B48EAD;">2</span><span style="color: #81A1C1;"> *</span><span> a</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  in</span><span style="color: #ECEFF4;">  (</span><span>x1</span><span style="color: #ECEFF4;">,</span><span> x2</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Here we can see the use of indentation to group bindings inside the <code>let</code> block. Each binding can refer to the next, regardless of the order in which they were defined. Here's one more change:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>roots&#39;&#39;&#39; a b c </span><span style="color: #81A1C1;">=</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  let</span></span>
+<span class="giallo-l"><span>    x1 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">-</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span> aTwice</span></span>
+<span class="giallo-l"><span>    x2 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">+</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span> aTwice</span></span>
+<span class="giallo-l"><span>    d  </span><span style="color: #81A1C1;">=</span><span> sqrt </span><span style="color: #ECEFF4;">(</span><span>b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>    aTwice </span><span style="color: #81A1C1;">=</span><span> a </span><span style="color: #81A1C1;">*</span><span style="color: #B48EAD;"> 2</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  in</span><span style="color: #ECEFF4;"> (</span><span>x1</span><span style="color: #ECEFF4;">,</span><span> x2</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>The only requirement is that indentation inside the <code>let</code> block is on the same level. Otherwise this can cause syntax and compilation errors.</p>
+<p>The <code>let .. in</code> construct can also be used to define local functions. In the previous section we defined a function <code>factorial5</code> with the helper function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial5 n </span><span style="color: #81A1C1;">|</span><span> n </span><span style="color: #81A1C1;">&gt;=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;">    =</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">             |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Here, since the helper function was defined at indentation 0, it is now available to all other functions. Even though only the factorial function requires it, this pollutes the global namespace. We can move it inside the <code>let</code> block and rewrite it as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial6 n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  |</span><span> n </span><span style="color: #81A1C1;">&gt;=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> = let</span></span>
+<span class="giallo-l"><span>      helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>      helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    in</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span></code></pre>
+<p>Again, the only requirement here is keeping the indentation consistent.</p>
+<p>We can also use <code>let .. in</code> to create a pattern. Suppose a function <code>rootsDiff</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>rootsDiff a b c </span><span style="color: #81A1C1;">= let</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span>x1</span><span style="color: #ECEFF4;">,</span><span>x2</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =</span><span> roots a b c</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  in</span><span> x2 </span><span style="color: #81A1C1;">-</span><span> x1</span></span></code></pre>
+<p>Here, instead of calling the <code>roots</code> function, later using the functions <code>fst</code> and <code>snd</code> to project the first and second values out of the pair, we use the <code>let</code> block to deconstruct the pair by using pattern matching, binding both pair values to the names <code>x1</code> and <code>x2</code>.</p>
+<h4 id="binding-using-where">Binding using <code>where</code></h4>
+<p>The <code>where</code> construct is similar to <code>let .. in</code>, except it works in the opposite - if <code>let .. in</code> allows us to declare bindings up front, and later use them, by using <code>where</code> we first specify the resulting expression, and only later specify the bindings.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>roots&#39;&#39;&#39;&#39; a b c </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span>x1</span><span style="color: #ECEFF4;">,</span><span> x2</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span>  x1 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">-</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span> aTwice</span></span>
+<span class="giallo-l"><span>  x2 </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">-</span><span>b </span><span style="color: #81A1C1;">+</span><span> d</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span> aTwice</span></span>
+<span class="giallo-l"><span>  d  </span><span style="color: #81A1C1;">=</span><span> sqrt </span><span style="color: #81A1C1;">$</span><span> b </span><span style="color: #81A1C1;">^</span><span style="color: #B48EAD;"> 2</span><span style="color: #81A1C1;"> -</span><span style="color: #B48EAD;"> 4</span><span style="color: #81A1C1;"> *</span><span> a </span><span style="color: #81A1C1;">*</span><span> c</span></span>
+<span class="giallo-l"><span>  aTwice </span><span style="color: #81A1C1;">=</span><span> a </span><span style="color: #81A1C1;">*</span><span style="color: #B48EAD;"> 2</span></span></code></pre>
+<p>Here we first declare the resulting pair <code>(x1, x2)</code>, followed by the <code>where</code> keyword, after which we declare all bindings.</p>
+<p>The main difference between <code>let .. in</code> and <code>where</code>, other than the order, is the fact that <code>let .. in</code> is itself an expression that can be used in other expressions, while <code>where</code> is not an expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; let x = 2 in x ^ 2</span></span>
+<span class="giallo-l"><span>4</span></span>
+<span class="giallo-l"><span>&gt; (let x = 2 in x ^ 2) ^ 2</span></span>
+<span class="giallo-l"><span>16</span></span>
+<span class="giallo-l"><span>&gt; x ^ 2 where x = 2</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:28:7: error: parse error on input ‘where’</span></span></code></pre>
+<p>The <code>where</code> keyword can only be used inside a function definition and only in a specific place. This makes it suitable in cases where using the <code>let .. in</code> is not possible. Recall the last definition of <code>factorial6</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span>factorial6 n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  |</span><span> n </span><span style="color: #81A1C1;">&gt;=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> = let</span></span>
+<span class="giallo-l"><span>      helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>      helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    in</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span></code></pre>
+<p>Suppose we wanted to use the <code>helper</code> function not only in the first guard but also in other guard expressions. Because of the different guards, the entire body of <code>factorial6</code> is no longer a single expression. This is where the <code>where</code> style may become useful, allowing us to declare a common binding for all individual guard clauses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">factorial7</span><span style="color: #81A1C1;"> :: Integer -&gt; Integer</span></span>
+<span class="giallo-l"><span>factorial7 n </span><span style="color: #81A1C1;">|</span><span> n </span><span style="color: #81A1C1;">&gt;=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;">    =</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">             |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  where</span></span>
+<span class="giallo-l"><span>    helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>    helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Even though we're not using the <code>helper</code> function in the <code>otherwise</code> case, it's still available if we need it.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;right-fold-superpowers&#x2F;" rel="next" title="Right fold superpowers!">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Right fold superpowers!</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-2&#x2F;" rel="prev" title="Functional Programming in Haskell (Stepik course notes) - module 2">
+        <span class="nav-title">Functional Programming in Haskell (Stepik course notes) - module 2</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

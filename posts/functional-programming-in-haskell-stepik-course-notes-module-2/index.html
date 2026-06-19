@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functional Programming in Haskell (Stepik course notes) - module 2 | In Absentia</title>
+  <meta name="description" content="by Igal Tabachnik">
+  <meta name="keywords" content="programming, software, scala, haskell, functional programming">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Functional Programming in Haskell (Stepik course notes) - module 2">
+  <meta property="og:description" content="by Igal Tabachnik">
+  <meta property="og:url" content="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-2&#x2F;">
+  
+    <meta property="og:site_name" content="In Absentia">
+  
+  
+
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@hmemcpy">
+  
+
+  
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://hmemcpy.com/atom.xml">
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://hmemcpy.com/linen.css?h=7516597de5795edf0603">
+</head>
+
+<body>
+  <div class="headband"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com" class="site-brand">
+        <span class="site-title">In Absentia</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+
+      
+        <nav class="site-nav">
+          <ul class="nav-menu">
+            
+              <li class="nav-item">
+                <a href="&#x2F;">Home</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;posts&#x2F;">Archives</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;talks-i-liked&#x2F;">Talks I liked</a>
+              </li>
+            
+              <li class="nav-item">
+                <a href="&#x2F;cv.pdf">CV</a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+
+      <div class="header-search" id="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search posts"
+        >
+        <ul class="search-results" id="search-results" hidden></ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="main-inner">
+      
+<article class="post-block">
+  <header class="post-header">
+    <h1 class="post-title">Functional Programming in Haskell (Stepik course notes) - module 2</h1>
+    
+    <div class="post-meta">
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <time datetime="2020-01-20T23:07:38Z">2020-01-20</time>
+      </span>
+
+      
+
+      
+        <span class="post-meta-item">
+          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          41 min read
+        </span>
+      
+
+      
+        <a class="edit-link" href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy&#x2F;hmemcpy.com/edit/main/content/posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-2.md" target="_blank" rel="noopener" title="Edit on GitHub">
+          <i class="fa-solid fa-pencil"></i>
+        </a>
+      
+
+      
+    </div>
+    
+  </header>
+
+  <div class="post-body">
+    <p>This is the second module (out of 5) of my English summary of the Haskell MOOC on Stepik, available only in Russian. Read the first part in the <em>Introduction</em> module.</p>
+<ol>
+<li><a href="/posts/functional-programming-in-haskell-stepik-course-notes-module-1/">Introduction</a></li>
+<li><strong>Programming fundamentals</strong> (this page)</li>
+<li>Lists</li>
+<li>Data types</li>
+<li>Monads</li>
+</ol>
+<span id="continue-reading"></span><h2 id="programming-fundamentals">Programming fundamentals</h2>
+<h3 id="parametric-polymorphism">Parametric polymorphism</h3>
+<p>A function is said to be <em>polymorphic</em> if it can be used on values of different types. For example, the <code>+</code> operator may be used on values of type <code>Int</code>, returning an <code>Int</code> value, or <code>Double</code> values, returning a <code>Double</code>. This makes <code>+</code> a polymorphic operator.</p>
+<p>There are two kinds of polymorphism: <em>parametric polymorphism</em> and <em>ad hoc polymorphism</em>. The former means that the function implementation is identical for all types which this function can be used with, the latter implies that for each type used with this function, there exists a special implementation, specific to the type. The examples above, using the <code>+</code> operator with <code>Int</code> and <code>Double</code> types, are examples of ad hoc polymorphism, since the implementation of addition for those types behaves differently.</p>
+<h4 id="polymorphic-functions">Polymorphic functions</h4>
+<p>The simplest example of a polymorphic function is <code>id</code> (which exists in the standard library), which returns its argument:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; id x = x</span></span>
+<span class="giallo-l"><span>&gt; :t id</span></span>
+<span class="giallo-l"><span>id :: t -&gt; t</span></span></code></pre>
+<p>This function's type is <code>t -&gt; t</code>. Here, <code>t</code> is called a <em>type variable</em>, meaning it can be applied to any arbitrary type. In Haskell, concrete types (such as <code>Integer</code>) start with a capital letter, and type variables start with a lowercase letter.</p>
+<p>This function is parametrically polymorphic since there are no further restrictions on the input parameter - it is returned unchanged from the function. We can call this function on values of arbitrary types:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; id True</span></span>
+<span class="giallo-l"><span>True</span></span>
+<span class="giallo-l"><span>&gt; id 5</span></span>
+<span class="giallo-l"><span>5</span></span></code></pre>
+<p>We can also call <code>id</code> on the function <code>id</code> itself. The result is the function <code>id</code> itself, which can be further applied to any value:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (id id) 4</span></span>
+<span class="giallo-l"><span>4</span></span></code></pre>
+<p>The type of a fully applied polymorphic function, e.g. <code>id True</code>, is a <code>Bool</code> type:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t id True</span></span>
+<span class="giallo-l"><span>id True :: Bool</span></span></code></pre>
+<p>What is the type of <code>(id id)</code>? The function itself is passed as an argument, making the return type the same type as the argument, namely <code>t -&gt; t</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (id id)</span></span>
+<span class="giallo-l"><span>(id id) :: t -&gt; t</span></span></code></pre>
+<p>Let's define a two-argument function <code>k</code> with parameters <code>x</code> and <code>y</code>. Not knowing anything about <code>x</code> and <code>y</code>, the only thing we can do here is return either <code>x</code> or <code>y</code>. Let's return <code>x</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; k x y = x</span></span></code></pre>
+<p>We'll get a function that always ignores its second argument, always returning the first:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; k 42 True</span></span>
+<span class="giallo-l"><span>42</span></span>
+<span class="giallo-l"><span>&gt; k 42 55</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>The type of our function <code>k</code> is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t k</span></span>
+<span class="giallo-l"><span>k :: t1 -&gt; t -&gt; t1</span></span></code></pre>
+<p>Here we see the use of type variables <code>t1</code> and <code>t</code>, meaning that the actual types are not important, <code>t1</code> and <code>t</code> could be different types. The return value is the first argument <code>t1</code>. This function already exists in the standard library, and it's called <code>const</code>. The <code>const</code> function always returns its first argument, ignoring the second. Here's the signature of <code>const</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t const</span></span>
+<span class="giallo-l"><span>const :: a -&gt; b -&gt; a</span></span></code></pre>
+<p>This type is using different names for its type variables, but it is identical to our <code>k</code> function.</p>
+<p>If we partially apply <code>const</code> to one argument, e.g. <code>const True</code>, its type is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t const True</span></span>
+<span class="giallo-l"><span>const True :: b -&gt; Bool</span></span></code></pre>
+<p>This partially-applied <code>const</code> can accept any arbitrary value, ignore it, and will always return a <code>Bool</code> value, namely <code>True</code>.</p>
+<p>In the previous module, we talked about the <code>error</code> and <code>undefined</code> functions, which immediately halt the execution, printing an error message:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; undefined</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.undefined</span></span>
+<span class="giallo-l"><span>&gt; error &quot;boom&quot;</span></span>
+<span class="giallo-l"><span>*** Exception: &quot;boom&quot;</span></span></code></pre>
+<p>The type of <code>undefined</code> is also parametrically polymorphic:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t undefined</span></span>
+<span class="giallo-l"><span>undefined :: a</span></span></code></pre>
+<p>The <code>undefined</code> function has a type variable <code>a</code>, which means it can be substituted for any type. It can be written anywhere an arbitrary type is expected, and it will still be correctly type-checked.  The <code>error</code> function, when given an error message, also inhabits all types:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t error &quot;boom</span></span>
+<span class="giallo-l"><span>error &quot;boom&quot; :: a</span></span>
+<span class="giallo-l"><span>&gt; :t error</span></span>
+<span class="giallo-l"><span>error :: [Char] -&gt; a</span></span></code></pre>
+<p>The <code>undefined</code> and <code>error</code> functions in Haskell halt program execution, which is why it's possible to define them using the highest (unconstrained) level of polymorphism, namely an arbitrary type parameter. Without any additional context, it's impossible to create a value of type <code>a</code>, so the only thing these functions can do is either hang forever or terminate with an error message. Those functions are called <em>bottom</em> values and denoted with a mathematical symbol ⊥.</p>
+<h4 id="most-general-type">Most general type</h4>
+<p>We can limit function polymorphism by explicitly specifying its type. Consider an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">mono</span><span style="color: #81A1C1;"> :: Char -&gt; Char</span></span>
+<span class="giallo-l"><span>mono x </span><span style="color: #81A1C1;">=</span><span> x</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #88C0D0;">semiMono</span><span style="color: #81A1C1;"> :: Char -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Char</span></span>
+<span class="giallo-l"><span>semiMono x y </span><span style="color: #81A1C1;">=</span><span> x</span></span></code></pre>
+<p>The implementation of the <code>mono</code> function above does not differ from the implementation of <code>id</code>, however, we specified that it can only be applied to values of type <code>Char</code>. Calling it with a <code>Char</code> value will return the value, otherwise, it will cause an error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; mono &#39;x&#39;</span></span>
+<span class="giallo-l"><span>&#39;x&#39;</span></span>
+<span class="giallo-l"><span>&gt; mono True</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:6: error:</span></span>
+<span class="giallo-l"><span>    • Couldn&#39;t match expected type ‘Char’ with actual type ‘Bool’</span></span>
+<span class="giallo-l"><span>    • In the first argument of ‘mono’, namely ‘True’</span></span>
+<span class="giallo-l"><span>      In the expression: mono True</span></span>
+<span class="giallo-l"><span>      In an equation for ‘it’: it = mono True</span></span></code></pre>
+<p>A function that operates on concrete types is called a <em>monomorphic</em> function.</p>
+<p>We can partially limit polymorphism, demonstrated by the function <code>semiMono</code>. It is a two-argument function, with an arbitrary second parameter.</p>
+<p>If we do not explicitly specify the function type, Haskell will infer the <em>most general type</em> available for the function. If we comment out the <code>semiMono :: Char -&gt; a -&gt; Char</code> declaration above, Haskell will infer the following type for <code>semiMono</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t semiMono</span></span>
+<span class="giallo-l"><span>semiMono :: t1 -&gt; t -&gt; t1</span></span></code></pre>
+<p>The type inference algorithm that Haskell uses is based on the <a rel="external" href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system">Hindley-Damas-Milner</a> algorithm. This algorithm infers the most general type for any given expression. If an expression has no further restrictions, Haskell infers a generic type variable, otherwise, it will infer a monomorphised type parameter, such as <code>Char</code> in the example above.</p>
+<h4 id="higher-order-functions">Higher-order functions</h4>
+<p>A <em>higher-order function</em> is a function that takes another function as an argument. In Haskell and other functional languages, higher-order functions are used pervasively. We've already encountered one such function, the <code>$</code> operator, the low-precedence function application operator.</p>
+<p>Let's look at the type of the <code>$</code> operator:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t ($)</span></span>
+<span class="giallo-l"><span>($) :: (a -&gt; b) -&gt; a -&gt; b</span></span></code></pre>
+<p>It is a polymorphic type, a function of two arguments. Its first argument (left) is a function, the second argument (right) is a value of an arbitrary type. The <code>$</code> operator applies its left argument to the right. This requires the types to match - the type of the right argument <code>a</code> must match the type of the input parameter of the left argument <code>a -&gt; b</code>. The result of the <code>$</code> operator is the result of the left argument function. Since the result of <code>a -&gt; b</code> is the type <code>b</code>, it is the resulting type of applying <code>$</code> operator.</p>
+<p>Let's look at another example. Suppose the function <code>apply2</code> which applies the function twice:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; apply2 f x = f (f x)</span></span></code></pre>
+<p>What is the type of this expression? If we look at the above definition of <code>f</code>, it's a function from <code>a -&gt; b</code>. The inner <code>(f x)</code>, therefore, results in a type <code>b</code>. But now the outer function <code>f</code> is applied to the result of <code>(f x)</code>, which is <code>b</code>, however, it expects <code>a -&gt; b</code>? How can this be, if this function compiles just fine?</p>
+<p>Since both types <code>a</code> and <code>b</code> of our function <code>f :: a -&gt; b</code> are completely arbitrary, the type checker can infer that in this case, the types <code>a</code> and <code>b</code> are the same. Applying a function <code>a -&gt; b</code> on a value of type <code>b</code> only works if <code>a</code> and <code>b</code> are the same type.</p>
+<p>The Haskell compiler understands this, and it's able to monomorphise the function to the following signature:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t apply2</span></span>
+<span class="giallo-l"><span>apply2 :: (t -&gt; t) -&gt; t -&gt; t</span></span></code></pre>
+<p>Making the first argument, <code>f</code>, a function where the input and output types are the same. The second argument, <code>x</code> is a value of the same type, which is also the return type of the <code>apply2</code> function. This means our <code>apply2</code> function can be used on fewer types of values than <code>$</code>.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; apply2 (+5) 22</span></span>
+<span class="giallo-l"><span>32</span></span>
+<span class="giallo-l"><span>&gt; apply2 (++&quot;AB&quot;) &quot;CD&quot;</span></span>
+<span class="giallo-l"><span>&quot;CDABAB&quot;</span></span></code></pre>
+<p>Here we see the function <code>apply2</code> used with values of the same type: the first applies the function <code>(+5)</code> twice to the integer 22, and the second appends the string "AB" twice to the string "CD".</p>
+<p>Now let's look at a more useful function from the standard library, <code>flip</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>flip f y x = f x y</span></span></code></pre>
+<p>This function has 3 parameters: the function <code>f</code>, and two additional parameters <code>y</code> and <code>x</code>. It ends up applying the function <code>f</code> to the parameters in the reversed order, flipping between <code>y</code> and <code>x</code>. Here's an example using division:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (/) 4 2</span></span>
+<span class="giallo-l"><span>2.0</span></span>
+<span class="giallo-l"><span>&gt; flip (/) 4 2</span></span>
+<span class="giallo-l"><span>0.5</span></span></code></pre>
+<p>Here, because <code>flip</code> switches the order of parameters, we get <code>2 / 4</code> instead of <code>4 / 2</code>, resulting in 0.5.</p>
+<p>Let's see what happens when <code>flip</code> is applied to the function <code>const</code>. As you may recall, the <code>const</code> function always returns the first argument, ignoring the second. By flipping the arguments, <code>flip const</code> is now a function that always returns the second argument, ignoring the first!</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; flip const 5 True</span></span>
+<span class="giallo-l"><span>True</span></span></code></pre>
+<p>The <code>flip</code> function has the following type:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t flip</span></span>
+<span class="giallo-l"><span>flip :: (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c</span></span></code></pre>
+<p>Recall that in Haskell, any function can be considered a function of one argument, returning another function. In this case we can see that <code>flip</code> is a function that accepts a two-argument function <code>(a -&gt; b -&gt; c)</code> and returns a function <code>(b -&gt; a -&gt; c)</code> with the arguments reversed.</p>
+<p>We can see from the type of <code>flip const</code> that it takes two arguments, and always returns the second:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t flip const</span></span>
+<span class="giallo-l"><span>flip const :: b -&gt; c -&gt; c</span></span></code></pre><h4 id="anonymous-functions-lambda">Anonymous functions - Lambda</h4>
+<p>In Haskell, similar to mathematics, functions have names, and we apply the function by calling its name. However, there's an alternative - <em>anonymous functions</em>. Consider the expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>2 * x + 7</span></span></code></pre>
+<p>This expression contains an unknown variable <code>x</code>, and cannot be used in this form as a bound expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; 2 * x + 7</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:2:5: error: Variable not in scope: x</span></span></code></pre>
+<p>To compute the expression for any given <code>x</code> we usually resort to declaring a function that takes an <code>x</code> as an argument:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; f x = 2 * x + 7</span></span></code></pre>
+<p>Now it's a regular function that can be applied to any <code>x</code>, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; f 10</span></span>
+<span class="giallo-l"><span>27</span></span></code></pre>
+<p>However, instead of creating a named function, we can bind the value <code>x</code> using a <em>lambda expression</em>, by using the following syntax:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; \x -&gt; 2 * x + 7</span></span></code></pre>
+<p>We start by writing a backslash symbol (<code>\</code>), followed by the variable <code>x</code>, followed by an arrow <code>-&gt;</code>, after which we can refer to <code>x</code> in the body of the expression. The character <code>\</code> was chosen because it visually resembles the Greek letter lambda (λ).</p>
+<p>This creates an anonymous function (also called a lambda function or lambda expression), which behaves exactly like the named function <code>f</code> above. We can use this expression to apply it to the same value:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (\x -&gt; 2 * x + 7) 10</span></span>
+<span class="giallo-l"><span>27</span></span></code></pre>
+<p>We can define another function, <code>f'</code>, binding it to the lambda expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; f&#39; = \x -&gt; 2 * x + 7</span></span>
+<span class="giallo-l"><span>&gt; f&#39; 10</span></span>
+<span class="giallo-l"><span>27</span></span></code></pre>
+<p>Using those definitions, both <code>f</code> and <code>f'</code> are equivalent.</p>
+<p>We can pass multiple arguments to the lambda expression. Consider a function <code>lenVec</code> which calculates vector length:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; lenVec x y = sqrt $ x^2 + y^2</span></span>
+<span class="giallo-l"><span>&gt; lenVec 3 4</span></span>
+<span class="giallo-l"><span>5.0</span></span></code></pre>
+<p>We can rewrite this function as a series of lambda expressions, by moving the formal parameters to the right-hand side, turning them into lambda parameters:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; lenVec = \x -&gt; \y -&gt; sqrt $ x^2 + y^2</span></span></code></pre>
+<p>Haskell has a convenient syntactic sugar for specifying lambdas with multiple parameters:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; lenVec = \x y -&gt; sqrt $ x^2 + y^2</span></span>
+<span class="giallo-l"><span>&gt; lenVec 3 4</span></span>
+<span class="giallo-l"><span>5.0</span></span></code></pre>
+<p>Anonymous functions are most commonly used when using higher-order functions. Recall that a higher-order function is a function that accepts another function as an argument. Consider the following example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; p1 = ((1,2), (3,4))</span></span>
+<span class="giallo-l"><span>&gt; p2 = ((3,4), (5,6))</span></span></code></pre>
+<p>Here, <code>p1</code> and <code>p2</code> are pairs of pairs. Let's write a function that sums the first elements of each pair. To get the first element of the first pair we could use the function <code>fst</code> twice, like so:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; fst $ fst p1</span></span>
+<span class="giallo-l"><span>1</span></span></code></pre>
+<p>Let's now use it in a function that looks like this:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Functions</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>sumFstFst </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span style="color: #88C0D0;">+</span><span style="color: #ECEFF4;">) `</span><span style="color: #81A1C1;">on</span><span style="color: #ECEFF4;">`</span><span> helper</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">    where</span><span> helper pp </span><span style="color: #81A1C1;">=</span><span> fst </span><span style="color: #81A1C1;">$</span><span> fst pp</span></span></code></pre>
+<p>The <code>on</code> function is defined in the <code>Data.Functions</code> module, and has the following signature:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>on :: (b -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; a -&gt; c</span></span>
+<span class="giallo-l"><span>on op f x y = f x `op` f y</span></span></code></pre>
+<p>It is used to run a binary function <code>op</code> on the results of applying the unary function <code>f</code> to two arguments <code>x</code> and <code>y</code>. It can be used, for example, to define the <code>sumSquares</code> function from the previous module:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumSquares = (+) `on` (^2)</span></span></code></pre>
+<p>The <code>x</code> and <code>y</code> arguments here are omitted. Following the definition of <code>on</code>, substituting the values, we get:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>(^2) x + (^2) y</span></span>
+<span class="giallo-l"><span>  </span></span>
+<span class="giallo-l"><span>  ^    ^   ^</span></span>
+<span class="giallo-l"><span>  |    |   |</span></span>
+<span class="giallo-l"><span>  |    |   +-- f</span></span>
+<span class="giallo-l"><span>  |    +------ op</span></span>
+<span class="giallo-l"><span>  +----------- f</span></span></code></pre>
+<p>Our <code>sumFstFst</code> is a function of two arguments. We apply the operator <code>+</code> to the result of applying <code>helper</code> to both arguments:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sumFstFst p1 p2</span></span>
+<span class="giallo-l"><span>4</span></span></code></pre>
+<p>Visualized as the following:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>((+) `on` helper) p1 p2</span></span>
+<span class="giallo-l"><span> ~&gt; helper p1 + helper p2</span></span>
+<span class="giallo-l"><span> ~&gt; fst $ fst p1 + fst $ fst p2</span></span>
+<span class="giallo-l"><span> ~&gt; 1 + 3</span></span>
+<span class="giallo-l"><span> ~&gt; 4</span></span></code></pre>
+<p>It extracts the first element from <code>p1</code>, which is 1, the first element from <code>p2</code> which is 3, giving us the desired result 4.</p>
+<p>This works, but we would like to avoid declaring the named <code>helper</code> function, so we can use a lambda expression instead, omitting the <code>where</code> clause entirely:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumFstFst&#39; = (+) `on` (\pp -&gt; fst $ fst pp)</span></span></code></pre><h3 id="parametric-polymorphism-2">Parametric polymorphism (2)</h3>
+<p>Suppose we have two polymorphic functions, <code>f</code> and <code>g</code>. We would like to create a composite function, that takes both functions <code>f</code> and <code>g</code>, and applies them to the argument <code>x</code> in the following manner: first, apply <code>g</code> to <code>x</code>, and then apply <code>f</code> to the result. Let's look at how we can define such a composition operator.</p>
+<h4 id="function-composition">Function composition</h4>
+<p>Suppose our <code>f</code> and <code>g</code> functions have the following signatures:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>f :: b -&gt; c</span></span>
+<span class="giallo-l"><span>g :: a -&gt; b</span></span></code></pre>
+<p>Also, we have an argument <code>x</code> of type <code>a</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>x :: a</span></span></code></pre>
+<p>To apply the function <code>f</code> to the result of applying <code>g</code>, the result type of <code>g</code> must be the same as the input type of <code>f</code>, namely <code>b</code>. The function <code>g</code> accepts an argument of type <code>a</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>f (g x)</span></span></code></pre>
+<p>This gives us a result of type <code>c</code>, but we want instead to get a composite function from <code>a -&gt; c</code>.</p>
+<p>We can achieve this by abstracting over <code>x</code> using a lambda expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>\x -&gt; f (g x)</span></span></code></pre>
+<p>And this gives us the expected result, a function <code>a -&gt; c</code>.</p>
+<p>The complete composition function, therefore, can be defined thus:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>compose f g = \x -&gt; f (g x)</span></span></code></pre>
+<p>This operator already exists in Haskell, and it is called <code>.</code>. Its type is:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :i (.)</span></span>
+<span class="giallo-l"><span>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c 	-- Defined in ‘GHC.Base’</span></span>
+<span class="giallo-l"><span>infixr 9 .</span></span></code></pre>
+<p>Which is precisely what we wanted: it takes a function <code>b -&gt; c</code>, another function <code>a -&gt; b</code>, and returns a composite function <code>a -&gt; c</code>.</p>
+<p>Note the use of <code>:i</code> (short for <code>:info</code>) in GHCi - it returns additional information about the definition, such as where it is defined and its fixity, if available.</p>
+<p>Now let's look at how we can use this operator. In the previous section, we defined a function <code>sumFstFst'</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumFstFst = (+) `on` (\pp -&gt; fst $ fst pp)</span></span></code></pre>
+<p>In the lambda expression that extracts the first element from a pair of pairs, we used the <code>fst</code> function twice, to first extract the first pair, and then extract the first element from that pair. We are applying the function <code>fst</code> to the result of applying <code>fst</code> to the argument <code>pp</code>, and this is exactly what the composition operator gives us, allowing us to simplify the expression to the following:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumFstFst&#39;&#39; = (+) `on` (fst . fst)</span></span></code></pre>
+<p>The function <code>(fst . fst)</code> is a more compact equivalent of <code>(\pp -&gt; fst $ fst pp)</code>, called the <em>point-free</em> style, allowing us to omit the argument. Chains of function applications can be rewritten to this style:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>doIt x = f (g (h x)) == f ((g . h) x) == (f . (g . h)) x</span></span></code></pre>
+<p>Allowing us to drop the argument <code>x</code> on both sides, giving us:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>doIt = f . g . h</span></span></code></pre><h4 id="tuple-and-list-polymorphism">Tuple and list polymorphism</h4>
+<p>Until now, when talking about parametric polymorphism, we used functions. However, built-in Haskell types, such as tuples and lists are also parametrically polymorphic. Let's start with a list. Suppose we have a list of <code>Bool</code> values:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t [True,False]</span></span>
+<span class="giallo-l"><span>[True,False] :: [Bool]</span></span></code></pre>
+<p>A list in Haskell is written by using square brackets <code>[]</code>, and its type is polymorphic, depending on the type of its elements. Since lists are homogeneous, they can only contain values of the same type.</p>
+<p>If we look at the type of an empty list:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t []</span></span>
+<span class="giallo-l"><span>[] :: [a]</span></span></code></pre>
+<p>We'll see that its type is a type variable <code>a</code>, meaning the list is polymorphic in its elements.</p>
+<p>This is also apparent from functions that operate on lists, such as the concatenation operator <code>++</code>, taking two lists of the same type and produces another list of the same type:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (++)</span></span>
+<span class="giallo-l"><span>(++) :: [a] -&gt; [a] -&gt; [a]</span></span></code></pre>
+<p>Similar to the <code>:</code> operator that adds an element to the head of the list:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (:)</span></span>
+<span class="giallo-l"><span>(:) :: a -&gt; [a] -&gt; [a]</span></span></code></pre>
+<p>Tuples in Haskell are also polymorphic. Let's recall the syntax of creating a tuple:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (True,3)</span></span>
+<span class="giallo-l"><span>(True,3)</span></span></code></pre>
+<p>However, there's an alternative syntax for creating a tuple. Instead of specifying the values inside the tuple braces, we can use it in a prefix style:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (,) True 3</span></span>
+<span class="giallo-l"><span>(True,3)</span></span></code></pre>
+<p>The first syntax is called a <em>mixfix</em> style, where the values are mixed with the tuple structure. The prefix style can be used to create tuples of any length, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; (,,) True 3 &#39;c&#39;</span></span>
+<span class="giallo-l"><span>(True,3,&#39;c&#39;)</span></span></code></pre>
+<p>Let's look at the types of tuple construction operators:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (,)</span></span>
+<span class="giallo-l"><span>(,) :: a -&gt; b -&gt; (a, b)</span></span>
+<span class="giallo-l"><span>&gt; :t (,,)</span></span>
+<span class="giallo-l"><span>(,,) :: a -&gt; b -&gt; c -&gt; (a, b, c)</span></span></code></pre>
+<p>The type variables can be substituted for any type. We can also partially-apply the tuple operator, resulting in:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (,,) True &#39;x&#39;</span></span>
+<span class="giallo-l"><span>(,,) True &#39;x&#39; :: c -&gt; (Bool, Char, c)</span></span></code></pre>
+<p>We can create a function that turns a single value into a pair, with the value duplicated:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; dup x = (x,x)</span></span>
+<span class="giallo-l"><span>&gt; :t dup</span></span>
+<span class="giallo-l"><span>dup :: t -&gt; (t, t)</span></span></code></pre>
+<p>Since there are no constraints on the value <code>x</code>, the Haskell compiler infers a type variable <code>t</code>, meaning that the input and the first and second elements of the resulting pair must be the same type.</p>
+<p>The projection functions <code>fst</code> and <code>snd</code> that we encountered earlier have the types:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t fst</span></span>
+<span class="giallo-l"><span>fst :: (a, b) -&gt; a</span></span>
+<span class="giallo-l"><span>&gt; :t snd</span></span>
+<span class="giallo-l"><span>snd :: (a, b) -&gt; b</span></span></code></pre>
+<p>Resulting in <code>fst</code> to return the first element <code>a</code>, ignoring the second, and <code>snd</code> does the opposite - returns the second element <code>b</code>, ignoring the first.</p>
+<h4 id="currying">Currying</h4>
+<p>In most programming languages, function calls are made by specifying the function name, followed by parentheses, followed by a list of arguments, separated with a comma, e.g. <code>max(3, 7)</code>.</p>
+<p>In Haskell, function application is done without any additional punctuation, but by specifying the arguments after the function name with a space between them: <code>max 3 7</code>. Haskell allows us to not specify all the arguments to the function, resulting in a partially-applied function that can later be passed the rest of the arguments.</p>
+<p>This technique of turning an <em>n</em> argument function into a sequence of functions accepting one argument is called <em>currying</em>, named after a logician Haskell Curry, who formalized it after it was discovered by a Russian mathematician Moses Schönfinkel. The Haskell language is named after Haskell Curry.</p>
+<p>However, not all functions in Haskell are curried. Functions that operate on tuples bare resemblance to function calls in imperative languages, i.e. <code>fst (1, 2)</code>. To move between curried and uncurried forms, we can use two combinators, <code>curry</code> and <code>uncurry</code>. Let's look at a few examples:</p>
+<p>Recall the function <code>on</code> we learned in the previous section. It takes 4 parameters, the first being a function of two arguments:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t on</span></span>
+<span class="giallo-l"><span>on :: (b -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; a -&gt; c</span></span></code></pre>
+<p>In other words, the first expected argument <code>(b -&gt; b -&gt; c)</code> is a <em>curried</em> function. If we try to use a function <code>fst</code> as the first argument, we will get a type error, saying the types don't match - our <code>fst</code> function is the wrong shape - it is an <em>uncurried</em> function <code>(a, b) -&gt; a</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t fst `on` (^2)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:1: error:</span></span>
+<span class="giallo-l"><span>    • Occurs check: cannot construct the infinite type:</span></span>
+<span class="giallo-l"><span>        b ~ (b -&gt; c, b0)</span></span>
+<span class="giallo-l"><span>      Expected type: b -&gt; b -&gt; c</span></span>
+<span class="giallo-l"><span>        Actual type: (b -&gt; c, b0) -&gt; b -&gt; c</span></span>
+<span class="giallo-l"><span>    • In the first argument of ‘on’, namely ‘fst’</span></span>
+<span class="giallo-l"><span>      In the expression: fst `on` (^ 2)</span></span></code></pre>
+<p>To turn an uncurried function into a curried one, we can use the <code>curry</code> combinator that does just that:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t curry fst</span></span>
+<span class="giallo-l"><span>curry fst :: a -&gt; b -&gt; a</span></span></code></pre>
+<p>turning the <code>fst</code> function into the correct shape to use with the <code>on</code> function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t curry fst `on` (^2)</span></span>
+<span class="giallo-l"><span>curry fst `on` (^2) :: Num c =&gt; c -&gt; c -&gt; c</span></span></code></pre>
+<p>Let's define another function <code>avg</code> that averages the values of a pair:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">avg</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Double</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;">Double</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt; Double</span></span>
+<span class="giallo-l"><span>avg p </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span>fst p </span><span style="color: #81A1C1;">+</span><span> snd p</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> /</span><span style="color: #B48EAD;"> 2</span></span></code></pre>
+<p>This is another example of an uncurried function, and if we want to use it with a higher-order function, such as <code>on</code>, we need to turn it into a curried one, using <code>curry</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t curry avg `on` (^2)</span></span>
+<span class="giallo-l"><span>curry avg `on` (^2) :: Double -&gt; Double -&gt; Double</span></span></code></pre>
+<p>How would we define the <code>curry</code> function ourselves? Let's define a function <code>curry'</code> with the arguments:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>curry&#39; f x y = ...</span></span></code></pre>
+<p>The <code>curry'</code> function expects a function <code>f</code> to operate on a tuple. To do this, we need to turn our arguments <code>x</code> and <code>y</code> into a tuple, resulting in:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; curry&#39; f x y = f (x,y)</span></span></code></pre>
+<p>Looking at the inferred type signature we can see that it does exactly what is expected:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t curry&#39;</span></span>
+<span class="giallo-l"><span>curry&#39; :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c</span></span></code></pre>
+<p>it takes an uncurried function <code>(a, b) -&gt; c</code>, giving us back a curried function <code>a -&gt; b -&gt; c</code>.</p>
+<p>This signature matches exactly the definition of <code>curry</code> from the standard library.</p>
+<p>The opposite operation is called <code>uncurry</code>, a function that takes a curried function and returns a function that operates on a pair:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t uncurry</span></span>
+<span class="giallo-l"><span>uncurry :: (a -&gt; b -&gt; c) -&gt; (a, b) -&gt; c</span></span></code></pre><h3 id="type-classes">Type classes</h3>
+<p>In the previous section, we learned about parametric polymorphism. A function is polymorphic if it can be applied to arbitrary types, without any additional restrictions. This section talks about a specialized, <em>ad hoc polymorphism</em>. A function can be still applied to arguments of various types, as long as those types provide an implementation of an interface that defines the specialized behavior. This type of interface in Haskell is called a <em>type class</em>, and its implementations are called <em>instances</em>.</p>
+<h4 id="contexts">Contexts</h4>
+<p>Numeric constants in Haskell have the following representation:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t 7</span></span>
+<span class="giallo-l"><span>7 :: Num a =&gt; a</span></span></code></pre>
+<p>Whenever we encounter a "fat arrow" (sometimes called an <em>implication</em>) in the type signature, it splits the type into two parts: on the right-hand side is the type of the expression (in this case we say that 7 has the type <code>a</code>), and on the left-hand side we have a so-called <em>context</em>. The context contains two parts: the name of the <em>interface</em> that the type must provide an implementation for, and the type parameter for which this interface is defined. In our case, we say that 7 has a polymorphic type <code>a</code>, but this type <code>a</code> must have an implementation for the interface <code>Num</code>.</p>
+<p>We will use the terms <em>type class</em> instead of "interface", and <em>instance</em> instead of "implementation".</p>
+<p>The type class <code>Num</code> contains a series of operations on numbers, such as <em>addition</em>, <em>multiplication</em>, and others.</p>
+<p>Looking at the definition of the addition operator <code>+</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (+)</span></span>
+<span class="giallo-l"><span>(+) :: Num a =&gt; a -&gt; a -&gt; a</span></span></code></pre>
+<p>we see that it is also a polymorphic function that takes two arguments of the same type <code>a</code>, returning an argument of type <code>a</code>, provided the type <code>a</code> has an instance of <code>Num</code> (we can also say "belongs to the <code>Num</code> type class", or "members of the <code>Num</code> type class").</p>
+<p>There are many different type classes, providing various behaviors, such as comparison. The operator <code>&gt;</code> (greater than) has the following definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (&gt;)</span></span>
+<span class="giallo-l"><span>(&gt;) :: Ord a =&gt; a -&gt; a -&gt; Bool</span></span></code></pre>
+<p>It takes two arguments of the same type and returns a boolean value, indicating whether the first argument is greater than the second. The type <code>a</code> must belong to the type class <code>Ord</code> which defines this behavior.</p>
+<p>Let's see what happens when we partially-apply the <code>&gt;</code> operator with a number, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (&gt; 7)</span></span>
+<span class="giallo-l"><span>(&gt; 7) :: (Num a, Ord a) =&gt; a -&gt; Bool</span></span></code></pre>
+<p>Due to the operator section, <code>(&gt; 7)</code> becomes a unary predicate of type <code>a -&gt; Bool</code>, however, its context has expanded: it is now required that the type <code>a</code> belongs to both <code>Num</code> and <code>Ord</code> type classes - the <code>Ord</code> constraint due to the use of <code>&gt;</code>, and the <code>Num</code> constraint due to the use of a numeric value 7.</p>
+<p>A slightly more complicated example is using the operator section on a pair:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (&gt; (1,2))</span></span>
+<span class="giallo-l"><span>(&gt; (1,2)) :: (Num t, Num t1, Ord t, Ord t1) =&gt; (t, t1) -&gt; Bool</span></span></code></pre>
+<p>Pairs are also members of the <code>Ord</code> type class if the elements of the pair are members of that type class. Pair elements can be of different types, evident here by the use of <code>t</code> and <code>t1</code> type variables. Both types have constraints of belonging to the <code>Num</code> and <code>Ord</code> type classes.</p>
+<p>Now that we know how to read type class constraints, we can tell more about the errors that happen in case Haskell cannot satisfy such constraints. Consider the example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (* &#39;c&#39;)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:2: error:</span></span>
+<span class="giallo-l"><span>    • No instance for (Num Char) arising from a use of ‘*’</span></span>
+<span class="giallo-l"><span>    • In the expression: (* &#39;c&#39;)</span></span></code></pre>
+<p>We are trying to use the multiplication operator <code>*</code> with a character value <code>'c'</code>. Here, Haskell reports and error that there are no instances of type class <code>Num</code> (which <code>*</code> requires) for the type <code>Char</code>. We could fix this by defining our own instance of <code>Num Char</code>, providing we could implement such behavior.</p>
+<h4 id="type-class-declaration">Type class declaration</h4>
+<p>A type class provides an interface which can be implemented for concrete types. The type class declaration is a collection of named functions, having certain signatures. Here's an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Eq</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">==</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">/=</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span></code></pre>
+<p>A type class is defined by starting with the keyword <code>class</code>, followed by the name of the type class, followed by the type parameter for which this type class can be defined. After which, the keyword <code>where</code>, followed by the functions the type class instance must implement. The function definitions must start at the next indentation level.</p>
+<p>In our case, <code>Eq</code> can be defined for any arbitrary type <code>a</code>. Each instance of <code>Eq</code> will replace <code>a</code> with the concrete type for which it is implemented. The two functions defined in the interface, namely <code>==</code> and <code>/=</code> check for equality and inequality, respectively. Both have the signature <code>a -&gt; a -&gt; Bool</code>.</p>
+<p>The <code>Eq</code> type class is already defined in the Haskell standard library. Let's look at how it is used:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (==)</span></span>
+<span class="giallo-l"><span>(==) :: Eq a =&gt; a -&gt; a -&gt; Bool</span></span></code></pre>
+<p>The equality operator is a polymorphic function with a constraint that type <code>a</code> must be a member of <code>Eq</code>. This constraint remains as long as the values themselves remain polymorphic. In the expression:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (== 42)</span></span>
+<span class="giallo-l"><span>(== 42) :: (Eq a, Num a) =&gt; a -&gt; Bool</span></span></code></pre>
+<p>We can see that operator section, applied to a polymorphic value (recall that numbers in Haskell are polymorphic with a <code>Num</code> constraint), we can see that the <code>Eq</code> requirement remains, but also the <code>Num</code> requirement was added, meaning that the remaining argument must be a member of both <code>Eq</code> and <code>Num</code> type classes.</p>
+<p>If we partially apply the operator to a concrete type, e.g. <code>Char</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t (== &#39;x&#39;)</span></span>
+<span class="giallo-l"><span>(== &#39;x&#39;) :: Char -&gt; Bool</span></span></code></pre>
+<p>we see that the <code>Eq</code> requirement was removed, as Haskell monomorphised this expression to the concrete <code>Char</code> type.</p>
+<p>Let's now look at a few functions that use the <code>Eq</code> constraint. One such function, <code>elem</code> from the standard library, checks whether the value is an element in a list:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t elem</span></span>
+<span class="giallo-l"><span>elem :: Eq a =&gt; a -&gt; [a] -&gt; Bool</span></span></code></pre>
+<p>The arguments to <code>elem</code> is the value we're checking, as well as the list of those values. It works by equating the value with each element in the list, returning <code>True</code> in case such element was found, otherwise <code>False</code>. In order to perform such an equality check, the type <code>a</code> must be a member of the <code>Eq</code> type class.</p>
+<p>Reading type class constraints on type signatures is a powerful reasoning mechanism in Haskell, allowing us to deduce a lot about how a function behaves just from reading the type signature, without looking at the implementation.</p>
+<h4 id="type-class-instances">Type class instances</h4>
+<p>A type is considered a member of a type class, if there exists an implementation (called <em>instance</em>), implementing that type class. Here's an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Eq</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">==</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">/=</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">instance Eq Bool where</span></span>
+<span class="giallo-l"><span>  True</span><span style="color: #81A1C1;">   ==</span><span> True</span><span style="color: #81A1C1;">  =</span><span> True</span></span>
+<span class="giallo-l"><span>  False</span><span style="color: #81A1C1;">  ==</span><span> False</span><span style="color: #81A1C1;"> =</span><span> True</span></span>
+<span class="giallo-l"><span>  _      </span><span style="color: #81A1C1;">==</span><span> _     </span><span style="color: #81A1C1;">=</span><span> False</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">/=</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">==</span><span> y</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>The <code>Eq</code> definition has two functions, checking for equality and inequality. Here we are using a more compact style of writing, as both functions have the same signature, Haskell allows placing them in a single line, separated by commas.</p>
+<p>To declare a type class instance, we use the <code>instance</code> keyword, followed by the type class name, followed by the type for which we implement this instance (<code>Bool</code> in this case, causing our function signatures to monomorphise to <code>Bool -&gt; Bool -&gt; Bool</code>). This is followed by the keyword <code>where</code>. The next line (and the next indentation level) defines the implementations of the functions. In this case we use pattern matching to define the first signature, <code>==</code>.</p>
+<p>Boolean equality defined such that <code>True</code> is always equal to <code>True</code>, and <code>False</code> is always equal to <code>False</code>. Any other permutation is not equal, denoted here by using a placeholder symbol <code>_</code>, which in Haskell can be read as "in all other cases". Here it means that the match will always be successful, if the previous two failed, and the result will always be <code>False</code>, regardless of the values that were matched.</p>
+<p>The next implementation is the inequality function <code>/=</code>. In this case, we implement it via the equality implementation, negating the result of <code>==</code> with the function <code>not</code>. In such cases, where a function can be implemented in terms of another, it can be defined in the type class definition itself:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Eq</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">==</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">/=</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">/=</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">==</span><span> y</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>In such cases, it's often enough to implement just the functions that don't already have a default implementation. It is also possible to define cyclic implementations:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Eq</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">==</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">/=</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">/=</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">==</span><span> y</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">==</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">/=</span><span> y</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Since GHC 7.8.1, Type classes may state a <a rel="external" href="https://downloads.haskell.org/~ghc/7.8.1-rc1/docs/html/users_guide/pragmas.html#minimal-pragma"><em>minimal complete definition</em></a>, a specification of which minimal set of functions must be implemented by all instances.</p>
+<h4 id="polymorphic-instances">Polymorphic instances</h4>
+<p>We can also define type class instances for polymorphic types. For example, an <code>Eq</code> instance for a two element tuple (a pair). Two pairs are equal if their elements are equal. Pair elements themselves must be members of the <code>Eq</code> type class:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">instance</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Eq</span><span> a</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;"> Eq</span><span> b</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt; Eq</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #ECEFF4;">,</span><span> b</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span>  p1 </span><span style="color: #81A1C1;">==</span><span> p2 </span><span style="color: #81A1C1;">=</span><span> fst p1 </span><span style="color: #81A1C1;">==</span><span> fst p2 </span><span style="color: #81A1C1;">&amp;&amp;</span><span> snd p1 </span><span style="color: #81A1C1;">==</span><span> snd p2</span></span></code></pre>
+<p>Here we implement an instance for a polymorphic <code>Eq (a, b)</code>, with the additional constraint that <code>a</code> and <code>b</code> themselves must have an instance of <code>Eq</code>, as evident by the declaration <code>(Eq a, Eq b)</code> on the left-hand side of the <code>=&gt;</code> sign, allowing us to use the equality <code>==</code> operator in the expression body. No need to place each part in parentheses, since <code>==</code> has higher precedence than <code>&amp;&amp;</code>.</p>
+<p>Similarly, we can define an instance for lists:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">instance Eq</span><span> a</span><span style="color: #81A1C1;"> =&gt; Eq</span><span style="color: #ECEFF4;"> [</span><span>a</span><span style="color: #ECEFF4;">]</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  ...</span></span></code></pre>
+<p>All the definitions above already exist in the standard library, as well as many others, implementing all common base types.</p>
+<p>Not all types can be checked for equality. In Haskell, there are functional types for which implementing such equality is not possible. Consider the example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; id == (\x -&gt; x)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:1: error:</span></span>
+<span class="giallo-l"><span>    • No instance for (Eq (a0 -&gt; a0)) arising from a use of ‘==’</span></span>
+<span class="giallo-l"><span>        (maybe you haven&#39;t applied a function to enough arguments?)</span></span>
+<span class="giallo-l"><span>    • In the expression: id == (\ x -&gt; x)</span></span></code></pre>
+<p>Even though as implementors we know in this case that those two functions are identical, from theoretical computer science, function equality is said to be <em>undecidable</em> in a Turing-complete language, therefore it's not possible to implement in Haskell. Here, Haskell reports an error that there's no instance of <code>Eq</code> for a function type <code>a0 -&gt; a0</code>.</p>
+<h3 id="standard-type-classes">Standard type classes</h3>
+<p>In this section we'll talk about <em>type class extension</em>. This is similar to extension in object-oriented languages, however in Haskell we are extending the type class interfaces, never implementations.</p>
+<h4 id="class-extensions">Class extensions</h4>
+<p>Let's consider an example of the <code>Ord</code> type class (also exists in the standard library):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Eq</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">==</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">/=</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">/=</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">==</span><span> y</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">==</span><span> y  </span><span style="color: #81A1C1;">=</span><span> not </span><span style="color: #ECEFF4;">(</span><span>x </span><span style="color: #81A1C1;">/=</span><span> y</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">class</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Eq</span><span> a</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> =&gt; Ord</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">&lt;</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">&lt;=</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">&gt;=</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">&gt;</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Bool</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  max, min</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  compare</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt; Ordering</span></span>
+<span class="giallo-l"><span style="color: #616E88;">{- Minimal complete definition: either compare or &lt;= -}</span></span></code></pre>
+<p>The <code>Ord</code> type class is parameterized by <code>a</code> and itself has a <em>context</em> of <code>Eq a</code>. When placing such context in the type class definition (rather than the instance), it means that the <code>Ord</code> type class <em>extends</em> the <code>Eq</code> type class. In order to define an instance of <code>Ord</code> we must first define an instance <code>Eq</code>.</p>
+<p>The <code>Ord</code> type class defines the ordering behavior used in comparisons. Other than the usual ordering operators <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, and <code>&gt;</code>, we can define the <code>max</code> and <code>min</code> functions, as well as a function <code>compare</code>, which can be used for a more detailed comparison. The <code>compare</code> function returns a result <code>Ordering</code>, which is a type consisting of 3 values: LT, EQ, and GT (less than, equals, and greater than):</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; :i Ordering</span></span>
+<span class="giallo-l"><span>data Ordering = LT | EQ | GT 	-- Defined in ‘GHC.Types’</span></span>
+<span class="giallo-l"><span>...</span></span></code></pre>
+<p>In the minimal complete definition of the <code>Ord</code> type class it is stated that a valid instance can be defined by only implementing either the <code>compare</code> or <code>&lt;=</code> functions.</p>
+<p>We can also do a sort of <em>multiple inheritance</em>, by specifying several interfaces that extend our type class, e.g.:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>class (Eq a, Printable a) =&gt; MyClass a where</span></span>
+<span class="giallo-l"><span>  ...</span></span></code></pre>
+<p>Since in Haskell we're extending the type class interfaces themselves, and not the implementations, problems such as multiple inheritance in object-oriented languages do not occur.</p>
+<h4 id="show-and-read"><code>Show</code> and <code>Read</code></h4>
+<p>The standard library contains a useful type class <code>Show</code> with a function <code>show</code>, which can be used to create a string representation of a value.</p>
+<p>First, let's see how the <code>show</code> function is defined:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t show</span></span>
+<span class="giallo-l"><span>show :: Show a =&gt; a -&gt; String</span></span></code></pre>
+<p>It takes any arbitrary type <code>a</code> and returns a String, provided our <code>a</code> is a member of <code>Show</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; show 5</span></span>
+<span class="giallo-l"><span>&quot;5&quot;</span></span>
+<span class="giallo-l"><span>&gt; show 5.0</span></span>
+<span class="giallo-l"><span>&quot;5.0&quot;</span></span>
+<span class="giallo-l"><span>&gt; show [1,2]</span></span>
+<span class="giallo-l"><span>&quot;[1,2]&quot;</span></span></code></pre>
+<p>If <code>Show</code> performs a sort of a serialization of a value to <code>String</code>, the type class <code>Read</code> performs the opposite operation: it reads an arbitrary <code>String</code> value, and returns a type <code>a</code>, if an instance of <code>Read</code> exists for <code>a</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t read</span></span>
+<span class="giallo-l"><span>read :: Read a =&gt; String -&gt; a</span></span></code></pre>
+<p>However, if we attempt to use it as-is, we'll get the following error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; read &quot;5&quot;</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.read: no parse</span></span></code></pre>
+<p>(in older versions of GHC this would print a large message about a missing instance <code>(Read a0)</code>)</p>
+<p>Why did we get an error?</p>
+<p>Our <code>read</code> function is polymorphic in its return type, and here we must explicitly specify the return type of the function. Otherwise, Haskell has no way of knowing whether the string constant <code>"5"</code> is an <code>Int</code>, <code>Double</code>, or something else. To use the <code>read</code> function properly we must specify the return type using the syntax:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; read &quot;5&quot; :: Int</span></span>
+<span class="giallo-l"><span>5</span></span>
+<span class="giallo-l"><span>&gt; read &quot;5&quot; :: Double</span></span>
+<span class="giallo-l"><span>5.0</span></span>
+<span class="giallo-l"><span>&gt; read &quot;[1,2]&quot; :: [Double]</span></span>
+<span class="giallo-l"><span>[1.0,2.0]</span></span></code></pre>
+<p>The <code>read</code> function is not defined in the <code>Read</code> type class, because it has limited usefulness. In case it is unable to parse the input value, it will return an error. Suppose we attempt reading the string "5 rings" as an <code>Int</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; read &quot;5 rings&quot; :: Int</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.read: no parse</span></span></code></pre>
+<p>It will fail, because it won't be able to read the entire string. For this reason, there exists a function <code>reads</code>, which is a safer version that is able to return unparsed elements as a pair, in addition to the parsed value:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; reads &quot;5 rings&quot; :: [(Int,String)]</span></span>
+<span class="giallo-l"><span>[(5,&quot; rings&quot;)]</span></span></code></pre>
+<p>Returning the successful <code>Int</code> value as the first element, and the remainder string as the second element.</p>
+<h4 id="enum-and-bounded"><code>Enum</code> and <code>Bounded</code></h4>
+<p>Many types are considered <em>enumerations</em>, as if their values can be listed with a comma. For example, the <code>Int</code> values can be listed as "1,2,3...". Each element can be less then or greater than its predecessor, and we can move up and down the type by increasing or decreasing the value. Same goes for <code>Char</code> and even <code>Bool</code> - there's a certain order to the elements, and we can enumerate this order.</p>
+<p>The type class that defines such enumeration sequences is called <code>Enum</code>. It defines two functions: a <em>successor</em> <code>succ</code>, and a <em>predecessor</em> <code>pred</code>. Here's its definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Enum</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  succ, pred</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  toEnum</span><span style="color: #81A1C1;"> :: Int -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  fromEnum</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; Int</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  ...</span></span></code></pre>
+<p>The <code>succ</code> and <code>pred</code> function take a value and produce the next or the previous value of the same type. Each value can be considered assigned a number to it, and the functions <code>toEnum</code> and <code>fromEnum</code> can transform the number to a value and vice-versa. These functions, therefore, allow making the values of the type <code>a</code> <em>enumerable</em>:</p>
+<p>Here are <code>succ</code> and <code>pred</code> applied to <code>Int</code> and <code>Char</code>, respectively:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; succ 4</span></span>
+<span class="giallo-l"><span>5</span></span>
+<span class="giallo-l"><span>&gt; pred 4</span></span>
+<span class="giallo-l"><span>3</span></span>
+<span class="giallo-l"><span>&gt; pred &#39;z&#39;</span></span>
+<span class="giallo-l"><span>&#39;y&#39;</span></span>
+<span class="giallo-l"><span>&gt; succ &#39;z&#39;</span></span>
+<span class="giallo-l"><span>&#39;{&#39;</span></span></code></pre>
+<p>The <code>toEnum</code> and <code>fromEnum</code> operate as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; fromEnum &#39;z&#39;</span></span>
+<span class="giallo-l"><span>122</span></span>
+<span class="giallo-l"><span>&gt; toEnum 122 :: Char</span></span>
+<span class="giallo-l"><span>&#39;z&#39;</span></span></code></pre>
+<p>Note that the <code>toEnum</code> is polymorphic in its return type, therefore the type must be explicitly specified.</p>
+<p>We'll cover the <code>Bounded</code> type class next. The <code>Bounded</code> type class specifies the lower and upper bounds, available for a type.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Bounded</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  minBound, maxBound</span><span style="color: #81A1C1;"> ::</span><span> a</span></span></code></pre>
+<p>Here are a few examples:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; minBound :: Int</span></span>
+<span class="giallo-l"><span>-9223372036854775808</span></span>
+<span class="giallo-l"><span>&gt; maxBound :: Int</span></span>
+<span class="giallo-l"><span>9223372036854775807</span></span>
+<span class="giallo-l"><span>&gt; minBound :: Char</span></span>
+<span class="giallo-l"><span>&#39;\NUL&#39;</span></span>
+<span class="giallo-l"><span>&gt; maxBound :: Char</span></span>
+<span class="giallo-l"><span>&#39;\1114111&#39;</span></span>
+<span class="giallo-l"><span>&gt; minBound :: Bool</span></span>
+<span class="giallo-l"><span>False</span></span>
+<span class="giallo-l"><span>&gt; maxBound :: Bool</span></span>
+<span class="giallo-l"><span>True</span></span></code></pre>
+<p>The only standard type that is a member of <code>Enum</code>, but not a member of <code>Bounded</code> is the <code>Integer</code> type. Trying to get a bound value of an <code>Integer</code> will result in an error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; maxBound :: Integer</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:1: error:</span></span>
+<span class="giallo-l"><span>    • No instance for (Bounded Integer)</span></span>
+<span class="giallo-l"><span>        arising from a use of ‘maxBound’</span></span>
+<span class="giallo-l"><span>    • In the expression: maxBound :: Integer</span></span>
+<span class="giallo-l"><span>      In an equation for ‘it’: it = maxBound :: Integer</span></span></code></pre><h4 id="num-and-its-extensions"><code>Num</code> and its extensions</h4>
+<p>The <code>Num</code> type class defines operations that can be performed on numeric values. It has a rich hierarchy of extensions, specifying more complex numbers and operations.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">class Num</span><span> a</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"><span style="color: #ECEFF4;">  (</span><span style="color: #88C0D0;">+</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">-</span><span style="color: #ECEFF4;">)</span><span style="color: #88C0D0;">, </span><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">*</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  negate</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  abs</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  signum</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span></span>
+<span class="giallo-l"><span style="color: #88C0D0;">  fromInteger</span><span style="color: #81A1C1;"> :: Integer -&gt;</span><span> a</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>  x </span><span style="color: #81A1C1;">-</span><span> y </span><span style="color: #81A1C1;">=</span><span> x </span><span style="color: #81A1C1;">+</span><span> negate y</span></span>
+<span class="giallo-l"><span>  negate x </span><span style="color: #81A1C1;">=</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;"> -</span><span> x</span></span></code></pre>
+<p>The <code>Num</code> type class defines a series of operations that must be implemented. It defines the <code>+</code>, <code>-</code>, and <code>*</code> operations, however, it does not define division <code>/</code>. This is due to the fact that division for whole numbers, and numbers with a floating point are implemented differently. The <code>Num</code> type class has two extensions: the <code>Integral</code> and <code>Fractional</code> type classes, the former defines division for whole numbers, the latter - for floating-point numbers.</p>
+<p>In reality, the <code>Integral</code> type class does not extend <code>Num</code> directly, it uses another type class <code>Real</code>, which represents all real numbers.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :i Integral</span></span>
+<span class="giallo-l"><span>class (Real a, Enum a) =&gt; Integral a where</span></span>
+<span class="giallo-l"><span>  quot :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  rem :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  div :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  mod :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  quotRem :: a -&gt; a -&gt; (a, a)</span></span>
+<span class="giallo-l"><span>  divMod :: a -&gt; a -&gt; (a, a)</span></span>
+<span class="giallo-l"><span>  toInteger :: a -&gt; Integer</span></span>
+<span class="giallo-l"><span>  {-# MINIMAL quotRem, toInteger #-}</span></span>
+<span class="giallo-l"><span>  	-- Defined in ‘GHC.Real’</span></span>
+<span class="giallo-l"><span>instance Integral Integer -- Defined in ‘GHC.Real’</span></span>
+<span class="giallo-l"><span>instance Integral Int -- Defined in ‘GHC.Real’</span></span></code></pre>
+<p>The functions <code>div</code> and <code>mod</code> are responsible for the division operations, <code>div</code> performing integer division, and <code>mod</code> finds the remainder. The function <code>divMod</code> simultaneously applies <code>div</code> and <code>mod</code>, returning the result as a pair. The <code>MINIMAL</code> pragma suggests that a minimal complete definition requires implementing <code>quotRem</code> and <code>toInteger</code>.</p>
+<p>Haskell contains an implementation of <code>Integral</code> for the <code>Int</code> and <code>Integer</code> types, as shown by the output of the <code>:i</code> (<code>:info</code>) command.</p>
+<p>The other extension for <code>Num</code> is the <code>Fractional</code> type class:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :i Fractional</span></span>
+<span class="giallo-l"><span>class Num a =&gt; Fractional a where</span></span>
+<span class="giallo-l"><span>  (/) :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  recip :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  fromRational :: Rational -&gt; a</span></span>
+<span class="giallo-l"><span>  {-# MINIMAL fromRational, (recip | (/)) #-}</span></span>
+<span class="giallo-l"><span>  	-- Defined in ‘GHC.Real’</span></span>
+<span class="giallo-l"><span>instance Fractional Float -- Defined in ‘GHC.Float’</span></span>
+<span class="giallo-l"><span>instance Fractional Double -- Defined in ‘GHC.Float’</span></span></code></pre>
+<p>Here we can see that, among others, the <code>Fractional</code> type class defines the division operation <code>/</code> for floating-point numbers. Haskell includes an instance of this type class for <code>Float</code> and <code>Double</code>.</p>
+<p>The <code>Floating</code> type class defines a wide set of operations for floating-point arithmetic:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :i Floating</span></span>
+<span class="giallo-l"><span>class Fractional a =&gt; Floating a where</span></span>
+<span class="giallo-l"><span>  pi :: a</span></span>
+<span class="giallo-l"><span>  exp :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  log :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  sqrt :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  (**) :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  logBase :: a -&gt; a -&gt; a</span></span>
+<span class="giallo-l"><span>  sin :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  cos :: a -&gt; a</span></span>
+<span class="giallo-l"><span>  ...</span></span>
+<span class="giallo-l"><span>  {-# MINIMAL pi, exp, log, sin, cos, asin, acos, atan, sinh, cosh,</span></span>
+<span class="giallo-l"><span>              asinh, acosh, atanh #-}</span></span>
+<span class="giallo-l"><span>  	-- Defined in ‘GHC.Float’</span></span>
+<span class="giallo-l"><span>instance Floating Float -- Defined in ‘GHC.Float’</span></span>
+<span class="giallo-l"><span>instance Floating Double -- Defined in ‘GHC.Float’</span></span></code></pre>
+<p>Another extension is the <code>RealFrac</code> type class, which defines rounding operations:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>Prelude&gt; :i RealFrac</span></span>
+<span class="giallo-l"><span>class (Real a, Fractional a) =&gt; RealFrac a where</span></span>
+<span class="giallo-l"><span>  properFraction :: Integral b =&gt; a -&gt; (b, a)</span></span>
+<span class="giallo-l"><span>  truncate :: Integral b =&gt; a -&gt; b</span></span>
+<span class="giallo-l"><span>  round :: Integral b =&gt; a -&gt; b</span></span>
+<span class="giallo-l"><span>  ceiling :: Integral b =&gt; a -&gt; b</span></span>
+<span class="giallo-l"><span>  floor :: Integral b =&gt; a -&gt; b</span></span>
+<span class="giallo-l"><span>  {-# MINIMAL properFraction #-}</span></span>
+<span class="giallo-l"><span>  	-- Defined in ‘GHC.Real’</span></span>
+<span class="giallo-l"><span>instance RealFrac Float -- Defined in ‘GHC.Float’</span></span>
+<span class="giallo-l"><span>instance RealFrac Double -- Defined in ‘GHC.Float’</span></span></code></pre>
+<p>There are many more type classes in the <code>Num</code> hierarchy. Detailed documentation is available on <a rel="external" href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Num">Hoogle</a>.</p>
+<h3 id="non-strict-semantics">Non-strict semantics</h3>
+<p>In imperative languages, instruction order defines the order of execution. In functional languages there are no instructions, so it's not immediately obvious how to define an execution order of arbitrary expressions.</p>
+<h4 id="evaluation-models">Evaluation models</h4>
+<p>As you may recall, expressions are <em>reduced</em>, and their reduction may be performed in any order. Let's look at an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">sumIt</span><span style="color: #81A1C1;"> :: Int -&gt; Int -&gt; Int</span></span>
+<span class="giallo-l"><span>sumIt x y </span><span style="color: #81A1C1;">=</span><span> x </span><span style="color: #81A1C1;">+</span><span> y</span></span></code></pre>
+<p>This simple function sums the two arguments together. Invoking it with the following:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; sumIt (1 + 2) 3</span></span>
+<span class="giallo-l"><span>6</span></span></code></pre>
+<p>gives us the expected result 6. How can we arrive at this result? There are two possible strategies: the first, used in most programming languages, is called <em>eager evaluation</em> (sometimes <em>strict evaluation</em>). We first calculate the result of the expression <code>(1 + 2)</code>, and only then the function is applied. The second strategy, which is used in Haskell, is called <em>lazy evaluation</em>: we first substitute the expressions in the body of the functions, and only then perform the reduction. Here is an example of lazy evaluation reduction steps in Haskell:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumIt (2 + 3) 4</span></span>
+<span class="giallo-l"><span> ~&gt; (2 + 3) 4</span></span>
+<span class="giallo-l"><span> ~&gt; 5 + 4</span></span>
+<span class="giallo-l"><span> ~&gt; 9</span></span></code></pre>
+<p>First, we substitute the expressions in place of the former parameters <code>x</code> and <code>y</code>, namely <code>(2 + 3)</code> and <code>4</code>, and inside the body evaluate and reduce the expressions.</p>
+<p>Compared to the eager evaluation:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>sumIt (2 + 3) 4</span></span>
+<span class="giallo-l"><span> ~&gt; sumIt 5 4</span></span>
+<span class="giallo-l"><span> ~&gt; 5 + 4</span></span>
+<span class="giallo-l"><span> ~&gt; 9</span></span></code></pre>
+<p>Where the expression <code>(2 + 3)</code> is evaluated first.</p>
+<p>Let's introduce a bit of terminology: an expression that can be simplified further is called a <em>redex</em> (short for <em>reducible expression</em>).</p>
+<p>In the lazy evaluation example above there are two redexes: the first is the expression <code>(2 + 3)</code> - the <code>+</code> operation can be further simplified. The second redex is the function application itself.</p>
+<p>In situations where we have multiple redexes, we can employ different evaluation strategies for them.</p>
+<p>In pure functional languages, the same result will always be produced, regardless of the evaluation strategy. This is not guaranteed in imperative languages where order of evaluation matters.</p>
+<h4 id="lazy-evaluation">Lazy evaluation</h4>
+<p>Let's look at the properties of lazy evaluation. Consider the following function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">add7</span><span style="color: #81A1C1;"> :: Int -&gt; Int -&gt; Int</span></span>
+<span class="giallo-l"><span>add7 x y </span><span style="color: #81A1C1;">=</span><span> x </span><span style="color: #81A1C1;">+</span><span style="color: #B48EAD;"> 7</span></span></code></pre>
+<p>The number 7 is added to the first argument <code>x</code>, the second argument is ignored.</p>
+<p>Let's look at the reduction steps for both lazy and eager evaluation strategies:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>-- lazy</span></span>
+<span class="giallo-l"><span>add7 1 (2 + 3)</span></span>
+<span class="giallo-l"><span> ~&gt; 1 + 7</span></span>
+<span class="giallo-l"><span> ~&gt; 8</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>-- eager</span></span>
+<span class="giallo-l"><span>add7 1 (2 + 3)</span></span>
+<span class="giallo-l"><span> ~&gt; add7 1 5</span></span>
+<span class="giallo-l"><span> ~&gt; 1 + 7</span></span>
+<span class="giallo-l"><span> ~&gt; 8</span></span></code></pre>
+<p>In the first case we substitute the formal parameters <code>x</code> and <code>y</code> of <code>add7</code> with the expressions <code>1</code> and <code>(2 + 3)</code>. Since the function uses only the first argument, the second is completely ignored, therefore the second argument is not evaluated.</p>
+<p>In case of the eager evaluations, both expressions are first evaluated, before being bound to the function arguments.</p>
+<p>The lazy evaluation strategy is more efficient in this case, since it does not attempt to evaluate expressions that will not be used. However, this is not always the case. Here's an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">dup</span><span style="color: #81A1C1;"> :: Int -&gt;</span><span style="color: #ECEFF4;"> (</span><span style="color: #81A1C1;">Int</span><span style="color: #ECEFF4;">,</span><span style="color: #81A1C1;">Int</span><span style="color: #ECEFF4;">)</span></span>
+<span class="giallo-l"><span>dup x </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span>x</span><span style="color: #ECEFF4;">,</span><span>x</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Reducing this using both strategies:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>-- lazy</span></span>
+<span class="giallo-l"><span>dup (2+3)</span></span>
+<span class="giallo-l"><span> ~&gt; (2+3, 2+3)</span></span>
+<span class="giallo-l"><span> ~&gt; (5,2+3)</span></span>
+<span class="giallo-l"><span> ~&gt; (5,5)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>-- eager</span></span>
+<span class="giallo-l"><span>dup (2+3)</span></span>
+<span class="giallo-l"><span> ~&gt; dup 5</span></span>
+<span class="giallo-l"><span> ~&gt; (5,5)</span></span></code></pre>
+<p>The lazy evaluation strategy requires 4 steps of reduction, while the eager evaluation is more efficient.</p>
+<p>Lazy evaluation is preferable when some of the function parameters are ignored, while eager (strict) evaluation is preferable when they are used multiple times in the body of the function.</p>
+<p>Luckily, Haskell optimizes for such cases of duplicate use by deferring the evaluation, allowing calculating the result just once. This layer of indirection is called a <em>thunk</em>, and it works as follows:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>dup (2+3)</span></span>
+<span class="giallo-l"><span> ~&gt; (t,t)     -- t = 2+3</span></span>
+<span class="giallo-l"><span> ~&gt; (5,t)     -- t = 5</span></span>
+<span class="giallo-l"><span> ~&gt; (5,5)</span></span></code></pre>
+<p>The thunk <code>t</code> points to a value that hasn't yet been calculated. The first time the value is required, it is evaluated, and now the thunk points to the evaluated result, allowing substituting it immediately where it is further required, without reevaluating.</p>
+<p>Thunking is what allows lazy languages like Haskell to operate on huge values, such as infinite lists, however, it also slightly complicates our ability to reason about the program, as it turns simple expression trees into graphs.</p>
+<h4 id="strict-and-non-strict-semantics">Strict and non-strict semantics</h4>
+<p>Lazy evaluation has some interesting properties when dealing with programs that do not terminate. In many cases, using lazy evaluation we can eliminate some cases of diverging programs. Let's look at an example:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">const42</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt; Int</span></span>
+<span class="giallo-l"><span>const42 </span><span style="color: #81A1C1;">=</span><span> const </span><span style="color: #B48EAD;">42</span></span></code></pre>
+<p>The <code>const42</code> function takes one argument and returns an <code>Int</code>. It is implemented by calling <code>const</code>, passing it the number 42 and the argument. As you recall, the <code>const</code> function ignores its second argument, causing our <code>const42</code> function to always return the value 42.</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; const42 True</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>Since <code>const42</code> always ignores its argument, we can also apply it to a non-terminating computation:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; const42 undefined</span></span>
+<span class="giallo-l"><span>42</span></span></code></pre>
+<p>The <code>undefined</code> function always produces an error, but only when it is evaluated. In our case, the <code>undefined</code> function is never used, so it's never evaluated. This makes lazy evaluation suitable for eliminating divergent computations.</p>
+<p>Functions, such as <code>const42</code> are called <em>non-strict</em>. Formally, a non-strict function is a function that accepts a non-terminating (diverging) computation as an argument, but still produces a result (converging), it is considered non-strict. Conversely, a <em>strict</em> function, given a diverging computation as an argument, becomes divergent itself.</p>
+<p>This allows us to separate functions into two kinds: strict and non-strict. However, in some functions, the strictness of a second argument may depend on the first. This makes <em>strictness analysis</em> into a non-trivial problem. The Haskell compiler performs strictness analysis to reduce the cost of lazy evaluation, which sometimes can lead to better performing and more effective programs.</p>
+<h4 id="weak-head-normal-form">Weak Head Normal Form</h4>
+<p>In functional languages, expressions are reduced until they cannot be reduced further. The reduction process happens for as long as there are <em>redexes</em> that remain in the expression, resulting in an expression that no longer contains any redexes. Those fully-reduced expressions are in a so-called <em>normal form</em>, meaning that no more reductions are possible.</p>
+<p>In Haskell, there exists an intermediate reduction stage, called <em>weak head normal form</em> (abbreviated WHNF). Let's look at some examples:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>-- Normal Form</span></span>
+<span class="giallo-l"><span>42</span></span>
+<span class="giallo-l"><span>(3,4)</span></span>
+<span class="giallo-l"><span>\x -&gt; x + 2</span></span></code></pre>
+<p>The three expressions above are all in a normal form (NF). The first is a number 42, which has no other reduction steps. The second is a pair constructor, which is applied to the values 3 and 4, written in a <em>mixfix</em> style. This is also a value which cannot be reduced. The third example is a lambda expression. It too cannot be further reduced, since it does not contain any redexes (the <code>+</code> operator is considered <em>built-in</em>, and it cannot be applied until both arguments are available).</p>
+<p>Now let's look at expressions which are not in NF:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>-- not NF</span></span>
+<span class="giallo-l"><span>&quot;Hello &quot; ++ &quot;world&quot;</span></span>
+<span class="giallo-l"><span>sin (pi / 2)</span></span>
+<span class="giallo-l"><span>(\x -&gt; x + 2) 5</span></span>
+<span class="giallo-l"><span>(3,1+5)</span></span></code></pre>
+<p>Redexes exist in all of the above examples, meaning they can be further reduced, therefore are not considered normal form.</p>
+<p>Weak head normal form is a special case of an expression which contain redexes, consisting of the following:</p>
+<ol>
+<li>a lambda <em>abstraction</em></li>
+<li>a data constructor</li>
+<li>any built-in partially-applied operator</li>
+</ol>
+<p>Here are some examples of WHNF:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>-- WHNF</span></span>
+<span class="giallo-l"><span>\x -&gt; x + 2*3</span></span>
+<span class="giallo-l"><span>(3,1+5)</span></span>
+<span class="giallo-l"><span>(,) (4*5)</span></span>
+<span class="giallo-l"><span>(+) (7^2)</span></span></code></pre>
+<p>The first example is a lambda abstraction. It's not in NF since it contains a redex <code>2*3</code>, however when this expression is inside the lambda body, it is considered WHNF. The second example is a data constructor (tuple, in this case), which contains a reducible expression <code>1+5</code>. However, because it occurs inside a data constructor, this is also considered WHNF. The third and fourth examples are built-in Haskell operators, partially-applied to a redex. This is also considered a WHNF.</p>
+<p>It is said that expressions in NF are also at the same time WHNF. In most cases, Haskell will stop reducing expressions at WHNF, not reducing it further to NF. This allows Haskell to optimize functions for strictness.</p>
+<h4 id="forcing-strictness">Forcing strictness</h4>
+<p>We now know the meaning of lazy evaluation semantics. If an expression is not required - it will not be evaluated. In most cases this is a desired property, however, there are some cases this causes problems.</p>
+<p>Haskell uses deferred execution, or, thunking, to perform lazy computations. In working with large data structures, such as lists of an arbitrary length, thunks may accumulate in memory. Suppose we're summing a list of 10 million elements; in the lazy evaluation model, a thunk will have accumulated 10 million deferred <code>+</code> operations, ready for evaluation, but it cannot happen until all elements have been processed.</p>
+<p>Memory, or more specifically, <em>space leaks</em> is a common problem in Haskell, and often requires careful solutions. Sometimes, we'd like to instruct the Haskell compiler not to defer any computations, but perform them as soon as they're available. This is achieved by using the Haskell primitive <code>seq</code>.</p>
+<p>The <code>seq</code> primitive is a function that is used to force strict evaluation for a given computation. Let's see how this function could be defined (in pseudo-code), and its uses:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">seq</span><span style="color: #81A1C1;"> ::</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span></span>
+<span class="giallo-l"><span>seq </span><span style="color: #81A1C1;">⊥</span><span> b </span><span style="color: #81A1C1;">= ⊥</span></span>
+<span class="giallo-l"><span>seq a b </span><span style="color: #81A1C1;">=</span><span> b</span></span></code></pre>
+<p>The <code>seq</code> function can be though of as a function of two arguments, returning the second argument and ignoring the first. If it only had one definition (line 3 of the example above), it would be the same as using <code>flip const</code>. Such a definition is only possible in a lazy language, since it requires deferring the evaluation of the arguments. However, the definition above is not a valid Haskell syntax, as we're using a concept called <em>bottom</em> (also called <em>falsum</em>, denoted by the Unicode symbol ⊥ or an ASCII sequence <code>_|_</code>), which signifies non-terminating, or, divergent computations. If the first argument to <code>seq</code> is diverging, the result will also be diverging.</p>
+<p>This function cannot be directly implemented using Haskell syntax, however it's a built-in Haskell primitive.</p>
+<p>Let's see a few examples of using <code>seq</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; seq 1 2</span></span>
+<span class="giallo-l"><span>2</span></span>
+<span class="giallo-l"><span>&gt; seq undefined 2</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.undefined</span></span>
+<span class="giallo-l"><span>&gt; seq (id undefined) 2</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.undefined</span></span></code></pre>
+<p>Instead of ignoring its first argument, Haskell attempts to reduce it until WHNF. If this attempt fails (if the computation is divergent), <code>seq</code> fails as well.</p>
+<p>Let's see some examples where using WHNF with <code>seq</code> does not diverge:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; seq (undefined,undefined) 2</span></span>
+<span class="giallo-l"><span>2</span></span>
+<span class="giallo-l"><span>&gt; seq (\x -&gt; undefined) 2</span></span></code></pre>
+<p>Because both expressions above are already WHNF, <code>seq</code> is satisfied and does not attempt to reduce it further, returning the second argument.</p>
+<h4 id="strict-function-application-call-by-value">Strict function application (call-by-value)</h4>
+<p>Even though the <code>seq</code> primitive is useful, it's not very convenient. Haskell defines a more convenient <em>call-by-value</em> operator <code>$!</code>, which can be used instead of <code>seq</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #ECEFF4;">(</span><span style="color: #88C0D0;">$!</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> ::</span><span style="color: #ECEFF4;"> (</span><span>a</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> -&gt;</span><span> a</span><span style="color: #81A1C1;"> -&gt;</span><span> b</span></span>
+<span class="giallo-l"><span>f </span><span style="color: #81A1C1;">$!</span><span> x </span><span style="color: #81A1C1;">=</span><span> x </span><span style="color: #ECEFF4;">`</span><span style="color: #81A1C1;">seq</span><span style="color: #ECEFF4;">`</span><span> f x</span></span></code></pre>
+<p>The type of the <code>$!</code> operator is identical to the <code>$</code> operator, taking a function <code>a -&gt; b</code> and an argument <code>a</code>, producing a <code>b</code>. Here, it is using <code>seq</code> in the infix style, and means the following: the argument <code>x</code> is first reduced until WHNF, and then the function <code>f</code> is applied to the reduced <code>x</code>. Reduction here happens before function application, allowing the operator to force strictness. Let's see some uses of this operator:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; const 42 undefined</span></span>
+<span class="giallo-l"><span>42</span></span>
+<span class="giallo-l"><span>&gt; const 42 $ undefined</span></span>
+<span class="giallo-l"><span>42</span></span>
+<span class="giallo-l"><span>&gt; const 42 $! undefined</span></span>
+<span class="giallo-l"><span>*** Exception: Prelude.undefined</span></span></code></pre>
+<p>In the example above, we can see that the <code>$!</code> operator works similarly to <code>$</code> (they have the same precedence and associativity), however, the <code>$!</code> forces the evaluation of its arguments. Since <code>undefined</code> diverges, the result of <code>$!</code> diverges as well.</p>
+<p>Let's see a real example where this is useful. Consider our <code>factorial</code> function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #88C0D0;">factorial</span><span style="color: #81A1C1;"> :: Integer -&gt; Integer</span></span>
+<span class="giallo-l"><span>factorial n </span><span style="color: #81A1C1;">|</span><span> n </span><span style="color: #81A1C1;">&gt;</span><span style="color: #B48EAD;"> 0</span><span style="color: #81A1C1;">     =</span><span> helper </span><span style="color: #B48EAD;">1</span><span> n</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">            |</span><span> otherwise </span><span style="color: #81A1C1;">=</span><span> error </span><span style="color: #ECEFF4;">&quot;</span><span style="color: #A3BE8C;">arg must be &gt;= 0</span><span style="color: #ECEFF4;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">  where</span></span>
+<span class="giallo-l"><span>    helper acc </span><span style="color: #B48EAD;">0</span><span style="color: #81A1C1;"> =</span><span> acc</span></span>
+<span class="giallo-l"><span>    helper acc n </span><span style="color: #81A1C1;">=</span><span> helper </span><span style="color: #ECEFF4;">(</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>The <code>helper</code> function will recursively call <code>helper</code> until <code>n</code> reaches 0, accumulating nested calls to <code>helper</code> with decreasing <code>n</code> values. In reality, Haskell's strictness analysis can handle this situation, and turn them into strict calls, however if we want to make sure this optimization happens, we could use the <code>$!</code> operator to force this strictness ourselves:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">  ...</span></span>
+<span class="giallo-l"><span>  helper acc n </span><span style="color: #81A1C1;">=</span><span style="color: #ECEFF4;"> (</span><span>helper </span><span style="color: #81A1C1;">$!</span><span style="color: #ECEFF4;"> (</span><span>acc </span><span style="color: #81A1C1;">*</span><span> n</span><span style="color: #ECEFF4;">)) (</span><span>n </span><span style="color: #81A1C1;">-</span><span style="color: #B48EAD;"> 1</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>This change forces Haskell to evaluate the first argument to <code>helper</code>, allowing us to eliminate the chain of nested computations. In addition, since the <code>$!</code> operator has a low precedence, we must enclose the expression in parentheses.</p>
+<h3 id="modules-and-compilation">Modules and compilation</h3>
+<p>Haskell programs are a collection of <em>modules</em>. The main module is called <code>Main</code>, and each module should reside in a file named after the module, although that's not required. Inside the file, a module is declared by the keyword <code>module</code>, followed by the module name (starting with a capital letter), followed by the <code>where</code> keyword.</p>
+<h4 id="modules">Modules</h4>
+<p>In the file <code>Demo.hs</code>, we have the following definition:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Demo</span><span style="color: #81A1C1;"> where</span></span></code></pre>
+<p>We can now add our own definitions and imports. The <code>Prelude</code> module, which contains many basic functions is implicitly imported in our <code>Demo</code> module, and we can start using its functions in our module immediately.</p>
+<p>To use a function defined in another module, that module must first be imported by using the <code>import</code> keyword:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Demo</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Char</span></span></code></pre>
+<p>The <code>import Data.Char</code> directive imports all functions that are exposed in the module. Sometimes we don't need all the functions, so we can specify in parentheses the names of the functions we wish to import:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Char</span><span style="color: #ECEFF4;"> (</span><span style="color: #88C0D0;">toUpper</span><span style="color: #ECEFF4;">,</span><span style="color: #88C0D0;">toLower</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Sometimes we need the opposite operation - import all functions <em>except</em> the specified ones. This is allowed by using the keyword <code>hiding</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Char</span><span style="color: #81A1C1;"> hiding</span><span style="color: #ECEFF4;"> (</span><span style="color: #88C0D0;">toLower</span><span style="color: #ECEFF4;">)</span></span></code></pre>
+<p>Suppose we want to import the function <code>union</code> from <code>Data.List</code>. Another <code>union</code> function is also defined in <code>Data.Set</code>. Importing both modules, then trying to use the <code>union</code> function will result in the following error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.List</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.Set</span></span></code></pre><pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t `union`</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>&lt;interactive&gt;:1:1: error:</span></span>
+<span class="giallo-l"><span>    Ambiguous occurrence ‘union’</span></span>
+<span class="giallo-l"><span>    It could refer to either ‘Data.Set.union’,</span></span>
+<span class="giallo-l"><span>                             imported from ‘Data.Set’</span></span>
+<span class="giallo-l"><span>                             (and originally defined in ‘Data.Set.Internal’)</span></span>
+<span class="giallo-l"><span>                          or ‘Data.List.union’,</span></span>
+<span class="giallo-l"><span>                             imported from ‘Data.List’</span></span>
+<span class="giallo-l"><span>                             (and originally defined in ‘base-4.12.0.0:Data.OldList’)</span></span></code></pre>
+<p>The error suggests an ambiguity - Haskell is unable to determine which one of the <code>union</code>s we meant. Instead, we can use the fully-qualified name, e.g. <code>Data.List.union</code>:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t Data.List.union</span></span>
+<span class="giallo-l"><span>Data.List.union :: Eq a =&gt; [a] -&gt; [a] -&gt; [a]</span></span></code></pre>
+<p>However this is not often convenient. In some cases we'd like to always refer to a function by its fully-qualified name. For this, there exists a keyword <code>qualified</code> which imports module members with a fully-qualified name:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Data.List</span></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import qualified</span><span> Data.Set</span></span></code></pre>
+<p>Here, the ambiguity no longer occurs, since the <code>union</code> function from the <code>Data.Set</code> module must always be used fully-qualified:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t union</span></span>
+<span class="giallo-l"><span>union :: Eq a =&gt; [a] -&gt; [a] -&gt; [a]</span></span></code></pre>
+<p>Because the module names are hierarchical, the sometimes can be very long, and using the fully-qualified name proves cumbersome. Haskell allows to alias module names, allowing to locally rename them to something shorter, by using the <code>as</code> keyword:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">import qualified</span><span> Data.Set</span><span style="color: #81A1C1;"> as</span><span> Set</span></span></code></pre>
+<p>Allowing accessing it by the shorter name:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>&gt; :t Set.union</span></span>
+<span class="giallo-l"><span>Set.union  :: Ord a =&gt; Set.Set a -&gt; Set.Set a -&gt; Set.Set a</span></span></code></pre>
+<p>In rare occasions we'd like to implement a function that already exists in the <code>Prelude</code>. In this case, the <code>Prelude</code> module must be explicitly imported, hiding the functions that we wish to override locally. All explicitly-imported modules override any implicit ones.</p>
+<h4 id="exporting-modules">Exporting modules</h4>
+<p>Importing modules allows us to use functions declared in other modules. There is an opposite directive - <code>export</code>, which controls which functions from our module are visible to others.</p>
+<p>Let's create two modules in two separate files, <code>Demo.hs</code> and <code>Test.hs</code>. In the <code>Test</code> module we declare the following functions:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Test</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>sumIt x y </span><span style="color: #81A1C1;">=</span><span> x </span><span style="color: #81A1C1;">+</span><span> y</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>const42 </span><span style="color: #81A1C1;">=</span><span> const </span><span style="color: #B48EAD;">42</span></span></code></pre>
+<p>In the <code>Demo</code> module:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Demo</span><span style="color: #81A1C1;"> where</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #81A1C1;">import</span><span> Test</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>f1 </span><span style="color: #81A1C1;">=</span><span> const42 True</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>f2 </span><span style="color: #81A1C1;">=</span><span> sumIt </span><span style="color: #B48EAD;">3 4</span></span></code></pre>
+<p>Let's load it in GHCi:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span> $ ghci</span></span>
+<span class="giallo-l"><span>GHCi, version 8.6.5: http://www.haskell.org/ghc/  :? for help</span></span>
+<span class="giallo-l"><span>Prelude&gt; :l Demo</span></span>
+<span class="giallo-l"><span>[1 of 2] Compiling Test             ( Test.hs, interpreted )</span></span>
+<span class="giallo-l"><span>[2 of 2] Compiling Demo             ( Demo.hs, interpreted )</span></span>
+<span class="giallo-l"><span>Ok, two modules loaded.</span></span></code></pre>
+<p>The Haskell compiler first attempts to compile and load the imports, and then the actual module we've requested. If everything loaded without errors, we'll see the "Ok, two modules loaded" message.</p>
+<p>If we want to limit the functions that are available to other modules, we can <em>export</em> just some of them, by specifying their names in parentheses after the module name. In our <code>Test</code> module, let's only export the <code>sumIt</code> function:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="haskell"><span class="giallo-l"><span style="color: #81A1C1;">module</span><span> Test</span><span style="color: #ECEFF4;"> (</span><span style="color: #88C0D0;">sumIt</span><span style="color: #ECEFF4;">)</span><span style="color: #81A1C1;"> where</span></span></code></pre>
+<p>Saving, then reloading our GHCi session will produce the following error:</p>
+<pre class="giallo" style="color: #D8DEE9; background-color: #2E3440;"><code data-lang="plain"><span class="giallo-l"><span>*Demo&gt; :r</span></span>
+<span class="giallo-l"><span>[1 of 2] Compiling Test             ( Test.hs, interpreted )</span></span>
+<span class="giallo-l"><span>[2 of 2] Compiling Demo             ( Demo.hs, interpreted ) [Test changed]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>Demo.hs:5:6: error:</span></span>
+<span class="giallo-l"><span>    • Variable not in scope: const42 :: Bool -&gt; t</span></span>
+<span class="giallo-l"><span>    • Perhaps you meant ‘const’ (imported from Prelude)</span></span>
+<span class="giallo-l"><span>  |</span></span>
+<span class="giallo-l"><span>5 | f1 = const42 True</span></span>
+<span class="giallo-l"><span>  |      ^^^^^^^</span></span>
+<span class="giallo-l"><span>Failed, one module loaded.</span></span></code></pre>
+<p>The interpreter reports that the compilation failed, only the <code>Test</code> module was loaded. The <code>Demo</code> module reports an error that the <code>const42</code> function is not available.</p>
+<p>The export directive is Haskell's only mechanism for encapsulation. Similarly to object-oriented languages, where encapsulation is a means of hiding implementation details from public API, in Haskell, exporting only certain functions is the only way to keep some of the functions <em>private</em> to the module.</p>
+
+  </div>
+
+  
+  <footer class="post-footer">
+    
+
+    
+<div class="post-nav">
+  
+    <div class="post-nav-item post-nav-next">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;functional-programming-in-haskell-stepik-course-notes-module-1&#x2F;" rel="next" title="Functional Programming in Haskell (Stepik course notes) - module 1">
+        <i class="fa fa-angle-left"></i> <span class="nav-title">Functional Programming in Haskell (Stepik course notes) - module 1</span>
+      </a>
+    </div>
+  
+  
+    <div class="post-nav-item post-nav-prev">
+      <a href="https:&#x2F;&#x2F;hmemcpy.com&#x2F;posts&#x2F;setting-up-a-haskell-development-environment-in-minutes-in-vscode&#x2F;" rel="prev" title="Setting up a Haskell development environment in minutes in Visual Studio Code">
+        <span class="nav-title">Setting up a Haskell development environment in minutes in Visual Studio Code</span> <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  
+</div>
+
+  </footer>
+  
+</article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      
+        <div class="footer-social">
+          
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;hmemcpy" title="GitHub" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;x.com&#x2F;hmemcpy" title="X" target="_blank" rel="noopener">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;8205&#x2F;igal-tabachnik" title="Stack Overflow" target="_blank" rel="noopener">
+              <i class="fab fa-stack-overflow"></i>
+            </a>
+          
+            <a href="https:&#x2F;&#x2F;il.linkedin.com&#x2F;in&#x2F;igaltabachnik" title="LinkedIn" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          
+        </div>
+      
+      <div class="footer-copyright">
+        &copy;
+        2009 &ndash; 
+        2026
+        <span class="author">Igal Tabachnik</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav hamburger
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) {
+      navToggle.addEventListener('click', function() {
+        var nav = document.querySelector('.site-nav');
+        var open = nav.classList.toggle('open');
+        this.setAttribute('aria-expanded', open);
+      });
+    }
+
+    // Search — uses Pagefind JS API directly
+    (async function() {
+      var input   = document.getElementById('search-input');
+      var results = document.getElementById('search-results');
+      var pagefind;
+
+      try {
+        pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 12 });
+      } catch(e) {
+        return; // Pagefind not built yet (local dev) — fail silently
+      }
+
+      async function runSearch(query) {
+        if (!query) { results.hidden = true; return; }
+        var res = await pagefind.search(query);
+        var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
+        if (!hits.length) { results.hidden = true; return; }
+        results.innerHTML = hits.map(function(hit) {
+          return '<li class="search-result"><a href="' + hit.url + '">'
+            + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
+            + '<span class="result-excerpt">' + hit.excerpt + '</span>'
+            + '</a></li>';
+        }).join('');
+        results.hidden = false;
+      }
+
+      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('header-search').contains(e.target)) {
+          results.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { results.hidden = true; input.blur(); }
+        if (e.key === '/' && document.activeElement !== input
+            && document.activeElement.tagName !== 'INPUT'
+            && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
