@@ -1,6 +1,7 @@
 +++
 title = "How to remap calc.exe to scriptcs.exe"
 date = 2014-04-20T19:41:56Z
+aliases = ["/2014/04/how-to-remap-calc-exe-to-scriptcs-exe/"]
 +++
 Lately I found myself launching [scriptcs](http://scriptcs.net/) more and more to do simple calculations. I half-jokingly said on twitter that I'd better remap `calc.exe` to `scriptcs.exe` on my machine. However it seems that my joke tweet was taken seriously by some people, and I was asked how this was done. So here goes!
 

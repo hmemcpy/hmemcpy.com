@@ -1,6 +1,7 @@
 +++
 title = "Installing a .vsix Extension via MSI without \"devenv /setup\""
 date = 2014-03-17T01:40:19Z
+aliases = ["/2014/03/installing-vsix-extension-via-msi-without-devenv-setup/"]
 +++
 There are two ways to install Visual Studio extensions: via VSIX installed from the Visual Studio gallery (or by double-clicking, which executes VSIXInstaller.exe), or *manually*, by copying the files from a custom installer, typically MSI (and specifying a special `<InstalledByMsi>true</InstalledByMsi>` element in the `extension.vsixmanifest` file). The latter approach is generally used if the extension needs to perform additional tasks, such as running ngen or registering COM servers.
 

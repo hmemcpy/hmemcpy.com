@@ -1,6 +1,7 @@
 +++
 title = "Migrating from TFS to git to Visual Studio Online - the survival guide"
 date = 2014-06-29T23:28:16Z
+aliases = ["/2014/06/migrating-from-tfs-to-git-to-visual-studio-online-the-survival-guide/"]
 +++
 This is a step-by-step recount of my attempt to migrate an existing 3-year old TFS (TFVC) repository to git, while _keeping all the history_, and then moving it to [Visual Studio Online](http://www.visualstudio.com/), a TFS in the cloud. This wasn't an easy task, as there is no direct export-import built into either tools. I also ran into some problems during this lengthy process, and I describe the steps to solve them. Set aside a few hours of your time, brew some coffee (or tea), and let's get started!
 

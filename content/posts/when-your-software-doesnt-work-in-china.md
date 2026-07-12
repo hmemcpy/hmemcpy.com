@@ -1,6 +1,7 @@
 +++
 title = "When your software doesn't work in China"
 date = 2011-03-17T13:57:31Z
+aliases = ["/2011/03/when-your-software-doesnt-work-in-china/"]
 +++
 I had an interesting bug submitted by a user, he wrote that <a href="http://www.typemock.com" target="_blank">our product</a> was crashing in his Visual Studio 2010, which was a Traditional Chinese edition.
 

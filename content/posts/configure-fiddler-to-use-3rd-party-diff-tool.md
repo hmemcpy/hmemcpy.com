@@ -1,6 +1,7 @@
 +++
 title = "Configure Fiddler to use a 3rd party Diff tool"
 date = 2009-09-16T07:08:52Z
+aliases = ["/2009/09/configure-fiddler-to-use-3rd-party-diff-tool/"]
 +++
 I use the awesome [Fiddler2](http://www.fiddler2.com/fiddler2/) to debug HTTP, and I needed to compare sessions. Fiddler has a support for this, but when I clicked **Tools → Compare Sessions**, it prompted me to install **Windiff.exe**.
 

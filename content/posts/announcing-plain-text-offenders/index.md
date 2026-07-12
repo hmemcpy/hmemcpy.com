@@ -1,6 +1,7 @@
 +++
 title = "Announcing Plain Text Offenders"
 date = 2011-04-05T22:57:24Z
+aliases = ["/2011/04/announcing-plain-text-offenders/"]
 +++
 <img style="float: right; padding: 5px;" src="image.jpg" />
 

@@ -1,6 +1,7 @@
 +++
 title = "Upgrading TortoiseHg to v2.0"
 date = 2011-03-07T12:16:50Z
+aliases = ["/2011/03/upgrading-tortoisehg-to-v2-0/"]
 +++
 Version 2.0 of <a href="http://tortoisehg.bitbucket.org/" target="_blank">TortoiseHg</a>, the best Windows client for the <a href="http://mercurial.selenic.com/" target="_blank">Mercurial</a> distributed source control system, was released a few days ago, featuring a complete UI overhaul and numerous fixes and improvements.
 

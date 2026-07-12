@@ -1,6 +1,7 @@
 +++
 title = "Working with shared dependencies in ZIO Test"
 date = 2021-11-20T10:08:54Z
+aliases = ["/2021/11/working-with-shared-dependencies-in-zio-test/"]
 +++
 ZIO Test is a [testing library](https://zio.dev/datatypes/test/) in which all suites and individual tests are regular ZIO values. This means that all composition features that apply to ZIO also apply to tests, in particular, dependency management via the environment.
 

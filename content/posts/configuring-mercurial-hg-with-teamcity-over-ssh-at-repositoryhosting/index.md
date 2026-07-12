@@ -1,6 +1,7 @@
 +++
 title = "Configuring Mercurial (Hg) with TeamCity over SSH at RepositoryHosting"
 date = 2010-09-19T11:30:00Z
+aliases = ["/2010/09/configuring-mercurial-hg-with-teamcity-over-ssh-at-repositoryhosting/"]
 +++
 At [Typemock](http://site.typemock.com/), we're making the change of moving our source control from SVN to Mercurial (Hg). Side note: **Hg** is a symbol for [Mercury](http://en.wikipedia.org/wiki/Mercury_(element) in the periodic table.
 

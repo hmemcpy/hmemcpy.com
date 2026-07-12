@@ -1,6 +1,7 @@
 +++
 title = "Ever wanted to know why you got the badge on StackOverflow? Now you can!"
 date = 2010-07-11T07:09:05Z
+aliases = ["/2010/07/ever-wanted-to-know-why-you-got-the-badge-on-stackoverflow-now-you-can/"]
 +++
 Badges are an integral part of the StackOverflow, which reward participants. According to [Jeff Atwood](http://www.codinghorror.com), those are based on the [Xbox 360 Achievement System](http://www.xbox360achievements.org/index.php).
 

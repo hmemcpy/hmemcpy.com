@@ -4,6 +4,14 @@
     display: block;
   }
 
+  .header-inner {
+    height: auto;
+    min-height: $navbar-height;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    gap: 0.55rem 0;
+  }
+
   // Nav collapses into dropdown below the header
   .site-nav {
     display: none;
@@ -44,6 +52,15 @@
 
   .post-list-date {
     min-width: 5.5em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 

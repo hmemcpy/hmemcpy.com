@@ -1,6 +1,7 @@
 +++
 title = "How to convert Subversion repository to Mercurial (Hg) - it's easier than you think!"
 date = 2010-11-26T14:51:35Z
+aliases = ["/2010/11/how-to-convert-subversion-repository-to-mercurial-hgits-easier-than-you-think/"]
 +++
 Converting SVN to Mercurial, while keeping all the commit history, might sound like a hard thing to do, but in fact it isn't! This functionality is already built into Mercurial, it's just not enabled by default.
 

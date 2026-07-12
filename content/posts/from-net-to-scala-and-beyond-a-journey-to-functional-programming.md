@@ -1,6 +1,7 @@
 +++
 title = "From .NET to Scala and beyond: a journey to Functional Programming"
 date = 2017-05-17T11:24:13Z
+aliases = ["/2017/05/from-net-to-scala-and-beyond-a-journey-to-functional-programming/"]
 +++
 *Original title was "Monads solve a problem you might not have, but it's a nice problem to have", which is an homage to a [great post](http://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/) by [Krzysztof Koźmic](https://twitter.com/kkozmic) about IoC containers.*
 

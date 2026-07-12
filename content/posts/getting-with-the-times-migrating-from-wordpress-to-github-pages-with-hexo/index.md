@@ -1,6 +1,7 @@
 +++
 title = "Getting with the times: migrating from WordPress to GitHub Pages with Hexo"
 date = 2016-06-11T14:22:11Z
+aliases = ["/2016/06/getting-with-the-times-migrating-from-wordpress-to-github-pages-with-hexo/"]
 +++
 I was finally able to migrate from WordPress to a gorgeous, static, and blazing fast blog, hosted on [GitHub Pages](https://pages.github.com/) for free. Here is a recap of what I did, starting with exporting all data from WordPress, and finishing with setting up an automatic publishing with [AppVeyor](https://www.appveyor.com/)!
 

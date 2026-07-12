@@ -1,6 +1,7 @@
 +++
 title = "How to debug anything with Visual Studio and JetBrains dotPeek v1.2!"
 date = 2014-07-16T14:30:35Z
+aliases = ["/2014/07/how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2/"]
 +++
 Sometimes, we wish we could just step into some 3<sup>rd</sup> party library, to figure out how it works, but we either don't have the source code, or otherwise just can't. Fortunately, this is made possible by **dotPeek v1.2** that was [just released](http://blog.jetbrains.com/dotnet/2014/07/16/dotpeek-1-2-is-released/), which can act as a symbol server for decompiled assemblies!
 

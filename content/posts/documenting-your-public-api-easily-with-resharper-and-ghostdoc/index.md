@@ -1,6 +1,7 @@
 +++
 title = "Documenting your public API easily with ReSharper and GhostDoc"
 date = 2010-11-17T16:54:10Z
+aliases = ["/2010/11/documenting-your-public-api-easily-with-resharper-and-ghostdoc/"]
 +++
 In my [previous post](/posts/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/) on how to find static fields in the entire solution using ReSharper and a free ReSharper plug-in, [Agent Smith](http://code.google.com/p/agentsmithplugin/), I briefly mentioned that the described trick can be used to aid documenting the public API. Some people have asked me to elaborate, so here goes:
 

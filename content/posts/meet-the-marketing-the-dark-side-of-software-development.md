@@ -1,6 +1,7 @@
 +++
 title = "Meet the Marketing - the dark side of software development"
 date = 2011-02-07T23:04:51Z
+aliases = ["/2011/02/meet-the-marketing-the-dark-side-of-software-development/"]
 +++
 Working on a greenfield project with a great team of developers is probably the best thing that can happen. You're engaged in shaping and molding your ideas into code. Better if you're an agile team, continuously improving and adding value.
 

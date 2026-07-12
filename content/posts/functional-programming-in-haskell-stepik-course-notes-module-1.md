@@ -1,6 +1,7 @@
 +++
 title = "Functional Programming in Haskell (Stepik course notes) - module 1"
 date = 2020-01-18T02:01:20Z
+aliases = ["/2020/01/functional-programming-in-haskell-stepik-course-notes-module-1/"]
 +++
 There's a fantastic free online course (MOOC) for the Russian-speaking developer community on [Stepik](https://stepik.org/) for learning Haskell - a two-part course titled [Functional Programming in Haskell](https://stepik.org/course/75) by Denis Moskvin, (then) associate professor at the St. Petersburg Academic University. I recently re-watched the course (having completed it previously) and decided to take notes and summarize the course content in English for your enjoyment.
 

@@ -1,6 +1,7 @@
 +++
 title = "First Rule of Unit Testing: Don't do it! (yet)"
 date = 2013-04-12T07:51:07Z
+aliases = ["/2013/04/first-rule-of-unit-testing-dont-do-it-yet/"]
 +++
 I wasn't sure how I'd like to begin this blog post. Instead of writing a long and boring introduction that drives my point, I'll just dump all that boiled inside me for quite a while. Sarcasm and bitterness ahead!
 

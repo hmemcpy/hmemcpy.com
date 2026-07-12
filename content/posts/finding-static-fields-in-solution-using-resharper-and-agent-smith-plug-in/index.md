@@ -1,6 +1,7 @@
 +++
 title = "Finding static fields in solution using ReSharper and Agent Smith plug-in"
 date = 2010-11-16T14:49:36Z
+aliases = ["/2010/11/finding-static-fields-in-solution-using-resharper-and-agent-smith-plug-in/"]
 +++
 Today I came across a need to find all static fields in my entire solution I'm working on. Finding things usually is a no-brainer with [ReSharper](http://www.jetbrains.com/resharper/), but this time I didn't find an option to do this easily.
 

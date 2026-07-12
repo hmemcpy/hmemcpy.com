@@ -14,6 +14,45 @@ body {
   min-height: 100vh;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.55rem 0.8rem;
+  border-radius: $border-radius;
+  color: $bg;
+  background: $text;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease;
+
+  &:focus { transform: translateY(0); }
+}
+
+:focus-visible {
+  outline: 3px solid rgba($orange, 0.55);
+  outline-offset: 3px;
+}
+
+html { scroll-padding-top: $navbar-height + $headband-height + 16px; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  scroll-margin-top: $navbar-height + $headband-height + 16px;
+}
+
 a {
   color: $link-color;
   text-decoration: none;

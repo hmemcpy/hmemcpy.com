@@ -1,6 +1,7 @@
 +++
 title = "How to debug a process that is crashing on startup"
 date = 2010-12-20T21:51:45Z
+aliases = ["/2010/12/how-to-debug-a-process-that-is-crashing-on-startup/"]
 +++
 Here's a neat trick which allows you to debug a process by attaching a debugger upon process start. It's useful at times when you can't directly launch an application with debugger attached, or you have a process which accepts command line parameters which are not directly under your control (such as `QTAgent32.exe`, which is the MSTest unit test runner, launched by Visual Studio).
 

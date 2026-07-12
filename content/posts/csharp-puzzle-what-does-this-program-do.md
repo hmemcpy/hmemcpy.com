@@ -1,6 +1,7 @@
 +++
 title = "C# Puzzle: What does this program do?"
 date = 2010-07-13T07:04:11Z
+aliases = ["/2010/07/csharp-puzzle-what-does-this-program-do/"]
 +++
 Consider the following code:
 

@@ -1,6 +1,7 @@
 +++
 title = "Your C# is already functional, but only if you let it"
 date = 2020-03-06T00:00:27Z
+aliases = ["/2020/03/your-csharp-is-already-functional/"]
 +++
 A few days ago I [tweeted](https://twitter.com/hmemcpy/status/1235287026364276737) a C# code snippet, showing a [FizzBuzz](https://en.wikipedia.org/wiki/Fizz_buzz) implementation using some of the [new features in C# 8.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8). The tweet "went viral", as the kids say, with several people admiring the terse and *functional* aspect of it, while others asked me why I wasn't writing it in F# in the first place?
 

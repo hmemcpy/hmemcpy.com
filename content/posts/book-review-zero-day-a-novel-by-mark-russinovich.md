@@ -1,6 +1,7 @@
 +++
 title = "Book Review: Zero Day: A Novel by Mark Russinovich"
 date = 2011-03-18T20:19:49Z
+aliases = ["/2011/03/book-review-zero-day-a-novel-by-mark-russinovich/"]
 +++
 [<img style="float: left; padding: 5px" src="http://i2.wp.com/ecx.images-amazon.com/images/I/51s-8x8YWEL._SL160_.jpg?resize=107%2C160" />](http://www.amazon.com/Zero-Day-Novel-Mark-Russinovich/dp/031261246X?SubscriptionId=AKIAI4TIA44MOSRMVWNA&tag=inabs-20)The name Mark Russinovich should be familiar to anyone in the IT industry. He's the co-founder of Winternals (which operated the Sysinternals website), now owned by Microsoft. Mark is a co-author of the <a href="http://amzn.to/eKaXDx" target="_blank">Windows Internals</a> books, and the creator of such tools as <a href="http://technet.microsoft.com/en-us/sysinternals/bb896653" target="_blank">Process Explorer</a>, <a href="http://technet.microsoft.com/en-us/sysinternals/bb963902" target="_blank">Autoruns</a> and <a href="http://technet.microsoft.com/en-us/sysinternals/bb896645" target="_blank">Process Monitor</a>, which are just a small subset of the Sysinternals tools arsenal, which is being used daily by programmers, IT and computer forensics experts around the world.
 

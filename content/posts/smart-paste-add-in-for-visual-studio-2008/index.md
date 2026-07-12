@@ -1,6 +1,7 @@
 +++
 title = "Smart Paste Add-In for Visual Studio 2008"
 date = 2009-05-19T05:57:18Z
+aliases = ["/2009/05/smart-paste-add-in-for-visual-studio-2008/"]
 +++
 Say you need to paste a chunk of XML (or [WKT](http://en.wikipedia.org/wiki/Well-known_text)) into Visual Studio as a string literal (for your unit tests, or what not). How would you do it?
 

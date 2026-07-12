@@ -1,6 +1,7 @@
 +++
 title = "ReSharper: Fixing array and object initializer indentation"
 date = 2009-04-22T04:55:49Z
+aliases = ["/2009/04/resharper-fixing-array-object-initializer-indentation/"]
 +++
 There are tons of options when it comes to configuring your coding style in ReSharper. Somehow I managed to screw the indentation of array and object initializers' variables. This is what it looked like (I use **At Next Line (BSD style)** setting):</p> 
 

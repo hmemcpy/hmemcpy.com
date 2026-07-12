@@ -8,6 +8,8 @@
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
   <meta name="description" content="{{ config.description }}">
   <meta name="keywords" content="{{ config.extra.keywords | default(value='') }}">
+  <meta name="theme-color" content="#faf9f7">
+  <link rel="canonical" href="{% block canonical_url %}{{ config.base_url }}{% endblock canonical_url %}">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
@@ -32,11 +34,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.2.0/css/all.min.css">
   <link rel="stylesheet" href="{{ get_url(path='linen.css', cachebust=true) }}">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="headband"></div>
 
   <header class="site-header">
@@ -45,18 +48,18 @@
         <span class="site-title">{{ config.title }}</span>
       </a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="site-navigation" aria-expanded="false">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
       </button>
 
       {% if config.extra.menu %}
-        <nav class="site-nav">
+        <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
           <ul class="nav-menu">
             {% for item in config.extra.menu %}
               <li class="nav-item{% if current_path is defined and current_path == item.url %} active{% endif %}">
-                <a href="{{ item.url }}">{{ item.name }}</a>
+                <a href="{{ item.url }}"{% if current_path is defined and current_path == item.url %} aria-current="page"{% endif %}>{{ item.name }}</a>
               </li>
             {% endfor %}
           </ul>
@@ -64,7 +67,7 @@
       {% endif %}
 
       <div class="header-search" id="header-search">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
         <input
           type="search"
           id="search-input"
@@ -72,13 +75,16 @@
           placeholder="Search…"
           autocomplete="off"
           aria-label="Search posts"
+          aria-controls="search-results"
+          aria-describedby="search-hint"
         >
-        <ul class="search-results" id="search-results" hidden></ul>
+        <span class="visually-hidden" id="search-hint">Press slash to focus search</span>
+        <ul class="search-results" id="search-results" aria-live="polite" aria-label="Search results" hidden></ul>
       </div>
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" id="main-content" tabindex="-1">
     <div class="main-inner">
       {% block content %}{% endblock content %}
     </div>
@@ -87,13 +93,13 @@
   <footer class="site-footer">
     <div class="footer-inner">
       {% if config.extra.social %}
-        <div class="footer-social">
+        <nav class="footer-social" aria-label="Social links">
           {% for item in config.extra.social %}
-            <a href="{{ item.url }}" title="{{ item.name }}" target="_blank" rel="noopener">
-              {% if item.icon %}<i class="{{ item.icon }}"></i>{% else %}{{ item.name }}{% endif %}
+            <a href="{{ item.url }}" aria-label="{{ item.name }}" title="{{ item.name }}" target="_blank" rel="noopener noreferrer">
+              {% if item.icon %}<i class="{{ item.icon }}" aria-hidden="true"></i>{% else %}{{ item.name }}{% endif %}
             </a>
           {% endfor %}
-        </div>
+        </nav>
       {% endif %}
       <div class="footer-copyright">
         &copy;
@@ -129,10 +135,14 @@
       }
 
       async function runSearch(query) {
-        if (!query) { results.hidden = true; return; }
+        if (!query) { results.hidden = true; results.innerHTML = ''; return; }
         var res = await pagefind.search(query);
         var hits = await Promise.all(res.results.slice(0, 8).map(function(r) { return r.data(); }));
-        if (!hits.length) { results.hidden = true; return; }
+        if (!hits.length) {
+          results.innerHTML = '<li class="search-empty">No matching posts</li>';
+          results.hidden = false;
+          return;
+        }
         results.innerHTML = hits.map(function(hit) {
           return '<li class="search-result"><a href="' + hit.url + '">'
             + '<span class="result-title">' + (hit.meta && hit.meta.title ? hit.meta.title : hit.url) + '</span>'
@@ -142,7 +152,12 @@
         results.hidden = false;
       }
 
-      input.addEventListener('input', function() { runSearch(this.value.trim()); });
+      var searchTimer;
+      input.addEventListener('input', function() {
+        var query = this.value.trim();
+        window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(function() { runSearch(query); }, 120);
+      });
 
       document.addEventListener('click', function(e) {
         if (!document.getElementById('header-search').contains(e.target)) {

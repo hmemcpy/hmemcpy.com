@@ -1,6 +1,7 @@
 +++
 title = "5 ways ReSharper changed my programming style"
 date = 2009-02-05T12:35:38Z
+aliases = ["/2009/02/5-ways-resharper-changed-my-programming-style/"]
 +++
 I love [ReSharper](http://www.jetbrains.com/resharper/). It has completely changed the way I think about code. When I have to use Visual Studio without ReSharper installed, I feel like I'm writing the code in Notepad. As my first actual post on this blog I'd like to present a _few_ features of ReSharper 4.1 that help me code faster, better, (stronger) and with much higher accuracy.
 

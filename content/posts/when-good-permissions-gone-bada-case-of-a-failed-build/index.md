@@ -1,6 +1,7 @@
 +++
 title = "When good permissions gone bad - a case of a failed build"
 date = 2014-06-09T16:08:08Z
+aliases = ["/2014/06/when-good-permissions-gone-bada-case-of-a-failed-build/"]
 +++
 I was called over to see if I could help solve a strange issue - every time the build script (Ant) for the client's Android app ran - certain files that were modified by the build script (a `.properties` file, few others), were suddenly inaccessible to other people logging to the machine - only the user who initiated the build could still write to the files. Looking at the file permissions tab proved as much: only the current user and the Administrators group could access the file!
 

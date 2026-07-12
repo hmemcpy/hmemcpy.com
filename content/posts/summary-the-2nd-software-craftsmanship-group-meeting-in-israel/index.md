@@ -1,6 +1,7 @@
 +++
 title = "Summary: the 2nd Software Craftsmanship group meeting in Israel"
 date = 2010-07-22T06:55:48Z
+aliases = ["/2010/07/summary-the-2nd-software-craftsmanship-group-meeting-in-israel/"]
 +++
 Yesterday I attended the 2nd Software Craftsmanship meeting, led by [Uri Lavi](http://www.irefactor.net/), held in the headquarters of [PicScout](http://www.picscout.com/).
 <!-- more -->

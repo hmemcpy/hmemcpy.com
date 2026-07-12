@@ -1,6 +1,7 @@
 +++
 title = "More fun with ReSharper annotations in ASP.NET MVC!"
 date = 2013-02-26T15:47:38Z
+aliases = ["/2013/02/more-fun-with-resharper-annotations-in-asp-net-mvc/"]
 +++
 After my previous blog post on the subject, my good friend Avi Pinto asked if it was possible to *teach* ReSharper to treat an ASP.NET MVC `HtmlHelper` extension method to understand and navigate to relative paths within the project. I'm happy to report that not only this is possible, it also requires almost no effort at all!
 

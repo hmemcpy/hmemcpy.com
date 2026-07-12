@@ -1,6 +1,7 @@
 +++
 title = "Roslyn! It's got Electrolytes!"
 date = 2014-04-11T00:10:59Z
+aliases = ["/2014/04/roslyn-its-got-electrolytes/"]
 +++
 Not 10 minutes passed since the Roslyn open-sourcing announcement at Build 2014, which by itself is a monumental, historic event for Microsoft and the .NET community worldwide; some people already started predicting the demise of ReSharper. It's been a week or so, and JetBrains finally [posted a Q&A](http://blog.jetbrains.com/dotnet/2014/04/10/resharper-and-roslyn-qa/) where they explain their reasons for **not** moving to Roslyn as predicted, at least not in the foreseeable future. Which, in turn, caused yet another sea of comments, both supporting and condemning the decision.
 

@@ -1,6 +1,7 @@
 +++
 title = "Review: my new HP Spectre x360 2-in-1 convertible laptop"
 date = 2015-12-04T16:38:45Z
+aliases = ["/2015/12/review-my-new-hp-spectre-x360-2-in-1-convertible-laptop/"]
 +++
 <img style="float: right; padding: 5px;" src="image1.png" />I decided to get with the times, and get myself a mid-level ultraportable machine I can carry around while traveling. Knowing almost nothing about this category of computers (and having avoided touch-enabled hybrids/tables until now), I spent considerable time researching. My requirements were simple:
 

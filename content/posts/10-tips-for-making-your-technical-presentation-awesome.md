@@ -1,6 +1,7 @@
 +++
 title = "10 tips for making your technical presentation awesome!"
 date = 2012-10-05T16:07:46Z
+aliases = ["/2012/10/10-tips-for-making-your-technical-presentation-awesome/"]
 +++
 I am, by no means, a [professional speaker](http://www.speakinghacks.com/). I am developer with passion for technology and learning, and being known for talking **_a lot_**, I sometimes speak at local user groups about particular topics. Here are some tips I've gathered for making my presentations a little bit better.
 

@@ -1,6 +1,7 @@
 +++
 title = "Everything I learned about self-publishing an open-source book"
 date = 2020-02-17T12:03:11Z
+aliases = ["/2020/02/everything-i-learned-about-self-publishing-an-open-source-book/"]
 +++
 Over the past two years, the PDF version of Bartosz Milewski's [*Category Theory for Programmers*](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) became a highly-successful [open-source book](https://github.com/hmemcpy/milewski-ctfp-pdf), which was adapted to other programming languages, such as Scala and OCaml. There was a high demand for a physical copy of the book, so I went exploring the vast options, which I summarize below.
 

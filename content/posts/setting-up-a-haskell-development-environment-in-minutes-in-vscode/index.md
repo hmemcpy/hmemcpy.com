@@ -1,6 +1,7 @@
 +++
 title = "Setting up a Haskell development environment in minutes in Visual Studio Code"
 date = 2020-02-01T13:58:22Z
+aliases = ["/2020/02/setting-up-a-haskell-development-environment-in-minutes-in-vscode/"]
 +++
 This was initially a long post, detailing all the manual steps required to set up a complete Haskell development environment, however, thanks to a [hint](https://twitter.com/k_cieslak/status/1222115319881310210) by [Krzysztof Cieślak](https://twitter.com/k_cieslak), this process is now fully automated, allowing you to get started in *minutes*. All thanks to a Visual Studio Code feature called *devcontainers*, supporting running the [development environment in a Docker container](https://code.visualstudio.com/docs/remote/containers).
 

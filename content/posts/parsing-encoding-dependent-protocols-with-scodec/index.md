@@ -1,6 +1,7 @@
 +++
 title = "Parsing character encoding-dependent protocols with scodec in Scala"
 date = 2021-11-19T13:29:31Z
+aliases = ["/2021/11/parsing-encoding-dependent-protocols-with-scodec/"]
 +++
 At [work](https://unit.co), we have to handle and process many types of (sometimes archaic) financial protocols. One such protocol, Image Cash Letter (ICL, also known as ANSI DSTU X9.37 or X9.100-180), describes how cheques (or checks, for the US folks) are transmitted electronically between financial institutions.
 

@@ -1,6 +1,7 @@
 +++
 title = "Using BSP effectively in IntelliJ and Scala"
 date = 2021-09-20T09:54:44Z
+aliases = ["/2021/09/bsp-and-intellij/"]
 +++
 I've been using the BSP support in IntelliJ for over 6 months now, and while the experience wasn't always smooth, it's definitely worth considering switching to BSP over sbt. I've recently contributed a couple of fixes to sbt's implementation of BSP, adding a few missing pieces, allowing improved support in IntelliJ using sbt's native BSP server. I am grateful to sbt maintainer [Adrien Piquerez](https://github.com/adpi2) of Scala Center and [Justin Kaeser](https://github.com/jastice) of JetBrains, who implemented the BSP support in IntelliJ, for their hard work and great help!
 

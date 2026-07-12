@@ -1,6 +1,7 @@
 +++
 title = "Preventing a certain Windows Update from installing on Windows 10"
 date = 2015-04-15T15:30:26Z
+aliases = ["/2015/04/preventing-a-certain-windows-update-from-installing-on-windows-10/"]
 +++
 This post explains how to prevent a certain update from installing on a Windows 10 machine (at the time of writing, build 10049). The information below might not be accurate/relevant for future updates.
 

@@ -1,6 +1,7 @@
 +++
 title = "How to make TestDriven.NET open dotPeek (or any other IL disassembler) instead of Reflector"
 date = 2011-05-15T11:34:10Z
+aliases = ["/2011/05/how-to-make-testdriven-net-open-dotpeek-or-any-other-il-disassembler-instead-of-reflector/"]
 +++
 [TestDriven.NET](http://testdriven.net/) is a free (for personal use) test runner for Visual Studio, that allows you to run unit tests from the context menu ("Run Tests") using any unit testing framework. What I like particularly about TestDriven.NET, is that it allows running or debugging any arbitrary method as well!
 

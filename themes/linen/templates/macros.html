@@ -78,13 +78,13 @@
 {% macro pagination(paginator) %}
 <nav class="pagination">
   {% if paginator.previous %}
-    <a class="extend prev" rel="prev" href="{{ paginator.previous }}"><i class="fa fa-angle-left"></i></a>
+    <a class="extend prev" rel="prev" aria-label="Previous page" href="{{ paginator.previous }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
   {% endif %}
 
   {% for i in range(end=paginator.number_pagers) %}
     {% set page_num = i + 1 %}
     {% if page_num == paginator.current_index %}
-      <span class="page-number current">{{ page_num }}</span>
+      <span class="page-number current" aria-current="page">{{ page_num }}</span>
     {% elif page_num == 1 %}
       <a class="page-number" href="{{ paginator.base_url }}">{{ page_num }}</a>
     {% else %}
@@ -93,7 +93,7 @@
   {% endfor %}
 
   {% if paginator.next %}
-    <a class="extend next" rel="next" href="{{ paginator.next }}"><i class="fa fa-angle-right"></i></a>
+    <a class="extend next" rel="next" aria-label="Next page" href="{{ paginator.next }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
   {% endif %}
 </nav>
 {% endmacro pagination %}

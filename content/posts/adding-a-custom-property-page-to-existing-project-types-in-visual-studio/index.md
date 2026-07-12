@@ -1,6 +1,7 @@
 +++
 title = "Adding a custom property page to existing project types in Visual Studio"
 date = 2015-03-27T22:53:18Z
+aliases = ["/2015/03/adding-a-custom-property-page-to-existing-project-types-in-visual-studio/"]
 +++
 _Note: this post assumes some knowledge developing Visual Studio Extensions (VSIX)._
 

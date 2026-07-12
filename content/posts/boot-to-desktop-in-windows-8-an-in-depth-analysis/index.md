@@ -1,6 +1,7 @@
 +++
 title = "Boot to desktop in Windows 8: An in-depth analysis"
 date = 2012-09-08T20:40:30Z
+aliases = ["/2012/09/boot-to-desktop-in-windows-8-an-in-depth-analysis/"]
 +++
 One of the most controversial decisions Microsoft made with regards to Windows 8 was the removal of the *classic* Start Menu, and replacing it with the new <strike>Metro</strike>Start screen. Furthermore, Microsoft made it impossible to go immediately to the desktop upon login in Windows 8 - it must be done via the new Start screen too.
 

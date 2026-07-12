@@ -1,6 +1,7 @@
 +++
 title = "Making Productivity Power Tools for Visual Studio 2010 play nicely with ReSharper"
 date = 2010-07-21T21:02:02Z
+aliases = ["/2010/07/making-productivity-power-tools-visual-studio-2010-play-nicely-with-resharper/"]
 +++
 Scott Guthrie [wrote](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx) about VS 2010 Productivity Power Tools update, and I went to the Extensions Gallery to download it. I won't write an overview about it, ScottGu has already done an excellent job on [his blog](http://weblogs.asp.net/scottgu/archive/2010/07/19/vs-2010-productivity-power-tools-update-with-some-cool-new-features.aspx). You can also find more information on the [extension's page](http://visualstudiogallery.msdn.microsoft.com/en-us/d0d33361-18e2-46c0-8ff2-4adea1e34fef).
 

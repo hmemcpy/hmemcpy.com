@@ -1,6 +1,7 @@
 +++
 title = "Awesome tip: Copy text from any Message Box to Clipboard"
 date = 2009-02-12T16:10:00Z
+aliases = ["/2009/02/awesome-tip-copy-text-from-any-messagebox-to-clipboard/"]
 +++
 I just found out that it's possible to copy the text from any message box to clipboard by pressing **Ctrl-C** when the message box appears! Think of all the times you needed to search for an exact error message text, and needed to switch back and forth between the message and your browser window.
 

@@ -1,6 +1,7 @@
 +++
 title = "Right fold superpowers!"
 date = 2019-07-31T09:25:58Z
+aliases = ["/2019/07/right-fold-superpowers/"]
 +++
 It's amazing how sometimes just having a different framing of the problem helps with developing a much deeper understanding of the problem. I was working through the exercises of the [Data61 Functional Programming course](https://github.com/data61/fp-course), assisted by Brian McKenna's [video streams](https://www.youtube.com/watch?v=NzIZzvbplSM&list=PLly9WMAVMrayYo2c-1E_rIRwBXG_FbLBW), and I came accross a definition of a *right fold* that can be thought of as "constructor replacement":
 

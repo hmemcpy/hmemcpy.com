@@ -1,6 +1,7 @@
 +++
 title = "How to enable login verifications on Twitter from \"unsuppored\" countries"
 date = 2014-04-26T17:35:45Z
+aliases = ["/2014/04/how-to-enable-login-verifications-on-twitter-from-unsupported-countries/"]
 +++
 It's funny how a random twitter rant can yield valid solutions. One such rant between [@omervk](https://twitter.com/omervk) (who co-runs [plaintextoffenders.com](http://plaintextoffenders.com)) and myself regarding enabling Two Factor Authentication (2FA, or *login verification*) on twitter being unavailable for people in Israel, caught the attention of [Per Thorsheim](https://twitter.com/thorsheim), an independent security consultant and founder of the [Passwords conference](http://passwordscon.org/). Per, turns out, was interested in this problem because of another matter, that Twitter seemingly _turned off_ login verification for people who do not have their phone numbers associated with Twitter! Per wrote about his own experiences trying to enable 2FA on twitter [here](http://securitynirvana.blogspot.no/2014/04/did-twitter-silently-remove-login.html).
 

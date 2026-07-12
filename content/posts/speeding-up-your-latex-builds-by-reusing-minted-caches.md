@@ -1,6 +1,7 @@
 +++
 title = "Speeding up your LaTeX builds by reusing minted caches"
 date = 2020-02-15T16:35:51Z
+aliases = ["/2020/02/speeding-up-your-latex-builds-by-reusing-minted-caches/"]
 +++
 Over the past two years, the PDF version of Bartosz Milewski's [*Category Theory for Programmers*](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) became a highly-successful [open-source book](https://github.com/hmemcpy/milewski-ctfp-pdf), which was adapted to other programming languages, such as Scala and OCaml. Unfortunately, building this 400+ page PDF from LaTeX sources in multiple editions took a significant amount of time, sometimes upwards of 15 minutes. One of the reasons was, all the code snippets are loaded from external code files (so that they can be easily adapted to other programming languages), and they have to be compiled each time in a format LaTeX understands.
 

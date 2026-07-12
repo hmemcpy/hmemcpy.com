@@ -1,6 +1,7 @@
 +++
 title = "Modifying Windows Live Writer blog content in PublishNotificationHook plugins' OnPrePublish"
 date = 2011-04-23T18:51:49Z
+aliases = ["/2011/04/modifying-windows-live-writer-blog-content-in-publishnotificationhook-plugins-onprepublish/"]
 +++
 I'm writing a <a href="http://msdn.microsoft.com/en-us/library/ff747355.aspx" target="_blank">PublishNotificationHook</a> plugin for Windows Live Writer (don't worry, I will soon reveal what it is), and I noticed that there doesn't seem to be a way to control the contents (text or HTML) of the blog post in this type of plugin.
 

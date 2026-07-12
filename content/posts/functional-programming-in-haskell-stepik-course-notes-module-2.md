@@ -1,6 +1,7 @@
 +++
 title = "Functional Programming in Haskell (Stepik course notes) - module 2"
 date = 2020-01-20T23:07:38Z
+aliases = ["/2020/01/functional-programming-in-haskell-stepik-course-notes-module-2/"]
 +++
 This is the second module (out of 5) of my English summary of the Haskell MOOC on Stepik, available only in Russian. Read the first part in the *Introduction* module.
 

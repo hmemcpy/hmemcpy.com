@@ -1,6 +1,7 @@
 +++
 title = "SOLVED: A case of a failing Windows Update (KB3124200) on Windows 10"
 date = 2016-01-12T18:19:35Z
+aliases = ["/2016/01/solved-a-case-of-a-failing-windows-update-kb3124200-on-windows-10/"]
 +++
 I'm writing this post mainly to myself, explaining how I figured out why this particular Windows Update package was failing to install on my Windows 10 (installation began, then rolled back). This can serve as a general troubleshooting step when google searches lead you nowhere.
 

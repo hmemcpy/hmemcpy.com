@@ -1,6 +1,7 @@
 +++
 title = "How Nancy made .NET Web development fun!"
 date = 2014-03-17T15:35:48Z
+aliases = ["/2014/03/how-nancy-made-net-web-development-fun/"]
 +++
 Let's get this out of the way first: this is **not** a post about how to use [Nancy](http://nancyfx.org/) - there are lots of blog posts out there, written by people far better at it than me!
 

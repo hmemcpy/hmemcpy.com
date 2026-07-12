@@ -1,6 +1,7 @@
 +++
 title = "JetBrains + Nemerle = Limitless Potential!"
 date = 2012-06-23T17:17:00Z
+aliases = ["/2012/06/jetbrains-nemerle-limitless-potential/"]
 +++
 There has been some excitement last Friday, as JetBrains' .NET tools program manager Ilya "orangy" Ryzhenkov [announced](https://twitter.com/orangy/status/216127804482404352) via twitter that JetBrains are bringing on board the team behind the [Nemerle](http://nemerle.org/) programming language. This happened a few days after hinting on twitter that a major announcement is coming.
 

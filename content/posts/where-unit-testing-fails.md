@@ -1,6 +1,7 @@
 +++
 title = "Where unit testing fails"
 date = 2011-06-24T20:34:42Z
+aliases = ["/2011/06/where-unit-testing-fails/"]
 +++
 _**Note:** I wrote this post before watching Uncle Bob's excellent NDC 2011 talk called [Transformation Priority Premise](http://cleancoder.posterous.com/the-transformation-priority-premise), which talks exactly about the subject below, however I am still not convinced. I will write a follow-up to this post._
 

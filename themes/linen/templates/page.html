@@ -6,6 +6,7 @@
 {% block og_title %}{{ page.title }}{% endblock og_title %}
 {% block og_description %}{{ page.description | default(value=config.description) }}{% endblock og_description %}
 {% block og_url %}{{ page.permalink }}{% endblock og_url %}
+{% block canonical_url %}{{ page.permalink }}{% endblock canonical_url %}
 
 {% block content %}
 <article class="post-block">
@@ -14,33 +15,33 @@
     {% if not page.extra.skip_in_feed %}
     <div class="post-meta">
       <span class="post-meta-item">
-        <span class="post-meta-item-icon"><i class="far fa-calendar"></i></span>
+        <span class="post-meta-item-icon"><i class="far fa-calendar" aria-hidden="true"></i></span>
         <time datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
       </span>
 
       {% if page.updated and page.updated != page.date %}
         <span class="post-meta-item">
-          <span class="post-meta-item-icon"><i class="far fa-calendar-check"></i></span>
+          <span class="post-meta-item-icon"><i class="far fa-calendar-check" aria-hidden="true"></i></span>
           Updated: <time datetime="{{ page.updated }}">{{ page.updated | date(format="%Y-%m-%d") }}</time>
         </span>
       {% endif %}
 
       {% if page.reading_time %}
         <span class="post-meta-item">
-          <span class="post-meta-item-icon"><i class="far fa-clock"></i></span>
+          <span class="post-meta-item-icon"><i class="far fa-clock" aria-hidden="true"></i></span>
           {{ page.reading_time }} min read
         </span>
       {% endif %}
 
       {% if config.extra.github_repo %}
         <a class="edit-link" href="{{ config.extra.github_repo }}/edit/main/content/{{ page.relative_path }}" target="_blank" rel="noopener" title="Edit on GitHub">
-          <i class="fa-solid fa-pencil"></i>
+          <i class="fa-solid fa-pencil" aria-hidden="true"></i><span class="visually-hidden">Edit on GitHub</span>
         </a>
       {% endif %}
 
       {% if page.taxonomies.categories %}
         <span class="post-meta-item">
-          <span class="post-meta-item-icon"><i class="far fa-folder"></i></span>
+          <span class="post-meta-item-icon"><i class="far fa-folder" aria-hidden="true"></i></span>
           {% for cat in page.taxonomies.categories %}
             <a href="{{ get_taxonomy_url(kind='categories', name=cat) }}">{{ cat }}</a>
             {%- if not loop.last %}, {% endif %}

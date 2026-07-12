@@ -1,6 +1,7 @@
 +++
 title = "A case of mysterious spam links!"
 date = 2015-03-03T13:01:13Z
+aliases = ["/2015/03/a-case-of-mysterious-spam-links-injection-by-block/"]
 +++
 **Update:** _I was rightly corrected by the creator of uBlock, those are not links, but CSS selectors inside a `<style>` tag, to cause the offending links to be removed from the page. Furthermore, those particular rules are being fed from AdBlock Plus'_ [_EasyList_](https://easylist.adblockplus.org/en/)_, and they are not related to uBlock._
 

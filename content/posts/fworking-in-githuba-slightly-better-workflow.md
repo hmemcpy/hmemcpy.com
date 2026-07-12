@@ -1,6 +1,7 @@
 +++
 title = "[FW]orking in Github - a slightly better workflow?"
 date = 2014-01-06T11:53:06Z
+aliases = ["/2014/01/fworking-in-githuba-slightly-better-workflow/"]
 +++
 *If you don't understand the title, I tried to be clever and used [regular expressions](http://www.regular-expressions.info/charclass.html). I now have 2 problems.*
 

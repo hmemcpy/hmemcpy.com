@@ -1,6 +1,7 @@
 +++
 title = "Type in Russian (or any other language) with Google IME"
 date = 2011-08-11T13:17:23Z
+aliases = ["/2011/08/type-in-russian-or-any-other-language-with-google-ime/"]
 +++
 I speak Russian, but I never bothered to learn how to properly type it on the keyboard. Every time I needed to search or write something, I would use a transliteration service, such as <a href="http://www.translit.ru" target="_blank">translit.ru</a>, then copy the translated text to clipboard and paste it to the target window (such as a Skype chat session).
 

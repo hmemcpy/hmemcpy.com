@@ -1,6 +1,7 @@
 +++
 title = "Mac survival guide for the Windows lifer"
 date = 2016-06-22T11:45:51Z
+aliases = ["/2016/06/mac-survival-guide-for-the-windows-lifer/"]
 +++
 I recently started a [shiny new job](http://wix.engineering/), and got a shiny new Macbook Pro to go with it. Having spent most of my personal and professional life on Windows, I knew that an adjustment period would have to follow. Below are my impressions, the good, bad, and the ugly side of adjusting to One Cupertino Way after a lifetime on Windows.
 <!-- more -->

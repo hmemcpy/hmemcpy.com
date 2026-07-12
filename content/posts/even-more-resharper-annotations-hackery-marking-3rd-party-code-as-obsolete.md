@@ -1,6 +1,7 @@
 +++
 title = "Even more ReSharper Annotations hackery: marking 3rd party code as obsolete"
 date = 2013-03-24T23:16:14Z
+aliases = ["/2013/03/even-more-resharper-annotations-hackery-marking-3rd-party-code-as-obsolete/"]
 +++
 As part of transitioning to a new API, I wanted a way to mark the old API as obsolete, so that Visual Studio (or ReSharper) would flag using of the old API as an error.
 

@@ -1,6 +1,7 @@
 +++
 title = "ReSharper 5.0 Hidden Gem - Patterns Catalogue"
 date = 2010-02-25T21:06:26Z
+aliases = ["/2010/02/resharper-5-hidden-gem-patterns-catalogue/"]
 +++
 **[November 16, 2010]** While the information below is still very much relevant, please download the latest version of [ReSharper](http://www.jetbrains.com/resharper/) from JetBrains website.
 

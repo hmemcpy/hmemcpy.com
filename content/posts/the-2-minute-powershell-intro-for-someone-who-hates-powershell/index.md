@@ -1,6 +1,7 @@
 +++
 title = "The 2-minute PowerShell intro for someone who \"hates PowerShell\""
 date = 2014-12-10T14:06:25Z
+aliases = ["/2014/12/the-2-minute-powershell-intro-for-someone-who-hates-powershell/"]
 +++
 Hi, I'm a developer, and I hate PowerShell<sup>*</sup>. For no reason in particular, PowerShell just never seemed that appealing for me as a developer, as it was always marketed towards sysadmins. And I never liked the syntax - all those dollar signs reminded me of PHP.
 

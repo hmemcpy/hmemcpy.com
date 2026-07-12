@@ -1,6 +1,7 @@
 +++
 title = "Becoming Foolish"
 date = 2017-10-20T08:00:39Z
+aliases = ["/2017/10/becoming-foolish/"]
 +++
 The book [*The Pragmatic Programmer: From Journeyman to Master*](https://pragprog.com/book/tpp/the-pragmatic-programmer) by Andy Hunt and Dave Thomas suggests that as developers, we should "learn at least one new language every year." (pg. 14)
 

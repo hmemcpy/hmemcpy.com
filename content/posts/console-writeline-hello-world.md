@@ -1,6 +1,7 @@
 +++
 title = "Console.WriteLine(\"Hello World!\");"
 date = 2009-02-04T15:53:00Z
+aliases = ["/2009/02/console-writeline-hello-world/"]
 +++
 [Welcome to my fortress tall...](https://www.youtube.com/watch?v=rUGIocJK9Tc)
 

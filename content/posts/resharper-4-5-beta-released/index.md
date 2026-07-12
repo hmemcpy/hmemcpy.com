@@ -1,6 +1,7 @@
 +++
 title = "ReSharper 4.5 Beta Released - First Impressions"
 date = 2009-03-18T06:46:28Z
+aliases = ["/2009/03/resharper-4-5-beta-released/"]
 +++
 _[**Update:** this article is now obsolete, and the links below might not work. Please download the latest ReSharper version from the JetBrains website.]_
 

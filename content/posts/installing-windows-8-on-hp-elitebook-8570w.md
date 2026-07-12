@@ -1,6 +1,7 @@
 +++
 title = "Installing Windows 8 on HP EliteBook 8570w"
 date = 2012-09-30T11:37:29Z
+aliases = ["/2012/09/installing-windows-8-on-hp-elitebook-8570w/"]
 +++
 <img style="float: right; padding: 5px;" width=200 src="http://www.www8-hp.com/in/en/images/8770w_hero_tcm_188_1453363.jpg" />I just got my brand new [HP EliteBook 8570w](http://www.hp.com/united-states/campaigns/workstations/8570w_features.html). I was looking for a new development machine for a while, and after long consideration decided on this custom build of the Ivy Bridge-based EliteBook. Here are the (important) specs:
 

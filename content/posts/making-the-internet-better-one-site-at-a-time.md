@@ -1,6 +1,7 @@
 +++
 title = "Making the Internet better, one site at a time"
 date = 2011-06-03T14:43:01Z
+aliases = ["/2011/06/making-the-internet-better-one-site-at-a-time/"]
 +++
 Sometime ago my friend <a href="https://twitter.com/omervk" target="_blank">@omervk</a> and myself created <a href="http://plaintextoffenders.com/" target="_blank">Plain Text Offenders</a> - a wall of shame for websites that store and email your own password to you in plaintext. I didn't expect this kind of explosion - hundreds of submissions already posted and dozens of new ones arriving every day!
 

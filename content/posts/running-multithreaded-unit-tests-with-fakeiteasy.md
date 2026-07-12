@@ -1,6 +1,7 @@
 +++
 title = "Running multithreaded unit tests with FakeItEasy"
 date = 2012-12-11T21:39:08Z
+aliases = ["/2012/12/running-multithreaded-unit-tests-with-fakeiteasy/"]
 +++
 While running some of my tests today, I suddenly got an `IndexOutOfRangeException`, with the following stack trace:
 

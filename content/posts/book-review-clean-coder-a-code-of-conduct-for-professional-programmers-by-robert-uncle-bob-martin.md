@@ -1,6 +1,7 @@
 +++
 title = "Book Review: 'Clean Coder: A Code of Conduct for Professional Programmers' by Robert 'Uncle Bob' Martin"
 date = 2011-05-29T11:38:03Z
+aliases = ["/2011/05/book-review-clean-coder-a-code-of-conduct-for-professional-programmers-by-robert-uncle-bob-martin/"]
 +++
 <img style="float: left; padding: 5px;" src="http://i0.wp.com/ecx.images-amazon.com/images/I/51BSQqef%2B6L._SL160_.jpg?resize=123%2C160" />In popular culture, computer programmers, sometimes confused with sysadmins, are often described as teenage punks, sitting in a dark, lit only by the glow of their monitor, empty cartons of pizza and Mountain Dew bottles scattered strategically around, frantically hacking away on their keyboard.
 

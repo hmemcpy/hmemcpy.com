@@ -1,6 +1,7 @@
 +++
 title = "Visiting Islay, Part 2"
 date = 2010-01-14T06:50:00Z
+aliases = ["/2010/01/visiting-islay-part-2/"]
 +++
 **Note:** this is part 2. Read part 1 of the trip [here](/posts/visiting-islay-part-1/).
 

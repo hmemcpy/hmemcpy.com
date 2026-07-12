@@ -1,6 +1,7 @@
 +++
 title = "Debug symbols, dotPeek and long paths in Visual Studio"
 date = 2014-08-01T14:06:04Z
+aliases = ["/2014/08/debug-symbols-dotpeek-and-long-paths-in-visual-studio/"]
 +++
 In my [previous post](/posts/how-to-debug-anything-with-visual-studio-and-jetbrains-dotpeek-v1-2/), I explained how to use the symbol server in [dotPeek 1.2](http://www.jetbrains.com/decompiler/) to debug any assembly in Visual Studio, allowing you to set breakpoints and step into any method (provided it was decompiled by dotPeek).
 

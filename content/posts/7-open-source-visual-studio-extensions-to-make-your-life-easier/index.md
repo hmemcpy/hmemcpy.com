@@ -1,6 +1,7 @@
 +++
 title = "7 open-source Visual Studio Extensions to make your life easier"
 date = 2015-10-28T22:15:19Z
+aliases = ["/2015/10/7-open-source-visual-studio-extensions-to-make-your-life-easier/"]
 +++
 It's time to upgrade your _favorite_ IDE! In this post I will list some of my favorite "off-the-beaten-path" extensions for Visual Studio that make my daily tasks much easier. I will not list the obvious ones, such as [ReSharper](https://www.jetbrains.com/resharper/) and [OzCode](http://www.oz-code.com/) (or even [Web Essentials](http://vswebessentials.com/)), but rather few relatively unknown ones that do some very cool things.
 

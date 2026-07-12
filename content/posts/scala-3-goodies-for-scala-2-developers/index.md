@@ -1,6 +1,7 @@
 +++
 title = "Scala 3 goodies for Scala 2 developers"
 date = 2021-06-22T10:45:02Z
+aliases = ["/2021/06/scala-3-goodies-for-scala-2-developers/"]
 +++
 Scala 3 is upon us, and the compiler team has been busy trying to make the migration process as smooth as possible. Scala 3 introduces new syntax for old things and deprecates some of Scala 2's infamous warts, many of which have been fixed (or made obsolete) by the new compiler. While some of the Scala 2 syntax still supported in Scala 3.0, it will be removed in Scala 3.1, so it's best to migrate as early as possible.
 

@@ -1,6 +1,7 @@
 +++
 title = "My talk at the ALT.NET Israel Tools meeting - ReSharper's Hidden Gems"
 date = 2010-12-19T12:13:11Z
+aliases = ["/2010/12/my-talk-at-the-alt-net-israel-tools-meetingresharpers-hidden-gems/"]
 +++
 I was delighted to talk about [ReSharper](http://www.jetbrains.com/resharper/) at the recent meeting of the [ALT.NET Israel](http://groups.google.com/group/altnetisrael) group. I chose ReSharper for the reason that I use it every day, and I can't imagine myself programming without it. I wanted to share with the rest some tips, tricks and general hidden features of this wonderful tool that I've learned over the years using it.
 

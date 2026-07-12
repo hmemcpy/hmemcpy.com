@@ -1,6 +1,7 @@
 +++
 title = "Turning old and busted asynchronous code into new async/await-enabled hotness with TaskCompletionSource<T>"
 date = 2013-01-30T22:38:36Z
+aliases = ["/2013/01/turning-old-and-busted-asynchronous-code-into-new-asyncawait-enabled-hotness-with-taskcompletionsourcet/"]
 +++
 While working with a client to create a new version of their software, one of the tasks was creating a service that talked to a hardware laser tracker, a device which allows tracking certain points (*targets*) over a large distance.
 

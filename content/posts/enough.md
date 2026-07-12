@@ -1,6 +1,7 @@
 +++
 title = "Enough!"
 date = 2017-03-07T12:52:52Z
+aliases = ["/2017/03/enough/"]
 +++
 Layered architectures were good, until they weren't. Someone said ORMs, and we were tearing out our SQL statements in favor of magic.
 

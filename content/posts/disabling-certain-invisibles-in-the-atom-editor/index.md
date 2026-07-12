@@ -1,6 +1,7 @@
 +++
 title = "Disabling certain \"invisibles\" in the Atom Editor"
 date = 2015-03-04T15:00:27Z
+aliases = ["/2015/03/disabling-certain-invisibles-in-the-atom-editor/"]
 +++
 I recently started using GitHub's [Atom editor](https://atom.io/), and other than the [slow-ish startup time](https://github.com/atom/atom/issues/2654), I love it very much!
 

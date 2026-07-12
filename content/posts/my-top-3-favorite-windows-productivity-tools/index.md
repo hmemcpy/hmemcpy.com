@@ -1,6 +1,7 @@
 +++
 title = "My top 3 favorite Windows productivity tools!"
 date = 2014-10-21T11:20:44Z
+aliases = ["/2014/10/my-top-3-favorite-windows-productivity-tools/"]
 +++
 There are way more tools I love and use every day, but the following 3 are my must-haves on every Windows machine I use, so I wanted to share them with you. And they are completely **free**!
 

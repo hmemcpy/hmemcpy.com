@@ -1,6 +1,7 @@
 +++
 title = "Visiting Islay, Part 1"
 date = 2010-01-12T20:42:06Z
+aliases = ["/2010/01/visiting-islay-part-1/"]
 +++
 Every whisky lover gets, at some point, to experience whisky from the island of Islay in Scotland. This experience will be remembered throughout his life: it can be either love at first taste, or loathing for eternity. Not everybody can handle the intensity and the powerful peaty flavor of (most) Islay whiskies, some may even stop drinking whisky altogether. Others, like myself, fall in love with the flavor and rarely able to drink anything else.
 

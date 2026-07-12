@@ -1,6 +1,7 @@
 +++
 title = "Installing Ubuntu in Windows Virtual PC"
 date = 2011-02-16T11:20:46Z
+aliases = ["/2011/02/installing-ubuntu-in-windows-virtual-pc/"]
 +++
 I was trying to install Ubuntu using [this tutorial](http://www.hanselman.com/blog/InstallingUbuntu104LTSOnWindowsVirtualPCOnWindows7.aspx) by Scott Hanselman, where upon pressing *Create virtual machine*, I was met with the following error message:
 <!-- more -->
