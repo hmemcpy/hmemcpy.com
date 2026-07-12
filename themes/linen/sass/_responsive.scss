@@ -51,7 +51,14 @@
   }
 
   .post-list-date {
+    display: block;
     min-width: 5.5em;
+    margin-bottom: 0.15em;
+  }
+
+  .post-list-item {
+    display: block;
+    padding: 0.85em 0;
   }
 }
 
